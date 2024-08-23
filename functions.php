@@ -1,0 +1,1705 @@
+<?php
+
+/**
+ * spitout functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package spitout
+ */
+
+if (!defined('_S_VERSION')) {
+    // Replace the version number of the theme on each release.
+    define('_S_VERSION', '1.0.0');
+}
+
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ */
+function spitout_setup()
+{
+    /*
+     * Make theme available for translation.
+     * Translations can be filed in the /languages/ directory.
+     * If you're building a theme based on spitout, use a find and replace
+     * to change 'spitout' to the name of your theme in all the template files.
+     */
+    load_theme_textdomain('spitout', get_template_directory() . '/languages');
+
+    // Add default posts and comments RSS feed links to head.
+    add_theme_support('automatic-feed-links');
+
+    /*
+     * Let WordPress manage the document title.
+     * By adding theme support, we declare that this theme does not use a
+     * hard-coded <title> tag in the document head, and expect WordPress to
+     * provide it for us.
+     */
+    add_theme_support('title-tag');
+
+    /*
+     * Enable support for Post Thumbnails on posts and pages.
+     *
+     * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+     */
+    add_theme_support('post-thumbnails');
+
+    // This theme uses wp_nav_menu() in one location.
+    register_nav_menus(
+        array(
+            'main-menu' => esc_html__('Primary', 'spitout'),
+            'loggedin-menu-buyer' => esc_html__('Logged In Menu Buyer', 'spitout'),
+            'loggedin-menu-seller' => esc_html__('Logged In Menu Seller', 'spitout'),
+            'footer-menu-1' => esc_html__('Footer Menu 1', 'spitout'),
+            'footer-menu-2' => esc_html__('Footer Menu 2', 'spitout'),
+            'footer-menu-3' => esc_html__('Footer Menu 3', 'spitout'),
+            'footer-menu-4' => esc_html__('Footer Menu 4', 'spitout'),
+            'footer-social-menu' => esc_html__('Social Menu', 'spitout'),
+
+        )
+    );
+
+    function spitout_add_menu_item_class($classes, $item, $args, $depth)
+    {
+        // Add custom class to <li> element
+        $classes[] = 'nav-item';
+
+        return $classes;
+    }
+    add_filter('nav_menu_css_class', 'spitout_add_menu_item_class', 10, 4);
+
+    function spitout_add_menu_link_class($atts, $item, $args)
+    {
+        // Add custom class to <a> element
+        $atts['class'] = 'nav-link';
+
+        return $atts;
+    }
+    add_filter('nav_menu_link_attributes', 'spitout_add_menu_link_class', 10, 3);
+
+    add_filter('nav_menu_css_class', 'spitout_special_nav_class', 10, 2);
+
+    function spitout_special_nav_class($classes, $item)
+    {
+        if (in_array('current-menu-item', $classes)) {
+            $classes[] = 'active ';
+        }
+        return $classes;
+    }
+
+    add_theme_support('disable-layout-styles');
+    /*
+     * Switch default core markup for search form, comment form, and comments
+     * to output valid HTML5.
+     */
+    add_theme_support(
+        'html5',
+        array(
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+            'style',
+            'script',
+        )
+    );
+
+    // Set up the WordPress core custom background feature.
+    add_theme_support(
+        'custom-background',
+        apply_filters(
+            'spitout_custom_background_args',
+            array(
+                'default-color' => 'ffffff',
+                'default-image' => '',
+            )
+        )
+    );
+
+    // Add theme support for selective refresh for widgets.
+    add_theme_support('customize-selective-refresh-widgets');
+
+    /**
+     * Add support for core custom logo.
+     *
+     * @link https://codex.wordpress.org/Theme_Logo
+     */
+    add_theme_support(
+        'custom-logo',
+        array(
+            'height' => 250,
+            'width' => 250,
+            'flex-width' => true,
+            'flex-height' => true,
+        )
+    );
+}
+add_action('after_setup_theme', 'spitout_setup');
+
+/**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @global int $content_width
+ */
+function spitout_content_width()
+{
+    $GLOBALS['content_width'] = apply_filters('spitout_content_width', 640);
+}
+add_action('after_setup_theme', 'spitout_content_width', 0);
+
+/**
+ * Register widget area.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function spitout_widgets_init()
+{
+    register_sidebar(
+        array(
+            'name' => esc_html__('Sidebar', 'spitout'),
+            'id' => 'sidebar-1',
+            'description' => esc_html__('Add widgets here.', 'spitout'),
+            'before_widget' => '<section id="%1$s" class="widget %2$s">',
+            'after_widget' => '</section>',
+            'before_title' => '<h2 class="widget-title">',
+            'after_title' => '</h2>',
+        )
+    );
+}
+add_action('widgets_init', 'spitout_widgets_init');
+
+/**
+ * Enqueue scripts and styles.
+ */
+function spitout_scripts()
+{
+    global $wp_query;
+    wp_enqueue_style('spitout-style', get_stylesheet_uri(), array(), _S_VERSION);
+    wp_style_add_data('spitout-style', 'rtl', 'replace');
+
+    /*  start Enquee splitout css  */
+
+    wp_enqueue_style('spitout-bootstrap.min', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), _S_VERSION);
+    wp_enqueue_style('spitout-bootstrap-icons.min', get_template_directory_uri() . '/assets/css/bootstrap-icons.min.css', array(), _S_VERSION);
+    wp_enqueue_style('spitout-select2.min', get_template_directory_uri() . '/assets/css/select2.min.css', array(), _S_VERSION);
+    wp_enqueue_style('new-spitout-style-css', get_template_directory_uri() . '/assets/css/spit-style.css', array(), _S_VERSION);
+    wp_enqueue_style('new-spitout-style-mobile', get_template_directory_uri() . '/assets/css/spit-responsive.css', array(), _S_VERSION);
+    // wp_enqueue_style('new-spitout-style-sb', get_template_directory_uri() . '/assets/css/ns.css', array(), _S_VERSION);
+    // wp_enqueue_style('new-spitout-style-ns', get_template_directory_uri() . '/assets/css/sb.css', array(), _S_VERSION);
+    wp_enqueue_style('new-spitout-style-aa', get_template_directory_uri() . '/assets/css/wallet-style.css', array(), _S_VERSION);
+    wp_enqueue_style('spitout-datepicker-jquery-css', 'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css', array(), _S_VERSION);
+    // wp_enqueue_style('spitout-datepicker-jquery-css', 'https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css', array(), _S_VERSION);
+    // wp_enqueue_style('spitout-chart-css', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css', array(), _S_VERSION);
+
+    wp_enqueue_style('spitout-cropper-css', 'https://unpkg.com/cropperjs/dist/cropper.min.css', array(), _S_VERSION);
+
+    /*  End Enquee splitout css  */
+
+    /*  start Enquee splitout js  */
+
+    // wp_enqueue_script( 'jquery-ui-core', false, array('jquery'));
+    wp_enqueue_script('custom-js', get_template_directory_uri() . '/js/custom.js', array(), time(), true);
+    wp_enqueue_script('jquery-ui-js', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js', array(), _S_VERSION, true);
+    wp_enqueue_script('multistep-form-js', get_template_directory_uri() . '/assets/js/multistep-form.js', array('jquery'), _S_VERSION, true);
+    wp_enqueue_script('spit-bootstrap.min', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), _S_VERSION, true);
+    wp_enqueue_script('spit-select2.min', get_template_directory_uri() . '/assets/js/select2.min.js', array('jquery'), _S_VERSION, true);
+    wp_enqueue_script('script', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'jquery-ui-js'), _S_VERSION, true);
+    // wp_enqueue_script('spit-cropper', 'https://unpkg.com/cropperjs/dist/cropper.min.js', array(), _S_VERSION, true);
+    wp_enqueue_script('spit-script', get_template_directory_uri() . '/assets/js/spit-script.js', array('jquery'), _S_VERSION, true);
+    wp_enqueue_script('spit-chart', 'https://cdn.jsdelivr.net/npm/chart.js', array(), _S_VERSION, true);
+    // wp_enqueue_script('spit-chart', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js', array(), _S_VERSION, true);
+
+    wp_enqueue_script('spit-cropper', 'https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.js', array('jquery'), _S_VERSION, true);
+    wp_enqueue_script('spit-script-ajax', get_template_directory_uri() . '/assets/js/spit-ajax.js', array('jquery'), time(), true);
+
+    /*  End Enquee splitout js  */
+    /*  localize ajax so than we can use "admin_url.ajax_url" on ajax-url  */
+    wp_localize_script('spit-script-ajax', 'spit_ajax', array('ajax_url' => admin_url('admin-ajax.php')));
+
+    /* feed load more js */
+
+    wp_register_script('spitout_loadmore', get_stylesheet_directory_uri() . '/assets/js/spit-load-more.js', array('jquery'));
+
+    $loadmore_params = array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'current_page' => get_query_var('paged') ? get_query_var('paged') : 1,
+        'max_page' => $wp_query->max_num_pages
+    );
+    wp_localize_script('spitout_loadmore', 'spitout_loadmore_params', $loadmore_params);
+    if (is_page('Feeds') || is_author()) // also tried slug, page id and wp_reset_query(); bot not worked
+    {
+        wp_enqueue_script('spitout_loadmore');
+	wp_enqueue_script('tinymce');
+        wp_enqueue_script('wp-tinymce');
+    }
+}
+add_action('wp_enqueue_scripts', 'spitout_scripts');
+
+// jquery ui enqueue
+function load_jquery_ui()
+{
+    wp_enqueue_script('jquery-ui-core');
+    wp_enqueue_script('jquery-ui-slider');
+}
+
+add_action('wp_enqueue_scripts', 'load_jquery_ui');
+
+// enqueue for slider in jquery ui for mobile touch
+function enqueue_jquery_ui_touch_punch()
+{
+    // Register the script
+    wp_register_script('jquery-ui-touch-punch', 'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js', array('jquery', 'jquery-ui-slider'), '0.2.3', true);
+
+    // Enqueue the script
+    wp_enqueue_script('jquery-ui-touch-punch');
+}
+add_action('wp_enqueue_scripts', 'enqueue_jquery_ui_touch_punch');
+
+
+/**
+ * Enqueue admin scripts and styles.
+ */
+function spitout_admin_scripts()
+{
+
+    /*  start Enquee splitout css  */
+    wp_enqueue_style('spitout-select2.min', get_template_directory_uri() . '/assets/css/select2.min.css', array(), _S_VERSION);
+    wp_enqueue_style('spitout-admin-style', get_template_directory_uri() . '/assets/css/spitout-admin.css', array(), _S_VERSION);
+    /*  End Enquee splitout css  */
+
+    /*  start Enquee splitout js  */
+    wp_enqueue_media();
+    wp_enqueue_script('custom-js', get_template_directory_uri() . '/js/custom.js', array(), _S_VERSION, true);
+    wp_enqueue_script('icon_uploader_js', get_template_directory_uri() . '/assets/js/spit-menu-icon-uploader.js', array('jquery'), _S_VERSION, true);
+    wp_enqueue_script('spit-select2.min', get_template_directory_uri() . '/assets/js/select2.min.js', array('jquery'), _S_VERSION, true);
+    /*  End Enquee splitout js  */
+}
+add_action('admin_enqueue_scripts', 'spitout_admin_scripts');
+
+/**
+ * Implement the Custom Header feature.
+ */
+require get_template_directory() . '/inc/custom-header.php';
+
+/**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Functions which enhance the theme by hooking into WordPress.
+ */
+require get_template_directory() . '/inc/template-functions.php';
+
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Home page custom-fields
+ */
+
+require get_template_directory() . '/inc/homepage-custom-fields.php';
+/**
+ * Theme options include file
+ */
+
+require get_template_directory() . '/inc/options-page.php';
+
+/**
+ * Load Jetpack compatibility file.
+ */
+if (defined('JETPACK__VERSION')) {
+    require get_template_directory() . '/inc/jetpack.php';
+}
+
+/**
+ * Load WooCommerce compatibility file.
+ */
+if (class_exists('WooCommerce')) {
+    require get_template_directory() . '/inc/woocommerce.php';
+}
+
+
+//=========by vileroze starts=========
+
+require_once get_template_directory() . '/inc/categories-functions.php';
+
+require get_template_directory() . '/inc/order-product-functions.php';
+
+require_once get_template_directory() . '/inc/myspitout-functions.php';
+
+
+//=========by vileroze ends=========
+
+
+
+
+//======tanush starts========
+
+require get_template_directory() . '/inc/notifications.php';
+
+require get_template_directory() . '/inc/spitout-idenfy-functions.php';
+require get_template_directory() . '/inc/spitout-email-templates-functions.php';
+
+/**
+ * Function to list users according to popular sellers
+ * @param int $total_shown
+ * @return array
+ **/
+function spitout_get_popular_sellers($total_shown = -1)
+{
+    global $wpdb;
+
+    // Query to get all sellers
+    $sellers = $wpdb->get_results("SELECT ID, display_name FROM {$wpdb->prefix}users");
+
+    $sales_by_sellers = array();
+
+    if ($sellers) {
+        foreach ($sellers as $seller) {
+            $seller_id = $seller->ID;
+
+            // Query to get all posts (products) by the current seller
+            $args = array(
+                'author' => $seller_id,
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+            );
+
+            $posts_by_seller = get_posts($args);
+
+            if ($posts_by_seller) {
+                $total_sales = 0; // Initialize total sales for the seller
+
+                foreach ($posts_by_seller as $post) {
+                    //Calculate total sales for the product
+                    $total_sales += intval(get_post_meta($post->ID, 'total_sales', true));
+                }
+
+                $sales_by_sellers[$seller_id] = $total_sales;
+            }
+        }
+
+        // Sort the array in descending order of total sales
+        arsort($sales_by_sellers);
+
+        // Limit the number of top sellers shown
+        if ($total_shown > 0) {
+            $sales_by_sellers = array_slice($sales_by_sellers, 0, $total_shown, true);
+        }
+    }
+
+    return $sales_by_sellers;
+}
+
+/**
+ * Get total sales of a specified seller
+ * @param int $seller_id
+ * @return array<int>|string
+ **/
+function get_seller_totals($seller_id)
+{
+    $total_sales = 0;
+    $total_earnings = 0;
+
+    $seller_sales_info = [];
+
+    $seller_orders = wc_get_orders([
+        'limit' => -1,
+        'meta_key' => 'seller_id',
+        'meta_value' => $seller_id,
+        'meta_compare' => 'LIKE',
+        'status' => array('completed'),
+    ]);
+
+    foreach ($seller_orders as $order) {
+        if ($order) {
+            $total_sales++;
+            // echo "1--";
+            $total_earnings +=  dynamic_currency_for_buyer_seller_order_pages($order->get_id(), false);
+        }
+    }
+
+    // echo '|||'.$total_sales.'|||';
+
+    if ($total_earnings > 0) {
+        $seller_sales_info['total_earnings'] = $total_earnings;
+        $seller_sales_info['total_sales'] = $total_sales;
+        $seller_sales_info['average_sales'] = $total_earnings / $total_sales;
+    } else {
+        $seller_sales_info['total_earnings'] = 0;
+        $seller_sales_info['total_sales'] = 0;
+        $seller_sales_info['average_sales'] = 0;
+    }
+
+    return $seller_sales_info;
+}
+
+/**
+ * Summary of spitout_get_newest_users
+ * @param int $total_shown
+ * @return array
+ **/
+function spitout_get_newest_users($total_shown = -1)
+{
+    $users = get_users(
+        array(
+            'role' => 'seller',
+        )
+    );
+    $users_with_date = array();
+
+    foreach ($users as $user) {
+
+        $user_id = $user->ID;
+        $user_joined = get_user_meta($user_id, 'so_join_date', true);
+
+        $timestamp = strtotime($user_joined);
+        $formatted_date = date("Y-m-d", $timestamp);
+        $users_with_date[$user_id] = $formatted_date;
+    }
+    // Sort the array based on join dates in descending order
+    arsort($users_with_date);
+
+    // Limit the number of top sellers shown
+    if ($total_shown > 0) {
+        $users_with_date = array_slice($users_with_date, 0, $total_shown, true);
+    }
+
+    return $users_with_date;
+}
+
+
+/* the create post shortcode, and the feeds shortcodes are here */
+require get_template_directory() . '/inc/feed-shortcodes.php';
+
+/* all the ajax actions are listed here  */
+require get_template_directory() . '/inc/ajax-actions.php';
+
+//======Sam dai starts========
+
+function spitout_update_user_status_on_login($user_login, $user)
+{
+    update_user_meta($user->ID, 'user_status', 'logged_in');
+}
+add_action('wp_login', 'spitout_update_user_status_on_login', 10, 2);
+
+
+function spit_out_update_user_status_on_logout()
+{
+    global $current_user;
+
+    update_user_meta($current_user->ID, 'user_status', 'logged_out');
+    update_user_meta($current_user->ID, 'user_logged_out_time', current_time('mysql'));
+}
+add_action('clear_auth_cookie', 'spit_out_update_user_status_on_logout', 20);
+
+
+
+if (function_exists('add_theme_support')) {
+    add_theme_support('post-thumbnails');
+    set_post_thumbnail_size(50, 50, true); // 50 pixels wide by 50 pixels tall, crop mode
+}
+
+function split_out_get_logged_in_user_ids()
+{
+    $args = array(
+        'meta_query' => array(
+            array(
+                'key' => 'user_status',
+                'value' => 'logged_in',
+                'compare' => '='
+            )
+        )
+    );
+
+    $user_query = new WP_User_Query($args);
+    $logged_out_users = $user_query->get_results();
+
+    $logged_out_user_ids = array();
+    foreach ($logged_out_users as $user) {
+        $logged_out_user_ids[] = $user->ID;
+    }
+
+    return $logged_out_user_ids;
+}
+
+
+/* retrive seller data  */
+
+/**
+ * Get Seller Information
+ *
+ * Retrieves information about a seller based on the provided user ID.
+ *
+ * @param int $seller_id The ID of the seller.
+ * @return array An array containing seller information.
+ */
+
+/* to call this function pass seller id 
+ eg
+    $get_author_meta_data = spitout_get_seller_information($seller_id);
+    $image = $get_author_meta_data['seller_profile_img']; */
+function spitout_get_seller_information($seller_id)
+{
+    if ($seller_id) {
+        $seller_img = get_user_meta($seller_id, "so_profile_img", true);
+        $seller_data = get_userdata($seller_id);
+        $seller_user_name = $seller_data->user_login;
+
+        $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
+        $seller_url = get_author_posts_url($seller_id);
+        $seller_img_url = wp_get_attachment_url($seller_img, 'thumbnail');
+        $seller_location = get_user_meta($seller_id, "so_location", true);
+        $seller_online_status = get_user_meta($seller_id, "user_status", true);
+        $seller_final_location = $seller_location ? $seller_location : 'N/A';
+        $seller_final_profile_img = $seller_img_url ? $seller_img_url : $profile_avatar;
+
+        $seller_display_name = $seller_data->display_name;
+
+        if ($seller_online_status == 'logged_in') {
+            $active_status = 'online';
+        } else {
+            $active_status = 'offline';
+        }
+
+        $seller_information = array(
+            'seller_display_name' => $seller_display_name,
+            'seller_user_name' => $seller_user_name,
+            'seller_location' => $seller_final_location,
+            'seller_profile_img' => $seller_final_profile_img,
+            'seller_url' => $seller_url,
+            'seller_online' => $active_status
+        );
+
+        return $seller_information;
+    }
+}
+
+/**
+ * A function that filters existing users based on their user IDs.
+ *
+ * @param array $userIds The array of user IDs to filter.
+ * @return array The array of filtered user IDs.
+ */
+if (!function_exists('spitoutFilterExistingUsers')) {
+    function spitoutFilterExistingUsers($userIds)
+    {
+        return array_filter($userIds, function ($userId) {
+            return get_userdata($userId);
+        });
+    }
+}
+
+/**
+ * Format the time difference between the input date and the current date in a human-readable way.
+ *
+ * @param string $comment_date The input date to calculate the time difference from
+ * @return string The formatted time difference with units (e.g., 1m for 1 minute)
+ */
+if (!function_exists('formatTimeDifference')) {
+    function formatTimeDifference($comment_date)
+    {
+        // Convert the input date and current date to Unix timestamps
+        $comment_timestamp = strtotime($comment_date);
+        $current_timestamp = current_time('timestamp');
+
+        // Calculate the time difference in seconds
+        $time_diff_seconds = $current_timestamp - $comment_timestamp;
+
+        // Define variables to store the formatted time and units
+        $formatted_time = '';
+        $unit = '';
+
+        if ($time_diff_seconds < 60) {
+            // If less than 60 seconds, use seconds
+            $formatted_time = $time_diff_seconds;
+            $unit = 's';
+        } elseif ($time_diff_seconds < 3600) {
+            // If less than 1 hour, use minutes
+            $formatted_time = floor($time_diff_seconds / 60);
+            $unit = 'm';
+        } elseif ($time_diff_seconds < 86400) {
+            // If less than 1 day, use hours
+            $formatted_time = floor($time_diff_seconds / 3600);
+            $unit = 'h';
+        } elseif ($time_diff_seconds < 2592000) {
+            // If less than 30 days, use days
+            $formatted_time = floor($time_diff_seconds / 86400);
+            $unit = 'd';
+        } elseif ($time_diff_seconds < 31536000) {
+            // If less than 1 year, use months
+            $formatted_time = floor($time_diff_seconds / 2592000);
+            $unit = 'mo';
+        } else {
+            // Use years
+            $formatted_time = floor($time_diff_seconds / 31536000);
+            $unit = 'y';
+        }
+
+        // Combine the formatted time and unit
+        $output = $formatted_time . $unit;
+
+        return $output;
+    }
+}
+
+/* retrive buyer data  */
+
+/**
+ * Get Buyer Information
+ *
+ * Retrieves information about a seller based on the provided user ID.
+ *
+ * @param int $buyer_id The ID of the seller.
+ * @return array An array containing seller information.
+ */
+
+/* to call this function pass buyer id 
+ eg
+    $get_author_meta_data = spitout_get_buyer_information($buyer_id);
+    $image = $get_author_meta_data['buyer_profile_img']; */
+function spitout_get_buyer_information($buyer_id)
+{
+    if ($buyer_id) {
+        $buyer_img = get_user_meta($buyer_id, "so_profile_img", true);
+        $buyer_data = get_userdata($buyer_id);
+        $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
+        $buyer_url = get_author_posts_url($buyer_id);
+        // $buyer_img_url = wp_get_attachment_url($buyer_img, 'thumbnail');
+        $buyer_location = get_user_meta($buyer_id, "so_location", true);
+        $buyer_online_status = get_user_meta($buyer_id, "user_status", true);
+        $buyer_final_location = $buyer_location ? $buyer_location : 'N/A';
+        // $buyer_final_profile_img = $buyer_img_url ? $buyer_img_url : $profile_avatar;
+        $buyer_final_profile_img = $buyer_img == false ? $profile_avatar : (wp_get_attachment_image_src((int) $buyer_img, 'post-thumbnail'))[0];
+        $buyer_display_name = $buyer_data->display_name;
+        $buyer_user_name = $buyer_data->user_login;
+
+        if ($buyer_online_status == 'logged_in') {
+            $active_status = 'online';
+        } else {
+            $active_status = 'offline';
+        }
+
+        $buyer_information = array(
+            'buyer_display_name' => $buyer_display_name,
+            'buyer_user_name' => $buyer_user_name,
+            'buyer_location' => $buyer_final_location,
+            'buyer_profile_img' => $buyer_final_profile_img,
+            'buyer_url' => $buyer_url,
+            'buyer_online' => $active_status
+        );
+
+        return $buyer_information;
+    }
+}
+
+add_filter('woocommerce_billing_fields', 'remove_company_name_from_checkout', 10, 1);
+
+function remove_company_name_from_checkout($fields)
+{
+
+    unset($fields['billing_company']);
+
+    return $fields;
+}
+
+
+function spitout_footer_menus($menu_name)
+{
+
+    if (($locations = get_nav_menu_locations()) && isset($locations[$menu_name])) {
+        $menu = wp_get_nav_menu_object($locations[$menu_name]);
+        $menu_items = wp_get_nav_menu_items($menu->term_id);
+
+        return $menu_items;
+    }
+}
+
+function spitout_footer_menu_list($footer_menu_name)
+{
+    $menu_location_slug = $footer_menu_name;
+
+    $menu_locations = get_nav_menu_locations();
+    if (isset($menu_locations[$menu_location_slug])) {
+        $menu_id = $menu_locations[$menu_location_slug];
+        $menu_object = wp_get_nav_menu_object($menu_id);
+        if ($menu_object) {
+            $menu_name = $menu_object->name;
+            echo '<h5 class="fw-bold footer-title">' . $menu_name . '</h5>';
+            echo '<div class="dropdown-list">';
+
+            $menu_items_footer2 = spitout_footer_menus($footer_menu_name);
+            foreach ($menu_items_footer2 as $menu_item) {
+                $id = $menu_item->ID;
+                $title = $menu_item->title;
+                $url = $menu_item->url;
+                echo '<li> <a class="' . $title . '" href="' . $url . '">' . $title . '</a></li>';
+            }
+        }
+    }
+}
+/* spit out upload menu icon function */
+
+function spit_out_page_custom_color_meta_box()
+{
+    add_meta_box(
+        'custom_color_meta_box',
+        'Choose Background Color',
+        'spit_out_render_page_color_meta_box',
+        'page',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'spit_out_page_custom_color_meta_box');
+
+function spit_out_render_page_color_meta_box($post)
+{
+    $spit_page_selected_color = get_post_meta($post->ID, 'spit_page_selected_color', true);
+?>
+    <label>
+        <input type="radio" name="spit_page_selected_color" value="#FFFFFF" <?php checked($spit_page_selected_color, '#FFFFFF'); ?>>
+        White
+    </label><br>
+    <label>
+        <input type="radio" name="spit_page_selected_color" value="#F4F4F4" <?php checked($spit_page_selected_color, '#F4F4F4'); ?>>
+        Grey
+    </label>
+<?php
+}
+
+
+function spit_out_save_custom_page_color_meta_box($post_id)
+{
+    if (array_key_exists('spit_page_selected_color', $_POST)) {
+        update_post_meta(
+            $post_id,
+            'spit_page_selected_color',
+            sanitize_text_field($_POST['spit_page_selected_color'])
+        );
+    }
+}
+add_action('save_post', 'spit_out_save_custom_page_color_meta_box');
+
+function spit_out_redirect_shop_product_page()
+{
+    // Get the current URL
+    $current_url = home_url($_SERVER['REQUEST_URI']);
+    $to_redirect_page = home_url('/seller/');
+
+    // Check if the current URL matches the WooCommerce shop or single product URLs
+    //if (strpos($current_url, '/shop/') !== false || strpos($current_url, '/product/') !== false) { 
+    if (strpos($current_url, '/shop/') !== false) {
+        // Redirect to another page
+        wp_redirect($to_redirect_page);
+        exit;
+    }
+    if (!is_user_logged_in() && is_page('my-spitout')) {
+        wp_redirect(site_url('/login/'));
+        exit();
+    }
+}
+add_action('template_redirect', 'spit_out_redirect_shop_product_page');
+
+/* set woocommerce order to on-hold */
+add_action('woocommerce_thankyou', 'spitout_set_wc_product_to_on_hold');
+function spitout_set_wc_product_to_on_hold($order_id)
+{
+    if (!$order_id)
+        return;
+
+    $order = wc_get_order($order_id);
+
+    // If order is "on-hold" update status to "processing"
+    if ($order->has_status('processing')) {
+        $order->update_status('on-hold');
+    }
+}
+
+function so_get_buyer_total_purchase($buyer_id, $seller_id)
+{
+
+    $customer_orders = wc_get_orders(
+        array(
+            'limit' => -1,
+            'customer_id' => (int) $buyer_id,
+            'meta_key' => 'seller_id',
+            'meta_value' => $seller_id,
+            'meta_compare' => 'LIKE',
+            'status' => array('completed'),
+        )
+    );
+
+    $total = 0;
+    $count = 0;
+    foreach ($customer_orders as $order) {
+        if ($order) {
+            $total += dynamic_currency_for_buyer_seller_order_pages($order->get_id(), false);
+            $count++;
+        }
+    }
+
+    return [$total, $count];
+}
+
+// shortcode for reset psw=================
+add_shortcode('so_reset_password', 'so_reset_password');
+function so_reset_password()
+{
+    ob_start();
+?>
+    <form>
+        <div class="form-card so-feed-new-container so-reset-pw">
+            <div class="row so-reset-password">
+                <div class="col-lg-12">
+                    <div class="login-title ">
+                        <h4 class="fs-title">Reset password</h4>
+                        <p class="mt-2">Enter the email address associated with your account and will send a link to reset
+                            your
+                            password.</p>
+                    </div>
+                    <label for="email">Email</label> <br>
+                    <input type="email" name="email" placeholder="Email" /> <br>
+                    <div class="col-lg-12">
+                        <input type="button" name="next" class="next-step-register-btn mt-4 so-signin-btn" id="so-login-btn" value="Continue" />
+                    </div>
+                    <div class="col-lg-12 login-redirect-to-register pt-2">
+                        <h6>Don't have an account yet. <span><a href="#">Sign up </a></span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<?php
+    $output = ob_get_contents();
+    ob_end_clean();
+    return $output;
+}
+// end of reset psw shortcode
+
+// shortcode for age verification-======================================================================
+
+
+add_shortcode('so_age_verification', 'so_age_verification');
+function so_age_verification()
+{
+    ob_start();
+?>
+
+    <div class="container so-age-verification-popup mt-5">
+        <h5 class="so-age-verification-popup-agelimit">+21</h5>
+        <h4 class="mb-2 mt-0">Age Verification</h4>
+        <p>This Website requires you to be <span>21</span> years or older to enter. Please enter your Date of Birth in
+            the fields
+            below in order to continue.</p>
+        <div class="so-datepicker-container mx-auto">
+            <div class="so-datepicker-dropdown">
+                <label for="month"></label>
+                <select id="month">
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="03">April</option>
+                    <option value="03">May</option>
+                    <option value="03">June</option>
+                    <option value="03">July</option>
+                    <option value="03">August</option>
+                    <option value="03">September</option>
+                    <option value="03">October</option>
+                    <option value="03">November</option>
+                    <option value="03">December</option>
+                </select>
+            </div>
+            <div class="so-datepicker-dropdown">
+                <label for="day"></label>
+                <select id="day">
+                    <!-- JavaScript to update the days dynamically based on the selected month -->
+                </select>
+            </div>
+            <div class="so-datepicker-dropdown">
+                <label for="year"></label>
+                <select id="year">
+
+                    <!-- JavaScript to generate a range of years dynamically -->
+                </select>
+            </div>
+        </div>
+        <div class="so-age-verify-popup-submit mt-3">
+            <button type="submit">
+                Submit
+                <i class="bi bi-arrow-right-circle-fill"></i></button>
+
+        </div>
+    </div>
+    <?php
+    $output = ob_get_contents();
+    ob_end_clean();
+    return $output;
+}
+
+add_action('wp_ajax_cpmm_send_msg_request_from_seller_profile', 'cpmm_send_msg_request_from_seller_profile');
+function cpmm_send_msg_request_from_seller_profile()
+{
+    $user_id = (int) $_POST['user_id'];
+    $curr_user_id = get_current_user_id();
+
+    $curr_req_ids = get_user_meta($user_id, 'cpmm_message_requests', true);
+
+    if (is_array($curr_req_ids)) {
+        if (!in_array($curr_user_id, $curr_req_ids)) {
+            array_push($curr_req_ids, $curr_user_id);
+            update_user_meta($user_id, 'cpmm_message_requests', $curr_req_ids);
+        }
+    } else {
+        update_user_meta($user_id, 'cpmm_message_requests', [$curr_user_id]);
+    }
+}
+
+function so_loginPage_styling()
+{
+    if (isset($_GET['action']) && ($_GET['action'] == 'rp' || $_GET['action'] == 'resetpass' || $_GET['action'] == 'lostpassword' || $_GET['checkemail'] == 'confirm')) { ?>
+        <style type="text/css">
+            #login h1 a,
+            .login h1 a {
+                background-image: url(<?php echo get_stylesheet_directory_uri() . '/assets/img/logo-mob.png'; ?>);
+                height: 65px;
+                width: 320px;
+                background-repeat: no-repeat;
+                padding-bottom: 30px;
+            }
+
+            #login .message.reset-pass,
+            #login .message {
+                border-left: 4px solid #ea1e79;
+                font-weight: 500;
+            }
+
+            #login #resetpassform .reset-pass-submit .button,
+            #login #resetpassform .reset-pass-submit .button-secondary {
+                color: #ea1e79;
+                border-color: #ea1e79;
+                background: #fff;
+            }
+
+            #login #resetpassform {
+                border: transparent;
+            }
+
+            #login #resetpassform .reset-pass-submit .button-primary,
+            #lostpasswordform .submit input {
+                background: #ea1e79;
+                border-color: #ea1e79;
+                color: #fff;
+                text-decoration: none;
+                text-shadow: none;
+            }
+
+            #login .privacy-policy-page-link a {
+                color: #ea1e79;
+            }
+
+            #login #resetpassform .description {
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            #login p#nav {
+                padding-left: 0;
+            }
+
+            #login p#nav a {
+                font-size: 16px;
+                font-weight: 600;
+                background: #ea1e79;
+                color: #fff;
+                padding: 10px 24px;
+                border-radius: 20px;
+            }
+
+            #login p#backtoblog {
+                background: #fff;
+                width: fit-content;
+                padding: 9px 12px;
+                border-radius: 20px;
+                font-weight: 500;
+            }
+
+            #login p#nav a:hover,
+            #login p#backtoblog a:hover {
+                color: #ea1e79;
+            }
+        </style>
+    <?php } else { ?>
+        <style type="text/css">
+            #login h1 a,
+            .login h1 a {
+                background-image: url(<?php echo get_stylesheet_directory_uri() . '/assets/img/logo-mob.png'; ?>);
+                height: 65px;
+                width: 320px;
+                background-repeat: no-repeat;
+                padding-bottom: 30px;
+            }
+
+            #login .message.reset-pass,
+            #login .message {
+                border-left: 4px solid #ea1e79;
+                font-weight: 500;
+            }
+
+            #login #resetpassform .reset-pass-submit .button,
+            #login #resetpassform .reset-pass-submit .button-secondary {
+                color: #ea1e79;
+                border-color: #ea1e79;
+                background: #fff;
+            }
+
+            #login #resetpassform {
+                border: transparent;
+            }
+
+            #login #resetpassform .reset-pass-submit .button-primary,
+            #lostpasswordform .submit input {
+                background: #ea1e79;
+                border-color: #ea1e79;
+                color: #fff;
+                text-decoration: none;
+                text-shadow: none;
+            }
+
+            #login .privacy-policy-page-link a {
+                color: #ea1e79;
+            }
+
+            #login #resetpassform .description {
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            #login p#nav {
+                padding-left: 0;
+            }
+
+            #login p#nav a {
+                font-size: 16px;
+                font-weight: 600;
+                background: #ea1e79;
+                color: #fff;
+                padding: 10px 24px;
+                border-radius: 20px;
+            }
+
+            #login p#backtoblog {
+                background: #fff;
+                width: fit-content;
+                padding: 9px 12px;
+                border-radius: 20px;
+                font-weight: 500;
+            }
+
+            #login p#nav a:hover,
+            #login p#backtoblog a:hover {
+                color: #ea1e79;
+            }
+        </style>
+
+    <?php
+    }
+}
+add_action('login_enqueue_scripts', 'so_loginPage_styling');
+
+add_action('woocommerce_thankyou', 'tm_add_order_metadata');
+function tm_add_order_metadata($order_id)
+{
+    $seller_ids = [];
+    $order_obj = new WC_Order($order_id);
+    $order_items = $order_obj->get_items();
+    $customer_id = $order_obj->get_customer_id();
+    foreach ($order_items as $item) {
+        $curr_product_id = $item->get_product_id();
+        if (!in_array($curr_product_id, $seller_ids)) {
+            array_push($seller_ids, get_post_field('post_author', $curr_product_id));
+        }
+    }
+
+    remove_action('woocommerce_new_order', 'tm_add_order_metadata', 10);
+
+    if (count($seller_ids) == 1) {
+        $order_obj->update_meta_data('seller_id', $seller_ids[0]);
+    } else if (count($seller_ids) > 1) {
+        $order_obj->update_meta_data('seller_id', serialize($seller_ids));
+    }
+    $order_obj->save();
+
+    ?>
+    <script>
+        // Define the button attributes
+        var buttonAttributes = {
+            'class': 'so-notify',
+            'data-sender': <?php echo $customer_id; ?>,
+            'data-receiver': <?php echo $seller_ids[0]; ?>,
+            'data-notify': 'new-orders',
+            'data-post-id': <?php echo $order_id; ?>
+        };
+        var $buttonn = jQuery('<button>').attr(buttonAttributes);
+        $buttonn.hide().appendTo('body');
+        setTimeout(function() {
+            if ($buttonn.length) {
+                $buttonn.click();
+                $buttonn.remove();
+            }
+        }, 1000);
+    </script>
+    <?php
+
+    add_action('woocommerce_new_order', 'tm_add_order_metadata', 10, 2);
+}
+
+add_filter('woocommerce_add_error', 'custom_cart_error_message', 10, 2);
+
+function custom_cart_error_message($error)
+{
+    // Check if the error message matches the default message
+    if ($error == 'Sorry, this product cannot be purchased.') {
+        // Replace the default error message with your custom message
+        $error = 'Attention: You are not allowed to add product from different sellers in same cart';
+    }
+
+    return $error;
+}
+
+/**
+ * The function `spitout_get_currency_exchange_rate` retrieves and formats the current currency
+ * exchange rate using the (WOOMULTI_CURRENCY_F_Data-> class for free plugin) (WOOMULTI_CURRENCY_Data-> class for pro plugin) class.
+ * 
+ * @return The function `spitout_get_currency_exchange_rate` returns the current exchange rate of the
+ * selected currency in a readable format with 10 decimal places.
+ */
+function spitout_get_currency_exchange_rate()
+{
+
+    if (class_exists('WOOMULTI_CURRENCY_Data')) {
+        $multiCurrencySettings = WOOMULTI_CURRENCY_Data::get_ins();
+        $wmcCurrencies = $multiCurrencySettings->get_list_currencies();
+        $currentCurrency = $multiCurrencySettings->get_current_currency();
+        $currentCurrencyRate = floatval($wmcCurrencies[$currentCurrency]['rate']);
+        return $currentCurrencyRate;
+    }
+}
+
+/**
+ * The function `spitout_get_formatted_price` calculates and returns a formatted price based on a given
+ * exchange rate.
+ * 
+ * @param price_to_be_formatted The `price_to_be_formatted` parameter is the price value that you want
+ * to format. This function appears to be calculating the final price after applying a currency
+ * exchange rate and then formatting it using the `wc_price` function.
+ * 
+ * @return The function `spitout_get_formatted_price` returns a formatted price after converting the
+ * input price to the currency exchange rate obtained from `spitout_get_currency_exchange_rate`
+ * function.
+ */
+function spitout_get_formatted_price($price_to_be_formatted)
+{
+    $exchange_rate = spitout_get_currency_exchange_rate();
+    $final_exchange_price = $price_to_be_formatted * $exchange_rate;
+    $formatted_price = wc_price($final_exchange_price);
+    return $formatted_price;
+}
+
+
+function spitout_get_formatted_currency_and_price($price)
+{
+    $get_exchange_rate = spitout_get_currency_exchange_rate();
+    $final_exchange_price = $price * $get_exchange_rate;
+    return get_woocommerce_currency_symbol() . $final_exchange_price;
+}
+
+
+function spitout_get_currency_exchange_btc_usd_rate()
+{
+
+    if (class_exists('WOOMULTI_CURRENCY_Data')) {
+        $multiCurrencySettings = WOOMULTI_CURRENCY_Data::get_ins();
+        $wmcCurrencies = $multiCurrencySettings->get_list_currencies();
+        $currentCurrency = $multiCurrencySettings->get_current_currency();
+        $currentCurrencyRate = floatval($wmcCurrencies[$currentCurrency]['rate']);
+        $readable_format = number_format($currentCurrencyRate, 10);
+        $get_exchange_rate = $wmcCurrencies['USD']['rate'];
+        return $get_exchange_rate;
+    }
+}
+
+
+
+function get_order_id_by_transaction_id($transaction_id)
+{
+    // Get all order id with the specified meta key
+    global $wpdb;
+    $get_order_id = $wpdb->get_results("
+    SELECT post_id 
+    FROM $wpdb->postmeta 
+    WHERE meta_key = '_wallet_payment_transaction_id' 
+    AND meta_value = $transaction_id
+", ARRAY_A);
+    if (!empty($get_order_id)) {
+        // Return the first order ID found with the specified meta value
+        return $get_order_id[0]['post_id'];
+    } else {
+        // Return false if no order is found with the specified meta value
+        return false;
+    }
+}
+
+
+
+
+// Define a function to modify the data
+function spitout_wallet_transaction_data($data, $transaction)
+{
+    $get_transacion_id = $transaction->transaction_id;
+    $get_transaction_details = $transaction->details;
+    $get_transaction_type = $transaction->type;
+    preg_match(
+        '/\d+/',
+        $get_transaction_details,
+        $matches
+    );
+    if (!empty($matches)) {
+        $order_number = $matches[0];
+    } else {
+        $order_number = 0;
+    }
+
+    $currency = $_COOKIE['wmc_current_currency'] ?? 'BTC';
+    $get_currency_exchange_rate = spitout_get_currency_exchange_btc_usd_rate();
+
+    $get_order_id_of_transaction = get_order_id_by_transaction_id($get_transacion_id);
+    $get_wallet_transation_charge = get_wallet_transaction_meta($get_transacion_id, '_wc_wallet_purchase_gateway_charge', true);
+    $get_wallet_withdrawal_transation = get_wallet_transaction_meta($get_transacion_id, '_withdrawal_request_id', true);
+    $get_wallet_withdrawal_amount_transation = get_post_meta($get_wallet_withdrawal_transation, '_wallet_withdrawal_amount', true);
+    $get_wallet_withdrawal_charge_amount_transation = get_post_meta($get_wallet_withdrawal_transation, '_wallet_withdrawal_transaction_charge', true);
+
+    /* $order = wc_get_order($order_number);
+
+    if ($order) {
+        if ($currency == 'BTC') {
+            $order_total = $order->get_formatted_order_total();
+        } else {
+            $convert_btc_usd = $order->get_total() * $get_currency_exchange_rate;
+            $order_total = '$' . number_format($convert_btc_usd, 2, '.', ',');
+        }
+        // etc.
+    } else {
+        if ($currency == 'BTC') {
+            $charge_able_amount = $get_wallet_withdrawal_charge_amount_transation / $get_currency_exchange_rate;
+            $order_total = '<p class="withdraw_order_amt m-0">฿' . number_format($charge_able_amount, 5, '.', ',') . '</p><span> (Withdraw Charge)</span>';
+        } else {
+
+            $convert_btc_usd = $get_wallet_withdrawal_charge_amount_transation;
+            $order_total = '<p class="withdraw_order_amt m-0">$' . number_format($convert_btc_usd, 2, '.', ',') . ' </p><span>(Withdraw Charge)</span>';
+        }
+    } */
+
+    $get_user_balance =  wc_price(apply_filters('woo_wallet_amount', $transaction->balance, $transaction->currency, $transaction->user_id), woo_wallet_wc_price_args($transaction->user_id));
+    // Additional modifications can be made here
+    $data['total_amount'] = $get_user_balance;
+    return $data;
+}
+
+// Hook the function to the filter
+add_filter('woo_wallet_transactons_datatable_row_data', 'spitout_wallet_transaction_data', 10, 2);
+
+// Define a function to modify the columns
+function spitout_wallet_transaction_columns($columns)
+{
+    // Add your new array
+    $new_column = array(
+        'data' => 'total_amount',
+        'title' => __('Balance', 'woo-wallet'),
+        'orderable' => false, // Example value, modify as needed
+    );
+
+    // Add the new column array to the existing columns array
+    array_splice($columns, 3, 0, array($new_column));
+    return $columns;
+}
+
+// Hook the function to the filter
+add_filter('woo_wallet_transactons_datatable_columns', 'spitout_wallet_transaction_columns', 10, 2);
+
+add_action('wp_ajax_spitout_hidden_users', 'spitout_hidden_users');
+function spitout_hidden_users()
+{
+    $user_id = (int) $_POST['user_id'];
+    $get_current_user_id = get_current_user_id();
+    $get_seller_hidden_user = get_user_meta($get_current_user_id, 'so_hidden_seller', true);
+    $user_info = get_userdata($user_id);
+    $username = $user_info->user_login;
+    $final_array = array_diff($get_seller_hidden_user, array($user_id));
+
+    // Output the updated array
+    $result = update_user_meta($get_current_user_id, 'so_hidden_seller', $final_array);
+
+    // Check if update was successful
+    if ($result) {
+        echo 'Success! ' . $username . '  has been removed from hidden users';
+    } else {
+        echo "Failed! Unable to removed form hidden users";
+    }
+    die();
+}
+
+function my_spitout_tab_setting_js()
+{
+    if (is_page('my-spitout')) { ?>
+
+        <script>
+            jQuery(document).ready(function() {
+
+                jQuery(function() {
+                    jQuery('.sales-pagination').on('click', function(e) {
+                        //window.localStorage.removeItem("activeTab");
+                        window.localStorage.setItem('activeTab', '#so-my-spitout-sales');
+                    });
+                    var activeTab = window.localStorage.getItem('activeTab');
+                    if (activeTab) {
+                        jQuery('#myTab button[data-target="' + activeTab + '"]').tab('show');
+                        window.localStorage.removeItem("activeTab");
+                    }
+
+                });
+            });
+        </script>
+    <?php
+    }
+}
+add_action('wp_footer', 'my_spitout_tab_setting_js');
+
+/**
+ * The above PHP function creates a shortcode in WordPress that generates an age verification popup
+ * dialog with a form for users to enter their date of birth.
+ * 
+ * @param mixed $atts The only attribute being used is `age`, which represents the age of consent 
+ * required to view the content.
+ * 
+ * @return void code for an age verification popup dialog.
+ */
+//vileroze
+add_shortcode('age_verification', 'spitout_age_verification');
+function spitout_age_verification($atts)
+{
+    //dont show to logged in users
+    if (is_user_logged_in()) {
+        return;
+    }
+    $age_of_consent = $atts['age'];
+    ob_start();
+    ?>
+
+    <dialog id="age-verfication-popup" class="overlay so-age-verification-popup" tabindex="-1">
+        <div class="popup so-age-verify-popup">
+            <div class="age-verify-popup-limit">
+                <h5>+21</h5>
+            </div>
+            <h4 class="mt-3 text-center">Age Verification</h4>
+            <h3 id="age-verification-err">You are not old enough to view this content</h3>
+            <p class="mt-3 mb-3">
+                This Website requires you to be <span>
+                    <?php echo $age_of_consent; ?>
+                </span> years or older to enter.
+                Please enter your Date of Birth in the fields below in order
+                to continue:
+            </p>
+            <div class="content">
+                <form action="" id="verify-age">
+
+                    <select name="month" class="form-control" id="verify-month" required>
+                        <option value="none">Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+
+                    <select name="day" class="form-control" id="verify-day" required>
+                        <option value="none">Day</option>
+                    </select>
+
+                    <select name="Year" class="form-control" id="verify-year" required>
+                        <option value="none">Year</option>
+                    </select>
+                    <!-- <input type="submit" class="btn btn-default" id="age-submit" value="VERIFY"> -->
+                </form>
+                <a href="#" class="btn btn-default age-verify-submit-btn" id="age-submit">Submit
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" enable-background="new 0 0 100 100" height="20" viewBox="0 0 100 100" width="20">
+                        <path d="m50 10.75c-18.266 0-34.562 13.129-38.383 31.007-1.909 8.933-.623 18.432 3.636 26.515 4.099 7.779 10.819 14.066 18.859 17.629 8.363 3.707 17.964 4.353 26.754 1.825 8.48-2.438 15.999-7.789 21.118-14.972 10.703-15.017 9.272-36.111-3.32-49.567-7.38-7.886-17.862-12.437-28.664-12.437zm18.829 41.347-10.7 10.958c-2.709 2.775-6.991-1.429-4.293-4.191l5.399-5.529h-25.586c-1.817 0-3.333-1.517-3.333-3.333s1.517-3.333 3.333-3.333h25.458l-5.506-5.505c-2.736-2.736 1.506-6.979 4.242-4.243l10.961 10.96c1.162 1.161 1.173 3.041.025 4.216z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </dialog>
+<?php
+    return ob_get_clean();
+}
+
+//add new product form
+add_shortcode('add_new_product_form', 'spitout_add_new_product_form_shortcode');
+function spitout_add_new_product_form_shortcode()
+{
+    ob_start();
+
+    if (isset($_POST['add_product'])) {
+        // WordPress environmet
+        require(dirname(__FILE__) . '/../../../wp-load.php');
+        // it allows us to use wp_handle_upload() function
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        // validation
+        if (empty($_FILES['product_picture'])) {
+            wp_die('No files selected.');
+        }
+
+        $upload = wp_handle_upload(
+            $_FILES['product_picture'],
+            ['test_form' => false]
+        );
+
+        if (!empty($upload['error'])) {
+            wp_die($upload['error']);
+        }
+
+        // it is time to add our uploaded image into WordPress media library
+        $attachment_id = wp_insert_attachment(
+            [
+                'guid' => $upload['url'],
+                'post_mime_type' => $upload['type'],
+                'post_title' => basename($upload['file']),
+                'post_content' => '',
+                'post_status' => 'inherit',
+            ],
+            $upload['file']
+        );
+
+        if (is_wp_error($attachment_id) || !$attachment_id) {
+            wp_die('Upload error.');
+        }
+
+        // update medatata, regenerate image sizes
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+        wp_update_attachment_metadata(
+            $attachment_id,
+            wp_generate_attachment_metadata($attachment_id, $upload['file'])
+        );
+
+        //create new product
+        $product_name = sanitize_text_field($_POST['product_name']);
+        $price = floatval($_POST['price']);
+        $final_price = spitout_get_formatted_price($price);
+
+        $additional_info = sanitize_textarea_field($_POST['additional_info']);
+        $product = new WC_Product_Simple();
+        $product->set_name($product_name);
+        $product->set_regular_price($final_price);
+        $product->set_short_description($additional_info);
+        $product->set_image_id($attachment_id);
+        $product->save();
+
+        // $new_product_id = $product->get_id();
+    }
+?>
+    <!-- ACCOUNT Page Contents -->
+    <section class="so-account-content-wrapper">
+        <div class="container inner-small-container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="so-account-settings">
+                        <h3>Add new product</h3>
+                        <div class="settings-pannel">
+                            <h4>Product Details</h4>
+                            <p>Add product, images, price and etc</p>
+                            <form action="" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="product_name">Product Name:</label>
+                                    <input type="text" name="product_name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Price:</label>
+                                    <input type="number" step="1" name="price" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="additional_info">Additional Information:</label>
+                                    <textarea name="additional_info"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="product_picture">Product Image:</label>
+                                    <input type="file" name="product_picture" />
+                                    <!-- accept="image/*" -->
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" name="add_product" value="Add Product">
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<?php
+    return ob_get_clean();
+}
+
+
+//to store the current exchange rate, to be used in graphs in 'my-spitout' page
+add_action('wp_footer', 'spitout_hidden_echange_rate');
+function spitout_hidden_echange_rate()
+{
+    if (is_page('my-spitout')) {
+        echo '<input type="hidden" class="curr-exchange-rate" value="' . spitout_get_currency_exchange_btc_usd_rate() . '">';
+    }
+}
+
+
+add_action('woocommerce_add_to_cart', 'so_add_product_meta_for_wallet_topup_on_submit', 10, 6);
+function so_add_product_meta_for_wallet_topup_on_submit($cart_item_key, $product_id, $quantity, $variation_id, $variation, $cart_item_data)
+{
+    if (($product_id == (int)(get_wallet_rechargeable_product()->get_id())) && isset($_POST['woo_add_to_wallet'])) {
+        if (so_get_dynamic_currency() == "BTC") {
+            //update the product meta
+            update_post_meta($product_id, '_regular_price', $_POST['woo_wallet_balance_to_add']);
+            $usd_price = (float)$_POST['woo_wallet_balance_to_add'] * spitout_get_currency_exchange_btc_usd_rate();
+            update_post_meta($product_id, '_regular_price_wmcp', json_encode(['USD' => (string)$usd_price]));
+        } else {
+            $btc_price = truncate_decimal_places(($_POST['woo_wallet_balance_to_add'] / spitout_get_currency_exchange_btc_usd_rate()), 6);
+            // $btc_price = number_format(($_POST['woo_wallet_balance_to_add'] / spitout_get_currency_exchange_btc_usd_rate()), 6, '.', '');
+            update_post_meta($product_id, '_regular_price', $btc_price);
+            update_post_meta($product_id, '_regular_price_wmcp', json_encode(['USD' => $_POST['woo_wallet_balance_to_add']]));
+        }
+    }
+}
+
+
+add_filter('custom_modify_cart_item_data', 'so_chage_wallet_product_data', 10, 6);
+function so_chage_wallet_product_data($cart_item_data, $product_id, $variation_id)
+{
+    // $cart_item_data['fffffff'] = 'ffffff';
+    if (($product_id == (int)(get_wallet_rechargeable_product()->get_id())) && isset($_POST['woo_add_to_wallet'])) {
+        if (so_get_dynamic_currency() == "BTC") {
+            $usd_price = (float)$_POST['woo_wallet_balance_to_add'] * spitout_get_currency_exchange_btc_usd_rate();
+
+            //update the woocommerce cart item details
+            $cart_item_data['regular_price'] = $_POST['woo_wallet_balance_to_add'];
+            $cart_item_data['regular_price_wmcp'] = (string)$usd_price;
+        } else {
+            $btc_price = (($_POST['woo_wallet_balance_to_add'] / spitout_get_currency_exchange_btc_usd_rate()));
+            // $btc_price = number_format(($_POST['woo_wallet_balance_to_add'] / spitout_get_currency_exchange_btc_usd_rate()), 6, '.', '');
+
+            //update the woocommerce cart item details
+            $cart_item_data['regular_price'] = (string)$btc_price;
+            $cart_item_data['regular_price_wmcp'] = $_POST['woo_wallet_balance_to_add'];
+        }
+    }
+    return $cart_item_data;
+}
+
+
+// add_action('woocommerce_before_checkout_form', 'so_add_product_meta_for_wallet_topup');
+// function so_add_product_meta_for_wallet_topup()
+// {
+//     if (!class_exists('WooCommerce')) {
+//         return;
+//     }
+
+//     $cart = WC()->cart;
+//     $wallet_topup_product_id = get_wallet_rechargeable_product()->get_id();
+
+//     if ($cart->get_cart_contents_count() == 1) {
+
+//         $cart_items = $cart->get_cart();
+
+//         foreach ($cart_items as $cart_item_key => $cart_item) {
+
+//             if ($cart_item['product_id'] == $wallet_topup_product_id) {
+//                 update_post_meta($cart_item['product_id'], '_regular_price', 'your_meta_value');
+//                 break;
+//             }
+//         }
+//     }
+// }
+
+
+
+
+
+/* The above PHP code defines a function named `spitout_enable_plisio_only_in_wallettopup` that takes
+an array of available gateways as a parameter. The function is intended to modify the list of
+available gateways and enable only the Plisio gateway when the user is in the "wallettopup" context.
+ */
+function spitout_enable_plisio_only_in_wallettopup($available_gateways)
+{
+
+
+    if (is_admin()) return $available_gateways;
+    if (!is_checkout()) return $available_gateways;
+    // Get cart object
+    $cart = WC()->cart;
+
+    // Get cart items
+    $cart_items = $cart->get_cart();
+
+    // Flag to indicate if the product is found
+    $product_found = false;
+
+    // Loop through cart items
+    foreach ($cart_items as $cart_item_key => $cart_item) {
+        // Get product ID
+        $product_id = $cart_item['product_id'];
+
+        // Check if the product ID matches the one we're looking for (1964)
+        if ($product_id == get_wallet_rechargeable_product()->get_id()) {
+            $product_found = true;
+            break; // Stop the loop since we found the product
+        }
+    }
+
+    if ($product_found == false) unset($available_gateways['plisio']);
+    return $available_gateways;
+}
+add_filter('woocommerce_available_payment_gateways', 'spitout_enable_plisio_only_in_wallettopup');
+
+
+
+
+/* -------------------------user restrict to wp-admin-------------- */
+
+
+function spitout_restrict_admin_access()
+{
+    if ((current_user_can('seller') || current_user_can('buyer')) && is_admin() && !defined('DOING_AJAX')) {
+        wp_redirect(home_url());
+        exit;
+    }
+}
+add_action('admin_init', 'spitout_restrict_admin_access');

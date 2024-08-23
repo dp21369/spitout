@@ -1,0 +1,85 @@
+/*!
+Theme Name: spitout
+Theme URI: http://underscores.me/
+Author: CodePixelzMedia
+Author URI: https://codepixelzmedia.com/
+Description: Description
+Version: 1.0.0
+Tested up to: 5.4
+Requires PHP: 5.6
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: spitout
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+spitout is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+
+/* by vileroze starts */
+
+#age-verification-err {
+  color: red;
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  opacity: 0;
+  height: auto;
+  width: auto;
+  place-items: center;
+}
+
+/* .overlay:target {
+  display: block;
+  opacity: 1;
+} */
+
+dialog[open]:not(:focus-within) {
+  background-color: rgb(255, 255, 254);
+  transition: background-color 0.01s ease;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 90%;
+  position: relative;
+  height: fit-content;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px) {
+  .popup {
+    width: 90%;
+  }
+}
+
+.grecaptcha-badge {
+    display: none !important;
+}
+/* by vileroze ends */

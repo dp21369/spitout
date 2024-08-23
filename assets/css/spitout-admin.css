@@ -1,0 +1,58 @@
+.so-spit-dashboard-table tr td input {
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+
+.so-spit-dashboard-table tr:nth-child(4) th,
+.so-spit-dashboard-table tr:nth-child(4) td,
+.so-spit-dashboard-table tr:nth-child(7) th,
+.so-spit-dashboard-table tr:nth-child(7) td,
+.so-spit-dashboard-table tr:nth-child(10) th,
+.so-spit-dashboard-table tr:nth-child(10) td {
+    padding-top: 30px;
+}
+
+.so-spit-dashboard-table tr:nth-child(3),
+.so-spit-dashboard-table tr:nth-child(6),
+.so-spit-dashboard-table tr:nth-child(9) {
+    border-bottom: 1px solid #a1a1a1a1;
+}
+
+.so-spit-dashboard-table tr:nth-child(3) th,
+.so-spit-dashboard-table tr:nth-child(3) td,
+.so-spit-dashboard-table tr:nth-child(6) th,
+.so-spit-dashboard-table tr:nth-child(6) td,
+.so-spit-dashboard-table tr:nth-child(9) th,
+.so-spit-dashboard-table tr:nth-child(9) td {
+    padding-bottom: 30px;
+}
+
+.form-table .so-spit-dashboard-table td,
+.form-table .so-spit-dashboard-table th {
+    padding: 5px 5px;
+}
+
+#spitout-custom-fields h2.hndle {
+    font-size: 24px;
+    /* padding-bottom: 10px; */
+}
+
+/* #spitout-custom-fields h2.hndle:after {
+    content: "hello cpm";
+} */
+
+/* Theme options css */
+.toplevel_page_theme-settings .wrap {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    padding: 15px;
+    font-weight: bold;
+}
+.toplevel_page_theme-settings .wrap table {
+    max-width: 50%;
+}
+.toplevel_page_theme-settings .wrap table td, .toplevel_page_theme-settings .wrap table th {
+background: #fff;
+padding: 15px;
+border: 1px solid #c3c4c7;
+}

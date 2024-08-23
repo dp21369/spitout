@@ -1,0 +1,70 @@
+/* #login h1 a,
+.login h1 a {
+
+    background-image: url('../img/logo-mob.png');
+    height: 65px;
+    width: 320px;
+    background-repeat: no-repeat;
+    padding-bottom: 30px;
+}
+
+#login .message.reset-pass,
+#login .message {
+    border-left: 4px solid #ea1e79;
+    font-weight: 500;
+}
+
+#login #resetpassform .reset-pass-submit .button,
+#login #resetpassform .reset-pass-submit .button-secondary {
+    color: #ea1e79;
+    border-color: #ea1e79;
+    background: #fff;
+}
+
+#login #resetpassform {
+    border: transparent;
+}
+
+#login #resetpassform .reset-pass-submit .button-primary,
+#lostpasswordform .submit input {
+    background: #ea1e79;
+    border-color: #ea1e79;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+#login .privacy-policy-page-link a {
+    color: #ea1e79;
+}
+
+#login #resetpassform .description {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#login p#nav {
+    padding-left: 0;
+}
+
+#login p#nav a {
+    font-size: 16px;
+    font-weight: 600;
+    background: #ea1e79;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 20px;
+}
+
+#login p#backtoblog {
+    background: #fff;
+    width: fit-content;
+    padding: 9px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+#login p#nav a:hover,
+#login p#backtoblog a:hover {
+    color: #ea1e79;
+} */

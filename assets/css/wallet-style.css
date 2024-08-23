@@ -1,0 +1,444 @@
+/* wallet css */
+
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar h3,
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-content h3 {
+  font-size: 24px;
+  line-height: 40px;
+  text-align: left;
+}
+
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar h3 a {
+  color: var(--primary-black);
+}
+.woo-wallet-my-wallet-container .woo-wallet-transaction-type-credit,
+.woo-wallet-my-wallet-container .woo-wallet-transaction-type-debit {
+  width: 40%;
+  display: flex;
+  justify-content: end;
+}
+.woo-wallet-my-wallet-container
+  .woo-wallet-transaction-type-credit
+  .wallet-orginal-amount,
+.woo-wallet-my-wallet-container
+  .woo-wallet-transaction-type-debit
+  .wallet-orginal-amount {
+  margin-right: auto;
+  color: var(--pink);
+  font-weight: 600;
+}
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar li span,
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar li p {
+  font-weight: 600;
+  color: var(--pink);
+}
+
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar li,
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar li:hover {
+  box-shadow: none;
+}
+
+.woo-wallet-sidebar li.card:hover {
+  background-color: var(--pink);
+  transition: 0.2s ease-in-out;
+  transform: scaleX(1);
+}
+
+.woo-wallet-sidebar li.card:hover p,
+.woo-wallet-sidebar li.card:hover span {
+  color: #fff;
+}
+
+.woo-wallet-my-wallet-container {
+  gap: 20px;
+}
+
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-content,
+.woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+}
+
+.woo-wallet-content form .select2-selection {
+  padding: 16px 20px;
+  border: 1px solid #dbdbdb;
+  border-radius: 50px;
+  height: 50px;
+}
+
+.woo-wallet-field-container {
+  flex-direction: column;
+}
+
+.woo-wallet-field-container textarea {
+  height: 180px;
+}
+
+.woo-wallet-content .woo-wallet-price bdi,
+.woocommerce-Price-amount bdi,
+#wc-wallet-transaction-details .withdraw_order_amt,
+#wc-wallet-transaction-details tbody tr td:nth-child(4),
+.woo-wallet-transactions-items li .woo-wallet-transaction-type-debit p,
+.woo-wallet-transactions-items li .woo-wallet-transaction-type-credit p {
+  color: var(--pink);
+  font-size: 16px;
+  font-weight: 600;
+}
+#wc-wallet-transaction-details tbody tr td:nth-child(4),
+.woo-wallet-transactions-items li .woo-wallet-transaction-type-debit p + span,
+.woo-wallet-transactions-items li .woo-wallet-transaction-type-credit p + span {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+#wc-wallet-transaction-details .withdraw_order_amt + span,
+.woo-wallet-transactions-items li .woo-wallet-transaction-type-debit p + span,
+.woo-wallet-transactions-items li .woo-wallet-transaction-type-credit p + span {
+  font-size: 12px;
+  color: #000;
+}
+.woocommerce .woo-wallet-my-wallet-container label {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-black);
+  margin-top: 0.7rem;
+}
+
+.woo-wallet-field-container input[type="submit"] {
+  width: fit-content;
+}
+
+.woo-wallet-field-container input[type="submit"]:hover {
+  color: var(--pink);
+  background-color: #fff;
+  border: 1px solid;
+}
+
+.woocommerce-MyAccount-content .woocommerce-info {
+  background-color: #f4f4f4;
+  font-weight: 600;
+  color: var(--pink);
+  text-align: center;
+  margin: 1rem 0;
+}
+
+#woo_wallet_withdrawal_notice {
+  margin: 1.5rem 0;
+}
+
+.woocommerce-MyAccount-content .woocommerce-info {
+  max-width: 800px;
+  margin: auto;
+}
+
+#woo-wallet-withdrawal-tabs {
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+#woo-wallet-withdrawal-tabs ul li a:hover {
+  color: #fff !important;
+  background-color: #ea1e79;
+  border-radius: 50px;
+}
+
+#woo-wallet-withdrawal-tabs .wallet-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+#woo-wallet-withdrawal-tabs .wallet-inputs .currency_input {
+  width: 100%;
+}
+
+#woo-wallet-withdrawal-tabs .woocommerce-error {
+  background: #fff;
+}
+
+#woo-wallet-withdrawal-tabs .woocommerce-error a {
+  color: var(--pink);
+  font-weight: 600;
+}
+
+#woo-wallet-withdrawal-tabs ul {
+  background-color: #fff;
+  border: transparent;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+#woo-wallet-withdrawal-tabs ul li {
+  border-bottom-width: 1px;
+  border-radius: 50px;
+  border: 1px solid #dbdbdb;
+}
+
+#woo-wallet-withdrawal-tabs form .currency_input span {
+  background-color: #fff;
+  border: transparent;
+}
+
+#woo-wallet-withdrawal-tabs form .currency_input select,
+.woo_wallet_withdrawal_payment_settings form select {
+  padding: 16px 20px;
+  border-radius: 50px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url(../img/down-arrow.svg);
+  background-repeat: no-repeat;
+  background-size: 14px;
+  background-position: center right 20px;
+  font-weight: 600;
+}
+
+#woo-wallet-withdrawal-tabs .wallet-inputs input[type="submit"] {
+  padding: 10px 20px;
+  width: fit-content;
+}
+
+#wc-wallet-transaction-details_wrapper {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#woo-wallet-withdrawal-tabs form .currency_input div {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.woo_wallet_withdrawal_payment_settings {
+  margin-top: 2rem;
+}
+
+.woo_wallet_withdrawal_payment_settings .form-row {
+  flex-direction: column;
+}
+
+.woo_wallet_withdrawal_payment_settings .form-row label {
+  font-weight: 600;
+}
+
+.woo_wallet_withdrawal_payment_settings .form-row input {
+  width: 100%;
+}
+
+table#wc-wallet-transaction-details {
+  width: 100% !important;
+  overflow-x: auto;
+}
+
+table#wc-wallet-transaction-details th,
+table#wc-wallet-transaction-details td {
+  width: auto !important;
+}
+
+table#wc-wallet-transaction-details th:last-child,
+table#wc-wallet-transaction-details td:last-child {
+  display: block !important;
+}
+
+.menu-item .woo-wallet-icon-wallet:before {
+  content: "\F613";
+  font-family: "BOOTSTRAP-ICONS";
+}
+.woo-wallet-my-wallet-container .woo-wallet-content-heading {
+  display: flex;
+  justify-content: space-between;
+}
+.woo-wallet-my-wallet-container
+  .woo-wallet-content-heading
+  .woo-wallet--original-price {
+  margin-left: auto;
+  width: 25%;
+  margin: 0;
+  margin-left: auto;
+  color: var(--primary-black);
+  font-weight: 600;
+}
+.woo-wallet-transaction-type-credit,
+.woo-wallet-transaction-type-debit {
+  flex-direction: column;
+  align-items: end;
+}
+.woo-wallet-transaction-type-credit .wallet-transction-balance,
+.woo-wallet-transaction-type-debit .wallet-transction-balance {
+  color: #000;
+  font-weight: 500;
+}
+@media screen and (max-width: 1024px) {
+  .woocommerce .woo-wallet-my-wallet-container .woo-wallet-content,
+  .woocommerce .woo-wallet-my-wallet-container .woo-wallet-sidebar {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .woocommerce .woo-wallet-my-wallet-container {
+    flex-direction: column;
+    display: flex;
+  }
+
+  .woocommerce-MyAccount-content
+    .woo-wallet-my-wallet-container
+    .woo-wallet-sidebar,
+  .woocommerce-MyAccount-content
+    .woo-wallet-my-wallet-container
+    .woo-wallet-content {
+    width: 100%;
+  }
+
+  #wc-wallet-transaction-details_wrapper {
+    max-width: 100%;
+    width: 100%;
+    overflow: auto;
+  }
+
+  #woo-wallet-withdrawal-tabs ul {
+    flex-wrap: wrap;
+  }
+  .woo-wallet-my-wallet-container .woo-wallet-transaction-type-credit {
+    width: auto;
+  }
+  #woo-wallet-withdrawal-tabs form .currency_input div {
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+  }
+  #woo-wallet-withdrawal-tabs form .currency_input div span {
+    padding: 0;
+  }
+}
+
+/* start of bitcoint ticker css */
+
+.Blinking-container {
+  background: #fff;
+  border-radius: 2px;
+  text-align: center;
+  position: relative;
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.text-red {
+  color: #ea1e79;
+}
+
+/* .blink-soft {
+    animation: blinker 1.5s linear infinite;
+} */
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.woo-wallet-conversion {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+/* end of bitcoint ticker css */
+
+.spitout-currency-icons {
+  align-items: center;
+}
+
+.spitout-currency-icons .woocommerce-multi-currency.wmc-shortcode .wmc-currency,
+.so-navigation-menu .spitout-currency-switcher .wmc-currency {
+  background: transparent !important;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.spitout-currency-icons
+  #woocommerce-multi-currency-1
+  .wmc-currency:nth-child(2):not(.woocommerce-checkout .wmc-currency),
+.so-navigation-menu .spitout-currency-switcher .wmc-currency:nth-child(2) {
+  border-right: 1px solid;
+}
+
+.spitout-currency-icons
+  .woocommerce-multi-currency.wmc-shortcode
+  .wmc-currency.wmc-active,
+.so-navigation-menu .spitout-currency-switcher .wmc-currency.wmc-active {
+  color: var(--pink);
+}
+
+.woocommerce-info a {
+  float: left !important;
+  margin-top: 30px;
+}
+
+.woocommerce-info a .dashicons {
+  display: flex;
+  align-items: normal;
+}
+
+div#spitout-currency-converter {
+  font-weight: 600;
+}
+
+/* .woocommerce-info a .dashicons::before{
+    background-color: #fff;
+    font-size: 18px;
+    border-radius: 50px;
+    padding: 6px 8px 8px 8px
+} */
+
+.woocommerce-info a .dashicons:before {
+  font-size: 18px;
+  color: var(--pink);
+}
+
+/* withdrawl notes */
+section.woo-wallet-withdrawal-details-tb-main {
+  margin: 0;
+}
+
+section.woo-wallet-withdrawal-details-tb-main header button.modal-close {
+  border: transparent;
+}
+
+section.woo-wallet-withdrawal-details-tb-main article .order_notes {
+  padding: 1em;
+}
+
+section.woo-wallet-withdrawal-details-tb-main footer .inner {
+  display: flex;
+  align-items: center;
+}
+
+section.woo-wallet-withdrawal-details-tb-main footer .add_note {
+  padding: 5px 20px;
+}
+.so-navigation .spitout-currency-switcher {
+  width: max-content;
+}
+@media screen and (max-width: 991px) {
+  .so-navigation-menu .spitout-currency-switcher .wmc-currency a {
+    font-weight: 600 !important;
+  }
+
+  .so-navigation-menu .spitout-currency-switcher {
+    display: flex;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 991px) and (max-width: 1200px) {
+  .spitout-currency-switcher .wmc-currency a {
+    font-size: 14px;
+  }
+}
