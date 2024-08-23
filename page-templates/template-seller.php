@@ -561,14 +561,16 @@ if ($all_sellers) {
                                     }
                                 ?>
 
-                                    <div class="col-md-4 col-sm-4 col-6 col-lg-2">
+                                    <div class="col-md-6 col-sm-6 col-6 col-lg-3">
                                         <a href="<?php echo $seller_url; ?>">
                                             <div class="so-new-seller-desc">
+                                                <div class="so-seller-header">
                                                 <figure>
                                                     <i class="bi bi-circle-fill <?php echo $active_status; ?>"></i><!--This is to mark the seller as online -->
                                                     <img src="<?php echo $seller_img_url ? $seller_img_url : $profile_avatar; ?>" alt="<?php echo $seller_data->display_name; ?>">
                                                 </figure>
-                                                <div class=" so-new-sellers-name">
+                                                <div class="so-new-sellers-name">
+                                                    <p class="seller-tag">Top Seller</p>
                                                     <h5 class="text-center m-0 p-2 d-flex">
                                                         <?php echo $seller_data->display_name; ?>
                                                         <?php if ((int) get_user_meta($seller_id, 'is_verified', true) == 1) { ?>
@@ -589,10 +591,37 @@ if ($all_sellers) {
                                                             <span>
                                                                 <?php echo $seller_location ? $seller_location : "N/A"; ?></span>
                                                             <!-- <div class="seller-page-location">
-                                            </div> -->
+                                                            </div> -->
                                                         </p>
                                                     </div>
                                                     </p>
+                                                </div>
+                                                </div> 
+                                                <div class="so-seller-footer mt-4 pt-4">
+                                                    <div class="seller-detailed-info mb-2">
+                                                        <div class="seller-followers">
+                                                            <h6><strong>870k</strong></h6>
+                                                            <span>Followers</span>
+                                                        </div>
+                                                        <div class="seller-sold">
+                                                            <h6><strong>11256k</strong></h6>
+                                                            <span>Spits Sold</span>
+                                                        </div>
+                                                        <div class="seller-category">
+                                                            <p><span>Asian</span></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="seller-new-rating">
+                                                        <p>
+                                                            <span>
+                                                                <i class="bi bi-star-fill"></i>
+                                                                <i class="bi bi-star-fill"></i>
+                                                                <i class="bi bi-star-fill"></i>
+                                                                <i class="bi bi-star-fill"></i>
+                                                                <i class="bi bi-star-half"></i>
+                                                            </span> 4.9 Rating</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </a>
