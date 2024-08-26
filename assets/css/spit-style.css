@@ -9688,12 +9688,19 @@ nav.woocommerce-MyAccount-navigation {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 45px;
   position: relative;
 }
 
+.seller-cat-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 45px;
+
+}
+
 .seller-search-categories figure {
-  flex-basis: calc((10% - 45px) + (45px/10));
+  width: calc((10% - 45px) + (45px/10));
 }
 
 .seller-search-categories figure img {
@@ -9703,6 +9710,13 @@ nav.woocommerce-MyAccount-navigation {
   aspect-ratio: 1/1;
   border-radius: 100%;
   margin-bottom: 10px;
+}
+
+.seller-search-categories .seller-more {
+  width: calc((10% - 45px) + (45px/10));
+  position: absolute;
+  right: 0%;
+  top: 0%;
 }
 
 .seller-search-categories .bi-three-dots {
@@ -9715,6 +9729,9 @@ nav.woocommerce-MyAccount-navigation {
   border: 1px solid #DADADA;
   border-radius: 100%;
   margin-bottom: 10px;
+}
+.seller-expanded  .seller-more{
+right: -10%;
 }
 
 .seller-expanded .bi-three-dots{
