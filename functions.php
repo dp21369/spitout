@@ -1709,16 +1709,11 @@ add_action('admin_init', 'spitout_restrict_admin_access');
 // use to load seller (load more)
 function load_more_sellers()
 {
-    // Number of posts to load per request
-    $posts_per_page = 9;
 
-    // Current page
-    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
     $seller_args = array(
         'post_type' => 'spit-category', // Your custom post type
         'posts_per_page' => -1,
-        'paged' => $paged,
     );
 
     $seller_type_query = new WP_Query($seller_args);
@@ -1747,40 +1742,3 @@ function load_more_sellers()
 }
 add_action('wp_ajax_load_more_sellers', 'load_more_sellers');
 add_action('wp_ajax_nopriv_load_more_sellers', 'load_more_sellers');
-
-
-add_action('wp_footer', function () {
-    ?>
-    <script>
-        jQuery(document).ready(function($) {
-            var paged = 2; // Start with page 2
-            var loading = false;
-
-            $('.seller-more').on('click', function() {
-                if (loading) return;
-                loading = true;
-
-                $.ajax({
-                    url: '<?php echo admin_url('admin-ajax.php'); ?>',
-                    type: 'POST',
-                    data: {
-                        action: 'load_more_sellers',
-                        paged: paged
-                    },
-                    success: function(response) {
-                        if (response) {
-                            // $('.seller-more').before(response);
-                            $('.seller-cat-wrapper').html(response);
-                            paged++;
-                            loading = false;
-                        } else {
-                            $('.seller-more').hide();
-                        }
-                    }
-                });
-            });
-        });
-        F
-    </script>
-<?php
-});

@@ -356,8 +356,10 @@ jQuery(document).ready(function () {
 
     ajaxUrl = spit_ajax.ajax_url;
     // var postContent = jQuery("#post-content").val();
-    var preFormatValue = document.getElementById('post-content').value.split('\n');
-    var postContent = preFormatValue.join('<br />');
+    var preFormatValue = document
+      .getElementById("post-content")
+      .value.split("\n");
+    var postContent = preFormatValue.join("<br />");
     jQuery("#so-feed-loading-icon").show();
     // jQuery("#so-feed-submit-form").hide();
     jQuery("#so-feed-submit-form").prop("disabled", true);
@@ -2687,6 +2689,27 @@ jQuery(document).ready(function ($) {
       error: function (xhr, status, error) {
         console.log("AJAX Error: " + status + " - " + error);
         loadMoreBtn.prop("disabled", false);
+      },
+    });
+  });
+});
+
+jQuery(document).ready(function () {
+  jQuery(document).on("click",".seller-more", function () {
+    jQuery.ajax({
+      url: spit_ajax.ajax_url,
+      type: "POST",
+      data: {
+        action: "load_more_sellers",
+      },
+      success: function (response) {
+        if (response) {
+          // $('.seller-more').before(response);
+          jQuery(".seller-cat-wrapper").html(response);
+          // loading = false;
+        } else {
+          jQuery(".seller-more").hide();
+        }
       },
     });
   });
