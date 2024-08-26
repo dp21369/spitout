@@ -2694,37 +2694,36 @@ jQuery(document).ready(function ($) {
   });
 });
 
-// jQuery(document).ready(function () {
-//   jQuery(document).on("click",".seller-more", function () {
-//     jQuery('.seller-search-categories').toggleClass('seller-expanded');
-//     jQuery.ajax({
-//       url: spit_ajax.ajax_url,
-//       type: "POST",
-//       data: {
-//         action: "load_more_sellers",
-//       },
-//       success: function (response) {
-//         if (response) {
-//           // alert();
-//           // $('.seller-search-categories').addClass('seller-expanded');
-//           jQuery(".seller-cat-wrapper").html(response);
-//           // loading = false;
-//         } else {
-//           jQuery(".seller-more").hide();
-//         }
-//       },
-//     });
-//   });
-// });
 jQuery(document).ready(function () {
-  alert('fdafad');
+  jQuery("#pills-tab .nav-link").on("click", function () {
+    var button_id = jQuery(this).attr("data-button-id");
+    var button_target = jQuery(this).attr("data-target");
+    var tab = jQuery(this).attr("data-tab");
     jQuery.ajax({
       url: spit_ajax.ajax_url,
       type: "POST",
       data: {
         action: "load_filtered_sellers",
+        button_id: button_id,
+        button_target: button_target,
+        tab: tab,
       },
       success: function (response) {
+        jQuery("#pills-tabContent").html(response);
       },
     });
+  });
+  jQuery.ajax({
+    url: spit_ajax.ajax_url,
+    type: "POST",
+    data: {
+      action: "load_filtered_sellers",
+      button_id: "",
+      button_target: "",
+      tab: "",
+    },
+    success: function (response) {
+      jQuery("#pills-tabContent").html(response);
+    },
+  });
 });
