@@ -287,6 +287,32 @@ if ($all_sellers) {
                                     <button class="nav-link" id="pills-recommended-tab" data-toggle="pill" data-target="#pills-recommended" type="button" role="tab" aria-controls="pills-recommended" aria-selected="false" data-button-id="pills-recommended-tab" data-tab="recommended">Recommended</button>
                                 </li>
                             </ul>
+                            <div class="so-filters-dropdowns">
+                                <div class="so-seller-filter-dropdown1 d-none">
+                                    <!-- <i class="bi bi-filter-left"></i> -->
+                                    <select id="seller-option">
+                                        <option value=""></i></option>
+                                        <option value="newsellers">New Sellers</option>
+                                        <option value="bestsellers">Best Sellers</option>
+                                        <option value="mostexp">Most expensive</option>
+                                        <option value="leastexp">Least expensive</option>
+                                        <option value="sortbyprice">Sort by price</option>
+                                    </select>
+                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/chevron-down.png" alt="" id="seller-dropdown-after-img" class="d-none" style="width: 100%; height: 100%; object-fit: cover;">
+                                </div>
+                                <a href="#" id="seller-filter-dropdown filter">
+                                    <div class="so-seller-filter-dropdown2 d-flex">
+                                        <h5>Filter</h5><span class="so-custom-icon icon-lightgray">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M17.5401 8.81063C19.1748 8.81063 20.5001 7.48539 20.5001 5.85062C20.5001 4.21586 19.1748 2.89062 17.5401 2.89062C15.9053 2.89062 14.5801 4.21586 14.5801 5.85062C14.5801 7.48539 15.9053 8.81063 17.5401 8.81063Z" fill="#292D32" />
+                                                <path d="M6.46 8.81063C8.09476 8.81063 9.42 7.48539 9.42 5.85062C9.42 4.21586 8.09476 2.89062 6.46 2.89062C4.82524 2.89062 3.5 4.21586 3.5 5.85062C3.5 7.48539 4.82524 8.81063 6.46 8.81063Z" fill="#292D32" />
+                                                <path d="M17.5401 21.1114C19.1748 21.1114 20.5001 19.7862 20.5001 18.1514C20.5001 16.5166 19.1748 15.1914 17.5401 15.1914C15.9053 15.1914 14.5801 16.5166 14.5801 18.1514C14.5801 19.7862 15.9053 21.1114 17.5401 21.1114Z" fill="#292D32" />
+                                                <path d="M6.46 21.1114C8.09476 21.1114 9.42 19.7862 9.42 18.1514C9.42 16.5166 8.09476 15.1914 6.46 15.1914C4.82524 15.1914 3.5 16.5166 3.5 18.1514C3.5 19.7862 4.82524 21.1114 6.46 21.1114Z" fill="#292D32" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
 
                             <div class="filter-pannel">
                                 <form class="seller-filter-dropdown-form filter" action="" method="POST">
@@ -474,10 +500,6 @@ if ($all_sellers) {
                             </div>
 
                             <div class="tab-content" id="pills-tabContent">
-<!--                                 
-                                <div class="tab-pane fade" id="pills-active" role="tabpanel" aria-labelledby="pills-active-tab">..prodwsd.</div>
-                                <div class="tab-pane fade" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">..sdasdsa.</div>
-                                <div class="tab-pane fade" id="pills-recommended" role="tabpanel" aria-labelledby="pills-recommended-tab">..recommended.</div> -->
                             </div>
                         </div>
                     </div>
