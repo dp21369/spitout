@@ -16,7 +16,7 @@ $all_sellers = get_users(
 // Define the query arguments
 $seller_args = array(
     'post_type' => 'spit-category', // Your custom post type
-    'posts_per_page' => 9, // Retrieve all posts
+    'posts_per_page' => -1, // Retrieve all posts
 );
 
 // Execute the query
@@ -263,190 +263,6 @@ if ($all_sellers) {
                         </div>
                     </div>
                 </div>
-                <div class="filter-pannel">
-                    <form class="seller-filter-dropdown-form filter" action="" method="POST">
-                        <i class="bi bi-caret-up-fill"></i>
-                        <div class="seller-filter-dropdowns-lists seller-dropdown-category">
-                            <label for="category">Category</label> <br>
-                            <select id="category" name="category">
-                                <option value="">All</option>
-                                <?php
-                                $args = array(
-                                    'post_type' => 'spit-category',
-                                    'posts_per_page' => -1,
-                                );
-                                $posts = get_posts($args);
-                                foreach ($posts as $post) {
-                                    $is_selected = isset($_POST['category']) && intval($_POST['category']) == intval(esc_attr($post->ID)) ? 'selected' : '';
-                                    echo '<option value="' . esc_attr($post->ID) . '" ' . $is_selected . '>' . esc_html($post->post_title) . '</option>';
-                                }
-                                wp_reset_postdata();
-                                ?>
-                            </select>
-                        </div>
-                        <div class="seller-filter-dropdowns-lists seller-dropdown-topseller">
-                            <label for="top-sellers">Top Sellers</label> <br>
-                            <select id="top-sellers" name="top-sellers">
-                                <?php
-                                function isTopSellerSelected($valueToCheck)
-                                {
-                                    if (isset($_POST['top-sellers'])) {
-                                        $selected_value = $_POST['top-sellers'];
-                                        return $selected_value == $valueToCheck ? 'selected' : '';
-                                    }
-                                }
-                                ?>
-                                <option value="" <?php echo isTopSellerSelected(''); ?>>All</option>
-                                <option value="most-popular" <?php echo isTopSellerSelected('most-popular'); ?>>Most Popular
-                                </option>
-                                <option value="new-sellers" <?php echo isTopSellerSelected('new-sellers'); ?>>New Sellers
-                                </option>
-                            </select>
-                        </div>
-                        <div class=" seller-filter-dropdowns-lists seller-dropdown-age">
-                            <label for="age-start">Age</label> <br>
-                            <select id="age-start" name="age-start">
-                                <option value=""> -- </option>
-                                <?php
-                                if (!empty($all_sellers)) {
-                                    $ages = array();
-                                    echo 'xxxxxxx';
-                                    foreach ($all_sellers as $user) {
-                                        $post_meta_date = get_user_meta($user->ID, 'so_dob', true); // Replace with your post meta date
-                                        if (gettype($post_meta_date) == 'boolean') {
-                                            continue;
-                                        }
-                                        $date_from_post = DateTime::createFromFormat('m/d/Y', $post_meta_date);
-                                        // Check if $date_from_post is a valid DateTime object
-                                        if (!$date_from_post instanceof DateTime) {
-                                            // Handle the error (e.g., log it, provide a default date, etc.)
-                                            continue;
-                                        }
-                                        $today_date = new DateTime();
-                                        $interval = $date_from_post->diff($today_date);
-                                        $age = $interval->y; // Get the difference in years
-                                        // $age = get_user_meta(54, 'so_age', true);
-                                        if ($age !== '') {
-                                            $ages[] = $age; // Add age to the array if it's not empty
-                                        }
-                                    }
-                                    // Calculate the maximum and minimum ages
-                                    $largest_age = max($ages);
-                                    $smallest_age = min($ages);
-                                    for ($age = $smallest_age; $age <= $largest_age; $age++) {
-                                        $is_selected = isset($_POST['age-start']) && intval($_POST['age-start']) == intval($age) ? 'selected' : '';
-                                        echo '<option value="' . $age . '" ' . $is_selected . '>' . $age . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                            <label for="age-end"></label>
-                            <select id="age-end" name="age-end">
-                                <option value=""> -- </option>
-                                <?php
-                                if (!empty($all_sellers)) {
-                                    for ($age = $largest_age; $age >= $smallest_age; $age--) {
-                                        $is_selected = isset($_POST['age-end']) && intval($_POST['age-end']) == intval($age) ? 'selected' : '';
-                                        echo '<option value="' . $age . '" ' . $is_selected . '>' . $age . '</option>';
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div id="slider-range-age" class="sellers-filter-slider"></div>
-                        <script>
-                            jQuery(function() {
-                                var minAge = <?php echo $smallest_age; ?>;
-                                var maxAge = <?php echo $largest_age; ?>;
-                                jQuery("#slider-range-age").slider({
-                                    range: true,
-                                    min: minAge,
-                                    max: maxAge,
-                                    values: [minAge, maxAge],
-                                    slide: function(event, ui) {
-                                        jQuery("#age-start").val(ui.values[0]);
-                                        jQuery("#age-end").val(ui.values[1]);
-                                    }
-                                });
-                                jQuery("#age-start").val(jQuery("#slider-range-age").slider("values", 0));
-                                jQuery("#age-end").val(jQuery("#slider-range-age").slider("values", 1));
-                            });
-                        </script>
-                        <div class="seller-filter-dropdowns-lists seller-dropdown-activestatus">
-                            <label for="online">Online</label> <br>
-                            <select id="online" name="online">
-                                <?php
-                                function isOnlineSelected($valueToCheck)
-                                {
-                                    if (isset($_POST['online'])) {
-                                        $selected_value = $_POST['online'];
-                                        // var_dump($selected_value);
-                                        return $selected_value == $valueToCheck ? 'selected' : '';
-                                    }
-                                }
-                                ?>
-                                <option value="" <?php echo isOnlineSelected(''); ?>>All</option>
-                                <option value="active-now" <?php echo isOnlineSelected('active-now'); ?>> Active Now </option>
-                                <option value="offline" <?php echo isOnlineSelected('offline'); ?>> Offline </option>
-                            </select>
-                        </div>
-                        <div class="seller-filter-dropdowns-lists seller-dropdown-price">
-                            <label for="price-start">Price Saliva</label> <br>
-                            <input type="number" step="any" min="0" id="price-start" name="price-start" value="<?php echo isset($_POST['price-start']) ? $_POST['price-start'] : ''; ?>" />
-                            <label for="price-end"></label>
-                            <input type="number" step="any" min="0" id="price-end" name="price-end" value="<?php echo isset($_POST['price-end']) ? $_POST['price-end'] : ''; ?>" />
-                        </div>
-                        <div id="slider-range" class="sellers-filter-slider"></div>
-                        <script>
-                            jQuery(function() {
-                                var minPrice = 0;
-                                var maxPrice = 1000; // You can set the maximum value according to your requirements
-                                jQuery("#slider-range").slider({
-                                    range: true,
-                                    min: minPrice,
-                                    max: maxPrice,
-                                    values: [minPrice, maxPrice],
-                                    slide: function(event, ui) {
-                                        jQuery("#price-start").val(ui.values[0]);
-                                        jQuery("#price-end").val(ui.values[1]);
-                                    }
-                                });
-                                jQuery("#price-start").val(jQuery("#slider-range").slider("values", 0));
-                                jQuery("#price-end").val(jQuery("#slider-range").slider("values", 1));
-                            });
-                            jQuery(document).on("pagecreate", function() {
-                                jQuery("#slider-range").on('slidestop', function(event) {
-                                    console.log("slidestop event fired");
-                                });
-                            });
-                        </script>
-                        <div class="seller-filter-dropdowns-lists seller-dropdown-location">
-                            <label for="location">Location</label> <br>
-                            <select id="location" name="location">
-                                <option value="">All</option>
-                                <?php
-                                $sellers_location = array();
-                                foreach ($all_sellers as $seller) {
-                                    $seller_location = get_user_meta($seller->ID, "so_location", true);
-                                    if (!in_array($seller_location, $sellers_location) && !empty($seller_location)) {
-                                        $sellers_location[] = $seller_location;
-                                    }
-                                }
-                                foreach ($sellers_location as $location) {
-                                    $is_selected = isset($_POST['location']) && $_POST['location'] == $location ? 'selected' : '';
-                                    echo '<option value="' . $location . '" ' . $is_selected . '>' . $location . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="filter-dropdown-delete-icon">
-                            <button type="reset" id="reset-button">
-                                <i class="bi bi-trash-fill"></i>
-                            </button>
-                            <button type="submit" class="apply-button" name="apply-button">Apply Filter</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
@@ -472,32 +288,7 @@ if ($all_sellers) {
                                 </li>
                             </ul>
 
-                            <div class="so-filters-dropdowns">
-                                <div class="so-seller-filter-dropdown1 d-none">
-                                    <!-- <i class="bi bi-filter-left"></i> -->
-                                    <select id="seller-option">
-                                        <option value=""></i></option>
-                                        <option value="newsellers">New Sellers</option>
-                                        <option value="bestsellers">Best Sellers</option>
-                                        <option value="mostexp">Most expensive</option>
-                                        <option value="leastexp">Least expensive</option>
-                                        <option value="sortbyprice">Sort by price</option>
-                                    </select>
-                                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/chevron-down.png" alt="" id="seller-dropdown-after-img" class="d-none" style="width: 100%; height: 100%; object-fit: cover;">
-                                </div>
-                                <a href="#" id="seller-filter-dropdown filter">
-                                    <div class="so-seller-filter-dropdown2 d-flex">
-                                        <h5>Filter</h5><span class="so-custom-icon icon-lightgray">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M17.5401 8.81063C19.1748 8.81063 20.5001 7.48539 20.5001 5.85062C20.5001 4.21586 19.1748 2.89062 17.5401 2.89062C15.9053 2.89062 14.5801 4.21586 14.5801 5.85062C14.5801 7.48539 15.9053 8.81063 17.5401 8.81063Z" fill="#292D32" />
-                                                <path d="M6.46 8.81063C8.09476 8.81063 9.42 7.48539 9.42 5.85062C9.42 4.21586 8.09476 2.89062 6.46 2.89062C4.82524 2.89062 3.5 4.21586 3.5 5.85062C3.5 7.48539 4.82524 8.81063 6.46 8.81063Z" fill="#292D32" />
-                                                <path d="M17.5401 21.1114C19.1748 21.1114 20.5001 19.7862 20.5001 18.1514C20.5001 16.5166 19.1748 15.1914 17.5401 15.1914C15.9053 15.1914 14.5801 16.5166 14.5801 18.1514C14.5801 19.7862 15.9053 21.1114 17.5401 21.1114Z" fill="#292D32" />
-                                                <path d="M6.46 21.1114C8.09476 21.1114 9.42 19.7862 9.42 18.1514C9.42 16.5166 8.09476 15.1914 6.46 15.1914C4.82524 15.1914 3.5 16.5166 3.5 18.1514C3.5 19.7862 4.82524 21.1114 6.46 21.1114Z" fill="#292D32" />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
+                            
 
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
@@ -508,17 +299,11 @@ if ($all_sellers) {
                                             foreach ($all_sellers as $seller) {
                                                 $sellers_ids[] = $seller->ID;
                                             }
-                                            // var_dump('aaa');
                                         } else if (empty($filtered_users) && !empty($errors)) {
                                             echo ($errors);
-                                            // var_dump('bbb');
                                         } else if (!empty($filtered_users)) {
                                             $sellers_ids = $filtered_users;
-                                            // var_dump('ccc');
                                         }
-                                        // echo '<pre>';
-                                        // var_dump($sellers_ids);
-                                        // echo '</pre>';
                                         foreach ($sellers_ids as $seller_id) {
                                             $attachment_id = (int) get_user_meta($seller_id, 'so_profile_img', true);
                                             $attachment_array = wp_get_attachment_image_src($attachment_id, 'medium'); // if not available than retrieves the original image
@@ -547,8 +332,7 @@ if ($all_sellers) {
                                             if ($seller_data == false) {
                                                 // echo '<p class="text-warning">Sellerid:'.$seller_id.' does not exist</p> <br>';
                                                 continue;
-                                            }
-                                        ?>
+                                            } ?>
 
                                             <div class="col-md-6 col-sm-6 col-6 col-lg-3">
                                                 <a href="<?php echo $seller_url; ?>">

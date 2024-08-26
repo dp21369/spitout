@@ -2694,23 +2694,25 @@ jQuery(document).ready(function ($) {
   });
 });
 
-jQuery(document).ready(function () {
-  jQuery(document).on("click",".seller-more", function () {
-    jQuery.ajax({
-      url: spit_ajax.ajax_url,
-      type: "POST",
-      data: {
-        action: "load_more_sellers",
-      },
-      success: function (response) {
-        if (response) {
-          // $('.seller-more').before(response);
-          jQuery(".seller-cat-wrapper").html(response);
-          // loading = false;
-        } else {
-          jQuery(".seller-more").hide();
-        }
-      },
-    });
-  });
-});
+// jQuery(document).ready(function () {
+//   jQuery(document).on("click",".seller-more", function () {
+//     jQuery('.seller-search-categories').toggleClass('seller-expanded');
+//     jQuery.ajax({
+//       url: spit_ajax.ajax_url,
+//       type: "POST",
+//       data: {
+//         action: "load_more_sellers",
+//       },
+//       success: function (response) {
+//         if (response) {
+//           // alert();
+//           // $('.seller-search-categories').addClass('seller-expanded');
+//           jQuery(".seller-cat-wrapper").html(response);
+//           // loading = false;
+//         } else {
+//           jQuery(".seller-more").hide();
+//         }
+//       },
+//     });
+//   });
+// });

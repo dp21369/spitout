@@ -1707,38 +1707,39 @@ add_action('admin_init', 'spitout_restrict_admin_access');
 
 
 // use to load seller (load more)
-function load_more_sellers()
-{
+// function load_more_sellers()
+// {
 
 
-    $seller_args = array(
-        'post_type' => 'spit-category', // Your custom post type
-        'posts_per_page' => -1,
-    );
+//     $seller_args = array(
+//         'post_type' => 'spit-category', // Your custom post type
+//         'posts_per_page' => -1,
+//     );
 
-    $seller_type_query = new WP_Query($seller_args);
+//     $seller_type_query = new WP_Query($seller_args);
 
-    if ($seller_type_query->have_posts()) :
-        while ($seller_type_query->have_posts()) :
-            $seller_type_query->the_post();
-            // Get the post ID and title
-            $post_id = get_the_ID();
-            $title = get_the_title();
-            $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
-            // Get the featured image URL
-            $featured_image_url = wp_get_attachment_url($featured_image_id, 'full') ? wp_get_attachment_url($featured_image_id, 'full') : get_template_directory_uri() . '/assets/img/user.png';?>
-            <figure>
-                <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
-                <h5 class="text-center"><?php echo esc_html($title); ?></h5>
-            </figure>
+//     if ($seller_type_query->have_posts()) :
+//         while ($seller_type_query->have_posts()) :
+//             $seller_type_query->the_post();
+//             // Get the post ID and title
+//             $post_id = get_the_ID();
+//             $title = get_the_title();
+//             $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
+//             // Get the featured image URL
+            // $featured_image_url = wp_get_attachment_url($featured_image_id, 'full') ? wp_get_attachment_url($featured_image_id, 'full') : get_template_directory_uri() . '/assets/img/user.png';
+            ?>
+            <!-- <figure>
+                <img src="<?php //echo esc_url($featured_image_url); ?>" alt="seller-image">
+                <h5 class="text-center"><?php //echo esc_html($title); ?></h5>
+            </figure> -->
     <?php
-        endwhile;
-        wp_reset_postdata();
-    else :
-        echo '<p>No more posts found.</p>';
-    endif;
+//         endwhile;
+//         wp_reset_postdata();
+//     else :
+//         echo '<p>No more posts found.</p>';
+//     endif;
 
-    wp_die();
-}
-add_action('wp_ajax_load_more_sellers', 'load_more_sellers');
-add_action('wp_ajax_nopriv_load_more_sellers', 'load_more_sellers');
+//     wp_die();
+// }
+// add_action('wp_ajax_load_more_sellers', 'load_more_sellers');
+// add_action('wp_ajax_nopriv_load_more_sellers', 'load_more_sellers');
