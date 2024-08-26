@@ -9717,6 +9717,7 @@ nav.woocommerce-MyAccount-navigation {
   position: absolute;
   right: 0%;
   top: 0%;
+  cursor: pointer;
 }
 
 .seller-search-categories .bi-three-dots {
