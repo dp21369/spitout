@@ -9795,3 +9795,9 @@ nav.woocommerce-MyAccount-navigation {
 .seller-new-rating i {
   color: #fdc735;
 }
+
+.so-new-seller-desc figure i::before {
+  left: 5%;
+  top: 5%;
+  padding: 2px; 
+}
