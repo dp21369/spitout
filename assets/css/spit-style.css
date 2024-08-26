@@ -9703,6 +9703,16 @@ nav.woocommerce-MyAccount-navigation {
   width: calc((10% - 45px) + (45px/10));
 }
 
+.seller-cat-wrapper > figure {
+  display: none;
+}
+.seller-cat-wrapper > figure:nth-child(-n+9) {
+  display: block; /* Show only the first 9 children */
+}
+
+.seller-expanded .seller-cat-wrapper figure {
+  display: block;
+}
 .seller-search-categories figure img {
   width: 100%;
   object-fit: cover;

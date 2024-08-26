@@ -230,7 +230,7 @@ if ($all_sellers) {
                             <i class="bi bi-search"></i>
                         </form>
 
-                        <div class="seller-search-categories seller-expanded">
+                        <div class="seller-search-categories">
                             <div class="seller-cat-wrapper">
 
                                 <?php // Check if there are any posts

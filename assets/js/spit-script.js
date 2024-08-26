@@ -294,7 +294,7 @@ jQuery(document).ready(function () {
   //   jQuery('#woo_wallet_balance_to_add').attr('min','10');
   // }
 
-  
+
 });
 
 
@@ -324,7 +324,7 @@ jQuery(document).ready(function () {
   }
 
   //check if product is wallet topup
-  if(jQuery('.cart_item .product-name').html().indexOf('wallet') != -1){
+  if (jQuery('.cart_item .product-name').html().indexOf('wallet') != -1) {
     return;
   }
 
@@ -351,4 +351,11 @@ jQuery(document).ready(function () {
       jQuery("#pills-review-tab").click();
     }
   }
+});
+
+
+jQuery(document).ready(function () {
+  jQuery(document).on("click", ".seller-more", function () {
+    jQuery('.seller-search-categories').toggleClass('seller-expanded');
+  })
 });
