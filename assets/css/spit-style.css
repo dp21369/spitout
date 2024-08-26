@@ -9689,6 +9689,7 @@ nav.woocommerce-MyAccount-navigation {
   flex-wrap: wrap;
   flex-direction: row;
   gap: 45px;
+  position: relative;
 }
 
 .seller-search-categories figure {
@@ -9715,6 +9716,17 @@ nav.woocommerce-MyAccount-navigation {
   border-radius: 100%;
   margin-bottom: 10px;
 }
+
+.seller-expanded .bi-three-dots{
+  color: #121212;
+}
+
+.seller-expanded .bi-three-dots::before{
+  content: "\F659";
+}
+
+
+/* SELLER TAB CONTENT  */
 
 .seller-tab-col {
   display: flex;
