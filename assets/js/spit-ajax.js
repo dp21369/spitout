@@ -2716,3 +2716,15 @@ jQuery(document).ready(function ($) {
 //     });
 //   });
 // });
+jQuery(document).ready(function () {
+  alert('fdafad');
+    jQuery.ajax({
+      url: spit_ajax.ajax_url,
+      type: "POST",
+      data: {
+        action: "load_filtered_sellers",
+      },
+      success: function (response) {
+      },
+    });
+});
