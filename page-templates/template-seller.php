@@ -16,7 +16,7 @@ $all_sellers = get_users(
 // Define the query arguments
 $seller_args = array(
     'post_type' => 'spit-category', // Your custom post type
-    'posts_per_page' => -1, // Retrieve all posts
+    'posts_per_page' => 9, // Retrieve all posts
 );
 
 // Execute the query
@@ -230,29 +230,31 @@ if ($all_sellers) {
                             <i class="bi bi-search"></i>
                         </form>
 
-                        <div class="seller-search-categories">
-                            <?php // Check if there are any posts
-                            if ($seller_type_query->have_posts()) :
-                                while ($seller_type_query->have_posts()) :
-                                    $seller_type_query->the_post();
-                                    // Get the post ID
-                                    $post_id = get_the_ID();
-                                    // Get the post title
-                                    $title = get_the_title();
-                                    $featured_image_id = get_post_meta($post_id,'_thumbnail_id',true);
-                                    // Get the featured image URL
-                                    $featured_image_url = wp_get_attachment_url($featured_image_id, 'full') ? wp_get_attachment_url($featured_image_id, 'full') : get_template_directory_uri().'/assets/img/user.png' ; 
-                                    ?>
-                                    <figure>
-                                        <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
-                                        <h5 class="text-center"><?php echo esc_html($title); ?></h5>
-                                    </figure>
-                            <?php
-                                endwhile;
-                                wp_reset_postdata();
-                            else :
-                                echo '<p>No posts found.</p>';
-                            endif; ?>
+                        <div class="seller-search-categories seller-expanded">
+                            <div class="seller-cat-wrapper">
+
+                                <?php // Check if there are any posts
+                                if ($seller_type_query->have_posts()) :
+                                    while ($seller_type_query->have_posts()) :
+                                        $seller_type_query->the_post();
+                                        // Get the post ID
+                                        $post_id = get_the_ID();
+                                        // Get the post title
+                                        $title = get_the_title();
+                                        $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
+                                        // Get the featured image URL
+                                        $featured_image_url = wp_get_attachment_url($featured_image_id, 'full') ? wp_get_attachment_url($featured_image_id, 'full') : get_template_directory_uri() . '/assets/img/user.png'; ?>
+                                        <figure>
+                                            <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
+                                            <h5 class="text-center"><?php echo esc_html($title); ?></h5>
+                                        </figure>
+                                <?php
+                                    endwhile;
+                                    wp_reset_postdata();
+                                else :
+                                    echo '<p>No posts found.</p>';
+                                endif; ?>
+                            </div>
                             <figure class="seller-more">
                                 <i class="bi bi-three-dots"></i>
                                 <h5 class="text-center">More</h5>
