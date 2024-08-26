@@ -264,32 +264,7 @@ if ($all_sellers) {
                     </div>
 
 
-                    <div class="so-filters-dropdowns">
-                        <div class="so-seller-filter-dropdown1 d-none">
-                            <!-- <i class="bi bi-filter-left"></i> -->
-                            <select id="seller-option">
-                                <option value=""></i></option>
-                                <option value="newsellers">New Sellers</option>
-                                <option value="bestsellers">Best Sellers</option>
-                                <option value="mostexp">Most expensive</option>
-                                <option value="leastexp">Least expensive</option>
-                                <option value="sortbyprice">Sort by price</option>
-                            </select>
-                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/chevron-down.png" alt="" id="seller-dropdown-after-img" class="d-none" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <a href="#" id="seller-filter-dropdown filter">
-                            <div class="so-seller-filter-dropdown2 d-flex">
-                                <h5>Filter</h5><span class="so-custom-icon icon-lightgray">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M17.5401 8.81063C19.1748 8.81063 20.5001 7.48539 20.5001 5.85062C20.5001 4.21586 19.1748 2.89062 17.5401 2.89062C15.9053 2.89062 14.5801 4.21586 14.5801 5.85062C14.5801 7.48539 15.9053 8.81063 17.5401 8.81063Z" fill="#292D32" />
-                                        <path d="M6.46 8.81063C8.09476 8.81063 9.42 7.48539 9.42 5.85062C9.42 4.21586 8.09476 2.89062 6.46 2.89062C4.82524 2.89062 3.5 4.21586 3.5 5.85062C3.5 7.48539 4.82524 8.81063 6.46 8.81063Z" fill="#292D32" />
-                                        <path d="M17.5401 21.1114C19.1748 21.1114 20.5001 19.7862 20.5001 18.1514C20.5001 16.5166 19.1748 15.1914 17.5401 15.1914C15.9053 15.1914 14.5801 16.5166 14.5801 18.1514C14.5801 19.7862 15.9053 21.1114 17.5401 21.1114Z" fill="#292D32" />
-                                        <path d="M6.46 21.1114C8.09476 21.1114 9.42 19.7862 9.42 18.1514C9.42 16.5166 8.09476 15.1914 6.46 15.1914C4.82524 15.1914 3.5 16.5166 3.5 18.1514C3.5 19.7862 4.82524 21.1114 6.46 21.1114Z" fill="#292D32" />
-                                    </svg>
-                                </span>
-                            </div>
-                        </a>
-                    </div>
+
                 </div>
                 <div class="filter-pannel">
                     <form class="seller-filter-dropdown-form filter" action="" method="POST">
@@ -495,6 +470,7 @@ if ($all_sellers) {
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="seller-tab-col">
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-all-tab" data-toggle="pill" data-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="true">All</button>
@@ -509,130 +485,159 @@ if ($all_sellers) {
                                 <button class="nav-link" id="pills-recommended-tab" data-toggle="pill" data-target="#pills-recommended" type="button" role="tab" aria-controls="pills-recommended" aria-selected="false">Recommended</button>
                             </li>
                         </ul>
-                        
+
+                        <div class="so-filters-dropdowns">
+                            <div class="so-seller-filter-dropdown1 d-none">
+                                <!-- <i class="bi bi-filter-left"></i> -->
+                                <select id="seller-option">
+                                    <option value=""></i></option>
+                                    <option value="newsellers">New Sellers</option>
+                                    <option value="bestsellers">Best Sellers</option>
+                                    <option value="mostexp">Most expensive</option>
+                                    <option value="leastexp">Least expensive</option>
+                                    <option value="sortbyprice">Sort by price</option>
+                                </select>
+                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/chevron-down.png" alt="" id="seller-dropdown-after-img" class="d-none" style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <a href="#" id="seller-filter-dropdown filter">
+                                <div class="so-seller-filter-dropdown2 d-flex">
+                                    <h5>Filter</h5><span class="so-custom-icon icon-lightgray">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.5401 8.81063C19.1748 8.81063 20.5001 7.48539 20.5001 5.85062C20.5001 4.21586 19.1748 2.89062 17.5401 2.89062C15.9053 2.89062 14.5801 4.21586 14.5801 5.85062C14.5801 7.48539 15.9053 8.81063 17.5401 8.81063Z" fill="#292D32" />
+                                            <path d="M6.46 8.81063C8.09476 8.81063 9.42 7.48539 9.42 5.85062C9.42 4.21586 8.09476 2.89062 6.46 2.89062C4.82524 2.89062 3.5 4.21586 3.5 5.85062C3.5 7.48539 4.82524 8.81063 6.46 8.81063Z" fill="#292D32" />
+                                            <path d="M17.5401 21.1114C19.1748 21.1114 20.5001 19.7862 20.5001 18.1514C20.5001 16.5166 19.1748 15.1914 17.5401 15.1914C15.9053 15.1914 14.5801 16.5166 14.5801 18.1514C14.5801 19.7862 15.9053 21.1114 17.5401 21.1114Z" fill="#292D32" />
+                                            <path d="M6.46 21.1114C8.09476 21.1114 9.42 19.7862 9.42 18.1514C9.42 16.5166 8.09476 15.1914 6.46 15.1914C4.82524 15.1914 3.5 16.5166 3.5 18.1514C3.5 19.7862 4.82524 21.1114 6.46 21.1114Z" fill="#292D32" />
+                                        </svg>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
                         <div class="tab-content" id="pills-tabContent">
                             <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
                                 <div class="row">
-                                <?php
-                                $sellers_ids = [];
-                                if (empty($filtered_users) && empty($errors)) {
-                                    foreach ($all_sellers as $seller) {
-                                        $sellers_ids[] = $seller->ID;
+                                    <?php
+                                    $sellers_ids = [];
+                                    if (empty($filtered_users) && empty($errors)) {
+                                        foreach ($all_sellers as $seller) {
+                                            $sellers_ids[] = $seller->ID;
+                                        }
+                                        // var_dump('aaa');
+                                    } else if (empty($filtered_users) && !empty($errors)) {
+                                        echo ($errors);
+                                        // var_dump('bbb');
+                                    } else if (!empty($filtered_users)) {
+                                        $sellers_ids = $filtered_users;
+                                        // var_dump('ccc');
                                     }
-                                    // var_dump('aaa');
-                                } else if (empty($filtered_users) && !empty($errors)) {
-                                    echo ($errors);
-                                    // var_dump('bbb');
-                                } else if (!empty($filtered_users)) {
-                                    $sellers_ids = $filtered_users;
-                                    // var_dump('ccc');
-                                }
-                                // echo '<pre>';
-                                // var_dump($sellers_ids);
-                                // echo '</pre>';
-                                foreach ($sellers_ids as $seller_id) {
-                                    $attachment_id = (int) get_user_meta($seller_id, 'so_profile_img', true);
-                                    $attachment_array = wp_get_attachment_image_src($attachment_id, 'medium'); // if not available than retrieves the original image
-                                    if ($attachment_array) {
-                                        $seller_img_url = $attachment_array[0]; // URL of the thumbnail image 
-                                    }
-                                    $seller_img = get_user_meta($seller_id, "so_profile_img", true);
-                                    /* if the author avatar is empty it assign a placeholder image */
-                                    if (empty($seller_img_url)) {
-                                        $seller_img_url = get_stylesheet_directory_uri() . '/assets/img/user.png';
-                                    } else {
-                                        $seller_img_url = wp_get_attachment_url($seller_img);
-                                    }
-                                    $seller_data = get_userdata((int) $seller_id);
-                                    $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
-                                    $seller_url = get_author_posts_url($seller_id);
-                                    // $seller_img_url = wp_get_attachment_url($seller_img);
-                                    $seller_location = get_user_meta($seller_id, "so_location", true);
-                                    // $seller_active_status = get_user_meta($seller_id, 'user_status', true);
-                                    $seller_active_status = get_user_meta($seller_id, "cpmm_user_status", true);
-                                    if ($seller_active_status == 'logged_in') {
-                                        $active_status = 'online';
-                                    } else {
-                                        $active_status = 'offline';
-                                    }
-                                    if ($seller_data == false) {
-                                        // echo '<p class="text-warning">Sellerid:'.$seller_id.' does not exist</p> <br>';
-                                        continue;
-                                    }
-                                ?>
+                                    // echo '<pre>';
+                                    // var_dump($sellers_ids);
+                                    // echo '</pre>';
+                                    foreach ($sellers_ids as $seller_id) {
+                                        $attachment_id = (int) get_user_meta($seller_id, 'so_profile_img', true);
+                                        $attachment_array = wp_get_attachment_image_src($attachment_id, 'medium'); // if not available than retrieves the original image
+                                        if ($attachment_array) {
+                                            $seller_img_url = $attachment_array[0]; // URL of the thumbnail image 
+                                        }
+                                        $seller_img = get_user_meta($seller_id, "so_profile_img", true);
+                                        /* if the author avatar is empty it assign a placeholder image */
+                                        if (empty($seller_img_url)) {
+                                            $seller_img_url = get_stylesheet_directory_uri() . '/assets/img/user.png';
+                                        } else {
+                                            $seller_img_url = wp_get_attachment_url($seller_img);
+                                        }
+                                        $seller_data = get_userdata((int) $seller_id);
+                                        $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
+                                        $seller_url = get_author_posts_url($seller_id);
+                                        // $seller_img_url = wp_get_attachment_url($seller_img);
+                                        $seller_location = get_user_meta($seller_id, "so_location", true);
+                                        // $seller_active_status = get_user_meta($seller_id, 'user_status', true);
+                                        $seller_active_status = get_user_meta($seller_id, "cpmm_user_status", true);
+                                        if ($seller_active_status == 'logged_in') {
+                                            $active_status = 'online';
+                                        } else {
+                                            $active_status = 'offline';
+                                        }
+                                        if ($seller_data == false) {
+                                            // echo '<p class="text-warning">Sellerid:'.$seller_id.' does not exist</p> <br>';
+                                            continue;
+                                        }
+                                    ?>
 
-                                    <div class="col-md-6 col-sm-6 col-6 col-lg-3">
-                                        <a href="<?php echo $seller_url; ?>">
-                                            <div class="so-new-seller-desc">
-                                                <div class="so-seller-header">
-                                                <figure>
-                                                    <i class="bi bi-circle-fill <?php echo $active_status; ?>"></i><!--This is to mark the seller as online -->
-                                                    <img src="<?php echo $seller_img_url ? $seller_img_url : $profile_avatar; ?>" alt="<?php echo $seller_data->display_name; ?>">
-                                                </figure>
-                                                <div class="so-new-sellers-name">
-                                                    <p class="seller-tag">Top Seller</p>
-                                                    <h5 class="text-center m-0 p-2 d-flex">
-                                                        <?php echo $seller_data->display_name; ?>
-                                                        <?php if ((int) get_user_meta($seller_id, 'is_verified', true) == 1) { ?>
-                                                            <div class="profile-verify" title="verified">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                                                    <path d="M21.5609 10.7386L20.2009 9.15859C19.9409 8.85859 19.7309 8.29859 19.7309 7.89859V6.19859C19.7309 5.13859 18.8609 4.26859 17.8009 4.26859H16.1009C15.7109 4.26859 15.1409 4.05859 14.8409 3.79859L13.2609 2.43859C12.5709 1.84859 11.4409 1.84859 10.7409 2.43859L9.17086 3.80859C8.87086 4.05859 8.30086 4.26859 7.91086 4.26859H6.18086C5.12086 4.26859 4.25086 5.13859 4.25086 6.19859V7.90859C4.25086 8.29859 4.04086 8.85859 3.79086 9.15859L2.44086 10.7486C1.86086 11.4386 1.86086 12.5586 2.44086 13.2486L3.79086 14.8386C4.04086 15.1386 4.25086 15.6986 4.25086 16.0886V17.7986C4.25086 18.8586 5.12086 19.7286 6.18086 19.7286H7.91086C8.30086 19.7286 8.87086 19.9386 9.17086 20.1986L10.7509 21.5586C11.4409 22.1486 12.5709 22.1486 13.2709 21.5586L14.8509 20.1986C15.1509 19.9386 15.7109 19.7286 16.1109 19.7286H17.8109C18.8709 19.7286 19.7409 18.8586 19.7409 17.7986V16.0986C19.7409 15.7086 19.9509 15.1386 20.2109 14.8386L21.5709 13.2586C22.1509 12.5686 22.1509 11.4286 21.5609 10.7386ZM16.1609 10.1086L11.3309 14.9386C11.1909 15.0786 11.0009 15.1586 10.8009 15.1586C10.6009 15.1586 10.4109 15.0786 10.2709 14.9386L7.85086 12.5186C7.56086 12.2286 7.56086 11.7486 7.85086 11.4586C8.14086 11.1686 8.62086 11.1686 8.91086 11.4586L10.8009 13.3486L15.1009 9.04859C15.3909 8.75859 15.8709 8.75859 16.1609 9.04859C16.4509 9.33859 16.4509 9.81859 16.1609 10.1086Z" fill="#292D32" />
-                                                                </svg>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </h5>
-                                                    <div class="d-flex seller-page-location-details seller-page-location">
-                                                        <p class="text-center d-flex">
-                                                            <span class="so-custom-icon icon-lightgray">
-                                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M20.6211 8.45C19.5711 3.83 15.5411 1.75 12.0011 1.75C12.0011 1.75 12.0011 1.75 11.9911 1.75C8.46107 1.75 4.42107 3.82 3.37107 8.44C2.20107 13.6 5.36107 17.97 8.22107 20.72C9.28107 21.74 10.6411 22.25 12.0011 22.25C13.3611 22.25 14.7211 21.74 15.7711 20.72C18.6311 17.97 21.7911 13.61 20.6211 8.45ZM12.0011 13.46C10.2611 13.46 8.85107 12.05 8.85107 10.31C8.85107 8.57 10.2611 7.16 12.0011 7.16C13.7411 7.16 15.1511 8.57 15.1511 10.31C15.1511 12.05 13.7411 13.46 12.0011 13.46Z" fill="#292D32" />
-                                                                </svg>
-                                                            </span>
-                                                            <span>
-                                                                <?php echo $seller_location ? $seller_location : "N/A"; ?></span>
-                                                            <!-- <div class="seller-page-location">
+                                        <div class="col-md-6 col-sm-6 col-6 col-lg-3">
+                                            <a href="<?php echo $seller_url; ?>">
+                                                <div class="so-new-seller-desc">
+                                                    <div class="so-seller-header">
+                                                        <figure>
+                                                            <i class="bi bi-circle-fill <?php echo $active_status; ?>"></i><!--This is to mark the seller as online -->
+                                                            <img src="<?php echo $seller_img_url ? $seller_img_url : $profile_avatar; ?>" alt="<?php echo $seller_data->display_name; ?>">
+                                                        </figure>
+                                                        <div class="so-new-sellers-name">
+                                                            <p class="seller-tag">Top Seller</p>
+                                                            <h5 class="text-center m-0 p-2 d-flex">
+                                                                <?php echo $seller_data->display_name; ?>
+                                                                <?php if ((int) get_user_meta($seller_id, 'is_verified', true) == 1) { ?>
+                                                                    <div class="profile-verify" title="verified">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                                                            <path d="M21.5609 10.7386L20.2009 9.15859C19.9409 8.85859 19.7309 8.29859 19.7309 7.89859V6.19859C19.7309 5.13859 18.8609 4.26859 17.8009 4.26859H16.1009C15.7109 4.26859 15.1409 4.05859 14.8409 3.79859L13.2609 2.43859C12.5709 1.84859 11.4409 1.84859 10.7409 2.43859L9.17086 3.80859C8.87086 4.05859 8.30086 4.26859 7.91086 4.26859H6.18086C5.12086 4.26859 4.25086 5.13859 4.25086 6.19859V7.90859C4.25086 8.29859 4.04086 8.85859 3.79086 9.15859L2.44086 10.7486C1.86086 11.4386 1.86086 12.5586 2.44086 13.2486L3.79086 14.8386C4.04086 15.1386 4.25086 15.6986 4.25086 16.0886V17.7986C4.25086 18.8586 5.12086 19.7286 6.18086 19.7286H7.91086C8.30086 19.7286 8.87086 19.9386 9.17086 20.1986L10.7509 21.5586C11.4409 22.1486 12.5709 22.1486 13.2709 21.5586L14.8509 20.1986C15.1509 19.9386 15.7109 19.7286 16.1109 19.7286H17.8109C18.8709 19.7286 19.7409 18.8586 19.7409 17.7986V16.0986C19.7409 15.7086 19.9509 15.1386 20.2109 14.8386L21.5709 13.2586C22.1509 12.5686 22.1509 11.4286 21.5609 10.7386ZM16.1609 10.1086L11.3309 14.9386C11.1909 15.0786 11.0009 15.1586 10.8009 15.1586C10.6009 15.1586 10.4109 15.0786 10.2709 14.9386L7.85086 12.5186C7.56086 12.2286 7.56086 11.7486 7.85086 11.4586C8.14086 11.1686 8.62086 11.1686 8.91086 11.4586L10.8009 13.3486L15.1009 9.04859C15.3909 8.75859 15.8709 8.75859 16.1609 9.04859C16.4509 9.33859 16.4509 9.81859 16.1609 10.1086Z" fill="#292D32" />
+                                                                        </svg>
+                                                                    </div>
+                                                                <?php } ?>
+                                                            </h5>
+                                                            <div class="d-flex seller-page-location-details seller-page-location">
+                                                                <p class="text-center d-flex">
+                                                                    <span class="so-custom-icon icon-lightgray">
+                                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path d="M20.6211 8.45C19.5711 3.83 15.5411 1.75 12.0011 1.75C12.0011 1.75 12.0011 1.75 11.9911 1.75C8.46107 1.75 4.42107 3.82 3.37107 8.44C2.20107 13.6 5.36107 17.97 8.22107 20.72C9.28107 21.74 10.6411 22.25 12.0011 22.25C13.3611 22.25 14.7211 21.74 15.7711 20.72C18.6311 17.97 21.7911 13.61 20.6211 8.45ZM12.0011 13.46C10.2611 13.46 8.85107 12.05 8.85107 10.31C8.85107 8.57 10.2611 7.16 12.0011 7.16C13.7411 7.16 15.1511 8.57 15.1511 10.31C15.1511 12.05 13.7411 13.46 12.0011 13.46Z" fill="#292D32" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <span>
+                                                                        <?php echo $seller_location ? $seller_location : "N/A"; ?></span>
+                                                                    <!-- <div class="seller-page-location">
                                                             </div> -->
-                                                        </p>
-                                                    </div>
-                                                    </p>
-                                                </div>
-                                                </div> 
-                                                <div class="so-seller-footer mt-4 pt-4">
-                                                    <div class="seller-detailed-info mb-2">
-                                                        <div class="seller-followers">
-                                                            <h6><strong>870k</strong></h6>
-                                                            <span>Followers</span>
-                                                        </div>
-                                                        <div class="seller-sold">
-                                                            <h6><strong>11256k</strong></h6>
-                                                            <span>Spits Sold</span>
-                                                        </div>
-                                                        <div class="seller-category">
-                                                            <p><span>Asian</span></p>
+                                                                </p>
+                                                            </div>
+                                                            </p>
                                                         </div>
                                                     </div>
+                                                    <div class="so-seller-footer mt-4 pt-4">
+                                                        <div class="seller-detailed-info mb-2">
+                                                            <div class="seller-followers">
+                                                                <h6><strong>870k</strong></h6>
+                                                                <span>Followers</span>
+                                                            </div>
+                                                            <div class="seller-sold">
+                                                                <h6><strong>11256k</strong></h6>
+                                                                <span>Spits Sold</span>
+                                                            </div>
+                                                            <div class="seller-category">
+                                                                <p><span>Asian</span></p>
+                                                            </div>
+                                                        </div>
 
-                                                    <div class="seller-new-rating">
-                                                        <p>
-                                                            <span>
-                                                                <i class="bi bi-star-fill"></i>
-                                                                <i class="bi bi-star-fill"></i>
-                                                                <i class="bi bi-star-fill"></i>
-                                                                <i class="bi bi-star-fill"></i>
-                                                                <i class="bi bi-star-half"></i>
-                                                            </span> 4.9 Rating</p>
+                                                        <div class="seller-new-rating">
+                                                            <p>
+                                                                <span>
+                                                                    <i class="bi bi-star-fill"></i>
+                                                                    <i class="bi bi-star-fill"></i>
+                                                                    <i class="bi bi-star-fill"></i>
+                                                                    <i class="bi bi-star-fill"></i>
+                                                                    <i class="bi bi-star-half"></i>
+                                                                </span> 4.9 Rating
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                
-                                <?php } ?>
+                                            </a>
+                                        </div>
+
+                                    <?php } ?>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="pills-active" role="tabpanel" aria-labelledby="pills-active-tab">..prodwsd.</div>
                             <div class="tab-pane fade" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">..sdasdsa.</div>
                             <div class="tab-pane fade" id="pills-recommended" role="tabpanel" aria-labelledby="pills-recommended-tab">..recommended.</div>
+                        </div>
                         </div>
                     </div>
                 </div>

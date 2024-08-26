@@ -9716,6 +9716,21 @@ nav.woocommerce-MyAccount-navigation {
   margin-bottom: 10px;
 }
 
+.seller-tab-col {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.seller-filter-dropdown-form {
+  top: calc(100% + 85px);
+}
+
+#pills-tabContent {
+  flex-basis: 100%;
+}
+
 .seller-tab-section .nav-pills {
   column-gap: 15px;
 }
