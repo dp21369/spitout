@@ -9738,6 +9738,7 @@ nav.woocommerce-MyAccount-navigation {
   color: var(--pink);
   font-size: 25px;
   border: 1px solid #DADADA;
+  background-color: #FFF;
   border-radius: 100%;
   margin-bottom: 10px;
 }
