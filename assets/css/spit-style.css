@@ -9696,6 +9696,7 @@ nav.woocommerce-MyAccount-navigation {
   flex-wrap: wrap;
   flex-direction: row;
   gap: 45px;
+  width: 100%;
 
 }
 
@@ -9703,14 +9704,14 @@ nav.woocommerce-MyAccount-navigation {
   width: calc((10% - 45px) + (45px/10));
 }
 
-.seller-cat-wrapper > figure {
+.seller-cat-wrapper > .seller-cat-checkbox {
   display: none;
 }
-.seller-cat-wrapper > figure:nth-child(-n+9) {
+.seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n+9) {
   display: block; /* Show only the first 9 children */
 }
 
-.seller-expanded .seller-cat-wrapper figure {
+.seller-expanded .seller-cat-wrapper .seller-cat-checkbox {
   display: block;
 }
 .seller-search-categories figure img {
@@ -9921,10 +9922,10 @@ right: -10%;
 
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {
-  .seller-cat-wrapper > figure:nth-child(-n+9) {
+  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n+9) {
     display: none;
 }
-  .seller-cat-wrapper > figure:nth-child(-n+4) {
+  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n+4) {
     display: block;
   }  
 
