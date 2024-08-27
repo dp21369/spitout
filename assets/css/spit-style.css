@@ -9919,8 +9919,30 @@ right: -10%;
   right: 22%;
 }
 
+.new-seller-tab-content {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 500px;
+}
+
 #new-seller-tab-loader {
   display: none;
+  position: absolute;
+  background: none;
+  left: 0;
+  right: auto;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#new-seller-tab-loader .so-feed-options-loader {
+  position: unset;
+  width: 80px !important;
+  height: auto !important;
+  transform: unset;
+  margin: 60px auto;
 }
 
 /* RESPONSIVE CSS  */
