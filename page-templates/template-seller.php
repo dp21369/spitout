@@ -222,7 +222,7 @@ if ($all_sellers) {
                     </div>
                     <div class="seller-search-form">
                         <form>
-                            <input type="input" name="seller_search" value="" placeholder="Search Seller">
+                            <input type="input" name="seller_search" value="" placeholder="Search Seller" id="seller_search">
                             <i class="bi bi-search"></i>
                         </form>
                         <div class="seller-search-categories">
@@ -239,7 +239,7 @@ if ($all_sellers) {
                                         // Get the featured image URL
                                         $featured_image_url = wp_get_attachment_url($featured_image_id, 'thumbnail') ? wp_get_attachment_url($featured_image_id, 'thumbnail') : get_template_directory_uri() . '/assets/img/user.png'; ?>
                                         <div class="seller-cat-checkbox">
-                                            <input type="checkbox" name="category-name" value="category-value" class="category-class">
+                                            <input type="checkbox" name="category-name[]" value="true" class="category-class" data-id="<?php echo $post_id; ?>">
                                             <figure>
                                                 <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
                                             </figure>
