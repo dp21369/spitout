@@ -1773,6 +1773,10 @@ function load_filtered_sellers()
                 $seller_url = get_author_posts_url($seller);
                 // $seller_img_url = wp_get_attachment_url($seller_img);
                 $seller_location = get_user_meta($seller, "so_location", true);
+                $seller_category_id = get_user_meta($seller, "so_category", true) ? get_user_meta($seller, "so_category", true)[0] : '';
+                $seller_category = $seller_category_id ? get_the_title($seller_category_id) : 'N/A';
+                $totalFollowers = get_user_meta($seller, 'so_total_followers', true);
+                // var_dump($totalFollowers);
                 // $seller_active_status = get_user_meta($seller, 'user_status', true);
                 $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
                 if ($seller_active_status == 'logged_in') {
@@ -1832,7 +1836,7 @@ function load_filtered_sellers()
                                         <span>Spits Sold</span>
                                     </div>
                                     <div class="seller-category">
-                                        <p><span>Asian</span></p>
+                                        <p><span><?php echo esc_html($seller_category); ?></span></p>
                                     </div>
                                 </div>
 
