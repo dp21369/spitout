@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template Name: Seller Page
  * @package spitout
@@ -12,13 +11,11 @@ $all_sellers = get_users(
         'role' => 'seller',
     )
 );
-
 // Define the query arguments
 $seller_args = array(
     'post_type' => 'spit-category', // Your custom post type
     'posts_per_page' => -1, // Retrieve all posts
 );
-
 // Execute the query
 $seller_type_query = new WP_Query($seller_args);
 // Get the count of posts
@@ -214,7 +211,6 @@ if ($all_sellers) {
         </section>';
         }
     }
-
 ?>
     <div class="container sellers-page-heading mt-5">
         <div class="row">
@@ -229,10 +225,8 @@ if ($all_sellers) {
                             <input type="input" name="seller_search" value="" placeholder="Search Seller">
                             <i class="bi bi-search"></i>
                         </form>
-
                         <div class="seller-search-categories">
                             <div class="seller-cat-wrapper">
-
                                 <?php // Check if there are any posts
                                 if ($seller_type_query->have_posts()) :
                                     while ($seller_type_query->have_posts()) :
@@ -258,12 +252,10 @@ if ($all_sellers) {
                                     echo '<p>No posts found.</p>';
                                 endif; ?>
                             </div>
-
                             <figure class="seller-more">
                                 <i class="bi bi-three-dots"></i>
                                 <h5 class="text-center">More</h5>
                             </figure>
-
                         </div>
                     </div>
                 </div>
@@ -317,7 +309,6 @@ if ($all_sellers) {
                                     </div>
                                 </a>
                             </div>
-
                             <div class="filter-pannel">
                                 <form class="seller-filter-dropdown-form filter" action="" method="POST">
                                     <i class="bi bi-caret-up-fill"></i>
@@ -476,7 +467,6 @@ if ($all_sellers) {
                                             });
                                         });
                                     </script>
-
                                     <div class="filter-dropdown-delete-icon">
                                         <button type="reset" id="reset-button">
                                             <i class="bi bi-trash-fill"></i>
@@ -485,14 +475,17 @@ if ($all_sellers) {
                                     </div>
                                 </form>
                             </div>
-
-                            <div class="tab-content" id="seller-pills-tabContent">
+                            <div class="new-seller-tab-content">
+                                <div class="tab-content" id="seller-pills-tabContent">
+                                </div>
+                                <div id="new-seller-tab-loader" class="so-feed-options-loader-wrapper" style="/* display: none; */">
+                                    <img src="https://spitout.com/wp-content/themes/spitout/assets/img/loader.gif" alt="Loading" class="so-feed-options-loader" style="width: 25px;">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row pt-4 pb-5">
-
                 </div>
             </div>
         </section>

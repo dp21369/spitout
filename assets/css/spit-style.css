@@ -9919,6 +9919,9 @@ right: -10%;
   right: 22%;
 }
 
+#new-seller-tab-loader {
+  display: none;
+}
 
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {
