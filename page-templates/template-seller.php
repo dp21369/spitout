@@ -317,21 +317,22 @@ if ($all_sellers) {
                             <div class="filter-pannel">
                                 <form class="seller-filter-dropdown-form filter" action="" method="POST">
                                     <i class="bi bi-caret-up-fill"></i>
-                                    <div class="seller-filter-dropdowns-lists seller-dropdown-category">
-                                        <label for="category">Category</label> <br>
-                                        <select id="category" name="category">
+                                    <div class="seller-filter-dropdowns-lists seller-dropdown-location">
+                                        <label for="location">Location</label> <br>
+                                        <select id="location" name="location">
                                             <option value="">All</option>
                                             <?php
-                                            $args = array(
-                                                'post_type' => 'spit-category',
-                                                'posts_per_page' => -1,
-                                            );
-                                            $posts = get_posts($args);
-                                            foreach ($posts as $post) {
-                                                $is_selected = isset($_POST['category']) && intval($_POST['category']) == intval(esc_attr($post->ID)) ? 'selected' : '';
-                                                echo '<option value="' . esc_attr($post->ID) . '" ' . $is_selected . '>' . esc_html($post->post_title) . '</option>';
+                                            $sellers_location = array();
+                                            foreach ($all_sellers as $seller) {
+                                                $seller_location = get_user_meta($seller->ID, "so_location", true);
+                                                if (!in_array($seller_location, $sellers_location) && !empty($seller_location)) {
+                                                    $sellers_location[] = $seller_location;
+                                                }
                                             }
-                                            wp_reset_postdata();
+                                            foreach ($sellers_location as $location) {
+                                                $is_selected = isset($_POST['location']) && $_POST['location'] == $location ? 'selected' : '';
+                                                echo '<option value="' . $location . '" ' . $is_selected . '>' . $location . '</option>';
+                                            }
                                             ?>
                                         </select>
                                     </div>
@@ -471,25 +472,7 @@ if ($all_sellers) {
                                             });
                                         });
                                     </script>
-                                    <div class="seller-filter-dropdowns-lists seller-dropdown-location">
-                                        <label for="location">Location</label> <br>
-                                        <select id="location" name="location">
-                                            <option value="">All</option>
-                                            <?php
-                                            $sellers_location = array();
-                                            foreach ($all_sellers as $seller) {
-                                                $seller_location = get_user_meta($seller->ID, "so_location", true);
-                                                if (!in_array($seller_location, $sellers_location) && !empty($seller_location)) {
-                                                    $sellers_location[] = $seller_location;
-                                                }
-                                            }
-                                            foreach ($sellers_location as $location) {
-                                                $is_selected = isset($_POST['location']) && $_POST['location'] == $location ? 'selected' : '';
-                                                echo '<option value="' . $location . '" ' . $is_selected . '>' . $location . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
+                                    
                                     <div class="filter-dropdown-delete-icon">
                                         <button type="reset" id="reset-button">
                                             <i class="bi bi-trash-fill"></i>

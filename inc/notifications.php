@@ -375,7 +375,7 @@ function so_notification_update()
 
 
 
-add_action('wp_ajax_so_retrieve_new_messages', 'so_retrieve_new_messages');
+// add_action('wp_ajax_so_retrieve_new_messages', 'so_retrieve_new_messages');
 function so_retrieve_new_messages(){
 
     $limit = (int)$_POST['limit'];

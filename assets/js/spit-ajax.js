@@ -2298,76 +2298,76 @@ jQuery(document).ready(function () {
       });
     });
 
-    if (jQuery("body").hasClass("logged-in")) {
-      setInterval(() => {
-        let sender_id_list = [];
+    // if (jQuery("body").hasClass("logged-in")) {
+    //   setInterval(() => {
+    //     let sender_id_list = [];
 
-        let last_ntfy_id = jQuery(".header-notifications li a")
-          .first()
-          .attr("data-notification-id");
+    //     let last_ntfy_id = jQuery(".header-notifications li a")
+    //       .first()
+    //       .attr("data-notification-id");
 
-        jQuery.ajax({
-          url: spit_ajax.ajax_url,
-          type: "POST",
-          data: {
-            action: "so_retrieve_new_messages",
-            limit: 5,
-            last_ntfy_id: last_ntfy_id,
-          },
+    //     jQuery.ajax({
+    //       url: spit_ajax.ajax_url,
+    //       type: "POST",
+    //       data: {
+    //         action: "so_retrieve_new_messages",
+    //         limit: 5,
+    //         last_ntfy_id: last_ntfy_id,
+    //       },
 
-          success: function (response) {
-            if (response.data == "no-new-msg") {
-              jQuery(".new-msg-icon").hide();
-              return;
-            }
+    //       success: function (response) {
+    //         if (response.data == "no-new-msg") {
+    //           jQuery(".new-msg-icon").hide();
+    //           return;
+    //         }
 
-            jQuery(".new-msg-icon").show();
+    //         jQuery(".new-msg-icon").show();
 
-            if (Notification.permission === "granted") {
-              if (window.location.href.includes("chat")) {
-                return;
-              }
-            }
+    //         if (Notification.permission === "granted") {
+    //           if (window.location.href.includes("chat")) {
+    //             return;
+    //           }
+    //         }
 
-            console.log(response);
+    //         console.log(response);
 
-            response.data.forEach((ntfy) => {
-              console.log("ppp");
-              if (!sender_id_list.includes(ntfy.sender_id)) {
-                sender_id_list.push(ntfy.sender_id);
+    //         response.data.forEach((ntfy) => {
+    //           console.log("ppp");
+    //           if (!sender_id_list.includes(ntfy.sender_id)) {
+    //             sender_id_list.push(ntfy.sender_id);
 
-                let notification = new Notification("NEW MESSAGE", {
-                  body: "You have unread messages !!",
-                  icon: jQuery(".so-logo-mobile .navbar-brand img")
-                    .eq(0)
-                    .attr("src"),
-                });
+    //             let notification = new Notification("NEW MESSAGE", {
+    //               body: "You have unread messages !!",
+    //               icon: jQuery(".so-logo-mobile .navbar-brand img")
+    //                 .eq(0)
+    //                 .attr("src"),
+    //             });
 
-                notification.onclick = (event) => {
-                  event.preventDefault();
-                  location.href =
-                    jQuery(".navbar-brand").attr("href") +
-                    "chat" +
-                    "?uid=" +
-                    ntfy.sender_id;
-                };
-              }
+    //             notification.onclick = (event) => {
+    //               event.preventDefault();
+    //               location.href =
+    //                 jQuery(".navbar-brand").attr("href") +
+    //                 "chat" +
+    //                 "?uid=" +
+    //                 ntfy.sender_id;
+    //             };
+    //           }
 
-              //mark the notification as seen
-              jQuery.ajax({
-                url: spit_ajax.ajax_url,
-                type: "POST",
-                data: {
-                  action: "so_mark_ntfy_as_seen",
-                  ntfy_id: ntfy.id,
-                },
-                success: function (response) {},
-              });
-            });
-          },
-        });
-      }, 10000);
-    }
+    //           //mark the notification as seen
+    //           jQuery.ajax({
+    //             url: spit_ajax.ajax_url,
+    //             type: "POST",
+    //             data: {
+    //               action: "so_mark_ntfy_as_seen",
+    //               ntfy_id: ntfy.id,
+    //             },
+    //             success: function (response) {},
+    //           });
+    //         });
+    //       },
+    //     });
+    //   }, 10000);
+    // }
   }
 });
 
