@@ -419,24 +419,24 @@ if ($all_sellers) {
                                             jQuery("#age-end").val(jQuery("#slider-range-age").slider("values", 1));
                                         });
                                     </script>
-                                    <div class="seller-filter-dropdowns-lists seller-dropdown-activestatus">
+                                    <!-- <div class="seller-filter-dropdowns-lists seller-dropdown-activestatus">
                                         <label for="online">Online</label> <br>
                                         <select id="online" name="online">
                                             <?php
-                                            function isOnlineSelected($valueToCheck)
-                                            {
-                                                if (isset($_POST['online'])) {
-                                                    $selected_value = $_POST['online'];
-                                                    // var_dump($selected_value);
-                                                    return $selected_value == $valueToCheck ? 'selected' : '';
-                                                }
-                                            }
+                                            // function isOnlineSelected($valueToCheck)
+                                            // {
+                                            //     if (isset($_POST['online'])) {
+                                            //         $selected_value = $_POST['online'];
+                                            //         // var_dump($selected_value);
+                                            //         return $selected_value == $valueToCheck ? 'selected' : '';
+                                            //     }
+                                            // }
                                             ?>
-                                            <option value="" <?php echo isOnlineSelected(''); ?>>All</option>
-                                            <option value="active-now" <?php echo isOnlineSelected('active-now'); ?>> Active Now </option>
-                                            <option value="offline" <?php echo isOnlineSelected('offline'); ?>> Offline </option>
+                                            <option value="" <?php //echo isOnlineSelected(''); ?>>All</option>
+                                            <option value="active-now" <?php //echo isOnlineSelected('active-now'); ?>> Active Now </option>
+                                            <option value="offline" <?php //echo isOnlineSelected('offline'); ?>> Offline </option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                     <div class="seller-filter-dropdowns-lists seller-dropdown-price">
                                         <label for="price-start">Price Saliva</label> <br>
                                         <input type="number" step="any" min="0" id="price-start" name="price-start" value="<?php echo isset($_POST['price-start']) ? $_POST['price-start'] : ''; ?>" />
@@ -478,8 +478,8 @@ if ($all_sellers) {
                             <div class="new-seller-tab-content">
                                 <div class="tab-content" id="seller-pills-tabContent">
                                 </div>
-                                <div id="new-seller-tab-loader" class="so-feed-options-loader-wrapper" style="/* display: none; */">
-                                    <img src="https://spitout.com/wp-content/themes/spitout/assets/img/loader.gif" alt="Loading" class="so-feed-options-loader" style="width: 25px;">
+                                <div id="new-seller-tab-loader" class="so-feed-options-loader-wrapper">
+                                    <img src="https://spitout.com/wp-content/themes/spitout/assets/img/spit-loader.gif" alt="Loading" class="so-feed-options-loader" style="width: 25px;">
                                 </div>
                             </div>
                         </div>

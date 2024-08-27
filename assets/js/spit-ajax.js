@@ -2711,6 +2711,7 @@ jQuery(document).ready(function () {
 
       beforeSend: function () {
         jQuery("#new-seller-tab-loader").show();
+        jQuery("#seller-pills-tabContent").empty();
       },
       success: function (response) {
         jQuery("#seller-pills-tabContent").html(response);
@@ -2732,6 +2733,7 @@ jQuery(document).ready(function () {
 
     beforeSend: function () {
       jQuery("#new-seller-tab-loader").show();
+      jQuery("#seller-pills-tabContent").empty();
     },
     success: function (response) {
       jQuery("#seller-pills-tabContent").html(response);
