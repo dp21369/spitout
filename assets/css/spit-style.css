@@ -9949,6 +9949,128 @@ right: -10%;
   margin: 60px auto;
 }
 
+
+/* NEW HOME PAGE CSS  */
+.page-id-3042 {
+  background: linear-gradient( 180deg, rgb(248,222,249) 0%, rgb(255,255,255) 100%) !important;
+}
+
+.banner-section {
+  padding-top: 140px;
+  background: url('/wp-content/uploads/2024/08/Banner-text.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  margin-top: -65px;
+}
+
+.banner-images .wp-block-column{
+  position: relative;
+}
+
+.banner-images img {
+  width: 100%;
+}
+
+.banner-overlay-image {
+  /* position: absolute; */
+  top: 0;
+  left: 50%;
+  /* transform: translate(-50%,50%); */
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.banner-content {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 30px;
+}
+
+.special-text mark {
+  background: linear-gradient( 90deg, rgb(208,124,253) 0%, rgb(201,35,118) 100%);
+  padding: 5px 30px;
+  border-radius: 50px;
+  color: #FFF !important;
+  position: relative;
+}
+
+.special-text mark:before,
+.special-text mark:after  {
+  position: absolute;
+  content: '';
+  background-image: url("../img/star.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 14px;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+}
+
+.special-text mark:before {
+  top: 50%;
+  left: 10px;
+}
+
+.special-text mark:after {
+  top: 50%;
+  right: 10px;
+}
+
+.banner-content .wp-block-heading {
+  margin-top: 0;
+  margin-bottom: 28px;
+  line-height: 1;
+}
+
+.banner-buttons .wp-block-buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.new-button .wp-element-button{
+  background-color: var(--pink);
+  color: white;
+  border: transparent;
+  border-radius: 40px;
+  padding: 20px 50px;
+  font-weight: 600;
+  cursor: pointer !important;
+  position: relative;
+}
+
+.new-button .wp-element-button:hover {
+  color: white !important;
+}
+
+.new-button.sell-btn  .wp-element-button{
+ background-color: #f3f3f3 !important;
+}
+
+.new-button.sell-btn .wp-element-button:hover {
+  background-color: #CCC !important;
+  color: #000 !important;
+}
+
+.sell-btn .wp-element-button:before {
+  position: absolute;
+  content: '';
+  top: 50%;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  background: url("../img/drop-svg-icon.svg");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {
   .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n+9) {
