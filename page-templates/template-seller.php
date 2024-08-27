@@ -255,6 +255,13 @@ if ($all_sellers) {
                                     echo '<p>No posts found.</p>';
                                 endif; ?>
                             </div>
+                            <div class="seller-cat-checkbox">
+                                <input type="checkbox" name="cgitategory-name" value="category-value" id="category-id">
+                                <figure>
+                                <img src="/wp-content/uploads/2023/12/Milf.png" alt="seller-image">
+                                </figure>
+                                <h5 class="text-center">Lesbian</h5>
+                            </div>
                             <figure class="seller-more">
                                 <i class="bi bi-three-dots"></i>
                                 <h5 class="text-center">More</h5>

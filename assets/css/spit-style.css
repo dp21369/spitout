@@ -9754,6 +9754,43 @@ right: -10%;
   content: "\F659";
 }
 
+.seller-cat-checkbox {
+  position: relative;
+  width: calc((10% - 45px) + (45px/10));
+}
+
+.seller-cat-checkbox  input[type="checkbox"] {
+  /* position: absolute; */
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  background: transparent;
+  z-index: 9;
+  display: block;
+  position: relative;
+  appearance: none;
+  margin-bottom: 10px;
+  border: 0 !important;
+}
+
+.seller-cat-checkbox  input[type="checkbox"]:checked:before {
+  border: 1px solid var(--pink);
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 100%;
+}
+
+.seller-cat-checkbox figure {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
 
 /* SELLER TAB CONTENT  */
 
