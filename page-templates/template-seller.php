@@ -239,7 +239,7 @@ if ($all_sellers) {
                                         // Get the featured image URL
                                         $featured_image_url = wp_get_attachment_url($featured_image_id, 'thumbnail') ? wp_get_attachment_url($featured_image_id, 'thumbnail') : get_template_directory_uri() . '/assets/img/user.png'; ?>
                                         <div class="seller-cat-checkbox">
-                                            <input type="checkbox" name="cgitategory-name" value="category-value" id="category-id">
+                                            <input type="checkbox" name="category-name" value="category-value" class="category-class">
                                             <figure>
                                                 <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
                                             </figure>
@@ -264,12 +264,12 @@ if ($all_sellers) {
     </div>
     <!-- seller page body========================================= -->
     <div class="so-seller-contents">
-        <section class="so-new-seller seller-tab-section mt-3">
+        <section class="so-new-seller seller-tab-section mt-5">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="seller-tab-col">
-                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <ul class="nav nav-pills mb-4" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pills-all-tab" data-toggle="pill" data-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="true" data-button-id="pills-all-tab" data-tab="all">All</button>
                                 </li>
