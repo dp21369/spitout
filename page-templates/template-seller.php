@@ -244,10 +244,13 @@ if ($all_sellers) {
                                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
                                         // Get the featured image URL
                                         $featured_image_url = wp_get_attachment_url($featured_image_id, 'thumbnail') ? wp_get_attachment_url($featured_image_id, 'thumbnail') : get_template_directory_uri() . '/assets/img/user.png'; ?>
-                                        <figure>
-                                            <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
+                                        <div class="seller-cat-checkbox">
+                                            <input type="checkbox" name="cgitategory-name" value="category-value" id="category-id">
+                                            <figure>
+                                                <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
+                                            </figure>
                                             <h5 class="text-center"><?php echo esc_html($title); ?></h5>
-                                        </figure>
+                                        </div>
                                 <?php
                                     endwhile;
                                     wp_reset_postdata();
@@ -255,13 +258,7 @@ if ($all_sellers) {
                                     echo '<p>No posts found.</p>';
                                 endif; ?>
                             </div>
-                            <div class="seller-cat-checkbox">
-                                <input type="checkbox" name="cgitategory-name" value="category-value" id="category-id">
-                                <figure>
-                                <img src="/wp-content/uploads/2023/12/Milf.png" alt="seller-image">
-                                </figure>
-                                <h5 class="text-center">Lesbian</h5>
-                            </div>
+
                             <figure class="seller-more">
                                 <i class="bi bi-three-dots"></i>
                                 <h5 class="text-center">More</h5>
@@ -479,7 +476,7 @@ if ($all_sellers) {
                                             });
                                         });
                                     </script>
-                                    
+
                                     <div class="filter-dropdown-delete-icon">
                                         <button type="reset" id="reset-button">
                                             <i class="bi bi-trash-fill"></i>
@@ -489,7 +486,7 @@ if ($all_sellers) {
                                 </form>
                             </div>
 
-                            <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-content" id="seller-pills-tabContent">
                             </div>
                         </div>
                     </div>

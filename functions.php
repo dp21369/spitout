@@ -1775,8 +1775,14 @@ function load_filtered_sellers()
                 $seller_location = get_user_meta($seller, "so_location", true);
                 $seller_category_id = get_user_meta($seller, "so_category", true) ? get_user_meta($seller, "so_category", true)[0] : '';
                 $seller_category = $seller_category_id ? get_the_title($seller_category_id) : 'N/A';
-                $totalFollowers = get_user_meta($seller, 'so_total_followers', true);
-                // var_dump($totalFollowers);
+                $get_Followers = get_user_meta($seller, 'so_total_followers', true) ? get_user_meta($seller, 'so_total_followers', true) : [];
+                $totalFollowers = is_array($get_Followers) || $get_Followers instanceof Countable
+                    ? (count($get_Followers) > 0
+                        ? (count($get_Followers) >= 1000
+                            ? round(count($get_Followers) / 1000, 1) . 'k'
+                            : count($get_Followers))
+                        : 'N/A')
+                    : 'N/A';
                 // $seller_active_status = get_user_meta($seller, 'user_status', true);
                 $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
                 if ($seller_active_status == 'logged_in') {
@@ -1828,7 +1834,7 @@ function load_filtered_sellers()
                             <div class="so-seller-footer mt-4 pt-4">
                                 <div class="seller-detailed-info mb-2">
                                     <div class="seller-followers">
-                                        <h6><strong>870k</strong></h6>
+                                        <h6><strong><?php echo esc_html($totalFollowers); ?></strong></h6>
                                         <span>Followers</span>
                                     </div>
                                     <div class="seller-sold">

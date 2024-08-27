@@ -2709,7 +2709,7 @@ jQuery(document).ready(function () {
         tab: tab,
       },
       success: function (response) {
-        jQuery("#pills-tabContent").html(response);
+        jQuery("#seller-pills-tabContent").html(response);
       },
     });
   });
@@ -2723,7 +2723,7 @@ jQuery(document).ready(function () {
       tab: "",
     },
     success: function (response) {
-      jQuery("#pills-tabContent").html(response);
+      jQuery("#seller-pills-tabContent").html(response);
     },
   });
 });
