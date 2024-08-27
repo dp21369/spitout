@@ -2708,8 +2708,15 @@ jQuery(document).ready(function () {
         button_target: button_target,
         tab: tab,
       },
+
+      beforeSend: function () {
+        jQuery("#new-seller-tab-loader").show();
+      },
       success: function (response) {
         jQuery("#seller-pills-tabContent").html(response);
+      },
+      complete: function () {
+        jQuery("#new-seller-tab-loader").hide();
       },
     });
   });
@@ -2722,8 +2729,15 @@ jQuery(document).ready(function () {
       button_target: "",
       tab: "",
     },
+
+    beforeSend: function () {
+      jQuery("#new-seller-tab-loader").show();
+    },
     success: function (response) {
       jQuery("#seller-pills-tabContent").html(response);
+    },
+    complete: function () {
+      jQuery("#new-seller-tab-loader").hide();
     },
   });
 });
