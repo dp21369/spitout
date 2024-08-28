@@ -218,6 +218,10 @@ function spitout_scripts()
 
     wp_enqueue_script('spit-cropper', 'https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.js', array('jquery'), _S_VERSION, true);
     wp_enqueue_script('spit-script-ajax', get_template_directory_uri() . '/assets/js/spit-ajax.js', array('jquery'), time(), true);
+    if (is_page('seller') || is_post_type_archive('seller')) {
+        wp_enqueue_script('seller-page-script-ajax', get_template_directory_uri() . '/assets/js/seller-spit-ajax.js', array('jquery'), time(), true);
+        wp_localize_script('seller-page-script-ajax', 'spit_ajax', array('ajax_url' => admin_url('admin-ajax.php')));
+    }
 
     /*  End Enquee splitout js  */
     /*  localize ajax so than we can use "admin_url.ajax_url" on ajax-url  */
@@ -1977,10 +1981,39 @@ function load_filtered_sellers()
             </div>
         </div>
 
-    <?php }else{
+<?php } else {
         echo '<span>No user found!</span>';
     }
     wp_die();
 }
 add_action('wp_ajax_load_filtered_sellers', 'load_filtered_sellers');
 add_action('wp_ajax_nopriv_load_filtered_sellers', 'load_filtered_sellers');
+
+
+function resize_and_compress_image($attachment_id, $max_width = 800, $max_height = 800, $quality = 70)
+{
+    $file_path = get_attached_file($attachment_id);
+
+    if (!file_exists($file_path)) {
+        return false; // Return false if the image file doesn't exist
+    }
+
+    // Create a new instance of the image editor
+    $image_editor = wp_get_image_editor($file_path);
+
+    if (is_wp_error($image_editor)) {
+        return false; // Return false if there's an error with the image editor
+    }
+
+    // Resize the image
+    $image_editor->resize($max_width, $max_height, true);
+
+    // Set the compression quality
+    $image_editor->set_quality($quality);
+
+    // Save the resized image and overwrite the original
+    $result = $image_editor->save($file_path); // Save to the same path to overwrite
+
+    // Return the URL of the resized image or false if it fails
+    return $result ? wp_get_attachment_url($attachment_id) : false;
+}

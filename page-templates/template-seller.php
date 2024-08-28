@@ -236,8 +236,11 @@ if ($all_sellers) {
                                         // Get the post title
                                         $title = get_the_title();
                                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
-                                        // Get the featured image URL
-                                        $featured_image_url = wp_get_attachment_url($featured_image_id, 'thumbnail') ? wp_get_attachment_url($featured_image_id, 'thumbnail') : get_template_directory_uri() . '/assets/img/user.png'; ?>
+                                        $featured_image_url = resize_and_compress_image($featured_image_id, 800, 800, 70);
+                                        if (!$featured_image_url) {
+                                            // Fallback if resize and compression fails
+                                            $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
+                                        }?>
                                         <div class="seller-cat-checkbox">
                                             <input type="checkbox" name="category-name[]" value="true" class="category-class" data-id="<?php echo $post_id; ?>">
                                             <figure>
@@ -479,7 +482,7 @@ if ($all_sellers) {
                                 <div class="tab-content" id="seller-pills-tabContent">
                                 </div>
                                 <div id="new-seller-tab-loader" class="so-feed-options-loader-wrapper">
-                                    <img src="https://spitout.com/wp-content/themes/spitout/assets/img/spit-loader.gif" alt="Loading" class="so-feed-options-loader" style="width: 25px;">
+                                    <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/spit-loader.gif'); ?>" alt="Loading" class="so-feed-options-loader" style="width: 25px;">
                                 </div>
                             </div>
                         </div>
