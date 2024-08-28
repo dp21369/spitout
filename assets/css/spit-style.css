@@ -10040,7 +10040,6 @@ right: -10%;
   padding: 20px 70px 20px 50px;
   font-weight: 600;
   cursor: pointer !important;
-  position: relative;
 }
 
 .new-button .wp-element-button{
@@ -10050,36 +10049,51 @@ right: -10%;
 
 .new-button.sell-btn {
  background-color: #f3f3f3 !important;
+ transition: all 0.2s ease;
 }
 
 .new-button.sell-btn:hover {
-  background-color: #CCC !important;
-  color: #000 !important;
+  background-color: #000 !important;
+
+}
+
+.new-button.sell-btn:hover .wp-element-button{
+  color: #FFF !important;
 }
 
 
-.new-button .wp-element-button:hover {
-  color: #000 !important;
+
+.sell-btn .wp-element-button,
+.join-btn .wp-element-button{
+  position: relative;
 }
+
 .sell-btn .wp-element-button:before,
 .join-btn .wp-element-button:before {
   position: absolute;
   content: '';
   top: 50%;
-  right: 20px;
+  right: -25px;
   width: 20px;
   height: 20px;
   transform: translateY(-50%);
 }
 
 .sell-btn .wp-element-button:before{
-  background: url("../img/drop-svg-icon.svg");
+  background: url("../img/drop-dark-icon.svg");
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
 }
 
-.new-button.join-btn:hover .wp-element-button{
+.sell-btn:hover .wp-element-button:before{
+  background: url("../img/drop-light-icon.svg");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.join-btn:hover .wp-element-button{
   color: white !important;
 }
 .join-btn .wp-element-button:before {
