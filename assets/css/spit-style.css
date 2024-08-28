@@ -10032,31 +10032,37 @@ right: -10%;
   gap: 30px;
 }
 
-.new-button .wp-element-button{
+.new-button{
   background-color: var(--pink);
   color: white;
   border: transparent;
   border-radius: 40px;
-  padding: 20px 50px;
+  padding: 20px 70px 20px 50px;
   font-weight: 600;
   cursor: pointer !important;
   position: relative;
 }
 
-.new-button .wp-element-button:hover {
-  color: white !important;
+.new-button .wp-element-button{
+  padding: 0;
+  background-color: unset;
 }
 
-.new-button.sell-btn  .wp-element-button{
+.new-button.sell-btn {
  background-color: #f3f3f3 !important;
 }
 
-.new-button.sell-btn .wp-element-button:hover {
+.new-button.sell-btn:hover {
   background-color: #CCC !important;
   color: #000 !important;
 }
 
-.sell-btn .wp-element-button:before {
+
+.new-button .wp-element-button:hover {
+  color: #000 !important;
+}
+.sell-btn .wp-element-button:before,
+.join-btn .wp-element-button:before {
   position: absolute;
   content: '';
   top: 50%;
@@ -10064,7 +10070,21 @@ right: -10%;
   width: 20px;
   height: 20px;
   transform: translateY(-50%);
+}
+
+.sell-btn .wp-element-button:before{
   background: url("../img/drop-svg-icon.svg");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.new-button.join-btn:hover .wp-element-button{
+  color: white !important;
+}
+.join-btn .wp-element-button:before {
+
+  background: url("../img/arrow-svg-icon.svg");
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
