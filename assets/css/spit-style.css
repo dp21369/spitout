@@ -9960,6 +9960,13 @@ nav.woocommerce-MyAccount-navigation {
   background: linear-gradient(180deg, rgb(248, 222, 249) 0%, rgb(255, 255, 255) 100%) !important;
 }
 
+.banner-content>div {
+  max-width: 500px;
+  /* margin: 0 auto; */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .banner-section {
   padding-top: 140px;
   background: url('/wp-content/uploads/2024/08/Banner-text.png');
@@ -9976,6 +9983,7 @@ nav.woocommerce-MyAccount-navigation {
 .banner-images img {
   width: 100%;
 }
+
 
 .banner-overlay-image {
   /* position: absolute; */
@@ -10032,6 +10040,10 @@ nav.woocommerce-MyAccount-navigation {
   line-height: 1;
 }
 
+.banner-content .banner-subtext {
+  margin-bottom: 45px;
+}
+
 .wp-block-buttons {
   display: flex;
   justify-content: center;
@@ -10070,6 +10082,7 @@ nav.woocommerce-MyAccount-navigation {
 .new-button.sell-btn .wp-element-button {
   color: #000 !important;
 }
+
 .new-button.sell-btn:hover .wp-element-button {
   color: #FFF !important;
 }
@@ -10136,6 +10149,7 @@ nav.woocommerce-MyAccount-navigation {
   padding: 25px;
   border-radius: 50px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .total-seller-count {
@@ -10149,7 +10163,7 @@ nav.woocommerce-MyAccount-navigation {
 
 .seller-dropdown select {
   border: 0;
-  flex: 0 70%;
+  flex: 0 60%;
   font-weight: 700;
   outline: none;
   appearance: none;
@@ -10160,7 +10174,7 @@ nav.woocommerce-MyAccount-navigation {
 }
 
 .banner-rewiews {
-  max-width: 250px;
+  max-width: 250px !important;
   width: 100%;
   margin: 40px auto 0;
   display: flex;
@@ -10208,6 +10222,11 @@ nav.woocommerce-MyAccount-navigation {
   color: #fdc736;
 }
 
+.review-text p {
+  margin-bottom: 0;
+  color: #000;
+}
+
 
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {
@@ -10222,5 +10241,13 @@ nav.woocommerce-MyAccount-navigation {
   .seller-search-categories .seller-cat-checkbox,
   .seller-search-categories .seller-more {
     width: calc((20% - 45px) + (45px/10));
+  }
+}
+
+
+@media screen and (max-width:768px) {
+  .seller-dropdown.d-flex {
+    gap: 20px;
+    justify-content: center;
   }
 }
