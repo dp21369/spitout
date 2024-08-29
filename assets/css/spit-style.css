@@ -10074,7 +10074,7 @@ nav.woocommerce-MyAccount-navigation {
   padding: 20px 70px 20px 50px;
 }
 
-.sell-btn .wp-element-button:before, 
+.sell-btn .wp-element-button:before,
 .join-btn .wp-element-button:before {
   position: absolute;
   content: '';
