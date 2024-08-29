@@ -10200,6 +10200,10 @@ nav.woocommerce-MyAccount-navigation {
   flex: 1;
 }
 
+.review-icons span {
+  font-weight: 700;
+}
+
 .review-icons i {
   color: #fdc736;
 }

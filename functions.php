@@ -2033,8 +2033,6 @@ function resize_and_compress_image($attachment_id, $max_width = 800, $max_height
     return $result ? wp_get_attachment_url($attachment_id) : false;
 }
 
-
-<<<<<<< Updated upstream
 // ShortCode For Homepage Banner content =================
 add_shortcode('so_banner_content', 'so_banner_content');
 function so_banner_content()
@@ -2088,7 +2086,7 @@ function so_banner_content()
     return $output;
 }
 // END of ShortCode For Homepage Banner content
-=======
+
 function modify_user_query_for_partial_search($query)
 {
     global $wpdb;
@@ -2105,4 +2103,3 @@ function modify_user_query_for_partial_search($query)
         );
     }
 }
->>>>>>> Stashed changes
