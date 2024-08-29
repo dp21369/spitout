@@ -2079,15 +2079,17 @@ function so_banner_content()
     $seller_cat_count = $seller_type_query->post_count;
     ?>
     <div class="seller-dropdown d-flex">
-        <div class="total-seller-count">2994 Sellers</div>
-        <select>
+        <div class="total-seller-count"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
+        <select id="select-cat-redirect">
+            <option value="">Select Category</option>
             <?php // Check if there are any posts
             if ($seller_type_query->have_posts()) :
                 while ($seller_type_query->have_posts()) :
                     $seller_type_query->the_post();
                     $post_id = get_the_ID();
+                    $cat_url = get_permalink($post_id);
                     $title = get_the_title(); ?>
-                    <option value="<?php echo $post_id; ?>"><?php echo esc_html($title); ?></option>
+                    <option value="<?php echo esc_url($cat_url); ?>"><?php echo esc_html($title); ?></option>
             <?php endwhile;
                 wp_reset_postdata();
             endif; ?>

@@ -293,19 +293,18 @@ jQuery(document).ready(function () {
   // if(currentCurrencyTopUp == "USD"){
   //   jQuery('#woo_wallet_balance_to_add').attr('min','10');
   // }
-
-
 });
-
 
 //save original price to local storage
 jQuery(document).ready(function () {
-  if (window.location.href.indexOf('/my-account/woo-wallet/add/') > -1) {
+  if (window.location.href.indexOf("/my-account/woo-wallet/add/") > -1) {
     jQuery(".woo-add-to-wallet").on("click", function () {
       var ogPrice = jQuery("#woo_wallet_balance_to_add").val();
-      var ogCurrency = jQuery("#woo_wallet_balance_to_add").attr('data-current-currency');
-      localStorage.setItem('ogWalletTopUpPrice', ogPrice);
-      localStorage.setItem('ogWalletTopUpCurrency', ogCurrency);
+      var ogCurrency = jQuery("#woo_wallet_balance_to_add").attr(
+        "data-current-currency"
+      );
+      localStorage.setItem("ogWalletTopUpPrice", ogPrice);
+      localStorage.setItem("ogWalletTopUpCurrency", ogCurrency);
     });
     // var currentCurrencyTopUp = jQuery("#woo_wallet_balance_to_add").attr("data-current-currency");
     // if(currentCurrencyTopUp == "USD"){
@@ -314,34 +313,33 @@ jQuery(document).ready(function () {
   }
 });
 
-
 // set the price from local storage to checkout form page
 jQuery(document).ready(function () {
-
   //check if in check out page
-  if (window.location.href.indexOf('checkout') == -1) {
+  if (window.location.href.indexOf("checkout") == -1) {
     return;
   }
 
   //check if product is wallet topup
-  if (jQuery('.cart_item .product-name').html().indexOf('wallet') != -1) {
+  if (jQuery(".cart_item .product-name").html().indexOf("wallet") != -1) {
     return;
   }
 
-  var ogWalletTopUpPrice = localStorage.getItem('ogWalletTopUpPrice');
-  var ogWalletTopUpCurrency = localStorage.getItem('ogWalletTopUpCurrency');
+  var ogWalletTopUpPrice = localStorage.getItem("ogWalletTopUpPrice");
+  var ogWalletTopUpCurrency = localStorage.getItem("ogWalletTopUpCurrency");
 
   if (ogWalletTopUpPrice) {
-    jQuery('.checkout-page-order-heading').append(' for amount: ' + ogWalletTopUpCurrency + ' ' + ogWalletTopUpPrice);
+    jQuery(".checkout-page-order-heading").append(
+      " for amount: " + ogWalletTopUpCurrency + " " + ogWalletTopUpPrice
+    );
   }
 
   //remove the price and currency after the wallet topup price is set
   jQuery(document).on("click", "#place_order", function () {
-    localStorage.removeItem('ogWalletTopUpPrice');
-    localStorage.removeItem('ogWalletTopUpCurrency');
+    localStorage.removeItem("ogWalletTopUpPrice");
+    localStorage.removeItem("ogWalletTopUpCurrency");
   });
 });
-
 
 //autoamtically open the reviews tab in the individual seller page
 jQuery(document).ready(function () {
@@ -353,9 +351,15 @@ jQuery(document).ready(function () {
   }
 });
 
-
 jQuery(document).ready(function () {
   jQuery(document).on("click", ".seller-more", function () {
-    jQuery('.seller-search-categories').toggleClass('seller-expanded');
-  })
+    jQuery(".seller-search-categories").toggleClass("seller-expanded");
+  });
+
+  jQuery("#select-cat-redirect").change(function () {
+    var selectedUrl = jQuery(this).val();
+    if (selectedUrl) {
+      window.location.href = selectedUrl;
+    }
+  });
 });
