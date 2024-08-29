@@ -9647,10 +9647,11 @@ nav.woocommerce-MyAccount-navigation {
 .seller-filter-opened::before {
   position: absolute;
   content: '';
-  top: 0;
+  top: -40px;
+  bottom: -50px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% + 105px);
   z-index: 1;
   background: rgba(0, 0, 0, 0.55);
 }
@@ -9935,7 +9936,7 @@ nav.woocommerce-MyAccount-navigation {
 
 .seller-filter-dropdown-form .bi-caret-up-fill {
   position: absolute;
-  top: -28px;
+  top: -25px;
   right: 60px;
   height: auto;
 }
