@@ -9931,7 +9931,7 @@ nav.woocommerce-MyAccount-navigation {
 .seller-tab-col .seller-filter-dropdown-form {
   position: relative;
   /* border: 1px solid rgb(234 30 121 / 40%); */
-  ;
+
 }
 
 .seller-filter-dropdown-form .bi-caret-up-fill {
@@ -10276,14 +10276,14 @@ nav.woocommerce-MyAccount-navigation {
   gap: 30px;
 }
 
-.card-box .wp-block-column:first-child{
-  padding-top: 8px;
-}
-
 .card-box .wp-block-column {
   padding: 50px 30px;
   border-radius: 20px;
   flex: 1;
+}
+
+.card-box .lower-top-padding{
+  padding-top: 8px;
 }
 
 .card-box .wp-block-heading {

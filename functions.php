@@ -2150,3 +2150,58 @@ function modify_user_query_for_partial_search($query)
         );
     }
 }
+
+
+// ShortCode For HomepageCATEGORY =================
+add_shortcode('so_category_list', 'so_category_list');
+function so_category_list()
+{
+    ob_start();
+?>
+<div class="so-browse-categories mt-4">
+<ul class="so-browse-categories-lists">
+    <?php
+    $get_spit_category = get_posts(
+        array(
+            'numberposts' => -1,
+            // -1 returns all posts
+            'post_type' => 'spit-category',
+            'orderby' => 'title',
+            'order' => 'ASC',
+            'post_status' => 'publish'
+        )
+    );
+
+    foreach ($get_spit_category as $key => $get_spit_cat) {
+        # code...
+        echo '  <li>
+        <a href="' . get_permalink($get_spit_cat->ID) . '">
+            <h5>' . $get_spit_cat->post_title . '</h5>
+        </a>
+    </li>';
+    }
+    ?>
+
+    <li id="browse-all-categories-btn">
+        <button>
+            <a href="<?php echo home_url('/categories') ?>" class="so-browse-cat-browse-all d-flex">
+                <h5>Browse All</h5>
+
+                <span class="so-custom-icon">
+                    <svg id="Layer_1" enable-background="new 0 0 100 100" height="512"
+                        viewBox="0 0 100 100" width="512" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m50 10.75c-18.266 0-34.562 13.129-38.383 31.007-1.909 8.933-.623 18.432 3.636 26.515 4.099 7.779 10.819 14.066 18.859 17.629 8.363 3.707 17.964 4.353 26.754 1.825 8.48-2.438 15.999-7.789 21.118-14.972 10.703-15.017 9.272-36.111-3.32-49.567-7.38-7.886-17.862-12.437-28.664-12.437zm18.829 41.347-10.7 10.958c-2.709 2.775-6.991-1.429-4.293-4.191l5.399-5.529h-25.586c-1.817 0-3.333-1.517-3.333-3.333s1.517-3.333 3.333-3.333h25.458l-5.506-5.505c-2.736-2.736 1.506-6.979 4.242-4.243l10.961 10.96c1.162 1.161 1.173 3.041.025 4.216z" />
+                    </svg>
+                </span>
+            </a>
+    </li>
+    </button>
+</ul>
+</div>
+<?php
+    $output = ob_get_contents();
+    ob_end_clean();
+    return $output;
+}
+// END of ShortCode For HomepageCATEGORY 
