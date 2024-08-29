@@ -6,9 +6,10 @@ jQuery(document).ready(function () {
     var searchValue;
   
     var typingTimer; // Timer identifier
-    var doneTypingInterval = 3000; // Time in milliseconds (3 seconds)
+    var doneTypingInterval = 1000; // Time in milliseconds (1.5 seconds)
   
     jQuery("#pills-tab .nav-link").on("click", function () {
+      searchValue = jQuery("#seller_search").val();
       button_id = jQuery(this).attr("data-button-id");
       button_target = jQuery(this).attr("data-target");
       tab = jQuery(this).attr("data-tab");
@@ -16,6 +17,7 @@ jQuery(document).ready(function () {
     });
   
     jQuery(".category-class").on("change", function () {
+      searchValue = jQuery("#seller_search").val();
       let id = jQuery(this).data("id");
       if (!selectedIds.includes(id)) {
         selectedIds.push(id); // Push only if not already in the array

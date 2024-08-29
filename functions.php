@@ -1723,7 +1723,7 @@ function load_filtered_sellers()
     $button_target = sanitize_text_field($_POST['button_target']);
     $button_tab = sanitize_text_field($_POST['tab']);
     $selected_cat_ids = isset($_POST['cat_id']) ? array_map('intval', $_POST['cat_id']) : array();
-    $searchValue = sanitize_text_field($_POST['searchValue']);
+    $searchValue = isset($_POST['searchValue']) ? sanitize_text_field($_POST['searchValue']) : '';
 
     $all_sellers = get_users(
         array(
@@ -1734,10 +1734,12 @@ function load_filtered_sellers()
     switch ($button_tab) {
         case 'active':
 
-            if (!empty($selected_cat_ids)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue)) {
+                // Add the filter before running the query
+                add_action('pre_user_query', 'modify_user_query_for_partial_search');
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'OR', // Use OR relation for matching any of the selected categories
+                    'relation' => 'AND', // Use AND relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
@@ -1753,12 +1755,16 @@ function load_filtered_sellers()
                 $args = array(
                     'role'    => 'seller', // Role to match
                     'meta_query' => $meta_query, // Meta query to filter by so_category
+                    'search'     => esc_attr($searchValue), // Search by username
                 );
 
                 $user_query = new WP_User_Query($args);
 
                 // Get the results
                 $users = $user_query->get_results();
+
+                // Remove the filter after running the query
+                remove_action('pre_user_query', 'modify_user_query_for_partial_search');
 
                 // Check if users are found
                 if (!empty($users)) {
@@ -1783,10 +1789,13 @@ function load_filtered_sellers()
             break;
 
         case 'popular':
-            if (!empty($selected_cat_ids)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue)) {
+                // Add the filter before running the query
+                add_action('pre_user_query', 'modify_user_query_for_partial_search');
+
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'OR', // Use OR relation for matching any of the selected categories
+                    'relation' => 'AND', // Use OR relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
@@ -1804,6 +1813,7 @@ function load_filtered_sellers()
                     'role'       => 'seller', // Role to match
                     'include'    => array_keys(spitout_get_popular_sellers()), // Filter to only these user IDs
                     'meta_query' => $meta_query, // Meta query to filter by so_category
+                    'search'     => esc_attr($searchValue), // Search by username
                 );
 
                 // Perform the user query
@@ -1811,6 +1821,9 @@ function load_filtered_sellers()
 
                 // Get the results
                 $users = $user_query->get_results();
+
+                // Remove the filter after running the query
+                remove_action('pre_user_query', 'modify_user_query_for_partial_search');
 
                 // Check if users are found
                 if (!empty($users)) {
@@ -1829,10 +1842,13 @@ function load_filtered_sellers()
             break;
 
         default:
-            if (!empty($selected_cat_ids)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue)) {
+                // Add the filter before running the query
+                add_action('pre_user_query', 'modify_user_query_for_partial_search');
+
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'OR', // Use OR relation for matching any of the selected categories
+                    'relation' => 'AND', // Use OR relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
@@ -1848,12 +1864,16 @@ function load_filtered_sellers()
                 $args = array(
                     'role'    => 'seller', // Role to match
                     'meta_query' => $meta_query, // Meta query to filter by so_category
+                    'search'     => esc_attr($searchValue), // Search by username
                 );
 
                 $user_query = new WP_User_Query($args);
 
                 // Get the results
                 $users = $user_query->get_results();
+
+                // Remove the filter after running the query
+                remove_action('pre_user_query', 'modify_user_query_for_partial_search');
 
                 // Check if users are found
                 if (!empty($users)) {
@@ -2014,6 +2034,7 @@ function resize_and_compress_image($attachment_id, $max_width = 800, $max_height
 }
 
 
+<<<<<<< Updated upstream
 // ShortCode For Homepage Banner content =================
 add_shortcode('so_banner_content', 'so_banner_content');
 function so_banner_content()
@@ -2067,3 +2088,21 @@ function so_banner_content()
     return $output;
 }
 // END of ShortCode For Homepage Banner content
+=======
+function modify_user_query_for_partial_search($query)
+{
+    global $wpdb;
+
+    // Only modify the query if the search term is set
+    if (isset($query->query_vars['search'])) {
+        // Modify the query to allow partial matches
+        $search = esc_attr($query->query_vars['search']);
+        $search = like_escape($search);
+        $query->query_where = str_replace(
+            "user_login LIKE",
+            "user_login LIKE '%{$search}%' OR {$wpdb->users}.user_nicename LIKE '%{$search}%' OR {$wpdb->users}.display_name LIKE '%{$search}%'",
+            $query->query_where
+        );
+    }
+}
+>>>>>>> Stashed changes
