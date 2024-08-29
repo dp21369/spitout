@@ -98,4 +98,3 @@ jQuery(document).ready(function () {
     location = jQuery("#location").val();
     seller_filter(button_id, button_target, tab, selectedIds, searchValue,location);
   }
-  

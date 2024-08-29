@@ -9908,7 +9908,7 @@ nav.woocommerce-MyAccount-navigation {
 
 .seller-tab-col .seller-filter-dropdown-form {
   position: relative;
-  border: 1px solid rgb(234 30 121 / 40%);
+  /* border: 1px solid rgb(234 30 121 / 40%); */
   ;
 }
 
@@ -9924,8 +9924,23 @@ nav.woocommerce-MyAccount-navigation {
   position: absolute;
   top: -4%;
   font-size: 36px;
-  color: var(--pink);
+  /* color: var(--pink); */
   right: 22%;
+}
+
+.seller-tab-col .apply-button {
+  /* padding: 10px 36px; */
+  background: var(--pink);
+  border-radius: 50px;
+  color: #FFF;
+}
+
+.so-new-seller .seller-tab-col  .apply-button:hover {
+  color: #FFF !important;
+}
+
+.seller-tab-col   .filter-dropdown-delete-icon i::before {
+  border: 0;
 }
 
 .new-seller-tab-content {
@@ -9958,6 +9973,7 @@ nav.woocommerce-MyAccount-navigation {
 /* NEW HOME PAGE CSS  */
 .page-id-3042 {
   background: linear-gradient(180deg, rgb(248, 222, 249) 0%, rgb(255, 255, 255) 100%) !important;
+  background: #f8def9 !important;
 }
 
 .banner-content>div {
@@ -10227,7 +10243,47 @@ nav.woocommerce-MyAccount-navigation {
   color: #000;
 }
 
+/* HOW IT WORKS SECTION  */
+.section-header {
+  margin-bottom: 55px;
+}
+.card-box {
+  display: flex;
+  flex-wrap: wrap !important;
+  flex-direction: row;
+  gap: 30px;
+}
 
+.card-box .wp-block-column:first-child{
+  padding-top: 8px;
+}
+
+.card-box .wp-block-column {
+  padding: 50px 30px;
+  border-radius: 20px;
+  flex: 1;
+}
+
+.card-box .wp-block-heading {
+  margin-top: 0;
+}
+
+.face-id {
+  margin-top: 1.5em;
+}
+
+.face-id img{
+  opacity: 0.5;
+}
+
+.card-box  .overflow-image {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.card-box  .wp-block-column p{
+  padding: 1.5em;
+}
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n+9) {
