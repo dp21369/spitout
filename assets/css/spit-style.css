@@ -9640,6 +9640,21 @@ nav.woocommerce-MyAccount-navigation {
 
 
 /* NEW CHANGES CSS BY DEV  */
+.seller-filter-opened {
+  position: relative;
+}
+
+.seller-filter-opened::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.55);
+}
+
 .sellers-page-heading .seller-search-header {
   /* display: flex;
   justify-content: space-between; */
@@ -9894,12 +9909,18 @@ nav.woocommerce-MyAccount-navigation {
   top: 70px;
 }
 
+.so-filters-dropdowns a{
+  z-index: 9;
+}
 .seller-tab-col .so-seller-filter-dropdown2 {
   gap: 10px;
   background: var(--pink);
   padding: 8px 30px;
 }
 
+.so-filters-dropdowns.close-state .so-seller-filter-dropdown2{
+  background: #000;
+}
 
 .seller-tab-col .so-seller-filter-dropdown2 h5 {
   color: #FFF;
