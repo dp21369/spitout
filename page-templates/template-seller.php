@@ -468,10 +468,12 @@ if ($all_sellers) {
                                         });
                                     </script>
                                     <div class="filter-dropdown-delete-icon">
-                                        <button type="reset" id="reset-button">
+                                        <!-- <button type="reset" id="reset-button">
                                             <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                        <button type="submit" class="apply-button" name="apply-button">Apply Filter</button>
+                                        </button> -->
+                                        <a href="#" class="reset-button" id="reset-button"> <i class="bi bi-trash-fill"></i> </a>
+                                        <!-- <button type="submit" class="apply-button" name="apply-button" id="apply-button">Apply Filter</button> -->
+                                        <a href="#" class="apply-button" id="apply-button"> Apply Filter </a>
                                     </div>
                                 </form>
                             </div>

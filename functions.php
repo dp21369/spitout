@@ -1724,6 +1724,7 @@ function load_filtered_sellers()
     $button_tab = sanitize_text_field($_POST['tab']);
     $selected_cat_ids = isset($_POST['cat_id']) ? array_map('intval', $_POST['cat_id']) : array();
     $searchValue = isset($_POST['searchValue']) ? sanitize_text_field($_POST['searchValue']) : '';
+    $location = isset($_POST['location']) ? sanitize_text_field($_POST['location']) : '';
 
     $all_sellers = get_users(
         array(
@@ -1734,7 +1735,7 @@ function load_filtered_sellers()
     switch ($button_tab) {
         case 'active':
 
-            if (!empty($selected_cat_ids) || !empty($searchValue)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location)) {
                 // Add the filter before running the query
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
                 // Prepare the meta query
@@ -1768,14 +1769,27 @@ function load_filtered_sellers()
 
                 // Check if users are found
                 if (!empty($users)) {
+                    $users_ids = []; // Initialize the array to store user IDs
+
+                   
                     foreach ($users as $user) {
                         $status = get_user_meta($user->ID, "cpmm_user_status", true);
+                        $seller_location = get_user_meta($user->ID,'so_location', true);
                         if ($status == 'logged_in') {
-                            $users_ids[] = $user->ID;
+                            // If $location is not empty, check if the user's location matches $location
+                            if (!empty($location)) {
+                                if ($seller_location == $location) {
+                                    $users_ids[] = $user->ID;
+                                }
+                            } else {
+                                // If $location is empty, add all logged-in users' IDs
+                                $users_ids[] = $user->ID;
+                            }
                         }
                     }
                 }
             } else {
+                $users_ids = [];
                 // Code to execute if expression equals active
                 foreach ($all_sellers as $user) {
                     $user_id = $user->ID;
@@ -1789,7 +1803,7 @@ function load_filtered_sellers()
             break;
 
         case 'popular':
-            if (!empty($selected_cat_ids) || !empty($searchValue)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location)) {
                 // Add the filter before running the query
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
 
@@ -1827,8 +1841,16 @@ function load_filtered_sellers()
 
                 // Check if users are found
                 if (!empty($users)) {
+                    $users_ids = [];
                     foreach ($users as $user) {
-                        $users_ids[] = $user->ID;
+                        $seller_location = get_user_meta($user->ID,'so_location', true);
+                        if (!empty($location)) {
+                            if ($seller_location == $location) {
+                                $users_ids[] = $user->ID;
+                            }
+                        }else{
+                            $users_ids[] = $user->ID;
+                        }
                     }
                 }
             } else {
@@ -1877,11 +1899,20 @@ function load_filtered_sellers()
 
                 // Check if users are found
                 if (!empty($users)) {
+                    $users_ids = [];
                     foreach ($users as $user) {
-                        $users_ids[] = $user->ID;
+                        $seller_location = get_user_meta($user->ID,'so_location', true);
+                        if (!empty($location)) {
+                            if ($seller_location == $location) {
+                                $users_ids[] = $user->ID;
+                            }
+                        }else{
+                            $users_ids[] = $user->ID;
+                        }
                     }
                 }
             } else {
+                $users_ids = [];
                 // Code to execute if expression doesn't match any value
                 foreach ($all_sellers as $user) {
                     $user_id = $user->ID;
@@ -2067,12 +2098,12 @@ function so_banner_content()
         </div>
         <div class="review-details">
             <div class="review-icons">
-               <span><i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                </span> 
+                <span><i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                </span>
                 <span>5.0</span>
             </div>
             <div class="review-text">
