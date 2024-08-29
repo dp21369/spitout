@@ -74,7 +74,7 @@ if (empty($banner_avatar)) {
 }
 
 // check if user is verified from Idenfy 
-$get_verified_status = get_user_meta($author_id, 'is_verified', true);
+// $get_verified_status = get_user_meta($author_id, 'is_verified', true);
 
 ?>
 
@@ -83,10 +83,10 @@ $get_verified_status = get_user_meta($author_id, 'is_verified', true);
 <section class="so-profile-new-profile so-buyer-profile-page">
     <input type="hidden" value="<?php echo $author_id; ?>" id="get_author_id">
 
-    <?php if ((int) get_user_meta($current_user_id, 'is_verified', true) == 0 && (int) $author_id == (int) $current_user_id) { ?>
+    <!-- <?php //if ((int) get_user_meta($current_user_id, 'is_verified', true) == 0 && (int) $author_id == (int) $current_user_id) { ?>
         <p class="verify-acc-text"><i class="bi bi-exclamation-circle"></i>Please Verify Your Account Below.
         </p>
-    <?php } ?>
+    <?php //} ?> -->
 
     <div class="container so-profile-new-container so-feed-new-container">
         <div class="row">
@@ -127,11 +127,11 @@ $get_verified_status = get_user_meta($author_id, 'is_verified', true);
 
 
                             <?php
-                            if ((int) get_user_meta($author_id, 'is_verified', true) == 0) {
-                                echo do_shortcode('[IDENFY]');
-                            } else {
-                                echo '<p class="idenfy-verified">Verified</p>';
-                            }
+                            // if ((int) get_user_meta($author_id, 'is_verified', true) == 0) {
+                            //     echo do_shortcode('[IDENFY]');
+                            // } else {
+                            //     echo '<p class="idenfy-verified">Verified</p>';
+                            // }
 
                             ?>
                         </div>

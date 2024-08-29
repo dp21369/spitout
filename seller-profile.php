@@ -363,19 +363,11 @@ $is_verified = (int) get_user_meta($current_user_id, 'is_verified', true) == 0 ?
 				if (!in_array('administrator', (array) wp_get_current_user()->roles)) {
                 ?>
                 <div class="profile-saliva-order-button">
-                  <?php if ($is_verified) { ?>
-                    <button class="d-flex so-order-products" id="spitout_order" type="submit" name="proceed_to_checkout"
+                <button class="d-flex so-order-products" id="spitout_order" type="submit" name="proceed_to_checkout"
                       title="<?php echo $isCurrentUserSeller ? 'Sellers can not buy products from another seller' : 'Order'; ?>">
                       <h5>Order</h5>
                       <i class="bi bi-arrow-right-circle-fill"></i>
                     </button>
-                  <?php } else {
-                    echo '<a href="' . $get_seller_url . '" class="d-flex so-order-products">
-                                            <button type="button">
-                                                 Verify Account
-                                            </button>
-                                        </a>';
-                  } ?>
                 </div>
               </form>
             <?php }

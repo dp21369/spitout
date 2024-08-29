@@ -561,13 +561,17 @@ function spitout_get_seller_information($seller_id)
         $seller_data = get_userdata($seller_id);
         $seller_user_name = $seller_data->user_login;
 
-        $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
+        // $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';F
         $seller_url = get_author_posts_url($seller_id);
-        $seller_img_url = wp_get_attachment_url($seller_img, 'thumbnail');
+        $seller_img_url = resize_and_compress_image($seller_img, 150, 150, 70);
+        if (!$seller_img_url) {
+            $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+        }
+        // $seller_img_url = wp_get_attachment_url($seller_img, 'thumbnail');
         $seller_location = get_user_meta($seller_id, "so_location", true);
         $seller_online_status = get_user_meta($seller_id, "user_status", true);
         $seller_final_location = $seller_location ? $seller_location : 'N/A';
-        $seller_final_profile_img = $seller_img_url ? $seller_img_url : $profile_avatar;
+        // $seller_final_profile_img = $seller_img_url ? $seller_img_url : $profile_avatar;
 
         $seller_display_name = $seller_data->display_name;
 
@@ -581,7 +585,7 @@ function spitout_get_seller_information($seller_id)
             'seller_display_name' => $seller_display_name,
             'seller_user_name' => $seller_user_name,
             'seller_location' => $seller_final_location,
-            'seller_profile_img' => $seller_final_profile_img,
+            'seller_profile_img' => esc_url($seller_img_url),
             'seller_url' => $seller_url,
             'seller_online' => $active_status
         );
@@ -1872,21 +1876,12 @@ function load_filtered_sellers()
                 <?php
                 foreach ($users_ids as $seller) {
                     $attachment_id = (int) get_user_meta($seller, 'so_profile_img', true);
-                    $attachment_array = wp_get_attachment_image_src($attachment_id, 'medium'); // if not available than retrieves the original image
-                    if ($attachment_array) {
-                        $seller_img_url = $attachment_array[0]; // URL of the thumbnail image 
-                    }
-                    $seller_img = get_user_meta($seller, "so_profile_img", true);
-                    /* if the author avatar is empty it assign a placeholder image */
-                    if (empty($seller_img_url)) {
-                        $seller_img_url = get_stylesheet_directory_uri() . '/assets/img/user.png';
-                    } else {
-                        $seller_img_url = wp_get_attachment_url($seller_img);
+                    $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
+                    if (!$seller_img_url) {
+                        $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
                     }
                     $seller_data = get_userdata((int) $seller);
-                    $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
                     $seller_url = get_author_posts_url($seller);
-                    // $seller_img_url = wp_get_attachment_url($seller_img);
                     $seller_location = get_user_meta($seller, "so_location", true);
                     $seller_category_id = get_user_meta($seller, "so_category", true) ? get_user_meta($seller, "so_category", true)[0] : '';
                     $seller_category = $seller_category_id ? get_the_title($seller_category_id) : 'N/A';
@@ -1916,7 +1911,7 @@ function load_filtered_sellers()
                                 <div class="so-seller-header">
                                     <figure>
                                         <i class="bi bi-circle-fill <?php echo $active_status; ?>"></i><!--This is to mark the seller as online -->
-                                        <img src="<?php echo $seller_img_url ? $seller_img_url : $profile_avatar; ?>" alt="<?php echo $seller_data->display_name; ?>">
+                                        <img src="<?php echo esc_url($seller_img_url); ?>" alt="<?php echo $seller_data->display_name; ?>">
                                     </figure>
                                     <div class="so-new-sellers-name">
                                         <p class="seller-tag">Top Seller</p>
