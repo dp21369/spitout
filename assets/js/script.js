@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Toggle the "close-state" class on the link's parent div
       dropdownLink.parentElement.classList.toggle("close-state");
-
+      document.body.classList.toggle("seller-filter-opened");
       // Update the text of the h5 element based on the current state
       if (dropdownLink.parentElement.classList.contains("close-state")) {
         h5Element.textContent = "Close";
