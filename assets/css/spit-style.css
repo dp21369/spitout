@@ -10032,19 +10032,24 @@ nav.woocommerce-MyAccount-navigation {
   line-height: 1;
 }
 
-.banner-buttons .wp-block-buttons {
+.wp-block-buttons {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
   gap: 30px;
 }
 
+
 .new-button {
   background-color: var(--pink);
-  color: white;
+  color: #ffffff;
   border: transparent;
   border-radius: 40px;
   /* padding: 20px 70px 20px 50px; */
   font-weight: 600;
   cursor: pointer !important;
+  display: inline-block;
 }
 
 .new-button .wp-element-button {
@@ -10062,6 +10067,9 @@ nav.woocommerce-MyAccount-navigation {
 
 }
 
+.new-button.sell-btn .wp-element-button {
+  color: #000 !important;
+}
 .new-button.sell-btn:hover .wp-element-button {
   color: #FFF !important;
 }

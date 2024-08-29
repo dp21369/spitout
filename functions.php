@@ -1976,7 +1976,7 @@ function load_filtered_sellers()
             </div>
         </div>
 
-<?php } else {
+    <?php } else {
         echo '<span>No user found!</span>';
     }
     wp_die();
@@ -2012,3 +2012,21 @@ function resize_and_compress_image($attachment_id, $max_width = 800, $max_height
     // Return the URL of the resized image or false if it fails
     return $result ? wp_get_attachment_url($attachment_id) : false;
 }
+
+
+// ShortCode For Homepage Banner content =================
+add_shortcode('so_banner_content', 'so_banner_content');
+function so_banner_content()
+{
+    ob_start();
+    ?>
+    <div class="wp-block-buttons">
+        <div class="new-button sell-btn"><a class="wp-block-button__link wp-element-button" href="/register">Sell</a></div>
+        <div class="new-button join-btn"><a class="wp-block-button__link wp-element-button" href="/my-spitout">Join Free</a></div>
+    </div>
+<?php
+    $output = ob_get_contents();
+    ob_end_clean();
+    return $output;
+}
+// END of ShortCode For Homepage Banner content
