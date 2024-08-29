@@ -10130,6 +10130,36 @@ nav.woocommerce-MyAccount-navigation {
   margin: 0;
 }
 
+.seller-dropdown {
+  justify-content: space-between;
+  border: 1px solid #e0e0e0;
+  padding: 25px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+}
+
+.total-seller-count {
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #fae5fa;
+  border-radius: 50px;
+  color: #f27af2;
+  font-weight: 700;
+}
+
+.seller-dropdown select {
+  border: 0;
+  flex: 0 70%;
+  font-weight: 700;
+  outline: none;
+  appearance: none;
+  background: url("../img/down-arrow.svg");
+  background-position: right;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+
 
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {

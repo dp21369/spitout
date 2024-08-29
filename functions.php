@@ -2020,6 +2020,15 @@ function so_banner_content()
 {
     ob_start();
     ?>
+    <div class="seller-dropdown d-flex">
+        <div class="total-seller-count">2994 Sellers</div>
+        <select>
+            <option value="volvo">Selet Category</option>
+            <option value="Asian">Asian</option>
+            <option value="Arab">Arab</option>
+            <option value="Glasses">Glasses</option>
+        </select>
+    </div>
     <div class="wp-block-buttons">
         <div class="new-button sell-btn"><a class="wp-block-button__link wp-element-button" href="/register">Sell</a></div>
         <div class="new-button join-btn"><a class="wp-block-button__link wp-element-button" href="/my-spitout">Join Free</a></div>
