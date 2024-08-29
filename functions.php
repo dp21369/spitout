@@ -2033,6 +2033,34 @@ function so_banner_content()
         <div class="new-button sell-btn"><a class="wp-block-button__link wp-element-button" href="/register">Sell</a></div>
         <div class="new-button join-btn"><a class="wp-block-button__link wp-element-button" href="/my-spitout">Join Free</a></div>
     </div>
+
+    <div class="banner-rewiews">
+        <div class="reviewers-img">
+            <figure>
+                <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="reviewer-image">
+            </figure>
+            <figure>
+                <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="reviewer-image">
+            </figure>
+            <figure>
+                <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="reviewer-image">
+            </figure>
+        </div>
+        <div class="review-details">
+            <div class="review-icons">
+               <span><i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                </span> 
+                <span>5.0</span>
+            </div>
+            <div class="review-text">
+                <p>From 150+ Reviews</p>
+            </div>
+        </div>
+    </div>
 <?php
     $output = ob_get_contents();
     ob_end_clean();
