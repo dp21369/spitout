@@ -1771,10 +1771,10 @@ function load_filtered_sellers()
                 if (!empty($users)) {
                     $users_ids = []; // Initialize the array to store user IDs
 
-                   
+
                     foreach ($users as $user) {
                         $status = get_user_meta($user->ID, "cpmm_user_status", true);
-                        $seller_location = get_user_meta($user->ID,'so_location', true);
+                        $seller_location = get_user_meta($user->ID, 'so_location', true);
                         if ($status == 'logged_in') {
                             // If $location is not empty, check if the user's location matches $location
                             if (!empty($location)) {
@@ -1843,12 +1843,12 @@ function load_filtered_sellers()
                 if (!empty($users)) {
                     $users_ids = [];
                     foreach ($users as $user) {
-                        $seller_location = get_user_meta($user->ID,'so_location', true);
+                        $seller_location = get_user_meta($user->ID, 'so_location', true);
                         if (!empty($location)) {
                             if ($seller_location == $location) {
                                 $users_ids[] = $user->ID;
                             }
-                        }else{
+                        } else {
                             $users_ids[] = $user->ID;
                         }
                     }
@@ -1864,7 +1864,7 @@ function load_filtered_sellers()
             break;
 
         default:
-            if (!empty($selected_cat_ids) || !empty($searchValue)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location)) {
                 // Add the filter before running the query
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
 
@@ -1901,12 +1901,12 @@ function load_filtered_sellers()
                 if (!empty($users)) {
                     $users_ids = [];
                     foreach ($users as $user) {
-                        $seller_location = get_user_meta($user->ID,'so_location', true);
+                        $seller_location = get_user_meta($user->ID, 'so_location', true);
                         if (!empty($location)) {
                             if ($seller_location == $location) {
                                 $users_ids[] = $user->ID;
                             }
-                        }else{
+                        } else {
                             $users_ids[] = $user->ID;
                         }
                     }
@@ -2069,14 +2069,28 @@ add_shortcode('so_banner_content', 'so_banner_content');
 function so_banner_content()
 {
     ob_start();
+    $seller_args = array(
+        'post_type' => 'spit-category', // Your custom post type
+        'posts_per_page' => -1, // Retrieve all posts
+    );
+    // Execute the query
+    $seller_type_query = new WP_Query($seller_args);
+    // Get the count of posts
+    $seller_cat_count = $seller_type_query->post_count;
     ?>
     <div class="seller-dropdown d-flex">
         <div class="total-seller-count">2994 Sellers</div>
         <select>
-            <option value="volvo">Selet Category</option>
-            <option value="Asian">Asian</option>
-            <option value="Arab">Arab</option>
-            <option value="Glasses">Glasses</option>
+            <?php // Check if there are any posts
+            if ($seller_type_query->have_posts()) :
+                while ($seller_type_query->have_posts()) :
+                    $seller_type_query->the_post();
+                    $post_id = get_the_ID();
+                    $title = get_the_title(); ?>
+                    <option value="<?php echo $post_id; ?>"><?php echo esc_html($title); ?></option>
+            <?php endwhile;
+                wp_reset_postdata();
+            endif; ?>
         </select>
     </div>
     <div class="wp-block-buttons">
