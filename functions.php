@@ -1883,13 +1883,54 @@ function load_filtered_sellers()
                     $users_ids = [];
                     foreach ($users as $user) {
                         $seller_location = get_user_meta($user->ID, 'so_location', true);
-                        if (!empty($location)) {
-                            if ($seller_location == $location) {
-                                $users_ids[] = $user->ID;
+                        $post_meta_date = get_user_meta($user->ID, 'so_dob', true);
+
+                        $age = 0;
+                        if (!empty($post_meta_date)) {
+                            try {
+                                // Create a DateTime object from the given format
+                                $dob = DateTime::createFromFormat('d/m/Y', $post_meta_date);
+
+                                // Check if the conversion was successful
+                                if ($dob === false) {
+                                    throw new Exception("Invalid date format: " . $post_meta_date);
+                                }
+
+                                $now = new DateTime();
+                                $age = (int)$now->diff($dob)->y;
+                                error_log("User Age: " . $age);
+                            } catch (Exception $e) {
+                                error_log("Error: " . $e->getMessage());
                             }
-                        } else {
+                        }
+                        $location_match = true;
+                        $age_match = true;
+
+                        if (!empty($location)) {
+                            $location_match = ($seller_location == $location);
+                        }
+
+                        if ((!empty($selectedMinAge) || !empty($selectedMaxAge)) && $age > 0) {
+                            if (!empty($selectedMinAge) && !empty($selectedMaxAge)) {
+                                $age_match = ($age >= $selectedMinAge && $age <= $selectedMaxAge);
+                            } elseif (!empty($selectedMinAge)) {
+                                $age_match = ($age >= $selectedMinAge);
+                            } elseif (!empty($selectedMaxAge)) {
+                                $age_match = ($age <= $selectedMaxAge);
+                            }
+                        }
+
+                        if ($location_match && $age_match) {
                             $users_ids[] = $user->ID;
                         }
+
+                        // if (!empty($location)) {
+                        //     if ($seller_location == $location) {
+                        //         $users_ids[] = $user->ID;
+                        //     }
+                        // } else {
+                        //     $users_ids[] = $user->ID;
+                        // }
                     }
                 }
             } else {
