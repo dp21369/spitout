@@ -67,6 +67,19 @@ jQuery(document).ready(function () {
   jQuery(document).on("click", "#apply-button", function () {
     location = jQuery("#location").val();
     searchValue = jQuery("#seller_search").val();
+
+    // after select the filter button chages starts
+    let h5Element = jQuery("#seller-filter-dropdown").find("h5");
+    jQuery(".so-filters-dropdowns").toggleClass("close-state");
+    jQuery(".seller-filter-dropdown-form").hide();
+    jQuery(document.body).toggleClass("seller-filter-opened");
+    if (jQuery(".so-filters-dropdowns").hasClass("close-state")) {
+      jQuery(h5Element).text("Close");
+    } else {
+      jQuery(h5Element).text("Filter");
+    }
+    // after select the filter button chages ends
+
     seller_filter(
       button_id,
       button_target,

@@ -296,7 +296,7 @@ if ($all_sellers) {
                                     </select>
                                     <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/chevron-down.png" alt="" id="seller-dropdown-after-img" class="d-none" style="width: 100%; height: 100%; object-fit: cover;">
                                 </div>
-                                <a href="#" id="seller-filter-dropdown filter">
+                                <a href="#" id="seller-filter-dropdown">
                                     <div class="so-seller-filter-dropdown2 d-flex">
                                         <h5>Filter</h5><span class="so-custom-icon icon-lightgray">
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

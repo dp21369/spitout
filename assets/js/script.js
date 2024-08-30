@@ -67,10 +67,10 @@ window.dispatchEvent(new Event("resize"));
 // seller page filter dropdown js=========================================
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (document.getElementById("seller-filter-dropdown filter") != null) {
+  if (document.getElementById("seller-filter-dropdown") != null) {
     // Get references to the "a" tag and the form
     const dropdownLink = document.getElementById(
-      "seller-filter-dropdown filter"
+      "seller-filter-dropdown"
     );
     const form = document.querySelector(".seller-filter-dropdown-form.filter");
 
@@ -89,10 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  if (document.getElementById("seller-filter-dropdown filter") != null) {
+  if (document.getElementById("seller-filter-dropdown") != null) {
     // Get references to the link, h5, and icon
     const dropdownLink = document.getElementById(
-      "seller-filter-dropdown filter"
+      "seller-filter-dropdown"
     );
     const h5Element = dropdownLink.querySelector("h5");
     const iconElement = dropdownLink.querySelector(".bi-grid-fill");
