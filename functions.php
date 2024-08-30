@@ -1725,6 +1725,10 @@ function load_filtered_sellers()
     $selected_cat_ids = isset($_POST['cat_id']) ? array_map('intval', $_POST['cat_id']) : array();
     $searchValue = isset($_POST['searchValue']) ? sanitize_text_field($_POST['searchValue']) : '';
     $location = isset($_POST['location']) ? sanitize_text_field($_POST['location']) : '';
+    $selectedMinAge = isset($_POST['selectedMinAge']) ? (int)sanitize_text_field($_POST['selectedMinAge']) : '';
+    $selectedMaxAge = isset($_POST['selectedMaxAge']) ? (int)sanitize_text_field($_POST['selectedMaxAge']) : '';
+    $selectedMinPrice = isset($_POST['selectedMinPrice']) ? (int)sanitize_text_field($_POST['selectedMinPrice']) : '';
+    $selectedMaxPrice = isset($_POST['selectedMaxPrice']) ? (int)sanitize_text_field($_POST['selectedMaxPrice']) : '';
 
     $all_sellers = get_users(
         array(
@@ -1735,7 +1739,7 @@ function load_filtered_sellers()
     switch ($button_tab) {
         case 'active':
 
-            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location) || !empty($selectedMinAge) || !empty($selectedMaxAge) || !empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
                 // Add the filter before running the query
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
                 // Prepare the meta query
@@ -1773,18 +1777,53 @@ function load_filtered_sellers()
 
 
                     foreach ($users as $user) {
+                        $post_meta_date = get_user_meta($user->ID, 'so_dob', true);
                         $status = get_user_meta($user->ID, "cpmm_user_status", true);
                         $seller_location = get_user_meta($user->ID, 'so_location', true);
                         if ($status == 'logged_in') {
-                            // If $location is not empty, check if the user's location matches $location
-                            if (!empty($location)) {
-                                if ($seller_location == $location) {
-                                    $users_ids[] = $user->ID;
+                            // Calculate the user's age based on their DOB
+                            $age = 0;
+                            if (!empty($post_meta_date)) {
+                                try {
+                                    // Create a DateTime object from the given format
+                                    $dob = DateTime::createFromFormat('d/m/Y', $post_meta_date);
+
+                                    // Check if the conversion was successful
+                                    if ($dob === false) {
+                                        throw new Exception("Invalid date format: " . $post_meta_date);
+                                    }
+
+                                    $now = new DateTime();
+                                    $age = (int)$now->diff($dob)->y;
+                                    error_log("User Age: " . $age);
+                                } catch (Exception $e) {
+                                    error_log("Error: " . $e->getMessage());
                                 }
-                            } else {
-                                // If $location is empty, add all logged-in users' IDs
+                            }
+                            // var_dump($age);
+                            // Check if the user meets the location and age criteria
+                            $location_match = true;
+                            $age_match = true;
+
+                            if (!empty($location)) {
+                                $location_match = ($seller_location == $location);
+                            }
+
+                            if ((!empty($selectedMinAge) || !empty($selectedMaxAge)) && $age > 0) {
+                                if (!empty($selectedMinAge) && !empty($selectedMaxAge)) {
+                                    $age_match = ($age >= $selectedMinAge && $age <= $selectedMaxAge);
+                                } elseif (!empty($selectedMinAge)) {
+                                    $age_match = ($age >= $selectedMinAge);
+                                } elseif (!empty($selectedMaxAge)) {
+                                    $age_match = ($age <= $selectedMaxAge);
+                                }
+                            }
+
+                            if ($location_match && $age_match) {
                                 $users_ids[] = $user->ID;
                             }
+                            // var_dump($post_meta_date, $selectedMinAge, $selectedMaxAge, $age);
+                            // error_log("Age: $age, Min Age: $selectedMinAge, Max Age: $selectedMaxAge");
                         }
                     }
                 }
@@ -1803,7 +1842,7 @@ function load_filtered_sellers()
             break;
 
         case 'popular':
-            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location) || !empty($selectedMinAge) || !empty($selectedMaxAge) || !empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
                 // Add the filter before running the query
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
 
@@ -1864,7 +1903,7 @@ function load_filtered_sellers()
             break;
 
         default:
-            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location)) {
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location) || !empty($selectedMinAge) || !empty($selectedMaxAge) || !empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
                 // Add the filter before running the query
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
 
@@ -2036,6 +2075,7 @@ add_action('wp_ajax_load_filtered_sellers', 'load_filtered_sellers');
 add_action('wp_ajax_nopriv_load_filtered_sellers', 'load_filtered_sellers');
 
 
+//function to change the size and copress the image
 function resize_and_compress_image($attachment_id, $max_width = 800, $max_height = 800, $quality = 70)
 {
     $file_path = get_attached_file($attachment_id);
@@ -2062,6 +2102,24 @@ function resize_and_compress_image($attachment_id, $max_width = 800, $max_height
 
     // Return the URL of the resized image or false if it fails
     return $result ? wp_get_attachment_url($attachment_id) : false;
+}
+
+// function for partial user search
+function modify_user_query_for_partial_search($query)
+{
+    global $wpdb;
+
+    // Only modify the query if the search term is set
+    if (isset($query->query_vars['search'])) {
+        // Modify the query to allow partial matches
+        $search = esc_attr($query->query_vars['search']);
+        $search = like_escape($search);
+        $query->query_where = str_replace(
+            "user_login LIKE",
+            "user_login LIKE '%{$search}%' OR {$wpdb->users}.user_nicename LIKE '%{$search}%' OR {$wpdb->users}.display_name LIKE '%{$search}%'",
+            $query->query_where
+        );
+    }
 }
 
 // ShortCode For Homepage Banner content =================
@@ -2134,71 +2192,50 @@ function so_banner_content()
 }
 // END of ShortCode For Homepage Banner content
 
-function modify_user_query_for_partial_search($query)
-{
-    global $wpdb;
-
-    // Only modify the query if the search term is set
-    if (isset($query->query_vars['search'])) {
-        // Modify the query to allow partial matches
-        $search = esc_attr($query->query_vars['search']);
-        $search = like_escape($search);
-        $query->query_where = str_replace(
-            "user_login LIKE",
-            "user_login LIKE '%{$search}%' OR {$wpdb->users}.user_nicename LIKE '%{$search}%' OR {$wpdb->users}.display_name LIKE '%{$search}%'",
-            $query->query_where
-        );
-    }
-}
-
-
 // ShortCode For HomepageCATEGORY =================
 add_shortcode('so_category_list', 'so_category_list');
 function so_category_list()
 {
-    ob_start();
-?>
-<div class="so-browse-categories mt-4">
-<ul class="so-browse-categories-lists">
-    <?php
-    $get_spit_category = get_posts(
-        array(
-            'numberposts' => -1,
-            // -1 returns all posts
-            'post_type' => 'spit-category',
-            'orderby' => 'title',
-            'order' => 'ASC',
-            'post_status' => 'publish'
-        )
-    );
+    ob_start(); ?>
+    <div class="so-browse-categories mt-4">
+        <ul class="so-browse-categories-lists">
+            <?php
+            $get_spit_category = get_posts(
+                array(
+                    'numberposts' => -1,
+                    // -1 returns all posts
+                    'post_type' => 'spit-category',
+                    'orderby' => 'title',
+                    'order' => 'ASC',
+                    'post_status' => 'publish'
+                )
+            );
 
-    foreach ($get_spit_category as $key => $get_spit_cat) {
-        # code...
-        echo '  <li>
-        <a href="' . get_permalink($get_spit_cat->ID) . '">
-            <h5>' . $get_spit_cat->post_title . '</h5>
-        </a>
-    </li>';
-    }
-    ?>
+            foreach ($get_spit_category as $key => $get_spit_cat) { ?>
+                <li>
+                    <a href="<?php echo esc_url(get_permalink($get_spit_cat->ID)); ?>">
+                        <h5><?php echo esc_html($get_spit_cat->post_title); ?></h5>
+                    </a>
+                </li>
+            <?php } ?>
 
-    <li id="browse-all-categories-btn">
-        <button>
-            <a href="<?php echo home_url('/categories') ?>" class="so-browse-cat-browse-all d-flex">
-                <h5>Browse All</h5>
+            <li id="browse-all-categories-btn">
+                <button>
+                    <a href="<?php echo home_url('/categories') ?>" class="so-browse-cat-browse-all d-flex">
+                        <h5>Browse All</h5>
 
-                <span class="so-custom-icon">
-                    <svg id="Layer_1" enable-background="new 0 0 100 100" height="512"
-                        viewBox="0 0 100 100" width="512" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="m50 10.75c-18.266 0-34.562 13.129-38.383 31.007-1.909 8.933-.623 18.432 3.636 26.515 4.099 7.779 10.819 14.066 18.859 17.629 8.363 3.707 17.964 4.353 26.754 1.825 8.48-2.438 15.999-7.789 21.118-14.972 10.703-15.017 9.272-36.111-3.32-49.567-7.38-7.886-17.862-12.437-28.664-12.437zm18.829 41.347-10.7 10.958c-2.709 2.775-6.991-1.429-4.293-4.191l5.399-5.529h-25.586c-1.817 0-3.333-1.517-3.333-3.333s1.517-3.333 3.333-3.333h25.458l-5.506-5.505c-2.736-2.736 1.506-6.979 4.242-4.243l10.961 10.96c1.162 1.161 1.173 3.041.025 4.216z" />
-                    </svg>
-                </span>
-            </a>
-    </li>
-    </button>
-</ul>
-</div>
+                        <span class="so-custom-icon">
+                            <svg id="Layer_1" enable-background="new 0 0 100 100" height="512"
+                                viewBox="0 0 100 100" width="512" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m50 10.75c-18.266 0-34.562 13.129-38.383 31.007-1.909 8.933-.623 18.432 3.636 26.515 4.099 7.779 10.819 14.066 18.859 17.629 8.363 3.707 17.964 4.353 26.754 1.825 8.48-2.438 15.999-7.789 21.118-14.972 10.703-15.017 9.272-36.111-3.32-49.567-7.38-7.886-17.862-12.437-28.664-12.437zm18.829 41.347-10.7 10.958c-2.709 2.775-6.991-1.429-4.293-4.191l5.399-5.529h-25.586c-1.817 0-3.333-1.517-3.333-3.333s1.517-3.333 3.333-3.333h25.458l-5.506-5.505c-2.736-2.736 1.506-6.979 4.242-4.243l10.961 10.96c1.162 1.161 1.173 3.041.025 4.216z" />
+                            </svg>
+                        </span>
+                    </a>
+            </li>
+            </button>
+        </ul>
+    </div>
 <?php
     $output = ob_get_contents();
     ob_end_clean();

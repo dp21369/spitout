@@ -21,198 +21,7 @@ $seller_args = array(
 $seller_type_query = new WP_Query($seller_args);
 // Get the count of posts
 $seller_cat_count = $seller_type_query->post_count;
-if ($all_sellers) {
-    // Check if the form is submitted
-    if (isset($_POST['apply-button'])) {
-        $users_filtered_by_category = [];
-        $users_filtered_by_popularity = [];
-        $users_filtered_by_age = [];
-        $users_filtered_by_active_status = [];
-        $users_filtered_by_saliva_price = [];
-        $users_filtered_by_location = [];
-        //filter sellers based on the category
-        if (!empty($_POST["category"])) {
-            $selected_category = sanitize_text_field($_POST['category']);
-            foreach ($all_sellers as $user) {
-                $categories = get_user_meta($user->ID, 'so_category', true);
-                $user_id = $user->ID;
-                if (is_array($categories) && in_array($selected_category, $categories)) {
-                    $users_filtered_by_category[] = $user_id;
-                    $users_filtered_by_category = spitoutFilterExistingUsers($users_filtered_by_category);
-                }
-            }
-            wp_reset_postdata();
-        }
-        //Filter sellers based on top-sellers
-        if (!empty($_POST["top-sellers"])) {
-            $selected_top_seller = sanitize_text_field($_POST['top-sellers']);
-            if ($selected_top_seller == 'most-popular') {
-                // var_dump('most-popular');
-                $users_filtered_by_popularity = array_keys(spitout_get_popular_sellers());
-            } else if ($selected_top_seller == 'new-sellers') {
-                $users_filtered_by_popularity = array_keys(spitout_get_newest_users());
-            }
-        }
-        //Filter sellers based on age
-        if (!empty($_POST["age-start"]) || !empty($_POST["age-end"])) {
-            // die($_POST["age-end"]);
-            // $selected_age_start = $_POST['age-start'] != '' ? intval($_POST['age-start']) : 0;
-            // $selected_age_end = $_POST['age-end'] !== '' ? intval($_POST['age-end']) : PHP_INT_MAX;
-            $selected_age_start = $_POST['age-start'];
-            $selected_age_end = $_POST['age-end'];
-            foreach ($all_sellers as $user) {
-                $post_meta_date = get_user_meta($user->ID, 'so_dob', true);
-                $date_from_post = DateTime::createFromFormat('m/d/Y', $post_meta_date);
-                // Check if $date_from_post is a valid DateTime object
-                if ($date_from_post !== false) {
-                    $today_date = new DateTime();
-                    $interval = $date_from_post->diff($today_date);
-                    $user_age = $interval->y; // Get the difference in years
-                    //Check seller age against the filter values
-                    if ($user_age >= $selected_age_start && $user_age <= $selected_age_end) {
-                        $users_filtered_by_age[] = $user->ID;
-                        $users_filtered_by_age = spitoutFilterExistingUsers($users_filtered_by_age);
-                    }
-                }
-            }
-        }
-        //Filter sellers based on whether they are active or not
-        if (!empty($_POST["online"])) {
-            $selected_online = sanitize_text_field($_POST['online']);
-            if ($selected_online == 'active-now') {
-                foreach ($all_sellers as $user) {
-                    $user_id = $user->ID;
-                    // $status = get_user_meta($user_id, 'so_online_status', true);
-                    $status = get_user_meta($user_id, "cpmm_user_status", true);
-                    if ($status == 'logged_in') {
-                        $users_filtered_by_active_status[] = $user_id;
-                    }
-                }
-            } else if ($selected_online == 'offline') {
-                foreach ($all_sellers as $user) {
-                    $user_id = $user->ID;
-                    $status = get_user_meta($user_id, 'cpmm_user_status', true);
-                    if ($status != 'logged_in') {
-                        $users_filtered_by_active_status[] = $user_id;
-                        $users_filtered_by_active_status = spitoutFilterExistingUsers($users_filtered_by_active_status);
-                    }
-                }
-            }
-        }
-        //Filter sellers based on their product price
-        if (!empty($_POST["price-start"]) || !empty($_POST["price-end"])) {
-            // $selected_price_start = isset($_POST['price-start']) && $_POST['price-start'] !== '' ? (intval($_POST['price-start']) <= intval($_POST['price-end']) ? intval($_POST['price-start']) : intval($_POST['price-end'])) : 0;
-            // $selected_price_end = isset($_POST['price-start']) && $_POST['price-start'] !== '' ? (intval($_POST['price-end']) >= intval($_POST['price-start']) ? intval($_POST['price-end']) : intval($_POST['price-start'])) : PHP_INT_MAX;
-            $selected_price_start = $_POST['price-start'] !== '' ? floatval($_POST['price-start']) : 0;
-            $selected_price_end = !empty($_POST['price-end']) ? floatval($_POST['price-end']) : PHP_INT_MAX;
-            $args = array(
-                'post_type' => 'product',
-                'post_status' => 'publish',
-                'posts_per_page' => -1,
-            );
-            //Pull all products
-            $products = new WP_Query($args);
-            if ($products->have_posts()) {
-                while ($products->have_posts()) {
-                    $products->the_post();
-                    $price = floatval(get_post_meta(get_the_ID(), '_price', true));
-                    //Check price of product against the filtered values
-                    if ($price >= $selected_price_start && $price <= $selected_price_end) {
-                        $seller_id = get_post_field('post_author', get_the_ID());
-                        // Check if the user has products before adding to the filtered array
-                        $user_has_products = count_user_posts($seller_id, 'product') > 0;
-                        if ($user_has_products && !in_array($seller_id, $users_filtered_by_saliva_price)) {
-                            $users_filtered_by_saliva_price[] = (int) $seller_id;
-                            $users_filtered_by_saliva_price = spitoutFilterExistingUsers($users_filtered_by_saliva_price);
-                        }
-                        //                         if (!in_array($seller_id, $users_filtered_by_saliva_price)) {
-                        //                             $users_filtered_by_saliva_price[] = (int) $seller_id;
-                        //                             $users_filtered_by_saliva_price = spitoutFilterExistingUsers($users_filtered_by_saliva_price);
-                        //                         }
-                    }
-                }
-            }
-            wp_reset_postdata();
-        }
-        //Filter sellers based on location
-        if (!empty($_POST["location"])) {
-            $selected_location = sanitize_text_field($_POST["location"]);
-            foreach ($all_sellers as $user) {
-                $user_location = get_user_meta($user->ID, "so_location", true);
-                if ($user_location == $selected_location) {
-                    $users_filtered_by_location[] = $user->ID;
-                }
-            }
-        }
-        $filter_list = [];
-        $temp_filter_list = [
-            $users_filtered_by_category,
-            $users_filtered_by_popularity,
-            $users_filtered_by_age,
-            $users_filtered_by_active_status,
-            $users_filtered_by_saliva_price,
-            $users_filtered_by_location
-        ];
-        foreach ($temp_filter_list as $arr) {
-            if (!empty($arr)) {
-                $filter_list[] = $arr;
-            }
-        }
-        if (!empty($filter_list)) { //&& count($filter_list) > 1
-            $filtered_users = call_user_func_array('array_intersect', $filter_list);
-        } else if (empty($_POST["category"]) && empty($_POST["top-sellers"]) && empty($_POST["age-start"]) && empty($_POST["age-end"]) && empty($_POST["online"]) && empty($_POST["price-start"]) && empty($_POST["price-end"]) && empty($_POST["location"])) {
-            foreach ($all_sellers as $seller) {
-                $filtered_users[] = $seller->ID;
-            }
-        }
-        if (empty($filtered_users)) {
-            $errors =
-                '
-        <section class="so-ms-form so-feed-new-container">
-            <div class="container-fluid" id="grad1">
-                <div class="row justify-content-center mt-0">
-                    <div class="col-lg-12">
-                        <div class=" px-0 pt-4 pb-0 mt-3 mb-3">
-                            <div class="row">
-                                <div class="col-md-12 mx-0">
-                                    <div id="msform">
-                                        <fieldset id="so-verify-failed">
-                                            <div class="form-card register-step-completed so-registration-failed">
-                                                <div class="row no-sellers-notice">
-                                                    <div class="col-lg-12">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
-                                                            viewBox="0 0 48 48">
-                                                            <g fill="#ef4444">
-                                                                <path
-                                                                    d="M31.424 38.177A15.93 15.93 0 0 1 24 40c-8.837 0-16-7.163-16-16S15.163 8 24 8s16 7.163 16 16c0 .167-.003.334-.008.5h2.001c.005-.166.007-.333.007-.5c0-9.941-8.059-18-18-18S6 14.059 6 24s8.059 18 18 18a17.92 17.92 0 0 0 8.379-2.065l-.954-1.758Z" />
-                                                                <path
-                                                                    d="M13.743 23.35c-.12.738.381 1.445 1.064 1.883c.714.457 1.732.707 2.93.53a3.794 3.794 0 0 0 2.654-1.665c.504-.764.711-1.693.48-2.382a.5.5 0 0 0-.818-.203c-1.796 1.704-3.824 2.123-5.643 1.448a.5.5 0 0 0-.667.39Zm20.076 0c.119.738-.382 1.445-1.065 1.883c-.714.457-1.731.707-2.93.53a3.794 3.794 0 0 1-2.653-1.665c-.504-.764-.712-1.693-.48-2.382a.5.5 0 0 1 .818-.203c1.796 1.704 3.824 2.123 5.642 1.448a.5.5 0 0 1 .668.39ZM40 32a4 4 0 0 1-8 0c0-3.5 4-7 4-7s4 3.5 4 7Zm-19.2 1.6c1.6-2.133 4.8-2.133 6.4 0a1 1 0 0 0 1.6-1.2c-2.4-3.2-7.2-3.2-9.6 0a1 1 0 0 0 1.6 1.2Z" />
-                                                            </g>
-                                                        </svg>
-                                                    </div>
-                                                    <div class="col-lg-12 reg-failed-title">
-                                                        <i class="bi bi-x-circle"></i>
-                                                        <h4>Unfortunately</h4>
-                                                    </div>
-                                                    <div class="col-lg-12 d-flex align-items-center">
-                                                        <h5>No sellers found. Try with different keywords. </h5>
-                                                    </div>
-                                                    <div class="col-lg-12 go-back-reg-failed">
-                                                        <a href="/spitout/seller">Go back</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>';
-        }
-    }
-?>
+if ($all_sellers) { ?>
     <div class="container sellers-page-heading mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -326,8 +135,7 @@ if ($all_sellers) {
                                                 }
                                             }
                                             foreach ($sellers_location as $location) {
-                                                $is_selected = isset($_POST['location']) && $_POST['location'] == $location ? 'selected' : '';
-                                                echo '<option value="' . $location . '" ' . $is_selected . '>' . $location . '</option>';
+                                                echo '<option value="' . $location . '">' . $location . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -335,19 +143,10 @@ if ($all_sellers) {
                                     <div class="seller-filter-dropdowns-lists seller-dropdown-topseller">
                                         <label for="top-sellers">Top Sellers</label> <br>
                                         <select id="top-sellers" name="top-sellers">
-                                            <?php
-                                            function isTopSellerSelected($valueToCheck)
-                                            {
-                                                if (isset($_POST['top-sellers'])) {
-                                                    $selected_value = $_POST['top-sellers'];
-                                                    return $selected_value == $valueToCheck ? 'selected' : '';
-                                                }
-                                            }
-                                            ?>
-                                            <option value="" <?php echo isTopSellerSelected(''); ?>>All</option>
-                                            <option value="most-popular" <?php echo isTopSellerSelected('most-popular'); ?>>Most Popular
+                                            <option value="">All</option>
+                                            <option value="most-popular">Most Popular
                                             </option>
-                                            <option value="new-sellers" <?php echo isTopSellerSelected('new-sellers'); ?>>New Sellers
+                                            <option value="new-sellers">New Sellers
                                             </option>
                                         </select>
                                     </div>
@@ -382,8 +181,7 @@ if ($all_sellers) {
                                                 $largest_age = max($ages);
                                                 $smallest_age = min($ages);
                                                 for ($age = $smallest_age; $age <= $largest_age; $age++) {
-                                                    $is_selected = isset($_POST['age-start']) && intval($_POST['age-start']) == intval($age) ? 'selected' : '';
-                                                    echo '<option value="' . $age . '" ' . $is_selected . '>' . $age . '</option>';
+                                                    echo '<option value="' . $age . '">' . $age . '</option>';
                                                 }
                                             }
                                             ?>
@@ -394,41 +192,18 @@ if ($all_sellers) {
                                             <?php
                                             if (!empty($all_sellers)) {
                                                 for ($age = $largest_age; $age >= $smallest_age; $age--) {
-                                                    $is_selected = isset($_POST['age-end']) && intval($_POST['age-end']) == intval($age) ? 'selected' : '';
-                                                    echo '<option value="' . $age . '" ' . $is_selected . '>' . $age . '</option>';
+                                                    echo '<option value="' . $age . '">' . $age . '</option>';
                                                 }
                                             }
                                             ?>
                                         </select>
                                     </div>
                                     <div id="slider-range-age" class="sellers-filter-slider" data-min-age="<?php echo $smallest_age; ?>" data-max-age="<?php echo $largest_age; ?>"></div>
-                                    
-                                    <!-- <div class="seller-filter-dropdowns-lists seller-dropdown-activestatus">
-                                        <label for="online">Online</label> <br>
-                                        <select id="online" name="online">
-                                            <?php
-                                            // function isOnlineSelected($valueToCheck)
-                                            // {
-                                            //     if (isset($_POST['online'])) {
-                                            //         $selected_value = $_POST['online'];
-                                            //         // var_dump($selected_value);
-                                            //         return $selected_value == $valueToCheck ? 'selected' : '';
-                                            //     }
-                                            // }
-                                            ?>
-                                            <option value="" <?php //echo isOnlineSelected(''); 
-                                                                ?>>All</option>
-                                            <option value="active-now" <?php //echo isOnlineSelected('active-now'); 
-                                                                        ?>> Active Now </option>
-                                            <option value="offline" <?php //echo isOnlineSelected('offline'); 
-                                                                    ?>> Offline </option>
-                                        </select>
-                                    </div> -->
                                     <div class="seller-filter-dropdowns-lists seller-dropdown-price">
                                         <label for="price-start">Price Saliva</label> <br>
-                                        <input type="number" step="any" min="0" id="price-start" name="price-start" value="<?php echo isset($_POST['price-start']) ? $_POST['price-start'] : ''; ?>" />
+                                        <input type="number" step="any" min="0" id="price-start" name="price-start" value="" />
                                         <label for="price-end"></label>
-                                        <input type="number" step="any" min="0" id="price-end" name="price-end" value="<?php echo isset($_POST['price-end']) ? $_POST['price-end'] : ''; ?>" />
+                                        <input type="number" step="any" min="0" id="price-end" name="price-end" value="" />
                                     </div>
                                     <div id="slider-range" class="sellers-filter-slider"></div>
                                     <div class="filter-dropdown-delete-icon">
