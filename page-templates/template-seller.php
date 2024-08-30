@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Seller Page
  * @package spitout
@@ -237,7 +238,7 @@ if ($all_sellers) {
                                         $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
                                         if (!$featured_image_url) {
                                             $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
-                                        }?>
+                                        } ?>
                                         <div class="seller-cat-checkbox">
                                             <input type="checkbox" name="category-name[]" value="true" class="category-class" data-id="<?php echo $post_id; ?>">
                                             <figure>
@@ -400,25 +401,8 @@ if ($all_sellers) {
                                             ?>
                                         </select>
                                     </div>
-                                    <div id="slider-range-age" class="sellers-filter-slider"></div>
-                                    <script>
-                                        jQuery(function() {
-                                            var minAge = <?php echo $smallest_age; ?>;
-                                            var maxAge = <?php echo $largest_age; ?>;
-                                            jQuery("#slider-range-age").slider({
-                                                range: true,
-                                                min: minAge,
-                                                max: maxAge,
-                                                values: [minAge, maxAge],
-                                                slide: function(event, ui) {
-                                                    jQuery("#age-start").val(ui.values[0]);
-                                                    jQuery("#age-end").val(ui.values[1]);
-                                                }
-                                            });
-                                            jQuery("#age-start").val(jQuery("#slider-range-age").slider("values", 0));
-                                            jQuery("#age-end").val(jQuery("#slider-range-age").slider("values", 1));
-                                        });
-                                    </script>
+                                    <div id="slider-range-age" class="sellers-filter-slider" data-min-age="<?php echo $smallest_age; ?>" data-max-age="<?php echo $largest_age; ?>"></div>
+                                    
                                     <!-- <div class="seller-filter-dropdowns-lists seller-dropdown-activestatus">
                                         <label for="online">Online</label> <br>
                                         <select id="online" name="online">
@@ -432,9 +416,12 @@ if ($all_sellers) {
                                             //     }
                                             // }
                                             ?>
-                                            <option value="" <?php //echo isOnlineSelected(''); ?>>All</option>
-                                            <option value="active-now" <?php //echo isOnlineSelected('active-now'); ?>> Active Now </option>
-                                            <option value="offline" <?php //echo isOnlineSelected('offline'); ?>> Offline </option>
+                                            <option value="" <?php //echo isOnlineSelected(''); 
+                                                                ?>>All</option>
+                                            <option value="active-now" <?php //echo isOnlineSelected('active-now'); 
+                                                                        ?>> Active Now </option>
+                                            <option value="offline" <?php //echo isOnlineSelected('offline'); 
+                                                                    ?>> Offline </option>
                                         </select>
                                     </div> -->
                                     <div class="seller-filter-dropdowns-lists seller-dropdown-price">
@@ -444,29 +431,6 @@ if ($all_sellers) {
                                         <input type="number" step="any" min="0" id="price-end" name="price-end" value="<?php echo isset($_POST['price-end']) ? $_POST['price-end'] : ''; ?>" />
                                     </div>
                                     <div id="slider-range" class="sellers-filter-slider"></div>
-                                    <script>
-                                        jQuery(function() {
-                                            var minPrice = 0;
-                                            var maxPrice = 1000; // You can set the maximum value according to your requirements
-                                            jQuery("#slider-range").slider({
-                                                range: true,
-                                                min: minPrice,
-                                                max: maxPrice,
-                                                values: [minPrice, maxPrice],
-                                                slide: function(event, ui) {
-                                                    jQuery("#price-start").val(ui.values[0]);
-                                                    jQuery("#price-end").val(ui.values[1]);
-                                                }
-                                            });
-                                            jQuery("#price-start").val(jQuery("#slider-range").slider("values", 0));
-                                            jQuery("#price-end").val(jQuery("#slider-range").slider("values", 1));
-                                        });
-                                        jQuery(document).on("pagecreate", function() {
-                                            jQuery("#slider-range").on('slidestop', function(event) {
-                                                console.log("slidestop event fired");
-                                            });
-                                        });
-                                    </script>
                                     <div class="filter-dropdown-delete-icon">
                                         <a href="#" class="reset-button" id="reset-button"> <i class="bi bi-trash-fill"></i> </a>
                                         <a href="#" class="apply-button" id="apply-button"> Apply Filter </a>
