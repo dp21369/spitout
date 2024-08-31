@@ -10310,7 +10310,6 @@ nav.woocommerce-MyAccount-navigation {
 .home-category-section .wp-block-column {
   padding: 0;
 }
-
 /* RESPONSIVE CSS  */
 @media screen and (max-width:992px) {
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n+9) {
