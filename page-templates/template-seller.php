@@ -153,11 +153,10 @@ if ($all_sellers) { ?>
                                     <div class=" seller-filter-dropdowns-lists seller-dropdown-age">
                                         <label for="age-start">Age</label> <br>
                                         <select id="age-start" name="age-start">
-                                            <option value=""> -- </option>
+                                            <option value="" selected> -- </option>
                                             <?php
                                             if (!empty($all_sellers)) {
                                                 $ages = array();
-                                                echo 'xxxxxxx';
                                                 foreach ($all_sellers as $user) {
                                                     $post_meta_date = get_user_meta($user->ID, 'so_dob', true); // Replace with your post meta date
                                                     if (gettype($post_meta_date) == 'boolean') {
@@ -188,7 +187,7 @@ if ($all_sellers) { ?>
                                         </select>
                                         <label for="age-end"></label>
                                         <select id="age-end" name="age-end">
-                                            <option value=""> -- </option>
+                                            <option value="" selected> -- </option>
                                             <?php
                                             if (!empty($all_sellers)) {
                                                 for ($age = $largest_age; $age >= $smallest_age; $age--) {

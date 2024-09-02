@@ -6,11 +6,16 @@ jQuery(document).ready(function () {
   var searchValue;
   var location;
 
-  var selectedMinAge = jQuery("#age-start").val();
-  var selectedMaxAge = jQuery("#age-end").val();
+  var selectedMinAge;
+  var selectedMaxAge;
 
-  var selectedMinPrice = jQuery("#price-start").val();
-  var selectedMaxPrice = jQuery("#price-start").val();
+  var selectedMinPrice;
+  var selectedMaxPrice;
+  // var selectedMinAge = jQuery("#age-start").val();
+  // var selectedMaxAge = jQuery("#age-end").val();
+
+  // var selectedMinPrice = jQuery("#price-start").val();
+  // var selectedMaxPrice = jQuery("#price-end").val();
 
   var typingTimer; // Timer identifier
   var doneTypingInterval = 1000; // Time in milliseconds (1.5 seconds)
@@ -23,11 +28,11 @@ jQuery(document).ready(function () {
     button_target = jQuery(this).attr("data-target");
     tab = jQuery(this).attr("data-tab");
 
-    selectedMinAge = jQuery("#age-start").val();
-    selectedMaxAge = jQuery("#age-end").val();
+    // selectedMinAge = jQuery("#age-start").val();
+    // selectedMaxAge = jQuery("#age-end").val();
 
-    selectedMinPrice = jQuery("#price-start").val();
-    selectedMaxPrice = jQuery("#price-start").val();
+    // selectedMinPrice = jQuery("#price-start").val();
+    // selectedMaxPrice = jQuery("#price-end").val();
     seller_filter(
       button_id,
       button_target,
@@ -60,7 +65,7 @@ jQuery(document).ready(function () {
     selectedMaxAge = jQuery("#age-end").val();
 
     selectedMinPrice = jQuery("#price-start").val();
-    selectedMaxPrice = jQuery("#price-start").val();
+    selectedMaxPrice = jQuery("#price-end").val();
     seller_filter(
       button_id,
       button_target,
@@ -114,11 +119,11 @@ jQuery(document).ready(function () {
     } else {
       jQuery(h5Element).text("Filter");
     }
-    electedMinAge = jQuery("#age-start").val();
+    selectedMinAge = jQuery("#age-start").val();
     selectedMaxAge = jQuery("#age-end").val();
 
     selectedMinPrice = jQuery("#price-start").val();
-    selectedMaxPrice = jQuery("#price-start").val();
+    selectedMaxPrice = jQuery("#price-end").val();
     // after select the filter button chages ends
 
     seller_filter(

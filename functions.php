@@ -1783,6 +1783,7 @@ function load_filtered_sellers()
                         if ($status == 'logged_in') {
                             // Calculate the user's age based on their DOB
                             $age = 0;
+
                             if (!empty($post_meta_date)) {
                                 try {
                                     // Create a DateTime object from the given format
@@ -1804,6 +1805,15 @@ function load_filtered_sellers()
                             // Check if the user meets the location and age criteria
                             $location_match = true;
                             $age_match = true;
+                            $price_match = true;
+
+                            if (!empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
+                                $product_user_ids = get_woocommerce_user_ids_by_user_id_and_price_range($user->ID, $selectedMinPrice, $selectedMaxPrice);
+
+                                if (is_null($product_user_ids)) {
+                                    $price_match = false;
+                                }
+                            }
 
                             if (!empty($location)) {
                                 $location_match = ($seller_location == $location);
@@ -1819,11 +1829,9 @@ function load_filtered_sellers()
                                 }
                             }
 
-                            if ($location_match && $age_match) {
+                            if ($location_match && $age_match && $price_match) {
                                 $users_ids[] = $user->ID;
                             }
-                            // var_dump($post_meta_date, $selectedMinAge, $selectedMaxAge, $age);
-                            // error_log("Age: $age, Min Age: $selectedMinAge, Max Age: $selectedMaxAge");
                         }
                     }
                 }
@@ -1905,6 +1913,14 @@ function load_filtered_sellers()
                         }
                         $location_match = true;
                         $age_match = true;
+                        $price_match = true;
+                        if (!empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
+                            $product_user_ids = get_woocommerce_user_ids_by_user_id_and_price_range($user->ID, $selectedMinPrice, $selectedMaxPrice);
+
+                            if (is_null($product_user_ids)) {
+                                $price_match = false;
+                            }
+                        }
 
                         if (!empty($location)) {
                             $location_match = ($seller_location == $location);
@@ -1920,7 +1936,7 @@ function load_filtered_sellers()
                             }
                         }
 
-                        if ($location_match && $age_match) {
+                        if ($location_match && $age_match && $price_match) {
                             $users_ids[] = $user->ID;
                         }
                     }
@@ -1995,6 +2011,14 @@ function load_filtered_sellers()
                         }
                         $location_match = true;
                         $age_match = true;
+                        $price_match = true;
+                        if (!empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
+
+                            $product_user_ids = get_woocommerce_user_ids_by_user_id_and_price_range($user->ID, $selectedMinPrice, $selectedMaxPrice);
+                            if (is_null($product_user_ids)) {
+                                $price_match = false;
+                            }
+                        }
 
                         if (!empty($location)) {
                             $location_match = ($seller_location == $location);
@@ -2010,7 +2034,7 @@ function load_filtered_sellers()
                             }
                         }
 
-                        if ($location_match && $age_match) {
+                        if ($location_match && $age_match && $price_match) {
                             $users_ids[] = $user->ID;
                         }
                     }
@@ -2061,7 +2085,7 @@ function load_filtered_sellers()
                     } ?>
 
                     <div class="col-md-6 col-sm-6 col-6 col-lg-3">
-                        <a class="seller-card-block" href="<?php echo $seller_url; ?>">
+                        <a href="<?php echo $seller_url; ?>">
                             <div class="so-new-seller-desc">
                                 <div class="so-seller-header">
                                     <figure>
@@ -2307,3 +2331,34 @@ function so_category_list()
     return $output;
 }
 // END of ShortCode For HomepageCATEGORY 
+
+
+function get_woocommerce_user_ids_by_user_id_and_price_range($user_id, $min_price = 0, $max_price = PHP_INT_MAX)
+{
+    global $wpdb;
+
+    // Prepare SQL query
+    $sql = $wpdb->prepare(
+        "SELECT p.ID
+        FROM {$wpdb->posts} p
+        JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+        WHERE p.post_type = 'product'
+        AND p.post_author = %d
+        AND pm.meta_key = '_regular_price_wmcp'
+        AND JSON_EXTRACT(pm.meta_value, '$.USD') BETWEEN %f AND %f
+        LIMIT 1",
+        $user_id,
+        $min_price,
+        $max_price
+    );
+
+    // Execute SQL query
+    $result = $wpdb->get_var($sql);
+
+    // Check if any product is found
+    if ($result) {
+        return $user_id; // Return the author's ID if a product is found
+    }
+
+    return null; // Return null if no matching product is found
+}
