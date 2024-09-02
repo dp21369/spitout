@@ -9847,10 +9847,23 @@ nav.woocommerce-MyAccount-navigation {
   color: #FFF;
 }
 
+.seller-card-block {
+  height: 100%;
+  display: inline-block;
+  width: 100%;
+}
+
 .so-new-seller-desc {
+  height: 100%;
   padding: 20px;
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
+}
+
+.seller-card-block {
+  height: 100%;
+  display: inline-block;
+  width: 100%;
 }
 
 /* SELLER HEADER  */
@@ -9991,8 +10004,13 @@ nav.woocommerce-MyAccount-navigation {
   margin: 60px auto;
 }
 
+#seller-pills-tabContent>a {
+  height: 100%;
+  display: inline-block;
+  width: 100%;
+}
 
-.seller-tab-col .so-new-sellers-name h5 {
+#seller-pills-tabContent .so-new-sellers-name h5 {
   justify-content: flex-end;
 }
 

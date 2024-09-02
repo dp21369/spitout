@@ -2061,7 +2061,7 @@ function load_filtered_sellers()
                     } ?>
 
                     <div class="col-md-6 col-sm-6 col-6 col-lg-3">
-                        <a href="<?php echo $seller_url; ?>">
+                        <a class="seller-card-block" href="<?php echo $seller_url; ?>">
                             <div class="so-new-seller-desc">
                                 <div class="so-seller-header">
                                     <figure>
