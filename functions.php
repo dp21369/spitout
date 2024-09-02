@@ -2368,6 +2368,7 @@ function get_woocommerce_user_ids_by_user_id_and_price_range($user_id, $min_pric
 add_shortcode('so_seller_list', 'so_seller_list');
 function so_seller_list($atts)
 {
+    $status = '';
     // Set default attributes
     $atts = shortcode_atts(
         array(
@@ -2381,8 +2382,200 @@ function so_seller_list($atts)
     // Get the status and count from attributes
     $status = sanitize_text_field($atts['status']);
     $count = intval($atts['count']);
+    $seller_ids = array();
+    ob_start();
+    switch ($status) {
+        case 'new':
+            // Query to get the latest registered users with the role 'seller'
+            $args = array(
+                'role'    => 'seller', // Modify if needed
+                'number'  => $count,   // Get the specified number of users
+                'orderby' => 'registered',
+                'order'   => 'DESC',
+            );
 
-    ob_start();?>
+            $user_query = new WP_User_Query($args);
+            // var_dump($user_query);
+            // Check if users are found
+            if (!empty($user_query->results)) {
+                foreach ($user_query->results as $user) {
+                    $seller_ids[] = $user->ID;
+                }
+            }
+            break;
+        case 'popular':
+            // Set default attributes
+            $atts = shortcode_atts(
+                array(
+                    'count'  => 10 // Default number of top sellers
+                ),
+                $atts,
+                'top_sellers_by_sales'
+            );
+
+            // Get the count from attributes
+            $count = intval($atts['count']);
+
+            ob_start();
+
+            // Query to get all users with the role 'seller'
+            $user_args = array(
+                'role' => 'seller' // Get users with the role 'seller'
+            );
+
+            $user_query = new WP_User_Query($user_args);
+            $sellers = [];
+
+            // Check if users are found
+            if (!empty($user_query->results)) {
+                foreach ($user_query->results as $user) {
+                    $user_id = $user->ID;
+
+                    // Get WooCommerce products for this user
+                    $product_args = array(
+                        'post_type' => 'product',
+                        'posts_per_page' => -1,
+                        'author' => $user_id,
+                        'post_status' => 'publish'
+                    );
+
+                    $products = get_posts($product_args);
+                    $total_sales = 0;
+
+                    // Calculate total sales for all products of this user
+                    foreach ($products as $product) {
+                        $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
+                        $total_sales += $product_sales;
+                    }
+
+                    // Add the seller and their total sales to the array
+                    $sellers[] = array(
+                        'user' => $user,
+                        'total_sales' => $total_sales
+
+                    );
+                }
+
+                // Sort sellers by total sales in descending order
+                usort($sellers, function ($a, $b) {
+                    return $b['total_sales'] - $a['total_sales'];
+                });
+
+                // Display the top sellers based on the total sales
+                $sellers = array_slice($sellers, 0, $count);
+
+                foreach ($sellers as $seller) {
+                    $seller_ids[] = $seller['user']->ID;
+                }
+            }
+            break;
+    } ?>
+    <?php if (!empty($seller_ids)) { ?>
+        <div class="shortcode-seller-wrapper">
+            <div class="row">
+                <?php
+                foreach ($seller_ids as $seller) {
+                    $attachment_id = (int) get_user_meta($seller, 'so_profile_img', true);
+                    $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
+                    if (!$seller_img_url) {
+                        $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+                    }
+                    $seller_data = get_userdata((int) $seller);
+                    $seller_url = get_author_posts_url($seller);
+                    $seller_location = get_user_meta($seller, "so_location", true);
+                    $seller_category_id = get_user_meta($seller, "so_category", true) ? get_user_meta($seller, "so_category", true)[0] : '';
+                    $seller_category = $seller_category_id ? get_the_title($seller_category_id) : 'N/A';
+                    $get_Followers = get_user_meta($seller, 'so_total_followers', true) ? get_user_meta($seller, 'so_total_followers', true) : [];
+                    $totalFollowers = is_array($get_Followers) || $get_Followers instanceof Countable
+                        ? (count($get_Followers) > 0
+                            ? (count($get_Followers) >= 1000
+                                ? round(count($get_Followers) / 1000, 1) . 'k'
+                                : count($get_Followers))
+                            : 'N/A')
+                        : 'N/A';
+                    // $seller_active_status = get_user_meta($seller, 'user_status', true);
+                    $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
+                    if ($seller_active_status == 'logged_in') {
+                        $active_status = 'online';
+                    } else {
+                        $active_status = 'offline';
+                    }
+                    if ($seller_data == false) {
+                        // echo '<p class="text-warning">Sellerid:'.$seller.' does not exist</p> <br>';
+                        continue;
+                    } ?>
+
+                    <div class="col-md-6 col-sm-6 col-6 col-lg-3">
+                        <a href="<?php echo $seller_url; ?>">
+                            <div class="so-new-seller-desc">
+                                <div class="so-seller-header">
+                                    <figure>
+                                        <i class="bi bi-circle-fill <?php echo $active_status; ?>"></i><!--This is to mark the seller as online -->
+                                        <img src="<?php echo esc_url($seller_img_url); ?>" alt="<?php echo $seller_data->display_name; ?>">
+                                    </figure>
+                                    <div class="so-new-sellers-name">
+                                        <p class="seller-tag">Top Seller</p>
+                                        <h5 class="text-center m-0 p-2 d-flex">
+                                            <?php echo $seller_data->display_name; ?>
+                                            <?php if ((int) get_user_meta($seller, 'is_verified', true) == 1) { ?>
+                                                <div class="profile-verify" title="verified">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M21.5609 10.7386L20.2009 9.15859C19.9409 8.85859 19.7309 8.29859 19.7309 7.89859V6.19859C19.7309 5.13859 18.8609 4.26859 17.8009 4.26859H16.1009C15.7109 4.26859 15.1409 4.05859 14.8409 3.79859L13.2609 2.43859C12.5709 1.84859 11.4409 1.84859 10.7409 2.43859L9.17086 3.80859C8.87086 4.05859 8.30086 4.26859 7.91086 4.26859H6.18086C5.12086 4.26859 4.25086 5.13859 4.25086 6.19859V7.90859C4.25086 8.29859 4.04086 8.85859 3.79086 9.15859L2.44086 10.7486C1.86086 11.4386 1.86086 12.5586 2.44086 13.2486L3.79086 14.8386C4.04086 15.1386 4.25086 15.6986 4.25086 16.0886V17.7986C4.25086 18.8586 5.12086 19.7286 6.18086 19.7286H7.91086C8.30086 19.7286 8.87086 19.9386 9.17086 20.1986L10.7509 21.5586C11.4409 22.1486 12.5709 22.1486 13.2709 21.5586L14.8509 20.1986C15.1509 19.9386 15.7109 19.7286 16.1109 19.7286H17.8109C18.8709 19.7286 19.7409 18.8586 19.7409 17.7986V16.0986C19.7409 15.7086 19.9509 15.1386 20.2109 14.8386L21.5709 13.2586C22.1509 12.5686 22.1509 11.4286 21.5609 10.7386ZM16.1609 10.1086L11.3309 14.9386C11.1909 15.0786 11.0009 15.1586 10.8009 15.1586C10.6009 15.1586 10.4109 15.0786 10.2709 14.9386L7.85086 12.5186C7.56086 12.2286 7.56086 11.7486 7.85086 11.4586C8.14086 11.1686 8.62086 11.1686 8.91086 11.4586L10.8009 13.3486L15.1009 9.04859C15.3909 8.75859 15.8709 8.75859 16.1609 9.04859C16.4509 9.33859 16.4509 9.81859 16.1609 10.1086Z" fill="#292D32" />
+                                                    </svg>
+                                                </div>
+                                            <?php } ?>
+                                        </h5>
+                                        <div class="d-flex seller-page-location-details seller-page-location">
+                                            <p class="text-center d-flex">
+                                                <span class="so-custom-icon icon-lightgray">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M20.6211 8.45C19.5711 3.83 15.5411 1.75 12.0011 1.75C12.0011 1.75 12.0011 1.75 11.9911 1.75C8.46107 1.75 4.42107 3.82 3.37107 8.44C2.20107 13.6 5.36107 17.97 8.22107 20.72C9.28107 21.74 10.6411 22.25 12.0011 22.25C13.3611 22.25 14.7211 21.74 15.7711 20.72C18.6311 17.97 21.7911 13.61 20.6211 8.45ZM12.0011 13.46C10.2611 13.46 8.85107 12.05 8.85107 10.31C8.85107 8.57 10.2611 7.16 12.0011 7.16C13.7411 7.16 15.1511 8.57 15.1511 10.31C15.1511 12.05 13.7411 13.46 12.0011 13.46Z" fill="#292D32" />
+                                                    </svg>
+                                                </span>
+                                                <span>
+                                                    <?php echo $seller_location ? $seller_location : "N/A"; ?></span>
+                                                <!-- <div class="seller-page-location">
+                                                            </div> -->
+                                            </p>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="so-seller-footer mt-4 pt-4">
+                                    <div class="seller-detailed-info mb-2">
+                                        <div class="seller-followers">
+                                            <h6><strong><?php echo esc_html($totalFollowers); ?></strong></h6>
+                                            <span>Followers</span>
+                                        </div>
+                                        <div class="seller-sold">
+                                            <h6><strong>11256k</strong></h6>
+                                            <span>Spits Sold</span>
+                                        </div>
+                                        <div class="seller-category">
+                                            <p><span><?php echo esc_html($seller_category); ?></span></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="seller-new-rating">
+                                        <p>
+                                            <span>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-fill"></i>
+                                                <i class="bi bi-star-half"></i>
+                                            </span> 4.9 Rating
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                <?php } ?>
+            </div>
+        </div>
+    <?php } ?>
 <?php
     $output = ob_get_contents();
     ob_end_clean();
