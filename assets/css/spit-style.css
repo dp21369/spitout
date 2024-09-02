@@ -10127,6 +10127,10 @@ section.wp-block-group {
   padding-bottom: 85px;
 }
 
+.page-container section.wp-block-group:last-child {
+  padding-bottom: 0;
+}
+
 .wp-block-heading {
   line-height: 1;
 }
