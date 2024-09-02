@@ -10079,7 +10079,7 @@ nav.woocommerce-MyAccount-navigation {
   position: relative;
   display: block;
   width: 100%;
-  min-height: 500px;
+  min-height: 300px;
 }
 
 #new-seller-tab-loader {
@@ -10183,7 +10183,7 @@ section.wp-block-group {
     rgb(208, 124, 253) 0%,
     rgb(201, 35, 118) 100%
   );
-  padding: 5px 30px;
+  padding: 6px 30px;
   border-radius: 50px;
   color: #fff !important;
   position: relative;
@@ -10327,7 +10327,7 @@ section.wp-block-group {
 
 .total-seller-count {
   margin: 0;
-  padding: 10px 20px;
+  padding: 6px 20px;
   background-color: #fae5fa;
   border-radius: 50px;
   color: #f27af2;
@@ -10549,6 +10549,10 @@ section.wp-block-group {
   padding: 0;
 }
 
+.so-subscribe-email {
+  position: relative;
+}
+
 .so-subscribe-email .wpcf7-form-control-wrap {
   display: inline-block;
   width: 100%;
@@ -10561,7 +10565,8 @@ section.wp-block-group {
   text-align: center;
 }
 
-.so-subscribe-email .wpcf7-form-control-wrap:before {
+/* .so-subscribe-email .wpcf7-form-control-wrap:before, */
+.subscribe-section .so-subscribe-email .wpcf7-submit {
   background: url("../img/email-icon.svg");
   background-color: #fff;
   background-position: center;
@@ -10576,6 +10581,8 @@ section.wp-block-group {
   right: 10px;
   transform: translate(0, -50%);
   border-radius: 100%;
+  padding: 0;
+  text-indent: -999vw;
 }
 
 .so-subscribe-email .wpcf7-form-control-wrap input {
@@ -10584,6 +10591,7 @@ section.wp-block-group {
   margin: 0px;
   border: 1px solid #a1a1a1a1 !important;
   width: 100%;
+  font-size: 16px;
 }
 
 /* RESPONSIVE CSS  */
