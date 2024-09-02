@@ -9992,6 +9992,11 @@ nav.woocommerce-MyAccount-navigation {
 }
 
 
+.seller-tab-col .so-new-sellers-name h5 {
+  justify-content: flex-end;
+}
+
+
 /* NEW HOME PAGE CSS  */
 .page-id-3042 {
   background: linear-gradient(180deg, rgb(248, 222, 249) 0%, rgb(255, 255, 255) 100%) !important;
