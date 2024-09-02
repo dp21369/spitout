@@ -101,9 +101,6 @@ if (!empty($get_popular_sellers)) {
             <h3>Popular Sellers</h3>
             <div class="row mt-5">
                 <?php
-                // $get_popular_sellers = spitout_get_popular_sellers();
-            
-
                 foreach ($get_popular_sellers as $key => $get_popular_seller) {
 
                     $get_seller_id = $key;
