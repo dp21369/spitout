@@ -2362,3 +2362,30 @@ function get_woocommerce_user_ids_by_user_id_and_price_range($user_id, $min_pric
 
     return null; // Return null if no matching product is found
 }
+
+
+// ShortCode For HomepageSeller =================
+add_shortcode('so_seller_list', 'so_seller_list');
+function so_seller_list($atts)
+{
+    // Set default attributes
+    $atts = shortcode_atts(
+        array(
+            'status' => 'active', // Default status
+            'count' => -1 // Default count, -1 means no limit
+        ),
+        $atts,
+        'so_seller_list'
+    );
+
+    // Get the status and count from attributes
+    $status = sanitize_text_field($atts['status']);
+    $count = intval($atts['count']);
+
+    ob_start();?>
+<?php
+    $output = ob_get_contents();
+    ob_end_clean();
+    return $output;
+}
+// END of ShortCode For HomepageSeller 
