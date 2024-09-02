@@ -1872,7 +1872,8 @@ function load_filtered_sellers()
                 // Prepare the user query arguments
                 $args = array(
                     'role'       => 'seller', // Role to match
-                    'include'    => array_keys(spitout_get_popular_sellers()), // Filter to only these user IDs
+                    // 'include'    => array_keys(spitout_get_popular_sellers()), // Filter to only these user IDs
+                    'include'    => get_popular_seller(), // Filter to only these user IDs
                     'meta_query' => $meta_query, // Meta query to filter by so_category
                     'search'     => esc_attr($searchValue), // Search by username
                 );
@@ -1943,7 +1944,8 @@ function load_filtered_sellers()
                 }
             } else {
                 // Code to execute if expression equals popular
-                $users_ids = array_keys(spitout_get_popular_sellers());
+                // $users_ids = array_keys(spitout_get_popular_sellers());
+                $users_ids = get_popular_seller();
             }
             break;
 
@@ -2382,92 +2384,16 @@ function so_seller_list($atts)
     // Get the status and count from attributes
     $status = sanitize_text_field($atts['status']);
     $count = intval($atts['count']);
-    $seller_ids = array();
+
     ob_start();
     switch ($status) {
         case 'new':
-            // Query to get the latest registered users with the role 'seller'
-            $args = array(
-                'role'    => 'seller', // Modify if needed
-                'number'  => $count,   // Get the specified number of users
-                'orderby' => 'registered',
-                'order'   => 'DESC',
-            );
-
-            $user_query = new WP_User_Query($args);
-            // var_dump($user_query);
-            // Check if users are found
-            if (!empty($user_query->results)) {
-                foreach ($user_query->results as $user) {
-                    $seller_ids[] = $user->ID;
-                }
-            }
+            $seller_ids = get_newer_seller($count);
             break;
         case 'popular':
-            // Set default attributes
-            $atts = shortcode_atts(
-                array(
-                    'count'  => 10 // Default number of top sellers
-                ),
-                $atts,
-                'top_sellers_by_sales'
-            );
-
-            // Get the count from attributes
-            $count = intval($atts['count']);
-
-            ob_start();
-
-            // Query to get all users with the role 'seller'
-            $user_args = array(
-                'role' => 'seller' // Get users with the role 'seller'
-            );
-
-            $user_query = new WP_User_Query($user_args);
-            $sellers = [];
-
-            // Check if users are found
-            if (!empty($user_query->results)) {
-                foreach ($user_query->results as $user) {
-                    $user_id = $user->ID;
-
-                    // Get WooCommerce products for this user
-                    $product_args = array(
-                        'post_type' => 'product',
-                        'posts_per_page' => -1,
-                        'author' => $user_id,
-                        'post_status' => 'publish'
-                    );
-
-                    $products = get_posts($product_args);
-                    $total_sales = 0;
-
-                    // Calculate total sales for all products of this user
-                    foreach ($products as $product) {
-                        $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
-                        $total_sales += $product_sales;
-                    }
-
-                    // Add the seller and their total sales to the array
-                    $sellers[] = array(
-                        'user' => $user,
-                        'total_sales' => $total_sales
-
-                    );
-                }
-
-                // Sort sellers by total sales in descending order
-                usort($sellers, function ($a, $b) {
-                    return $b['total_sales'] - $a['total_sales'];
-                });
-
-                // Display the top sellers based on the total sales
-                $sellers = array_slice($sellers, 0, $count);
-
-                foreach ($sellers as $seller) {
-                    $seller_ids[] = $seller['user']->ID;
-                }
-            }
+            $seller_ids = get_popular_seller($count);
+            break;
+        default:
             break;
     } ?>
     <?php if (!empty($seller_ids)) { ?>
@@ -2533,12 +2459,10 @@ function so_seller_list($atts)
                                                     </svg>
                                                 </span>
                                                 <span>
-                                                    <?php echo $seller_location ? $seller_location : "N/A"; ?></span>
-                                                <!-- <div class="seller-page-location">
-                                                            </div> -->
+                                                    <?php echo $seller_location ? $seller_location : "N/A"; ?>
+                                                </span>
                                             </p>
                                         </div>
-                                        </p>
                                     </div>
                                 </div>
                                 <div class="so-seller-footer mt-4 pt-4">
@@ -2582,3 +2506,82 @@ function so_seller_list($atts)
     return $output;
 }
 // END of ShortCode For HomepageSeller 
+
+
+
+function get_popular_seller($count = -1)
+{
+    // Query to get all users with the role 'seller'
+    $user_args = array(
+        'role' => 'seller' // Get users with the role 'seller'
+    );
+
+    $user_query = new WP_User_Query($user_args);
+    $sellers = [];
+    $seller_ids = array();
+    // Check if users are found
+    if (!empty($user_query->results)) {
+        foreach ($user_query->results as $user) {
+            $user_id = $user->ID;
+
+            // Get WooCommerce products for this user
+            $product_args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'author' => $user_id,
+                'post_status' => 'publish'
+            );
+
+            $products = get_posts($product_args);
+            $total_sales = 0;
+
+            // Calculate total sales for all products of this user
+            foreach ($products as $product) {
+                $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
+                $total_sales += $product_sales;
+            }
+
+            // Add the seller and their total sales to the array
+            $sellers[] = array(
+                'user' => $user,
+                'total_sales' => $total_sales
+
+            );
+        }
+
+        // Sort sellers by total sales in descending order
+        usort($sellers, function ($a, $b) {
+            return $b['total_sales'] - $a['total_sales'];
+        });
+
+        // Display the top sellers based on the total sales
+        $sellers = array_slice($sellers, 0, $count);
+
+        foreach ($sellers as $seller) {
+            $seller_ids[] = $seller['user']->ID;
+        }
+    }
+    return $seller_ids;
+}
+
+
+function get_newer_seller($count = -1)
+{
+    $seller_ids = array();
+    // Query to get the latest registered users with the role 'seller'
+    $args = array(
+        'role'    => 'seller', // Modify if needed
+        'number'  => $count,   // Get the specified number of users
+        'orderby' => 'registered',
+        'order'   => 'DESC',
+    );
+
+    $user_query = new WP_User_Query($args);
+    // Check if users are found
+    if (!empty($user_query->results)) {
+        foreach ($user_query->results as $user) {
+            $seller_ids[] = $user->ID;
+        }
+    }
+    return $seller_ids;
+}
