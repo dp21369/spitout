@@ -9738,7 +9738,18 @@ nav.woocommerce-MyAccount-navigation {
   padding: 0 !important;
 }
 
-/* NEW CHANGES CSS BY DEV  */
+/*------------------------------------
+NEW CHANGES CSS BY DEV  
+-------------------------------------*/
+
+/* SELLER PAGE  */
+body.seller-not-logged-in {
+  background-color: #F4F4F4 !important;
+}
+.sellers-page-heading {
+  padding: 0 15px ;
+}
+
 .seller-filter-opened {
   position: relative;
 }
@@ -9815,14 +9826,14 @@ nav.woocommerce-MyAccount-navigation {
 }
 
 .seller-search-categories figure {
-  width: calc((10% - 45px) + (45px / 10));
+  width: calc((9.09% - 45px) + (45px / 10));
 }
 
 .seller-cat-wrapper > .seller-cat-checkbox {
   display: none;
 }
 
-.seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 9) {
+.seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 10) {
   display: block;
   /* Show only the first 9 children */
 }
@@ -9841,7 +9852,7 @@ nav.woocommerce-MyAccount-navigation {
 }
 
 .seller-search-categories .seller-more {
-  width: calc((10% - 45px) + (45px / 10));
+  width: calc((9.09% - 45px) + (45px / 10));
   position: absolute;
   right: 0%;
   top: 0%;
@@ -9862,7 +9873,7 @@ nav.woocommerce-MyAccount-navigation {
 }
 
 .seller-expanded .seller-more {
-  right: -10%;
+  /* right: -10%; */
 }
 
 .seller-expanded .bi-three-dots {
@@ -9875,7 +9886,7 @@ nav.woocommerce-MyAccount-navigation {
 
 .seller-cat-checkbox {
   position: relative;
-  width: calc((10% - 45px) + (45px / 10));
+  width: calc((9.09% - 45px) + (45px / 10));
 }
 
 .seller-cat-checkbox input[type="checkbox"] {
@@ -9944,23 +9955,22 @@ nav.woocommerce-MyAccount-navigation {
   color: #fff;
 }
 
-.seller-card-block {
-  height: 100%;
-  display: inline-block;
-  width: 100%;
-}
-
 .so-new-seller-desc {
   height: 100%;
   padding: 20px;
   border-radius: 30px;
   background-color: rgb(255, 255, 255);
+  transition: all 0.2s ease;
 }
 
 .seller-card-block {
   height: 100%;
   display: inline-block;
   width: 100%;
+}
+
+.seller-card-block:hover .so-new-seller-desc {
+  box-shadow: 0px 7px 18px 0px rgba(222, 222, 222, 0.63);
 }
 
 /* SELLER HEADER  */
