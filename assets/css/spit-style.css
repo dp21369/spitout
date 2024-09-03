@@ -9969,9 +9969,14 @@ body.seller-not-logged-in {
   width: 100%;
 }
 
+.seller-card-block:hover {
+  color: #4c4c4c !important;
+}
+
 .seller-card-block:hover .so-new-seller-desc {
   box-shadow: 0px 7px 18px 0px rgba(222, 222, 222, 0.63);
 }
+
 
 /* SELLER HEADER  */
 
@@ -10131,6 +10136,27 @@ NEW HOME PAGE CSS
     rgb(255, 255, 255) 100%
   ) !important;
   /* background: #f8def9 !important; */
+}
+
+/* Header Section  */
+.navbar-brand, .nav-rightside-icons {
+  flex-basis: 15%;
+  width: auto !important;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.so-navigation-menu li {
+  border: 2px solid #FFF;
+  transition: all 0.2s ease;
+}
+.so-navigation-menu li:hover {
+  border: 2px solid #eb9ac2;
+  border-radius: 50px;
+}
+
+.so-navigation-menu li:hover a{
+  color: var(--primary-black) !important;
 }
 
 section.wp-block-group {
@@ -10632,6 +10658,16 @@ section.wp-block-group {
 
 /* RESPONSIVE CSS  */
 @media screen and (max-width: 992px) {
+
+  .so-navigation .so-nav-toggle .navbar-toggler-icon {
+    align-items: center;
+}
+
+.logged-in .so-navigation .so-nav-toggle {
+  top: 18px !important;
+  padding: 14px 25px;
+}
+
   .banner-section {
     padding-top: 0;
     background-position: center 100px;
@@ -10656,6 +10692,10 @@ section.wp-block-group {
 }
 
 @media screen and (max-width: 768px) {
+
+  .logged-in .so-navigation .so-nav-toggle {
+    padding: 0;
+  }
   .seller-dropdown.d-flex {
     gap: 20px;
     justify-content: center;
