@@ -2077,7 +2077,7 @@ function load_filtered_sellers()
                     // $seller_active_status = get_user_meta($seller, 'user_status', true);
                     $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
                     $total_sold = get_number_of_products_sold_by_user($seller);
-                    $seller_rating = (int)get_rating_of_seller($seller);
+                    $seller_rating = (float)get_rating_of_seller($seller);
                     // var_dump($seller_rating);
                     if ($seller_active_status == 'logged_in') {
                         $active_status = 'online';
@@ -2251,7 +2251,7 @@ function so_banner_content()
     // Get the count of posts
     $seller_cat_count = $seller_type_query->post_count;
 
-    
+
     ?>
     <div class="seller-dropdown d-flex">
         <div class="total-seller-count"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
@@ -2448,7 +2448,7 @@ function so_seller_list($atts)
                     // $seller_active_status = get_user_meta($seller, 'user_status', true);
                     $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
                     $total_sold = get_number_of_products_sold_by_user($seller);
-                    $seller_rating = (int)get_rating_of_seller($seller);
+                    $seller_rating = (float)get_rating_of_seller($seller);
                     if ($seller_active_status == 'logged_in') {
                         $active_status = 'online';
                     } else {
@@ -2510,7 +2510,7 @@ function so_seller_list($atts)
                                     <?php
                                     // Full stars
                                     $fullStars = floor($seller_rating);
-
+                                    // var_dump($fullStars);
                                     // Half star (if the seller_ra$seller_rating has a decimal part greater than 0)
                                     $halfStar = ($seller_rating - $fullStars >= 0.5) ? 1 : 0;
 
@@ -2684,26 +2684,21 @@ function get_rating_of_seller($author_id)
     );
 
     $reviews = get_comments($args_reviews);
-
+    $rating = array();
     if ($reviews):
-        $reviewsFound = true; // Set flag to true if reviews are found
         foreach ($reviews as $review):
-            $rating = get_comment_meta($review->comment_ID, 'rating', true);
-            $comment = get_comment($review->comment_ID);
-            $comment_author_id = $comment->user_id;
-            $reviewer_profile_avatar = wp_get_attachment_url((int) get_user_meta($comment_author_id, 'so_profile_img', true));
-            if (empty($reviewer_profile_avatar)) {
-                $reviewer_profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
-            }
-
-            // Retrieve user data
-            $user_info = get_userdata($comment_author_id);
-
-            // Get the full name from the user data
-            $full_name = get_the_author_meta('display_name', $comment_author_id, true);
-            $display_name = $full_name;
+            $rating[] = (int)get_comment_meta($review->comment_ID, 'rating', true);
         endforeach;
-        return $rating;
+        // Calculate the average rating
+        $totalRatings = count($rating);
+        $sumRatings = array_sum($rating);
+        
+        // Avoid division by zero if there are no ratings
+        $averageRating = $totalRatings > 0 ? $sumRatings / $totalRatings : 0;
+        
+        // Optionally round the average rating to one decimal place
+        $averageRating = round($averageRating, 1);
+        return $averageRating;
     endif;
     return null;
 }
