@@ -10230,6 +10230,7 @@ section.wp-block-group {
   margin: 0 auto;
   padding: 40px;
   border-radius: 30px;
+  position: relative;
 }
 
 .special-text mark {
@@ -10490,7 +10491,8 @@ section.wp-block-group {
   margin-top: 0;
 }
 
-.floating-button.wp-block-heading {
+.floating-button.wp-block-heading,
+.so-hiw-age-limit {
   aspect-ratio: 1;
   /* width: 100%; */
   padding: 5px;
