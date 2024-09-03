@@ -2212,11 +2212,21 @@ function resize_and_compress_image($attachment_id, $max_width = 800, $max_height
     // Set the compression quality
     $image_editor->set_quality($quality);
 
-    // Save the resized image and overwrite the original
-    $result = $image_editor->save($file_path); // Save to the same path to overwrite
+    // Generate a new filename for the resized image
+    $upload_dir = wp_upload_dir();
+    $file_info = pathinfo($file_path);
+    $new_file_name = $file_info['filename'] . '-resized.' . $file_info['extension'];
+    $new_file_path = $upload_dir['path'] . '/' . $new_file_name;
 
-    // Return the URL of the resized image or false if it fails
-    return $result ? wp_get_attachment_url($attachment_id) : false;
+    // Save the resized image with the new filename
+    $result = $image_editor->save($new_file_path);
+
+    if (is_wp_error($result)) {
+        return false; // Return false if there's an error saving the image
+    }
+
+    // Return the URL of the resized image
+    return $upload_dir['url'] . '/' . $new_file_name;
 }
 
 // function for partial user search
