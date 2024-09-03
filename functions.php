@@ -2076,6 +2076,9 @@ function load_filtered_sellers()
                         : 'N/A';
                     // $seller_active_status = get_user_meta($seller, 'user_status', true);
                     $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
+                    $total_sold = get_number_of_products_sold_by_user($seller);
+                    $seller_rating = (int)get_rating_of_seller($seller);
+                    // var_dump($seller_rating);
                     if ($seller_active_status == 'logged_in') {
                         $active_status = 'online';
                     } else {
@@ -2129,23 +2132,44 @@ function load_filtered_sellers()
                                             <span>Followers</span>
                                         </div>
                                         <div class="seller-sold">
-                                            <h6><strong>11256k</strong></h6>
+                                            <h6><strong><?php echo esc_html($total_sold); ?></strong></h6>
                                             <span>Spits Sold</span>
                                         </div>
                                         <div class="seller-category">
                                             <p><span><?php echo esc_html($seller_category); ?></span></p>
                                         </div>
                                     </div>
+                                    <?php
+                                    // Full stars
+                                    $fullStars = floor($seller_rating);
 
+                                    // Half star (if the seller_ra$seller_rating has a decimal part greater than 0)
+                                    $halfStar = ($seller_rating - $fullStars >= 0.5) ? 1 : 0;
+
+                                    // Empty stars
+                                    $emptyStars = 5 - ($fullStars + $halfStar);
+
+
+                                    ?>
                                     <div class="seller-new-rating">
                                         <p>
                                             <span>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-half"></i>
-                                            </span> 4.9 Rating
+                                                <?php
+                                                // Generate the full stars
+                                                for ($i = 0; $i < $fullStars; $i++) { ?>
+                                                    <i class="bi bi-star-fill"></i>
+                                                <?php }
+
+                                                // Generate the half star (if any)
+                                                if ($halfStar) { ?>
+                                                    <i class="bi bi-star-half"></i>
+                                                <?php }
+
+                                                // Generate the empty stars
+                                                for ($i = 0; $i < $emptyStars; $i++) { ?>
+                                                    <i class="bi bi-star"></i>
+                                                <?php } ?>
+                                            </span> <?php echo esc_html($seller_rating); ?> Rating
                                         </p>
                                     </div>
                                 </div>
@@ -2226,6 +2250,8 @@ function so_banner_content()
     $seller_type_query = new WP_Query($seller_args);
     // Get the count of posts
     $seller_cat_count = $seller_type_query->post_count;
+
+    
     ?>
     <div class="seller-dropdown d-flex">
         <div class="total-seller-count"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
@@ -2421,6 +2447,8 @@ function so_seller_list($atts)
                         : 'N/A';
                     // $seller_active_status = get_user_meta($seller, 'user_status', true);
                     $seller_active_status = get_user_meta($seller, "cpmm_user_status", true);
+                    $total_sold = get_number_of_products_sold_by_user($seller);
+                    $seller_rating = (int)get_rating_of_seller($seller);
                     if ($seller_active_status == 'logged_in') {
                         $active_status = 'online';
                     } else {
@@ -2472,23 +2500,41 @@ function so_seller_list($atts)
                                             <span>Followers</span>
                                         </div>
                                         <div class="seller-sold">
-                                            <h6><strong>11256k</strong></h6>
+                                            <h6><strong><?php echo esc_html($total_sold); ?></strong></h6>
                                             <span>Spits Sold</span>
                                         </div>
                                         <div class="seller-category">
                                             <p><span><?php echo esc_html($seller_category); ?></span></p>
                                         </div>
                                     </div>
+                                    <?php
+                                    // Full stars
+                                    $fullStars = floor($seller_rating);
 
+                                    // Half star (if the seller_ra$seller_rating has a decimal part greater than 0)
+                                    $halfStar = ($seller_rating - $fullStars >= 0.5) ? 1 : 0;
+
+                                    // Empty stars
+                                    $emptyStars = 5 - ($fullStars + $halfStar); ?>
                                     <div class="seller-new-rating">
                                         <p>
                                             <span>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-fill"></i>
-                                                <i class="bi bi-star-half"></i>
-                                            </span> 4.9 Rating
+                                                <?php
+                                                // Generate the full stars
+                                                for ($i = 0; $i < $fullStars; $i++) { ?>
+                                                    <i class="bi bi-star-fill"></i>
+                                                <?php }
+
+                                                // Generate the half star (if any)
+                                                if ($halfStar) { ?>
+                                                    <i class="bi bi-star-half"></i>
+                                                <?php }
+
+                                                // Generate the empty stars
+                                                for ($i = 0; $i < $emptyStars; $i++) { ?>
+                                                    <i class="bi bi-star"></i>
+                                                <?php } ?>
+                                            </span> <?php echo esc_html($seller_rating); ?> Rating
                                         </p>
                                     </div>
                                 </div>
@@ -2584,4 +2630,80 @@ function get_newer_seller($count = -1)
         }
     }
     return $seller_ids;
+}
+
+
+function get_number_of_products_sold_by_user($user_id)
+{
+    // Get all orders with 'completed' status
+    $orders = wc_get_orders(array(
+        'limit'    => -1,  // Get all orders
+        'status'   => 'completed',
+        'return'   => 'ids', // Return only order IDs for better performance
+    ));
+
+    $total_products_sold = 0;
+
+    // Loop through each order
+    foreach ($orders as $order_id) {
+        $order = wc_get_order($order_id);
+
+        // Loop through each item in the order
+        foreach ($order->get_items() as $item) {
+            $product_id = $item->get_product_id();
+            $product = wc_get_product($product_id);
+
+            // Check if the product author matches the given user ID
+            if ($product && $product->get_post_data()->post_author == $user_id) {
+                // Add the quantity sold for this product to the total
+                $total_products_sold += $item->get_quantity();
+            }
+        }
+    }
+    // Format the number of products sold based on the value
+    if ($total_products_sold >= 1000) {
+        $number_of_products_sold = number_format($total_products_sold / 1000, 1) . 'k';
+    } elseif ($total_products_sold > 0 && $total_products_sold < 1000) {
+        $number_of_products_sold = $total_products_sold;
+    } else {
+        $number_of_products_sold = 'N/A';
+    }
+
+
+    return $number_of_products_sold;
+}
+
+
+function get_rating_of_seller($author_id)
+{
+    $args_reviews = array(
+        'comment_approved' => 1,
+        'post_id' => $author_id,
+        'comment_type' => 'so_seller_review',
+        'number' => 2, // Initial number of reviews to display
+    );
+
+    $reviews = get_comments($args_reviews);
+
+    if ($reviews):
+        $reviewsFound = true; // Set flag to true if reviews are found
+        foreach ($reviews as $review):
+            $rating = get_comment_meta($review->comment_ID, 'rating', true);
+            $comment = get_comment($review->comment_ID);
+            $comment_author_id = $comment->user_id;
+            $reviewer_profile_avatar = wp_get_attachment_url((int) get_user_meta($comment_author_id, 'so_profile_img', true));
+            if (empty($reviewer_profile_avatar)) {
+                $reviewer_profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
+            }
+
+            // Retrieve user data
+            $user_info = get_userdata($comment_author_id);
+
+            // Get the full name from the user data
+            $full_name = get_the_author_meta('display_name', $comment_author_id, true);
+            $display_name = $full_name;
+        endforeach;
+        return $rating;
+    endif;
+    return null;
 }
