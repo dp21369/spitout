@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+  jQuery("#reset-button").click();
   var selectedIds = [];
   var button_id;
   var button_target;
@@ -18,7 +19,7 @@ jQuery(document).ready(function () {
   // var selectedMaxPrice = jQuery("#price-end").val();
 
   var typingTimer; // Timer identifier
-  var doneTypingInterval = 1000; // Time in milliseconds (1.5 seconds)
+  var doneTypingInterval = 1000; // Time in milliseconds (1 seconds)
 
   // runs on tab changes
   jQuery("#pills-tab .nav-link").on("click", function () {
@@ -168,8 +169,8 @@ jQuery(document).ready(function () {
     });
 
     // Set the initial values of the selects based on the slider
-    jQuery("#age-start").val(jQuery("#slider-range-age").slider("values", 0));
-    jQuery("#age-end").val(jQuery("#slider-range-age").slider("values", 1));
+    // jQuery("#age-start").val(jQuery("#slider-range-age").slider("values", 0));
+    // jQuery("#age-end").val(jQuery("#slider-range-age").slider("values", 1));
 
     // Handle changes to the select dropdowns (in case user changes them directly)
     jQuery("#age-start, #age-end").change(function () {
@@ -219,8 +220,8 @@ jQuery(document).ready(function () {
     });
 
     // Set the initial values of the inputs based on the slider
-    jQuery("#price-start").val(jQuery("#slider-range").slider("values", 0));
-    jQuery("#price-end").val(jQuery("#slider-range").slider("values", 1));
+    // jQuery("#price-start").val(jQuery("#slider-range").slider("values", 0));
+    // jQuery("#price-end").val(jQuery("#slider-range").slider("values", 1));
 
     // Handle changes to the input fields (in case the user changes them directly)
     jQuery("#price-start, #price-end").change(function () {
