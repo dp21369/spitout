@@ -200,9 +200,9 @@ if ($all_sellers) { ?>
                                     <div id="slider-range-age" class="sellers-filter-slider" data-min-age="<?php echo $smallest_age; ?>" data-max-age="<?php echo $largest_age; ?>"></div>
                                     <div class="seller-filter-dropdowns-lists seller-dropdown-price">
                                         <label for="price-start">Price Saliva</label> <br>
-                                        <input type="number" step="any" min="0" id="price-start" name="price-start" value="" />
+                                        <input type="number" min="0" id="price-start" name="price-start" />
                                         <label for="price-end"></label>
-                                        <input type="number" step="any" min="0" id="price-end" name="price-end" value="" />
+                                        <input type="number" min="0" id="price-end" name="price-end"/>
                                     </div>
                                     <div id="slider-range" class="sellers-filter-slider"></div>
                                     <div class="filter-dropdown-delete-icon">
