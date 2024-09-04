@@ -2837,3 +2837,32 @@ function get_rating_of_seller($author_id)
     endif;
     return null;
 }
+
+
+
+//===========change woocomerce email template recipient======================
+
+// Send "Processing Order" email to admin
+add_filter('woocommerce_email_recipient_customer_processing_order', 'send_processing_order_email_to_admin', 10, 2);
+function send_processing_order_email_to_admin($recipient, $order) {
+    $admin_email = get_option('admin_email');
+    $recipient .= ', ' . $admin_email;
+    return $recipient;
+}
+
+// Send "Order On-Hold" email to admin
+add_filter('woocommerce_email_recipient_customer_on_hold_order', 'send_on_hold_order_email_to_admin', 10, 2);
+function send_on_hold_order_email_to_admin($recipient, $order) {
+    $admin_email = get_option('admin_email');
+    $recipient .= ', ' . $admin_email;
+    return $recipient;
+}
+
+// Send "Completed Order" email to admin
+add_filter('woocommerce_email_recipient_customer_completed_order', 'send_completed_order_email_to_admin', 10, 2);
+function send_completed_order_email_to_admin($recipient, $order) {
+    $admin_email = get_option('admin_email');
+    $recipient .= ', ' . $admin_email;
+    return $recipient;
+}
+//===========change woocomerce email template recipient ends======================
