@@ -10527,6 +10527,7 @@ p.custom-pill-box {
   padding: 5px;
   margin-bottom: 5px;
   cursor: pointer;
+  transition: all 0.1s ease;
 }
 .cat-item a:last-child{
   margin-bottom: 5px;
@@ -10535,6 +10536,8 @@ p.custom-pill-box {
 .cat-item a:hover {
   color: #FFF !important;
   background: var(--pink);
+  border-radius: 2px;
+
 }
 
 .selected-cat .cat-item a:hover {
