@@ -9950,6 +9950,7 @@ body.seller-not-logged-in {
   border-radius: 50px;
   padding: 10px 30px;
   line-height: 1;
+  outline: none;
 }
 
 .seller-tab-section .nav-pills .nav-link.active {
