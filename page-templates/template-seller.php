@@ -143,16 +143,6 @@ if ($all_sellers) { ?>
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="seller-filter-dropdowns-lists seller-dropdown-topseller">
-                                        <label for="top-sellers">Top Sellers</label> <br>
-                                        <select id="top-sellers" name="top-sellers">
-                                            <option value="">All</option>
-                                            <option value="most-popular">Most Popular
-                                            </option>
-                                            <option value="new-sellers">New Sellers
-                                            </option>
-                                        </select>
-                                    </div>
                                     <div class=" seller-filter-dropdowns-lists seller-dropdown-age">
                                         <label for="age-start">Age</label> <br>
                                         <select id="age-start" name="age-start">
