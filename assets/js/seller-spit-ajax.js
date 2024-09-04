@@ -304,14 +304,8 @@ function doneTyping(
 ) {
   searchValue = jQuery("#seller_search").val();
   location = jQuery("#location").val();
-  selectedMinAge = parseInt(
-    jQuery("#slider-range-age").attr("data-min-age"),
-    10
-  );
-  selectedMaxAge = parseInt(
-    jQuery("#slider-range-age").attr("data-max-age"),
-    10
-  );
+  selectedMinAge = parseInt(jQuery("#age-start").val(), 10 );
+  selectedMaxAge = parseInt(jQuery("#age-end").val(),10);
 
   selectedMinPrice = jQuery("#price-start").val();
   selectedMaxPrice = jQuery("#price-end").val();

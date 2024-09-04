@@ -1952,6 +1952,103 @@ function load_filtered_sellers()
         case 'recommended':
             // Code to execute if expression equals recommended
             break;
+        case 'new-sellers':
+            if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location) || !empty($selectedMinAge) || !empty($selectedMaxAge) || !empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
+                // Add the filter before running the query
+                add_action('pre_user_query', 'modify_user_query_for_partial_search');
+
+                // Prepare the meta query
+                $meta_query = array(
+                    'relation' => 'AND', // Use OR relation for matching any of the selected categories
+                );
+
+                foreach ($selected_cat_ids as $cat_id) {
+                    // Add a LIKE condition for each category ID
+                    $meta_query[] = array(
+                        'key'     => 'so_category', // Meta key to match
+                        'value'   => '"' . $cat_id . '"', // Serialized value format
+                        'compare' => 'LIKE', // Use LIKE to match serialized arrays
+                    );
+                }
+
+                // Assuming $users_ids is already populated with the user IDs to include
+                // Prepare the user query arguments
+                $args = array(
+                    'role'       => 'seller', // Role to match
+                    // 'include'    => array_keys(spitout_get_popular_sellers()), // Filter to only these user IDs
+                    'include'    => get_newer_seller(), // Filter to only these user IDs
+                    'meta_query' => $meta_query, // Meta query to filter by so_category
+                    'search'     => esc_attr($searchValue), // Search by username
+                );
+
+                // Perform the user query
+                $user_query = new WP_User_Query($args);
+
+                // Get the results
+                $users = $user_query->get_results();
+
+                // Remove the filter after running the query
+                remove_action('pre_user_query', 'modify_user_query_for_partial_search');
+
+                // Check if users are found
+                if (!empty($users)) {
+                    $users_ids = [];
+                    foreach ($users as $user) {
+                        $seller_location = get_user_meta($user->ID, 'so_location', true);
+                        $post_meta_date = get_user_meta($user->ID, 'so_dob', true);
+
+                        $age = 0;
+                        if (!empty($post_meta_date)) {
+                            try {
+                                // Create a DateTime object from the given format
+                                $dob = DateTime::createFromFormat('d/m/Y', $post_meta_date);
+
+                                // Check if the conversion was successful
+                                if ($dob === false) {
+                                    throw new Exception("Invalid date format: " . $post_meta_date);
+                                }
+
+                                $now = new DateTime();
+                                $age = (int)$now->diff($dob)->y;
+                                error_log("User Age: " . $age);
+                            } catch (Exception $e) {
+                                error_log("Error: " . $e->getMessage());
+                            }
+                        }
+                        $location_match = true;
+                        $age_match = true;
+                        $price_match = true;
+                        if (!empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
+                            $product_user_ids = get_woocommerce_user_ids_by_user_id_and_price_range($user->ID, $selectedMinPrice, $selectedMaxPrice);
+
+                            if (is_null($product_user_ids)) {
+                                $price_match = false;
+                            }
+                        }
+
+                        if (!empty($location)) {
+                            $location_match = ($seller_location == $location);
+                        }
+
+                        if ((!empty($selectedMinAge) || !empty($selectedMaxAge)) && $age > 0) {
+                            if (!empty($selectedMinAge) && !empty($selectedMaxAge)) {
+                                $age_match = ($age >= $selectedMinAge && $age <= $selectedMaxAge);
+                            } elseif (!empty($selectedMinAge)) {
+                                $age_match = ($age >= $selectedMinAge);
+                            } elseif (!empty($selectedMaxAge)) {
+                                $age_match = ($age <= $selectedMaxAge);
+                            }
+                        }
+
+                        if ($location_match && $age_match && $price_match) {
+                            $users_ids[] = $user->ID;
+                        }
+                    }
+                }
+            } else {
+                $users_ids = get_newer_seller(15);
+            }
+            break;
 
         default:
             if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location) || !empty($selectedMinAge) || !empty($selectedMaxAge) || !empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
@@ -2725,10 +2822,10 @@ function get_rating_of_seller($author_id)
         // Calculate the average rating
         $totalRatings = count($rating);
         $sumRatings = array_sum($rating);
-        
+
         // Avoid division by zero if there are no ratings
         $averageRating = $totalRatings > 0 ? $sumRatings / $totalRatings : 0;
-        
+
         // Optionally round the average rating to one decimal place
         $averageRating = round($averageRating, 1);
         return $averageRating;
