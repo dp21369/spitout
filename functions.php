@@ -2377,25 +2377,30 @@ function so_banner_content()
             endif; ?>
         </select>
         <div class="banner-cat-select">
-            <div class="cat-item selected-cat"><span>Selected Category</span></div>
+            <div class="cat-item selected-cat">
+                <span>Selected Category</span>
+            </div>
             <div class="cat-option-dropdown">
                 <div class="cat-item">
-                    <figure>
+                    <a href="#"><figure>
                         <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
                     </figure>
                     <span>Asian</span>
+                    </a>
                 </div>
                 <div class="cat-item">
-                    <figure>
+                    <a href="#"><figure>
                         <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
                     </figure>
                     <span>Asian</span>
+                    </a>
                 </div>
                 <div class="cat-item">
-                    <figure>
+                    <a href="#"><figure>
                         <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
                     </figure>
                     <span>Asian</span>
+                    </a>
                 </div>
             </div>
         </div>

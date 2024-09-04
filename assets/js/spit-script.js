@@ -362,4 +362,17 @@ jQuery(document).ready(function () {
       window.location.href = selectedUrl;
     }
   });
+
+  jQuery(document).on("click", ".banner-cat-select", function (e) {
+    e.stopPropagation(); // Prevents the click from bubbling up to the document
+    jQuery(".cat-option-dropdown").toggleClass("expanded");
+  });
+
+  // Detect clicks outside of .banner-cat-select to remove the 'expanded' class
+  jQuery(document).on("click", function (e) {
+    if (!jQuery(e.target).closest('.banner-cat-select').length) {
+      jQuery(".cat-option-dropdown").removeClass("expanded");
+    }
+  });
+
 });
