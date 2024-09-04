@@ -21,7 +21,7 @@ function email_custom_footer()
             <p>Copyright © 2024 Spitout. All Rights Reserved. We appreciate you!</p>
         </div>
         <div class="footer-contact">
-            <a href="mailto:help@spitout.com">help@spitout.com</a>
+            <a href="mailto:contact@spitout.com">contact@spitout.com</a>
             <a href="tel:1(800)232-90-26">1(800)232-90-26</a>
         </div>
 
@@ -291,7 +291,7 @@ function spitout_email_templates($fullName, $to, $subject, $message, $type)
                 <p>Copyright © 2024 Spitout. All Rights Reserved. We appreciate you!</p>
             </div>
             <div class="footer-contact">
-                <a href="mailto:help@spitout.com">help@spitout.com</a>
+                <a href="mailto:contact@spitout.com">contact@spitout.com</a>
                 <a href="tel:1(800)232-90-26">1(800)232-90-26</a>
             </div>
 
