@@ -2195,7 +2195,14 @@ function load_filtered_sellers()
                                         <img src="<?php echo esc_url($seller_img_url); ?>" alt="<?php echo $seller_data->display_name; ?>">
                                     </figure>
                                     <div class="so-new-sellers-name">
-                                        <span class="seller-tag custom-pill-box yellow-pill-box">Top Seller</span>
+                                        <?php
+                                        $top_seller = get_popular_seller();
+                                        $is_top_seller = in_array($seller, $top_seller);
+                                        if ($is_top_seller) { ?>
+                                            <span class="seller-tag-popular custom-pill-box yellow-pill-box">Top Seller</span>
+                                        <?php } else { ?>
+                                            <span class="seller-tag custom-pill-box"></span>
+                                        <?php } ?>
                                         <h5 class="text-center m-0 p-2 d-flex">
                                             <?php echo $seller_data->display_name; ?>
                                             <?php if ((int) get_user_meta($seller, 'is_verified', true) == 1) { ?>
@@ -2362,46 +2369,31 @@ function so_banner_content()
     ?>
     <div class="seller-dropdown d-flex">
         <div class="custom-pill-box pink-pill-box"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
-        <select id="select-cat-redirect">
-            <option value="">Select Category</option>
-            <?php // Check if there are any posts
-            if ($seller_type_query->have_posts()) :
-                while ($seller_type_query->have_posts()) :
-                    $seller_type_query->the_post();
-                    $post_id = get_the_ID();
-                    $cat_url = get_permalink($post_id);
-                    $title = get_the_title(); ?>
-                    <option value="<?php echo esc_url($cat_url); ?>"><?php echo esc_html($title); ?></option>
-            <?php endwhile;
-                wp_reset_postdata();
-            endif; ?>
-        </select>
         <div class="banner-cat-select">
-            <div class="cat-item selected-cat">
+            <div class="selected-cat">
                 <span>Selected Category</span>
             </div>
             <div class="cat-option-dropdown">
-                <div class="cat-item">
-                    <a href="#"><figure>
-                        <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
-                    </figure>
-                    <span>Asian</span>
-                    </a>
-                </div>
-                <div class="cat-item">
-                    <a href="#"><figure>
-                        <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
-                    </figure>
-                    <span>Asian</span>
-                    </a>
-                </div>
-                <div class="cat-item">
-                    <a href="#"><figure>
-                        <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
-                    </figure>
-                    <span>Asian</span>
-                    </a>
-                </div>
+                <?php // Check if there are any posts
+                if ($seller_type_query->have_posts()) :
+                    while ($seller_type_query->have_posts()) :
+                        $seller_type_query->the_post();
+                        $post_id = get_the_ID();
+                        $cat_url = get_permalink($post_id);
+                        $title = get_the_title();
+                        $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
+                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70); ?>
+                        <div class="cat-item">
+                            <a href="<?php echo esc_url($cat_url); ?>">
+                                <figure>
+                                    <img src="<?php echo esc_url($featured_image_url); ?>" alt="cat-image">
+                                </figure>
+                                <span><?php echo esc_html($title); ?></span>
+                            </a>
+                        </div>
+                <?php endwhile;
+                    wp_reset_postdata();
+                endif; ?>
             </div>
         </div>
     </div>
@@ -2603,7 +2595,6 @@ function so_seller_list($atts)
                                         <img src="<?php echo esc_url($seller_img_url); ?>" alt="<?php echo $seller_data->display_name; ?>">
                                     </figure>
                                     <div class="so-new-sellers-name">
-                                        <span class="seller-tag custom-pill-box yellow-pill-box">Top Seller</span>
                                         <h5 class="text-center m-0 p-2 d-flex">
                                             <?php echo $seller_data->display_name; ?>
                                             <?php if ((int) get_user_meta($seller, 'is_verified', true) == 1) { ?>
@@ -2708,7 +2699,7 @@ function get_popular_seller($count = -1)
             // Get WooCommerce products for this user
             $product_args = array(
                 'post_type' => 'product',
-                'posts_per_page' => -1,
+                'posts_per_page' => $count,
                 'author' => $user_id,
                 'post_status' => 'publish'
             );
@@ -2721,13 +2712,14 @@ function get_popular_seller($count = -1)
                 $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
                 $total_sales += $product_sales;
             }
+            if ($total_sales > 0) {
+                // Add the seller and their total sales to the array
+                $sellers[] = array(
+                    'user' => $user,
+                    'total_sales' => $total_sales
 
-            // Add the seller and their total sales to the array
-            $sellers[] = array(
-                'user' => $user,
-                'total_sales' => $total_sales
-
-            );
+                );
+            }
         }
 
         // Sort sellers by total sales in descending order
@@ -2736,7 +2728,7 @@ function get_popular_seller($count = -1)
         });
 
         // Display the top sellers based on the total sales
-        $sellers = array_slice($sellers, 0, $count);
+        $sellers = array_slice($sellers, 0);
 
         foreach ($sellers as $seller) {
             $seller_ids[] = $seller['user']->ID;
@@ -2844,7 +2836,8 @@ function get_rating_of_seller($author_id)
 
 // Send "Processing Order" email to admin
 add_filter('woocommerce_email_recipient_customer_processing_order', 'send_processing_order_email_to_admin', 10, 2);
-function send_processing_order_email_to_admin($recipient, $order) {
+function send_processing_order_email_to_admin($recipient, $order)
+{
     $admin_email = get_option('admin_email');
     $recipient .= ', ' . $admin_email;
     return $recipient;
@@ -2852,7 +2845,8 @@ function send_processing_order_email_to_admin($recipient, $order) {
 
 // Send "Order On-Hold" email to admin
 add_filter('woocommerce_email_recipient_customer_on_hold_order', 'send_on_hold_order_email_to_admin', 10, 2);
-function send_on_hold_order_email_to_admin($recipient, $order) {
+function send_on_hold_order_email_to_admin($recipient, $order)
+{
     $admin_email = get_option('admin_email');
     $recipient .= ', ' . $admin_email;
     return $recipient;
@@ -2860,7 +2854,8 @@ function send_on_hold_order_email_to_admin($recipient, $order) {
 
 // Send "Completed Order" email to admin
 add_filter('woocommerce_email_recipient_customer_completed_order', 'send_completed_order_email_to_admin', 10, 2);
-function send_completed_order_email_to_admin($recipient, $order) {
+function send_completed_order_email_to_admin($recipient, $order)
+{
     $admin_email = get_option('admin_email');
     $recipient .= ', ' . $admin_email;
     return $recipient;

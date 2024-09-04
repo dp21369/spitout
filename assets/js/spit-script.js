@@ -356,13 +356,6 @@ jQuery(document).ready(function () {
     jQuery(".seller-search-categories").toggleClass("seller-expanded");
   });
 
-  jQuery("#select-cat-redirect").change(function () {
-    var selectedUrl = jQuery(this).val();
-    if (selectedUrl) {
-      window.location.href = selectedUrl;
-    }
-  });
-
   jQuery(document).on("click", ".banner-cat-select", function (e) {
     e.stopPropagation(); // Prevents the click from bubbling up to the document
     jQuery(".cat-option-dropdown").toggleClass("expanded");

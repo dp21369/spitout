@@ -2694,3 +2694,14 @@ jQuery(document).ready(function ($) {
   });
 });
 
+
+jQuery(document).ready(function(){
+  jQuery('.cat-item').on('click',function(){
+    var selected_html = jQuery(this).prop('outerHTML');
+    jQuery('.selected-cat').empty();
+
+    // Append the clicked .cat-item HTML to .selected-cat
+    jQuery('.selected-cat').append(selected_html);
+    console.log(selected_html);
+  });
+});
