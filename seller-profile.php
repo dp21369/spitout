@@ -10,7 +10,7 @@ get_header(); // Include header
 
 // Get the ID of the current user
 $author_id = get_queried_object_id();
-$current_user_id = get_current_user_id();
+$current_user_id = get_current_user_id(); //current logged in user id 
 $isCurrentUserAuthor = ($author_id == $current_user_id);
 
 if ($isCurrentUserAuthor) {
@@ -18,6 +18,7 @@ if ($isCurrentUserAuthor) {
 } else {
   $user_id = $author_id;
 }
+
 
 $isCurrentUserSeller = in_array('seller', (array) wp_get_current_user()->roles);
 
@@ -87,7 +88,7 @@ if (empty($banner_avatar)) {
   $banner_avatar = get_stylesheet_directory_uri() . '/assets/img/cover-proifle.png';
 }
 
-$is_verified = (int) get_user_meta($current_user_id, 'is_verified', true) == 0 ? false: true;
+$is_verified = (int) get_user_meta($user_id, 'is_verified', true) == 0 ? false: true;
 ?>
 
 
