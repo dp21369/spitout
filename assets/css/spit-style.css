@@ -10151,8 +10151,8 @@ body.seller-not-logged-in {
 /*-------------------------------------------
 NEW HOME PAGE CSS  
 --------------------------------------------*/
-.page-id-3042,
-.home {
+/* .home, */
+.page-id-3042{
   background: linear-gradient(
     180deg,
     rgb(248, 222, 249) 0%,
@@ -10591,7 +10591,7 @@ p.custom-pill-box {
 
 /* HOW IT WORKS SECTION  */
 .section-header {
-  margin-bottom: 55px;
+  margin-bottom: 25px;
 }
 
 .card-box {
@@ -10643,6 +10643,10 @@ p.custom-pill-box {
 
 .home-category-section .wp-block-column {
   padding: 0;
+}
+
+.home-category-section .so-browse-categories {
+margin-top: 0 !important;
 }
 
 /* HOME BOTTOM CTA  */
