@@ -2195,7 +2195,7 @@ function load_filtered_sellers()
                                         <img src="<?php echo esc_url($seller_img_url); ?>" alt="<?php echo $seller_data->display_name; ?>">
                                     </figure>
                                     <div class="so-new-sellers-name">
-                                        <p class="seller-tag">Top Seller</p>
+                                        <span class="seller-tag custom-pill-box yellow-pill-box">Top Seller</span>
                                         <h5 class="text-center m-0 p-2 d-flex">
                                             <?php echo $seller_data->display_name; ?>
                                             <?php if ((int) get_user_meta($seller, 'is_verified', true) == 1) { ?>
@@ -2603,7 +2603,7 @@ function so_seller_list($atts)
                                         <img src="<?php echo esc_url($seller_img_url); ?>" alt="<?php echo $seller_data->display_name; ?>">
                                     </figure>
                                     <div class="so-new-sellers-name">
-                                        <p class="seller-tag">Top Seller</p>
+                                        <span class="seller-tag custom-pill-box yellow-pill-box">Top Seller</span>
                                         <h5 class="text-center m-0 p-2 d-flex">
                                             <?php echo $seller_data->display_name; ?>
                                             <?php if ((int) get_user_meta($seller, 'is_verified', true) == 1) { ?>

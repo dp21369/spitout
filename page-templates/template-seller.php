@@ -28,7 +28,7 @@ if ($all_sellers) { ?>
                 <div class="seller-search-header">
                     <div class="seller-header-top">
                         <h4>Spitout <span>Sellers</span></h4>
-                        <div class="seller-number total-seller-count"><span><?php echo esc_html($seller_cat_count) ?> Sellers</span></div>
+                        <div class="custom-pill-box pink-pill-box"><span><?php echo esc_html($seller_cat_count) ?> Sellers</span></div>
                     </div>
                     <div class="seller-search-form">
                         <form>

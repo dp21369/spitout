@@ -10389,19 +10389,24 @@ section.wp-block-group {
 
 /* .total-seller-count,
 .seller-number, */
-.custom-pill-box  {
+.custom-pill-box {
   margin: 0;
-  padding: 6px 20px;
+  display: inline-block;
+  padding: 8px 20px;
   background-color: #fdfdfd;
   border-radius: 50px;
   color: #f27af2;
   font-weight: 700;
+  line-height: 1;
   align-self: center;
 }
 
 .pink-pill-box  {
   background-color: #fae5fa;
-
+}
+.yellow-pill-box  {
+  background-color: #faf7e5;
+  color: #f9ae43;
 }
 
 .seller-dropdown select {
