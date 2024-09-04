@@ -2222,7 +2222,7 @@ function load_filtered_sellers()
                                         </p>
                                     </div>
                                 </div>
-                                <div class="so-seller-footer mt-4 pt-4">
+                                <div class="so-seller-footer mt-4 pt-3">
                                     <div class="seller-detailed-info mb-2">
                                         <div class="seller-followers">
                                             <h6><strong><?php echo esc_html($totalFollowers); ?></strong></h6>
@@ -2628,7 +2628,7 @@ function so_seller_list($atts)
                                         </div>
                                     </div>
                                 </div>
-                                <div class="so-seller-footer mt-4 pt-4">
+                                <div class="so-seller-footer mt-4 pt-3">
                                     <div class="seller-detailed-info mb-2">
                                         <div class="seller-followers">
                                             <h6><strong><?php echo esc_html($totalFollowers); ?></strong></h6>
