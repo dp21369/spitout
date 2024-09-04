@@ -2279,7 +2279,7 @@ function load_filtered_sellers()
         </div>
 
     <?php } else {
-        echo '<span>No user found!</span>';
+        echo '<span class="no-seller-found">No user found!</span>';
     }
     wp_die();
 }
