@@ -349,7 +349,7 @@ if (!empty($get_popular_sellers)) {
                 <div class="card so-join-card1">
                     <div class="card-body">
                         <h2 class="card-title text-light">Be Yourself And <br> Join Us Today</h2>
-                        <h6 class="card-text text-light pb-3">SplitOut is the safest, easiest and most secure <br>
+                        <h6 class="card-text text-light pb-3">SpitOut is the safest, easiest and most secure <br>
                             website for verified user, buy and sell custom fetish.
                         </h6>
                         <a href="<?php echo $JoinUsFreeLink; ?>">
@@ -371,7 +371,7 @@ if (!empty($get_popular_sellers)) {
                 <div class="card so-join-card2">
                     <div class="card-body">
                         <h2 class="card-title text-light">Be Yourself And <br> Join Us Today</h2>
-                        <h6 class="card-text text-light pb-3">SplitOut is the safest, easiest and most secure <br>
+                        <h6 class="card-text text-light pb-3">SpitOut is the safest, easiest and most secure <br>
                             website
                             for
                             verified
