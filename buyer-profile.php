@@ -205,7 +205,7 @@ if (empty($banner_avatar)) {
                         <h5>
                             <?php echo $author_name; ?>
                         </h5>
-                        <?php if ((int) get_user_meta($user_id, 'is_verified', true) == 1) { ?>
+                        <?php $user = get_userdata($user_id); if (in_array('buyer', $user->roles)) { ?>
                             <div class="profile-verify" title="verified">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
                                     fill="none">
