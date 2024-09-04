@@ -10255,17 +10255,28 @@ section.wp-block-group {
   padding: 40px;
   border-radius: 30px;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .banner-spit-drop {
   position: absolute;
-  top: -20px;
-  right: -10%;
-  max-width: 80%;
+  top: 0;
+  right: 0;
+  max-width: 75%;
   width: 100%;
+  height: 100%;
   filter: brightness(0.985);
   z-index: 0;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.banner-spit-drop img {
+  position: absolute;
+  top: -20px;
+  right: -65px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .banner-spit-drop img {
@@ -10323,7 +10334,7 @@ section.wp-block-group {
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 30px;
+  gap: 15px;
 }
 
 .new-button {
@@ -10473,12 +10484,13 @@ p.custom-pill-box {
   position: absolute;
   background: #FFF;
   width: 100%;
+  top: calc(100% + 10px);
   padding: 15px;
   visibility: hidden;
   opacity: 0;
   height: 0;
   transition: all 0.3s ease;
-  box-shadow: 0px 7px 18px 0px rgba(222, 222, 222, 0.63);
+  box-shadow: 0px 15px 18px 0px rgba(222, 222, 222, 0.63);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -10486,10 +10498,24 @@ p.custom-pill-box {
 .cat-option-dropdown.expanded {
   visibility: visible;
   opacity: 1;
-  height: auto;
+  height: 300px;
   z-index: 1;
+  overflow-y: scroll;
 }
 
+.cat-option-dropdown::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cat-option-dropdown::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+.cat-option-dropdown::-webkit-scrollbar-thumb {
+  background: var(--pink);
+}
+
+.selected-cat,
 .cat-item {
   cursor: pointer;
 }
@@ -10511,6 +10537,11 @@ p.custom-pill-box {
   background: var(--pink);
 }
 
+.selected-cat .cat-item a:hover {
+  background: unset;
+  color: #121212 !important;
+}
+
 .cat-item figure {
   width: 30px;
   height: 30px;
@@ -10525,6 +10556,7 @@ p.custom-pill-box {
   object-position: center;
 }
 
+.selected-cat span,
 .cat-item  span {
   font-weight: 700;
   display: inline-block;
@@ -10534,7 +10566,7 @@ p.custom-pill-box {
 .banner-rewiews {
   max-width: 250px !important;
   width: 100%;
-  margin: 40px auto 0;
+  margin: 35px auto 0;
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
