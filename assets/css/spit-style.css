@@ -10402,6 +10402,58 @@ section.wp-block-group {
   background-position: right;
   background-size: 20px;
   background-repeat: no-repeat;
+  display: none;
+}
+
+.banner-cat-select {
+  position: relative;
+  flex: 0 60%;
+}
+
+.banner-cat-select:before {
+  background: url("../img/down-arrow.svg");
+  background-position: right;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  position: absolute;
+  content: '';
+  top: 50%;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+}
+
+.cat-option-dropdown {
+  position: absolute;
+  background: #FFF;
+  width: 100%;
+  padding: 10px;
+}
+
+.cat-item {
+  display: flex;
+  column-gap: 5px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.cat-item figure {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.cat-item figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cat-item  span {
+  font-weight: 700;
 }
 
 .banner-rewiews {

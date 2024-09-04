@@ -2279,6 +2279,29 @@ function so_banner_content()
                 wp_reset_postdata();
             endif; ?>
         </select>
+        <div class="banner-cat-select">
+            <div class="cat-item selected-cat"><span>Selected Category</span></div>
+            <div class="cat-option-dropdown">
+                <div class="cat-item">
+                    <figure>
+                        <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
+                    </figure>
+                    <span>Asian</span>
+                </div>
+                <div class="cat-item">
+                    <figure>
+                        <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
+                    </figure>
+                    <span>Asian</span>
+                </div>
+                <div class="cat-item">
+                    <figure>
+                        <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="cat-image">
+                    </figure>
+                    <span>Asian</span>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="wp-block-buttons">
         <div class="new-button sell-btn"><a class="wp-block-button__link wp-element-button" href="/register">Sell</a></div>
