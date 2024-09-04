@@ -9785,7 +9785,7 @@ body.seller-not-logged-in {
   font-size: 36px;
 }
 
-.sellers-page-heading span {
+.sellers-page-heading h4 span{
   color: var(--pink);
 }
 
@@ -9944,23 +9944,17 @@ body.seller-not-logged-in {
 }
 
 .seller-tab-section .nav-pills .nav-link {
+  background: #FFF;
   color: #000;
   font-weight: 600;
   border-radius: 50px;
-  padding: 8px 30px;
+  padding: 10px 30px;
+  line-height: 1;
 }
 
 .seller-tab-section .nav-pills .nav-link.active {
   background: var(--pink);
   color: #fff;
-}
-
-.so-new-seller-desc {
-  height: 100%;
-  padding: 20px;
-  border-radius: 30px;
-  background-color: rgb(255, 255, 255);
-  transition: all 0.2s ease;
 }
 
 .seller-card-block {
@@ -9971,6 +9965,14 @@ body.seller-not-logged-in {
 
 .seller-card-block:hover {
   color: #4c4c4c !important;
+}
+
+.seller-card-block .so-new-seller-desc {
+  height: 100%;
+  padding: 20px;
+  border-radius: 30px;
+  background-color: rgb(255, 255, 255);
+  transition: all 0.2s ease;
 }
 
 .seller-card-block:hover .so-new-seller-desc {
@@ -10015,8 +10017,8 @@ body.seller-not-logged-in {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
 }
-
 .seller-new-rating i {
   color: #fdc735;
 }
@@ -10051,7 +10053,8 @@ body.seller-not-logged-in {
 
 .seller-tab-col .so-seller-filter-dropdown2 h5 {
   color: #fff;
-  line-height: 24px;
+  /* line-height: 24px; */
+  line-height: 1;
 }
 
 .seller-tab-col .seller-filter-dropdown-form {
@@ -10384,13 +10387,21 @@ section.wp-block-group {
   align-items: center;
 }
 
-.total-seller-count {
+/* .total-seller-count,
+.seller-number, */
+.custom-pill-box  {
   margin: 0;
   padding: 6px 20px;
-  background-color: #fae5fa;
+  background-color: #fdfdfd;
   border-radius: 50px;
   color: #f27af2;
   font-weight: 700;
+  align-self: center;
+}
+
+.pink-pill-box  {
+  background-color: #fae5fa;
+
 }
 
 .seller-dropdown select {

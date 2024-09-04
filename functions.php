@@ -2233,7 +2233,7 @@ function load_filtered_sellers()
                                             <span>Spits Sold</span>
                                         </div>
                                         <div class="seller-category">
-                                            <p><span><?php echo esc_html($seller_category); ?></span></p>
+                                            <p class="custom-pill-box pink-pill-box"><span><?php echo esc_html($seller_category); ?></span></p>
                                         </div>
                                     </div>
                                     <?php
@@ -2361,7 +2361,7 @@ function so_banner_content()
 
     ?>
     <div class="seller-dropdown d-flex">
-        <div class="total-seller-count"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
+        <div class="custom-pill-box pink-pill-box"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
         <select id="select-cat-redirect">
             <option value="">Select Category</option>
             <?php // Check if there are any posts
@@ -2639,7 +2639,7 @@ function so_seller_list($atts)
                                             <span>Spits Sold</span>
                                         </div>
                                         <div class="seller-category">
-                                            <p><span><?php echo esc_html($seller_category); ?></span></p>
+                                            <p class="custom-pill-box pink-pill-box"><span><?php echo esc_html($seller_category); ?></span></p>
                                         </div>
                                     </div>
                                     <?php
