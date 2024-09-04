@@ -880,7 +880,7 @@ if (!function_exists('spitout_view_likes_list')) {
     $entered_email = sanitize_email($_POST['input']);
 
     // Check if the username exists
-    if (username_exists($entered_email)) {
+    if (email_exists($entered_email)) {
       echo 'exists'; // Username already exists
     } else {
       echo 'unique'; // Username is unique
@@ -907,7 +907,8 @@ if (!function_exists('spitout_view_likes_list')) {
     // Query the WordPress database to check if the email exists
     $user = get_user_by('login', $entered_username);
 
-    if ($user) {
+    // if ($user) {
+    if (username_exists($entered_username)) {
       echo 'exists'; // Email already exists
     } else {
       echo 'unique'; // Email is unique
