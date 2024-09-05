@@ -1221,7 +1221,7 @@ Responsive queries here
   }
 
   .home-category-section .section-header {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
   }
 
   .banner-text {

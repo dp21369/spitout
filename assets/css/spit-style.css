@@ -9917,6 +9917,11 @@ body.seller-not-logged-in {
   display: inline-block;
 }
 
+.seller-card-block .seller-page-location span {
+  text-align: justify;
+  line-height: 1.4;
+}
+
 .so-seller-header figure {
   max-width: 100px;
   margin: 0;
@@ -9929,6 +9934,10 @@ body.seller-not-logged-in {
 .so-seller-header h5 {
   justify-content: flex-start;
   text-align: left !important;
+}
+
+.seller-card-block .seller-page-location p {
+  gap: 6px;
 }
 
 /* SELLER FOOTER  */
@@ -10547,8 +10556,12 @@ p.custom-pill-box {
   row-gap: 2em;
 }
 
-.shortcode-seller-wrapper p {
+.seller-card-block p {
   margin-bottom: 0;
+}
+
+.shortcode-seller-wrapper .so-new-sellers-name {
+  align-content: center;
 }
 
 /* HOW IT WORKS SECTION  */
@@ -10612,6 +10625,11 @@ p.custom-pill-box {
 }
 
 /* HOME BOTTOM CTA  */
+
+.bottom-cta-section .card-box .wp-block-column{
+  border-radius: 15px;
+}
+
 .join-bottom-cta,
 .shop-bottom-cta {
   position: relative;
