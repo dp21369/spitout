@@ -1792,47 +1792,47 @@ jQuery(document).on("click", ".multistep-next", function () {
     );
     isValid = false;
   }
-console.log(isValid);
+// console.log(isValid);
   // If all validation passes, proceed to the next step
   if (isValid) {
-    // jQuery.ajax({
-    //   type: "POST",
-    //   url: spit_ajax.ajax_url,
-    //   data: {
-    //     action: "spitout_user_registration",
-    //     fullName: fullName,
-    //     username: username,
-    //     email: email,
-    //     dob: formattedDate,
-    //     accountpassword: password,
-    //     confirmPassword: confirmPassword,
-    //     country: country,
-    //     state: state,
-    //     role: role,
-    //   },
+    jQuery.ajax({
+      type: "POST",
+      url: spit_ajax.ajax_url,
+      data: {
+        action: "spitout_user_registration",
+        fullName: fullName,
+        username: username,
+        email: email,
+        dob: formattedDate,
+        accountpassword: password,
+        confirmPassword: confirmPassword,
+        country: country,
+        state: state,
+        role: role,
+      },
 
-    //   success: function (response) {
-    //     console.log(response);
-    //     if (response.status === "success") {
-    //       jQuery(".spitout-user-created-message").html(
-    //         '<div class="so-success-msg">' + response.message + "</div>"
-    //       );
-    //     } else {
-    //       if (response.type === "username") {
-    //         appendErrorMessage(response.type, response.message);
-    //       } else if (response.type === "email") {
-    //         appendErrorMessage(response.type, response.message);
-    //       } else if (response.type === "pwd") {
-    //         appendErrorMessage(response.type, response.message);
-    //       } else {
-    //         // Handle the default condition here
-    //         console.error("Unknown response type:", response.type);
-    //       }
-    //     }
+      success: function (response) {
+        console.log(response);
+        if (response.status === "success") {
+          jQuery(".spitout-user-created-message").html(
+            '<div class="so-success-msg">' + response.message + "</div>"
+          );
+        } else {
+          if (response.type === "username") {
+            appendErrorMessage(response.type, response.message);
+          } else if (response.type === "email") {
+            appendErrorMessage(response.type, response.message);
+          } else if (response.type === "pwd") {
+            appendErrorMessage(response.type, response.message);
+          } else {
+            // Handle the default condition here
+            console.error("Unknown response type:", response.type);
+          }
+        }
 
-    //     location.reload();
-    //   },
-    // });
+        location.reload();
+      },
+    });
   }
 });
 

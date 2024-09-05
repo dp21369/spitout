@@ -2794,7 +2794,6 @@ function get_popular_seller($count = -1)
                 );
             }
         }
-
         // Sort sellers by total sales in descending order
         usort($sellers, function ($a, $b) {
             return $b['total_sales'] - $a['total_sales'];
