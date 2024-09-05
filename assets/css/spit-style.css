@@ -1151,9 +1151,7 @@ h5.home-shop-link {
   border-radius: 10px;
 }
 
-.so-feed-uploaded-img
-  .plyr--video
-  .plyr.img-fluid:not(.plyr:-webkit-full-screen video) {
+.so-feed-uploaded-img .plyr--video .plyr.img-fluid:not(.plyr:-webkit-full-screen video) {
   max-height: 700px;
 }
 
@@ -1221,56 +1219,38 @@ h5.home-shop-link {
 }
 
 /* .so-likes-list-modal-content .so-likes-list-wrapper a:not(.so-likes-list-name a) { */
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions {
   margin-left: auto;
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions
-  h6.so-edit-card-option {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions h6.so-edit-card-option {
   padding: 0;
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions:has(.so-following-seller) {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions:has(.so-following-seller) {
   background-color: var(--pink);
   border-radius: 50px;
   padding: 5px 12px;
   border: 1px solid #ea1e79;
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions:has(.so-following-seller)
-  h6,
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions:has(.so-following-seller) h6,
 .so-likes-list-wrapper .spitout-modal-likes-actions .so-view-profile h6 {
   color: #fff;
   font-size: 14px;
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions:has(.so-follow-seller) {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions:has(.so-follow-seller) {
   border: 1px solid #bfbfbf;
   padding: 4px 24px;
   border-radius: 50px;
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions
-  h6 {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions h6 {
   border-bottom: 0;
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions
-  span {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions span {
   font-size: 12px;
 }
 
@@ -1572,11 +1552,7 @@ body.contact-not-logged-in {
   padding: 30px 40px;
 }
 
-.so-all-category
-  .so-browse-categories.mt-4
-  ul.so-browse-categories-lists
-  li
-  a:hover {
+.so-all-category .so-browse-categories.mt-4 ul.so-browse-categories-lists li a:hover {
   background-color: #ea1e79 !important;
 }
 
@@ -1631,28 +1607,18 @@ body.contact-not-logged-in {
   width: auto;
 }
 
-.so-settings-profile-form-category
-  .select2-selection--multiple
-  ul
-  li.select2-selection__choice {
+.so-settings-profile-form-category .select2-selection--multiple ul li.select2-selection__choice {
   background-color: var(--pink);
   color: #fff;
   border: 1px solid #ea1e79;
   border-radius: 20px;
 }
 
-.so-settings-profile-form-category
-  .select2-selection--multiple
-  ul
-  li.select2-selection__choice
-  button {
+.so-settings-profile-form-category .select2-selection--multiple ul li.select2-selection__choice button {
   color: #fff;
 }
 
-.so-settings-profile-form-category
-  .select2-container--default
-  .select2-selection--multiple
-  .select2-selection__choice__display {
+.so-settings-profile-form-category .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -1982,9 +1948,7 @@ select::-webkit-expand {
   font-size: 18px;
 }
 
-input:not(#so-profile-img):not(#so-banner-img):not([type="submit"]):not(
-    .page-template-template-home-page input
-  ) {
+input:not(#so-profile-img):not(#so-banner-img):not([type="submit"]):not(.page-template-template-home-page input) {
   padding: 16px 20px;
   border: 1px solid #dbdbdb;
   border-radius: 50px;
@@ -2018,7 +1982,7 @@ input:not(#so-profile-img):not(#so-banner-img):not([type="submit"]):not(
   width: max-content;
 }
 
-.so-settings-profile-form-password + input,
+.so-settings-profile-form-password+input,
 .settings-pannel .delete-account button {
   background-color: white;
   color: #ea1e79;
@@ -2030,7 +1994,7 @@ input:not(#so-profile-img):not(#so-banner-img):not([type="submit"]):not(
   padding: 20px;
 }
 
-.so-settings-profile-form-password + input:hover,
+.so-settings-profile-form-password+input:hover,
 .settings-pannel .delete-account button:hover {
   background-color: var(--pink);
   color: white;
@@ -2092,9 +2056,7 @@ input:not(#so-profile-img):not(#so-banner-img):not([type="submit"]):not(
   width: 100%;
 }
 
-.so-settings-profile-form-category
-  .select2-container
-  .select2-selection--multiple {
+.so-settings-profile-form-category .select2-container .select2-selection--multiple {
   padding: 10px 20px;
   border: 1px solid #dbdbdb;
   border-radius: 30px;
@@ -2193,14 +2155,11 @@ input:not(#so-profile-img):not(#so-banner-img):not([type="submit"]):not(
   font-size: 12px;
 }
 
-.profile-text-follow-option
-  .so-follow-following-wrapper:has(.so-following-seller) {
+.profile-text-follow-option .so-follow-following-wrapper:has(.so-following-seller) {
   background-color: var(--pink);
 }
 
-.profile-text-follow-option
-  .so-follow-following-wrapper:has(.so-following-seller)
-  p {
+.profile-text-follow-option .so-follow-following-wrapper:has(.so-following-seller) p {
   background-color: var(--pink);
   color: #fff;
 }
@@ -3299,7 +3258,7 @@ body.home .nf-arrow-up {
   background: #f4f4f4;
 }
 
-.nf-dropdown > ul > li > a {
+.nf-dropdown>ul>li>a {
   display: flex;
   gap: 10px;
   align-items: self-end;
@@ -3561,12 +3520,12 @@ body.home .nf-arrow-up {
   cursor: pointer;
 }
 
-.so-product-review .star-ratings :checked ~ label {
+.so-product-review .star-ratings :checked~label {
   color: var(--pink);
 }
 
 .so-product-review .star-ratings label:hover,
-.so-product-review .star-ratings label:hover ~ label {
+.so-product-review .star-ratings label:hover~label {
   color: var(--pink);
 }
 
@@ -3845,10 +3804,7 @@ abbr[title] {
   width: 100%;
 }
 
-#customer_details.col2-set
-  .form-row
-  .select2-container--default
-  .select2-selection--single {
+#customer_details.col2-set .form-row .select2-container--default .select2-selection--single {
   background-color: #fff;
   border: 1px solid #aaa;
   border-radius: 30px;
@@ -3875,10 +3831,7 @@ abbr[title] {
   width: 100%;
 }
 
-.select2-container--default
-  .select2-selection--single
-  .select2-selection__arrow
-  b {
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
   background: url(../img/down-arrow-svg.png);
   width: 12px;
   height: 8px;
@@ -4029,9 +3982,7 @@ section.gutentor-module-accordion {
 }
 
 .accordion-block .gutentor-module-accordion-item-heading:hover,
-.accordion-block
-  .gutentor-module-accordion-active
-  .gutentor-module-accordion-item-heading,
+.accordion-block .gutentor-module-accordion-active .gutentor-module-accordion-item-heading,
 .accordion-block .gutentor-module-accordion-icon-active,
 .accordion-block .gutentor-module-accordion-icon-active:hover {
   border: 1px transparent;
@@ -4156,31 +4107,20 @@ body.woocommerce-lost-password form.lost_reset_password input[type="text"] {
   margin-bottom: 20px;
 }
 
-.so-termsnpolicy-tab
-  .gutentor-tabs-style-outline
-  .gutentor-module-tabs-nav
-  .gutentor-module-tabs-item {
+.so-termsnpolicy-tab .gutentor-tabs-style-outline .gutentor-module-tabs-nav .gutentor-module-tabs-item {
   border: 1px solid transparent !important;
   border-bottom: 1px solid transparent !important;
 }
 
-.so-termsnpolicy-tab
-  .gutentor-tabs-style-outline
-  .gutentor-module-tabs-nav
-  .gutentor-tabs-nav-active,
-.so-termsnpolicy-tab
-  .gutentor-tabs-style-outline
-  .gutentor-module-tabs-nav
-  .gutentor-module-tabs-item:hover {
+.so-termsnpolicy-tab .gutentor-tabs-style-outline .gutentor-module-tabs-nav .gutentor-tabs-nav-active,
+.so-termsnpolicy-tab .gutentor-tabs-style-outline .gutentor-module-tabs-nav .gutentor-module-tabs-item:hover {
   color: var(--pink) !important;
   border: 1px solid transparent !important;
   background: transparent;
   border-bottom: 1px solid var(--pink) !important;
 }
 
-.so-termsnpolicy-tab
-  .gutentor-tabs-style-outline
-  .gutentor-module-tabs-content {
+.so-termsnpolicy-tab .gutentor-tabs-style-outline .gutentor-module-tabs-content {
   border: none;
 }
 
@@ -4204,6 +4144,7 @@ body.woocommerce-lost-password form.lost_reset_password input[type="text"] {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 768px) {
+
   /* .page-template-template-seller .custom-logo-link,
   .page-template-template-seller .so-nav-toggle,
   .nf-dropdown .nf-arrow-up {
@@ -4515,10 +4456,7 @@ MY SPITOUT
   color: #fff;
 }
 
-.so-my-spitout-tabs
-  .tab-content
-  button.so-my-spitout-addNewProduct-btn:hover
-  a {
+.so-my-spitout-tabs .tab-content button.so-my-spitout-addNewProduct-btn:hover a {
   color: var(--pink);
 }
 
@@ -4527,9 +4465,7 @@ MY SPITOUT
 }
 
 .so-my-spitout-tabs .tab-content button.so-my-spitout-addNewProduct-btn:focus,
-.so-my-spitout-tabs
-  .tab-content
-  button.so-my-spitout-addNewProduct-btn:active:focus,
+.so-my-spitout-tabs .tab-content button.so-my-spitout-addNewProduct-btn:active:focus,
 .so-my-spitout-tabs .tab-content button.so-my-spitout-addNewProduct-btn:active {
   background: transparent;
   border-color: var(--pink);
@@ -4631,9 +4567,7 @@ MY SPITOUT
   min-width: 112px;
   width: 200px;
 } */
-.so-my-spitout-tabs
-  .tab-content
-  table:not(.so-my-spitout-tabs .tab-content #ui-datepicker-div table) {
+.so-my-spitout-tabs .tab-content table:not(.so-my-spitout-tabs .tab-content #ui-datepicker-div table) {
   margin: 30px 0 0;
   border-collapse: separate;
   /* border-spacing: 0 22px; */
@@ -4785,10 +4719,7 @@ MODAL
   display: grid;
 }
 
-.so-my-spitout-modal.so-my-spitout-deteteModal
-  .modal-dialog
-  .modal-content
-  .modal-header {
+.so-my-spitout-modal.so-my-spitout-deteteModal .modal-dialog .modal-content .modal-header {
   padding: 45px 30px 5px;
   border-bottom: 0;
 }
@@ -5034,14 +4965,7 @@ SALES
   color: rgb(30, 30, 30) !important;
 }
 
-.so-my-spitout-sales-table
-  table
-  tr
-  td.so-my-spitout-sales-detail
-  a:hover
-  .so-custom-icon
-  svg
-  path {
+.so-my-spitout-sales-table table tr td.so-my-spitout-sales-detail a:hover .so-custom-icon svg path {
   fill: #888888;
 }
 
@@ -5406,9 +5330,7 @@ RESPONSIVE
     margin-bottom: 0;
   }
 
-  .so-my-spitout-tabs
-    .tab-content
-    h4:not(.so-my-spitout-tabs .tab-content .card h4) {
+  .so-my-spitout-tabs .tab-content h4:not(.so-my-spitout-tabs .tab-content .card h4) {
     font-size: 20px;
     position: relative;
     top: 10px;
@@ -5716,6 +5638,7 @@ h6.so-contact-form-subheading {
 }
 
 @media screen and (max-width: 767px) {
+
   .wpcf7-form input,
   .wpcf7-form textarea {
     width: 100%;
@@ -6665,16 +6588,11 @@ h6.so-contact-form-subheading {
 
 .so-following-list-wrapper a:not(.so-following-name a):hover,
 .so-followers-wrapper a:not(.so-followers-name a):hover,
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions:has(.so-following-seller):hover {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions:has(.so-following-seller):hover {
   background-color: var(--white);
 }
 
-.so-likes-list-modal-content
-  .so-likes-list-wrapper
-  .spitout-modal-likes-actions:has(.so-following-seller):hover
-  h6 {
+.so-likes-list-modal-content .so-likes-list-wrapper .spitout-modal-likes-actions:has(.so-following-seller):hover h6 {
   color: var(--pink);
 }
 
@@ -6828,12 +6746,9 @@ h6.so-contact-form-subheading {
   width: 20px;
 }
 
-:is(
-    .so-order-pay-status .so-ordercard-status-paid,
-    .so-order-pay-status .so-ordercard-status-arrivesoon,
-    .so-order-pay-status .so-ordercard-status-paid.completed
-  )
-  p {
+:is(.so-order-pay-status .so-ordercard-status-paid,
+  .so-order-pay-status .so-ordercard-status-arrivesoon,
+  .so-order-pay-status .so-ordercard-status-paid.completed) p {
   font-weight: 600;
 }
 
@@ -8294,17 +8209,11 @@ fieldset.hide-current {
   background-color: #a6a6a6;
 }
 
-.so-sales-view-confirm-page
-  .so-sales-view-confirm-page-tabs
-  button.nav-link.active
-  h6 {
+.so-sales-view-confirm-page .so-sales-view-confirm-page-tabs button.nav-link.active h6 {
   color: var(--pink);
 }
 
-.so-sales-view-confirm-page
-  .so-sales-view-confirm-page-tabs
-  button.nav-link
-  h6 {
+.so-sales-view-confirm-page .so-sales-view-confirm-page-tabs button.nav-link h6 {
   font-weight: 600;
 }
 
@@ -8581,10 +8490,7 @@ fieldset.hide-current {
   margin-right: auto;
 } */
 
-#pills-awaiting-confirmation
-  .so-sc-nd-single-buyer-details
-  form
-  .so-nd-single-confirm-order {
+#pills-awaiting-confirmation .so-sc-nd-single-buyer-details form .so-nd-single-confirm-order {
   border: 1px solid #dbdbdb;
   padding: 15px;
   border-radius: 50px;
@@ -9051,7 +8957,7 @@ fieldset.hide-current {
   font-weight: 600;
 }
 
-.so-thankyou-page .woocommerce-order-overview + p {
+.so-thankyou-page .woocommerce-order-overview+p {
   color: var(--pink);
   font-weight: 600;
   text-align: center;
@@ -9071,12 +8977,7 @@ fieldset.hide-current {
 
 .so-thankyou-page .woocommerce-order-details table tr th:not(:first-child),
 .so-thankyou-page .woocommerce-order-details table tfoot td,
-.so-thankyou-page
-  .woocommerce-order-details
-  table
-  tbody
-  tr
-  td:not(:first-child) {
+.so-thankyou-page .woocommerce-order-details table tbody tr td:not(:first-child) {
   text-align: end;
 }
 
@@ -9101,6 +9002,7 @@ fieldset.hide-current {
 }
 
 @media screen and (max-width: 480px) {
+
   /* sales order page */
   .so-order-page-details .buyer-order-filters {
     gap: 5px;
@@ -9406,7 +9308,7 @@ fieldset.hide-current {
   cursor: pointer;
 }
 
-.spitout-create-comment-form-wrapper textarea:focus + .so-create-comment {
+.spitout-create-comment-form-wrapper textarea:focus+.so-create-comment {
   top: 8px;
 }
 
@@ -9465,10 +9367,7 @@ fieldset.hide-current {
   font-size: 12px;
 }
 
-.spitout-comment-display-wrap
-  .so-commentbox-wrapper
-  .spitoutCommentlikeBtn
-  i::before {
+.spitout-comment-display-wrap .so-commentbox-wrapper .spitoutCommentlikeBtn i::before {
   font-size: 16px;
 }
 
@@ -9577,6 +9476,7 @@ fieldset.hide-current {
 
 /* comment responsive */
 @media screen and (max-width: 480px) {
+
   .spitout-create-comment-form-wrapper textarea,
   .so-comment-user-wrap .so-comment-main-content {
     font-size: 12px;
@@ -9746,8 +9646,9 @@ NEW CHANGES CSS BY DEV
 body.seller-not-logged-in {
   background-color: #F4F4F4 !important;
 }
+
 .sellers-page-heading {
-  padding: 0 15px ;
+  padding: 0 15px;
 }
 
 .seller-filter-opened {
@@ -9786,7 +9687,7 @@ body.seller-not-logged-in {
   font-size: 36px;
 }
 
-.sellers-page-heading h4 span{
+.sellers-page-heading h4 span {
   color: var(--pink);
 }
 
@@ -9830,11 +9731,11 @@ body.seller-not-logged-in {
   width: calc((9.09% - 40px) + (40px / 10));
 }
 
-.seller-cat-wrapper > .seller-cat-checkbox {
+.seller-cat-wrapper>.seller-cat-checkbox {
   display: none;
 }
 
-.seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 10) {
+.seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 10) {
   display: block;
   /* Show only the first 9 children */
 }
@@ -9993,6 +9894,7 @@ body.seller-not-logged-in {
   background: #FFF;
   border-radius: 30px;
 }
+
 /* SELLER HEADER  */
 
 .so-seller-header {
@@ -10006,7 +9908,7 @@ body.seller-not-logged-in {
   padding: 8px 10px;
 }
 
-.seller-card-block  .seller-no-tag{
+.seller-card-block .seller-no-tag {
   visibility: hidden;
   opacity: 0;
 }
@@ -10042,6 +9944,7 @@ body.seller-not-logged-in {
   justify-content: space-between;
   align-items: center;
 }
+
 .seller-new-rating i {
   color: #fdc735;
 }
@@ -10142,7 +10045,7 @@ body.seller-not-logged-in {
   margin: 60px auto;
 }
 
-#seller-pills-tabContent > a {
+#seller-pills-tabContent>a {
   height: 100%;
   display: inline-block;
   width: 100%;
@@ -10158,17 +10061,16 @@ body.seller-not-logged-in {
 NEW HOME PAGE CSS  
 --------------------------------------------*/
 /* .home, */
-.page-id-3042{
-  background: linear-gradient(
-    180deg,
-    rgb(248, 222, 249) 0%,
-    rgb(255, 255, 255) 100%
-  ) !important;
+.page-id-3042 {
+  background: linear-gradient(180deg,
+      rgb(248, 222, 249) 0%,
+      rgb(255, 255, 255) 100%) !important;
   /* background: #f8def9 !important; */
 }
 
 /* Header Section  */
-.navbar-brand, .nav-rightside-icons {
+.navbar-brand,
+.nav-rightside-icons {
   flex-basis: 15%;
   width: auto !important;
   justify-content: flex-end;
@@ -10183,12 +10085,12 @@ NEW HOME PAGE CSS
 
 
 .so-navigation-menu li:hover,
-.so-navigation-menu li.active { 
+.so-navigation-menu li.active {
   border: 2px solid #eb9ac2;
   border-radius: 50px;
 }
 
-.so-navigation-menu li:hover a{
+.so-navigation-menu li:hover a {
   color: var(--primary-black) !important;
 }
 
@@ -10200,12 +10102,11 @@ section.wp-block-group {
   padding-bottom: 0;
 }
 
-.page-id-3042 .wp-block-heading
-.home .wp-block-heading {
+.page-id-3042 .wp-block-heading .home .wp-block-heading {
   line-height: 1;
 }
 
-.banner-content > div {
+.banner-content>div {
   max-width: 500px;
   /* margin: 0 auto; */
   margin-left: auto;
@@ -10230,11 +10131,11 @@ section.wp-block-group {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(234,30,121,0.1) 0%, rgba(255,255,255,0) 30%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(234, 30, 121, 0.1) 0%, rgba(255, 255, 255, 0) 30%);
   /* z-index: 1; */
 }
 
-.banner-section .wp-block-group{
+.banner-section .wp-block-group {
   /* z-index: 9; */
 }
 
@@ -10292,17 +10193,15 @@ section.wp-block-group {
 }
 
 .special-text mark {
-  background: linear-gradient(
-    90deg,
-    rgb(208, 124, 253) 0%,
-    rgb(201, 35, 118) 100%
-  );
+  background: linear-gradient(90deg,
+      rgb(208, 124, 253) 0%,
+      rgb(201, 35, 118) 100%);
   padding: 6px 30px;
   border-radius: 50px;
   color: #fff !important;
   position: relative;
   display: inline-block;
-    line-height: 1.2;
+  line-height: 1.2;
 }
 
 .special-text mark:before,
@@ -10448,10 +10347,11 @@ p.custom-pill-box {
   line-height: 1;
 }
 
-.pink-pill-box  {
+.pink-pill-box {
   background-color: #fae5fa;
 }
-.yellow-pill-box  {
+
+.yellow-pill-box {
   background-color: #faf7e5;
   color: #f9ae43;
 }
@@ -10529,7 +10429,7 @@ p.custom-pill-box {
   cursor: pointer;
 }
 
-.cat-item a{
+.cat-item a {
   display: flex;
   column-gap: 5px;
   align-items: center;
@@ -10538,7 +10438,8 @@ p.custom-pill-box {
   cursor: pointer;
   transition: all 0.1s ease;
 }
-.cat-item a:last-child{
+
+.cat-item a:last-child {
   margin-bottom: 5px;
 }
 
@@ -10569,7 +10470,7 @@ p.custom-pill-box {
 }
 
 .selected-cat span,
-.cat-item  span {
+.cat-item span {
   font-weight: 700;
   display: inline-block;
   width: calc(100% - 35px);
@@ -10707,7 +10608,7 @@ p.custom-pill-box {
 }
 
 .home-category-section .so-browse-categories {
-margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 /* HOME BOTTOM CTA  */
