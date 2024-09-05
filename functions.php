@@ -2365,6 +2365,77 @@ function so_banner_content()
     // Get the count of posts
     $seller_cat_count = $seller_type_query->post_count;
 
+    // rating testing here starts
+
+    global $wpdb;
+
+    // Get all user IDs with the 'seller' role
+    $seller_ids = get_users(array(
+        'role'    => 'seller',
+        'fields'  => 'ID',
+    ));
+
+    // Check if there are any seller IDs
+    global $wpdb;
+
+    // Get all user IDs with the 'seller' role
+    $seller_ids = get_users(array(
+        'role'    => 'seller',
+        'fields'  => 'ID',
+    ));
+
+    // If there are sellers
+    if (!empty($seller_ids)) {
+        // Prepare the placeholders for the seller IDs
+        $placeholders = implode(',', array_fill(0, count($seller_ids), '%d'));
+
+        // 1. Count the number of unique users with a 5-star rating
+        $query_unique_users = $wpdb->prepare("
+        SELECT COUNT(DISTINCT c.comment_post_ID) 
+        FROM {$wpdb->commentmeta} cm
+        INNER JOIN {$wpdb->comments} c ON cm.comment_id = c.comment_ID
+        WHERE cm.meta_key = 'rating'
+        AND cm.meta_value = 5
+        AND c.comment_post_ID IN ($placeholders)
+    ", ...$seller_ids);
+
+        $unique_user_count = $wpdb->get_var($query_unique_users);
+
+        // 2. Get the IDs of users who received a 5-star rating
+        $query_user_ids = $wpdb->prepare("
+        SELECT DISTINCT c.comment_post_ID
+        FROM {$wpdb->commentmeta} cm
+        INNER JOIN {$wpdb->comments} c ON cm.comment_id = c.comment_ID
+        WHERE cm.meta_key = 'rating'
+        AND cm.meta_value = 5
+        AND c.comment_post_ID IN ($placeholders)
+    ", ...$seller_ids);
+
+        $user_ids_with_5_star = $wpdb->get_col($query_user_ids);
+
+        // 3. Get the total number of ratings
+        $query_total_ratings = $wpdb->prepare("
+        SELECT COUNT(*)
+        FROM {$wpdb->commentmeta} cm
+        INNER JOIN {$wpdb->comments} c ON cm.comment_id = c.comment_ID
+        WHERE cm.meta_key = 'rating'
+        AND c.comment_post_ID IN ($placeholders)
+    ", ...$seller_ids);
+
+        $total_ratings = $wpdb->get_var($query_total_ratings);
+
+        // Output the results
+        // echo 'Number of unique users with 5-star ratings: ' . $unique_user_count . '<br>';
+        // echo 'User IDs with 5-star ratings: ';
+        // print_r($user_ids_with_5_star);
+        // echo '<br>';
+        // echo 'Total number of ratings: ' . $total_ratings;
+    }
+
+    // Output or use the $ratings array as needed
+
+
+    // rating testing here ends
 
     ?>
     <div class="seller-dropdown d-flex">
@@ -2404,15 +2475,14 @@ function so_banner_content()
 
     <div class="banner-rewiews">
         <div class="reviewers-img">
-            <figure>
-                <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="reviewer-image">
-            </figure>
-            <figure>
-                <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="reviewer-image">
-            </figure>
-            <figure>
-                <img src="/wp-content/uploads/2024/06/profile-1.jpg" alt="reviewer-image">
-            </figure>
+            <?php if (!empty($user_ids_with_5_star))
+                foreach ($user_ids_with_5_star as $user_id) {
+                    $attachment_id = (int) get_user_meta($user_id, 'so_profile_img', true);
+                    $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70); ?>
+                <figure>
+                    <img src="<?php echo esc_url($seller_img_url); ?>" alt="reviewer-image">
+                </figure>
+            <?php } ?>
         </div>
         <div class="review-details">
             <div class="review-icons">
@@ -2425,7 +2495,7 @@ function so_banner_content()
                 <span>5.0</span>
             </div>
             <div class="review-text">
-                <p>From 150+ Reviews</p>
+                <p>From <?php echo $total_ratings; ?>+ Reviews</p>
             </div>
         </div>
     </div>
