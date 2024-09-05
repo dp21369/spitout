@@ -2453,7 +2453,10 @@ function so_banner_content()
                         $cat_url = get_permalink($post_id);
                         $title = get_the_title();
                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
-                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70); ?>
+                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70); 
+                        if (!$featured_image_url) {
+                            $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
+                        }?>
                         <div class="cat-item">
                             <a href="<?php echo esc_url($cat_url); ?>">
                                 <figure>
