@@ -2201,7 +2201,7 @@ function load_filtered_sellers()
                                         if ($is_top_seller) { ?>
                                             <span class="seller-tag-popular custom-pill-box yellow-pill-box">Top Seller</span>
                                         <?php } else { ?>
-                                            <span class="seller-tag custom-pill-box"></span>
+                                            <span class="seller-no-tag custom-pill-box yellow-pill-box">No tags</span>
                                         <?php } ?>
                                         <h5 class="text-center m-0 p-2 d-flex">
                                             <?php echo $seller_data->display_name; ?>
