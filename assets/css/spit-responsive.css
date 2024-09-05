@@ -27,6 +27,7 @@ Responsive queries here
 }
 
 @media screen and (max-width: 1023px) {
+
   .so-nav-toggle,
   .so-navigation .btn {
     padding: 15px 25px;
@@ -109,9 +110,11 @@ Responsive queries here
   .so-navigation .bi-search {
     display: none;
   }
+
   .so-navigation #navbarNav ul li a.woo-wallet-menu-contents {
     padding: 15px 0;
   }
+
   /* .logged-in .so-navigation {
         /* padding: 0; */
 
@@ -470,6 +473,7 @@ Responsive queries here
   .so-buyer-profile-page .so-profile-new-container {
     padding: 0 15px;
   }
+
   /* ORDER/SALES */
   .so-sc-nd-order-details.container {
     padding-bottom: 20px;
@@ -573,10 +577,12 @@ Responsive queries here
     margin: 15px;
     gap: 0;
   }
+
   .notification-count {
     right: -7px;
     top: -4px;
   }
+
   .so-login-btn {
     position: absolute;
     right: 22px;
@@ -661,20 +667,23 @@ Responsive queries here
     max-height: 500px;
     object-fit: contain;
   }
-	.profile-user-price-details{
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 5px;
-	}
-	.profile-user-saliva-price{
-		margin-left: 30px;
-		width: 90%;
-		justify-content: space-between;	
-	}
-	.profile-user-saliva-price input{
-		width: 20px !important;
-	}
-	
+
+  .profile-user-price-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .profile-user-saliva-price {
+    margin-left: 30px;
+    width: 90%;
+    justify-content: space-between;
+  }
+
+  .profile-user-saliva-price input {
+    width: 20px !important;
+  }
+
 
   /* newsfeed page css=========================================================================================== */
   .spitout-feed-card-wrapper .so-feed-card-wImage .card-body {
@@ -931,9 +940,7 @@ Responsive queries here
     margin-bottom: 5px;
   }
 
-  .profile-main-option
-    .profile-text-follow-option.idenfy_verify
-    a.idenfy-button,
+  .profile-main-option .profile-text-follow-option.idenfy_verify a.idenfy-button,
   .so-buyer-profile-page .edit-profile-button button,
   .profile-main-option .profile-text-follow-option a.idenfy-button,
   .profile-text-follow-option .edit-profile-button button {
@@ -948,31 +955,38 @@ Responsive queries here
   #pills-media .so-feed-uploaded-img {
     padding: 20px;
   }
+
   /* checkout page */
   .woocommerce-checkout .woo-title,
   .woocommerce-checkout #order_review_heading {
     padding: 10px;
   }
+
   .woocommerce-checkout .woo-note,
   .woocommerce-checkout .seller-wrapper,
   .woocommerce-checkout #order_review {
     margin: 20px 10px;
   }
+
   .woocommerce-checkout #customer_details .col-1,
   .woocommerce-checkout #customer_details.col2-set {
     padding: 0;
   }
+
   .so-settings-panel-titles .livechat_button a {
     font-size: 14px;
   }
+
   /* order/sales */
   .sales-product {
     flex-direction: column;
   }
+
   .sales-product h6 {
     margin-right: auto;
     margin-left: 0 !important;
   }
+
   .so-order-page-details .so-ordercard-buyer-details {
     flex-wrap: wrap;
   }
@@ -1051,16 +1065,20 @@ Responsive queries here
     margin-bottom: -40px;
   }
 }
+
 @media screen and (min-width: 991px) and (max-width: 1200px) {
   .logged-in .nav-rightside-icons {
     gap: 5px;
   }
+
   .so-navigation-menu a {
     font-size: 14px;
   }
+
   .so-navigation .container {
     max-width: 100%;
   }
+
   .so-navigation a.navbar-brand {
     width: 75px;
   }
@@ -1120,11 +1138,9 @@ Responsive queries here
     padding: 10px;
   }
 }
+
 @media screen and (min-width: 1280px) {
-  .logged-in
-    a.navbar-brand:not(.admin-bar a.navbar-brand):not(
-      .so-footer-logo a.navbar-brand
-    ) {
+  .logged-in a.navbar-brand:not(.admin-bar a.navbar-brand):not(.so-footer-logo a.navbar-brand) {
     width: 18%;
   }
 }
@@ -1135,39 +1151,47 @@ Responsive queries here
 
   .so-navigation .so-nav-toggle .navbar-toggler-icon {
     align-items: center;
-}
+  }
 
-.logged-in .so-navigation .so-nav-toggle {
-  top: 18px !important;
-  padding: 14px 25px;
-}
+  .logged-in .so-navigation .so-nav-toggle {
+    top: 18px !important;
+    padding: 14px 25px;
+  }
 
   .banner-section {
     padding-top: 0;
     background-position: center 100px;
-}
+  }
 
-.banner-overlay-image {
-  max-width: 50%;
+  .banner-overlay-image {
+    max-width: 50%;
 
-}
+  }
 
-.seller-cat-wrapper {
-  gap: 20px;
-}
+  .seller-cat-wrapper {
+    gap: 20px;
+  }
 
-  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 10) {
+  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 10) {
     display: none;
   }
 
-  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 6) {
+  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 6) {
     display: block;
   }
 
-  .seller-search-categories .seller-cat-checkbox, 
+  .seller-search-categories .seller-cat-checkbox,
   .seller-search-categories .seller-more {
     width: calc((14.28% - 20px) + (20px / 7));
-}
+  }
+
+  .card-box .wp-block-column {
+    flex-basis: 100% !important;
+  }
+
+  .card-box .wp-block-image img {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -1175,6 +1199,7 @@ Responsive queries here
   .logged-in .so-navigation .so-nav-toggle {
     padding: 0;
   }
+
   .seller-dropdown.d-flex {
     gap: 20px;
     justify-content: center;
@@ -1188,7 +1213,7 @@ Responsive queries here
   .banner-section {
 
     background-position: center top;
-}
+  }
 
   .home-category-section .section-header {
     margin-bottom: 0;
@@ -1207,25 +1232,25 @@ Responsive queries here
     margin-bottom: 0;
     font-size: 24px;
     line-height: normal;
-}
+  }
 
   .section-header {
     margin-bottom: 25px;
   }
 
   .seller-tab-section .nav-pills {
-gap: 15px;
-}
+    gap: 15px;
+  }
 
   .seller-cat-wrapper {
     gap: 10px;
-}
+  }
 
-  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 10) {
+  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 10) {
     display: none;
   }
 
-  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 4) {
+  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 4) {
     display: block;
   }
 
@@ -1237,40 +1262,63 @@ gap: 15px;
   .seller-card-block .so-seller-header {
     flex-wrap: wrap;
     justify-content: center;
-}
+  }
 
-.seller-card-block .seller-page-location {
-  justify-content: center;
-}
-.seller-detailed-info {
-  gap: 15px;
-  justify-content: space-around;
-}
+  .seller-card-block .seller-page-location {
+    justify-content: center;
+  }
 
-.seller-new-rating p {
-  text-align: center;
-}
+  .seller-detailed-info {
+    gap: 15px;
+    justify-content: space-around;
+  }
+
+  .seller-new-rating p {
+    text-align: center;
+  }
 }
 
 
 @media screen and (max-width: 480px) {
-  .shortcode-seller-wrapper .col-6, #seller-pills-tabContent .col-6 {
+
+  .shortcode-seller-wrapper .col-6,
+  #seller-pills-tabContent .col-6 {
     max-width: 100%;
     flex: 0 0 100%;
-}
+  }
 
-.so-new-seller-desc figure {
-  height: 150px;
-  width: 150px;
-}
+  .so-new-seller-desc figure {
+    height: 150px;
+    width: 150px;
+  }
 
-.so-seller-header .so-new-sellers-name {
-  flex-basis: 100%;
-}
+  .so-seller-header .so-new-sellers-name {
+    flex-basis: 100%;
+  }
 
-.seller-card-block .so-new-sellers-name h5 {
-  justify-content: center;
-}
+  .seller-card-block .so-new-sellers-name h5 {
+    justify-content: center;
+  }
+
+  .banner-content .seller-dropdown {
+    border: 0;
+    padding: 0;
+  }
+
+  .banner-cat-select {
+    flex: 0 100%;
+  }
+
+  .banner-cat-select {
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: 50px;
+  }
+
+  .banner-cat-select:before {
+    right: 25px;
+
+  }
 
 
 }

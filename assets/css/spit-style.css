@@ -10493,6 +10493,7 @@ p.custom-pill-box {
   background: #FFF;
   width: 100%;
   top: calc(100% + 10px);
+  left: 0;
   padding: 15px;
   visibility: hidden;
   opacity: 0;
@@ -10662,7 +10663,7 @@ p.custom-pill-box {
 }
 
 .card-box .wp-block-column {
-  padding: 50px 30px;
+  padding: 45px;
   border-radius: 20px;
   flex: 1;
 }
@@ -10693,8 +10694,8 @@ p.custom-pill-box {
 }
 
 .card-box .overflow-image {
-  margin-left: -30px;
-  margin-right: -30px;
+  margin-left: -45px;
+  margin-right: -45px;
 }
 
 .card-box .wp-block-column p {
