@@ -1128,3 +1128,132 @@ Responsive queries here
     width: 18%;
   }
 }
+
+
+/* RESPONSIVE CSS  */
+@media screen and (max-width: 992px) {
+
+  .so-navigation .so-nav-toggle .navbar-toggler-icon {
+    align-items: center;
+}
+
+.logged-in .so-navigation .so-nav-toggle {
+  top: 18px !important;
+  padding: 14px 25px;
+}
+
+  .banner-section {
+    padding-top: 0;
+    background-position: center 100px;
+}
+
+.banner-overlay-image {
+  max-width: 50%;
+
+}
+
+.seller-cat-wrapper {
+  gap: 20px;
+}
+
+  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 10) {
+    display: none;
+  }
+
+  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 6) {
+    display: block;
+  }
+
+  .seller-search-categories .seller-cat-checkbox, 
+  .seller-search-categories .seller-more {
+    width: calc((14.28% - 20px) + (20px / 7));
+}
+}
+
+@media screen and (max-width: 768px) {
+
+  .logged-in .so-navigation .so-nav-toggle {
+    padding: 0;
+  }
+  .seller-dropdown.d-flex {
+    gap: 20px;
+    justify-content: center;
+  }
+
+  section.wp-block-group {
+    padding-bottom: 0;
+    margin: 15px 0;
+  }
+
+  .banner-section {
+
+    background-position: center top;
+}
+
+  .home-category-section .section-header {
+    margin-bottom: 0;
+  }
+
+  .banner-text {
+    margin-top: 3rem;
+  }
+
+  .card-box .wp-block-column p {
+    padding: 0;
+  }
+
+  .section-header {
+    margin-bottom: 25px;
+  }
+
+  .seller-tab-section .nav-pills {
+gap: 15px;
+}
+
+  .seller-cat-wrapper {
+    gap: 10px;
+}
+
+  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 10) {
+    display: none;
+  }
+
+  .seller-cat-wrapper > .seller-cat-checkbox:nth-child(-n + 4) {
+    display: block;
+  }
+
+  .seller-search-categories .seller-cat-checkbox,
+  .seller-search-categories .seller-more {
+    width: calc((20% - 10px) + (10px / 5));
+  }
+
+  .seller-card-block .so-seller-header {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.seller-card-block .seller-page-location {
+  justify-content: center;
+}
+}
+
+
+@media screen and (max-width: 480px) {
+  .shortcode-seller-wrapper .col-6, #seller-pills-tabContent .col-6 {
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+
+.so-new-seller-desc figure {
+  height: 150px;
+  width: 150px;
+}
+
+.so-seller-header .so-new-sellers-name {
+  flex-basis: 100%;
+}
+
+.seller-card-block .so-new-sellers-name h5 {
+  justify-content: center;
+}
+}
