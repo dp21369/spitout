@@ -9778,6 +9778,7 @@ body.seller-not-logged-in {
 .seller-header-top {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .sellers-page-heading h4:first-child {
@@ -10003,6 +10004,11 @@ body.seller-not-logged-in {
 .seller-card-block .yellow-pill-box {
   font-size: 12px;
   padding: 8px 10px;
+}
+
+.seller-card-block  .seller-no-tag{
+  visibility: hidden;
+  opacity: 0;
 }
 
 .so-seller-header .so-new-sellers-name {

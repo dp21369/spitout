@@ -1202,6 +1202,13 @@ Responsive queries here
     padding: 0;
   }
 
+  .sellers-page-heading h4:first-child {
+    display: block;
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: normal;
+}
+
   .section-header {
     margin-bottom: 25px;
   }
@@ -1235,6 +1242,14 @@ gap: 15px;
 .seller-card-block .seller-page-location {
   justify-content: center;
 }
+.seller-detailed-info {
+  gap: 15px;
+  justify-content: space-around;
+}
+
+.seller-new-rating p {
+  text-align: center;
+}
 }
 
 
@@ -1256,4 +1271,6 @@ gap: 15px;
 .seller-card-block .so-new-sellers-name h5 {
   justify-content: center;
 }
+
+
 }
