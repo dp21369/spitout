@@ -10175,7 +10175,9 @@ NEW HOME PAGE CSS
   border-radius: 50px;
 }
 
-.so-navigation-menu li:hover {
+
+.so-navigation-menu li:hover,
+.so-navigation-menu li.active { 
   border: 2px solid #eb9ac2;
   border-radius: 50px;
 }
