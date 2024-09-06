@@ -1948,10 +1948,6 @@ function load_filtered_sellers()
                 $users_ids = get_popular_seller();
             }
             break;
-
-        case 'recommended':
-            // Code to execute if expression equals recommended
-            break;
         case 'new-sellers':
             if (!empty($selected_cat_ids) || !empty($searchValue) || !empty($location) || !empty($selectedMinAge) || !empty($selectedMaxAge) || !empty($selectedMinPrice) || !empty($selectedMaxPrice)) {
                 // Add the filter before running the query
@@ -2754,7 +2750,7 @@ function so_seller_list($atts)
 
 
 
-function get_popular_seller($total = 10)
+function get_popular_seller($total = 20)
 {
     $count = -1;
     // Query to get all users with the role 'seller'

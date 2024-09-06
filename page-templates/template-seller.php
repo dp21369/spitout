@@ -90,9 +90,6 @@ if ($all_sellers) { ?>
                                     <button class="nav-link" id="pills-popular-tab" data-toggle="pill" data-target="#pills-popular" type="button" role="tab" aria-controls="pills-popular" aria-selected="false" data-button-id="pills-popular-tab" data-tab="popular">Popular</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="pills-recommended-tab" data-toggle="pill" data-target="#pills-recommended" type="button" role="tab" aria-controls="pills-recommended" aria-selected="false" data-button-id="pills-recommended-tab" data-tab="recommended">Recommended</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-new-sellers-tab" data-toggle="pill" data-target="#pills-new-sellers" type="button" role="tab" aria-controls="pills-new-sellers" aria-selected="false" data-button-id="pills-new-sellers-tab" data-tab="new-sellers">New Sellers</button>
                                 </li>
                             </ul>
