@@ -2453,10 +2453,10 @@ function so_banner_content()
                         $cat_url = get_permalink($post_id);
                         $title = get_the_title();
                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
-                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70); 
+                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
                         if (!$featured_image_url) {
                             $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
-                        }?>
+                        } ?>
                         <div class="cat-item">
                             <a href="<?php echo esc_url($cat_url); ?>">
                                 <figure>
@@ -2754,8 +2754,9 @@ function so_seller_list($atts)
 
 
 
-function get_popular_seller($count = -1)
+function get_popular_seller($total = 10)
 {
+    $count = -1;
     // Query to get all users with the role 'seller'
     $user_args = array(
         'role' => 'seller' // Get users with the role 'seller'
@@ -2766,7 +2767,7 @@ function get_popular_seller($count = -1)
     $seller_ids = array();
     // Check if users are found
     if (!empty($user_query->results)) {
-        foreach ($user_query->results as $user) {
+        foreach ($user_query->results as $key => $user) {
             $user_id = $user->ID;
 
             // Get WooCommerce products for this user
@@ -2785,22 +2786,19 @@ function get_popular_seller($count = -1)
                 $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
                 $total_sales += $product_sales;
             }
-            if ($total_sales > 0) {
-                // Add the seller and their total sales to the array
-                $sellers[] = array(
-                    'user' => $user,
-                    'total_sales' => $total_sales
+            // Add the seller and their total sales to the array
+            $sellers[] = array(
+                'user' => $user,
+                'total_sales' => $total_sales
 
-                );
-            }
+            );
         }
         // Sort sellers by total sales in descending order
         usort($sellers, function ($a, $b) {
             return $b['total_sales'] - $a['total_sales'];
         });
-
         // Display the top sellers based on the total sales
-        $sellers = array_slice($sellers, 0);
+        $sellers = array_slice($sellers, 0, $total);
 
         foreach ($sellers as $seller) {
             $seller_ids[] = $seller['user']->ID;
