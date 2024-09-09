@@ -1182,7 +1182,7 @@ Responsive queries here
 
   .seller-search-categories .seller-cat-checkbox,
   .seller-search-categories .seller-more {
-    width: calc((14.28% - 20px) + (20px / 7));
+    width: calc((14.28% - 20px) + (20px / 6));
   }
 
   .card-box {
@@ -1261,7 +1261,7 @@ Responsive queries here
 
   .seller-search-categories .seller-cat-checkbox,
   .seller-search-categories .seller-more {
-    width: calc((20% - 10px) + (10px / 5));
+    width: calc((20% - 10px) + (10px / 4));
   }
 
   .seller-card-block .so-seller-header {
