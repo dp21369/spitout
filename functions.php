@@ -2507,7 +2507,7 @@ function so_banner_content()
                 <span>5.0</span>
             </div>
             <div class="review-text">
-                <p>From <?php echo $total_ratings; ?>+ Reviews</p>
+                <p>From <?php echo $unique_user_count; ?>+ Reviews</p>
             </div>
         </div>
     </div>
