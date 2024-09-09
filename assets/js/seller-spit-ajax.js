@@ -1,5 +1,4 @@
 jQuery(document).ready(function () {
-  jQuery("#reset-button").click();
   var selectedIds = [];
   var button_id;
   var button_target;
@@ -262,7 +261,6 @@ jQuery(document).ready(function () {
   }else{
     sellerSearch = undefined;
   }
-  console.log(sellerSearch);
   seller_filter(undefined, undefined, undefined, [], sellerSearch, undefined, undefined, undefined, undefined, undefined);
   // seller_filter();
 });
