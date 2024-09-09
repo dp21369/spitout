@@ -44,9 +44,13 @@ if ($all_sellers) { ?>
                                         $post_id = get_the_ID();
                                         $title = get_the_title();
                                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
-                                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
+                                        // $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
+
+                                        $featured_image_url = wp_get_attachment_image_src($featured_image_id,'thumbnail');
                                         if (!$featured_image_url) {
                                             $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
+                                        }else{
+                                            $featured_image_url = $featured_image_url[0];
                                         } ?>
                                         <div class="seller-cat-checkbox">
                                             <input type="checkbox" name="category-name[]" value="true" class="category-class" data-id="<?php echo $post_id; ?>">

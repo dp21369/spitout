@@ -563,11 +563,13 @@ function spitout_get_seller_information($seller_id)
 
         // $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';F
         $seller_url = get_author_posts_url($seller_id);
-        $seller_img_url = resize_and_compress_image($seller_img, 150, 150, 70);
+        // $seller_img_url = resize_and_compress_image($seller_img, 150, 150, 70);
+        $seller_img_url = wp_get_attachment_image_src($seller_img,'thumbnail');
         if (!$seller_img_url) {
             $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+        }else{
+            $seller_img_url = $seller_img_url[0];
         }
-        // $seller_img_url = wp_get_attachment_url($seller_img, 'thumbnail');
         $seller_location = get_user_meta($seller_id, "so_location", true);
         $seller_online_status = get_user_meta($seller_id, "user_status", true);
         $seller_final_location = $seller_location ? $seller_location : 'N/A';
@@ -684,7 +686,6 @@ function spitout_get_buyer_information($buyer_id)
         $buyer_data = get_userdata($buyer_id);
         $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';
         $buyer_url = get_author_posts_url($buyer_id);
-        // $buyer_img_url = wp_get_attachment_url($buyer_img, 'thumbnail');
         $buyer_location = get_user_meta($buyer_id, "so_location", true);
         $buyer_online_status = get_user_meta($buyer_id, "user_status", true);
         $buyer_final_location = $buyer_location ? $buyer_location : 'N/A';
@@ -2150,9 +2151,12 @@ function load_filtered_sellers()
                 <?php
                 foreach ($users_ids as $seller) {
                     $attachment_id = (int) get_user_meta($seller, 'so_profile_img', true);
-                    $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
+                    // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
+                    $seller_img_url = wp_get_attachment_image_src($attachment_id,'thumbnail');
                     if (!$seller_img_url) {
                         $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+                    }else{
+                        $seller_img_url = $seller_img_url[0];
                     }
                     $seller_data = get_userdata((int) $seller);
                     $seller_url = get_author_posts_url($seller);
@@ -2449,9 +2453,12 @@ function so_banner_content()
                         $cat_url = get_permalink($post_id);
                         $title = get_the_title();
                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
-                        $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
+                        // $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
+                        $featured_image_url = wp_get_attachment_image_src($featured_image_id,'thumbnail');
                         if (!$featured_image_url) {
                             $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
+                        }else{
+                            $featured_image_url = $featured_image_url[0];
                         } ?>
                         <div class="cat-item">
                             <a href="<?php echo esc_url($cat_url); ?>">
@@ -2477,7 +2484,13 @@ function so_banner_content()
             <?php if (!empty($user_ids_with_5_star))
                 foreach ($user_ids_with_5_star as $user_id) {
                     $attachment_id = (int) get_user_meta($user_id, 'so_profile_img', true);
-                    $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70); ?>
+                    // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70); 
+                    $seller_img_url = wp_get_attachment_image_src($attachment_id,'thumbnail');
+                    if (!$seller_img_url) {
+                        $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+                    }else{
+                        $seller_img_url = $seller_img_url[0];
+                    }?>
                 <figure>
                     <img src="<?php echo esc_url($seller_img_url); ?>" alt="reviewer-image">
                 </figure>
@@ -2624,9 +2637,12 @@ function so_seller_list($atts)
                 <?php
                 foreach ($seller_ids as $seller) {
                     $attachment_id = (int) get_user_meta($seller, 'so_profile_img', true);
-                    $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
+                    // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
+                    $seller_img_url = wp_get_attachment_image_src($attachment_id,'thumbnail');
                     if (!$seller_img_url) {
                         $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+                    }else{
+                        $seller_img_url = $seller_img_url[0];
                     }
                     $seller_data = get_userdata((int) $seller);
                     $seller_url = get_author_posts_url($seller);
