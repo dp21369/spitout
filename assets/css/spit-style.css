@@ -10403,7 +10403,7 @@ p.custom-pill-box {
   width: 100%;
   top: calc(100% + 10px);
   left: 0;
-  padding: 15px;
+  padding: 10px;
   visibility: hidden;
   opacity: 0;
   height: 0;
@@ -10411,6 +10411,9 @@ p.custom-pill-box {
   box-shadow: 0px 15px 18px 0px rgba(222, 222, 222, 0.63);
   border-radius: 5px;
   overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-color:  var(--pink) transparent;
+  scrollbar-width: thin;
 }
 
 .cat-option-dropdown.expanded {
@@ -10418,9 +10421,7 @@ p.custom-pill-box {
   opacity: 1;
   height: 300px;
   z-index: 1;
-  overflow-y: scroll;
-  scrollbar-color:  var(--pink) #FFF;
-  scrollbar-width: thin;
+
 }
 
 .cat-option-dropdown::-webkit-scrollbar {
