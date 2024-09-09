@@ -9992,6 +9992,10 @@ body.seller-not-logged-in {
   line-height: 1;
 }
 
+.seller-tab-col #seller-filter-dropdown svg path{
+  fill: #FFFFFF ;
+} 
+
 .seller-tab-col .seller-filter-dropdown-form {
   position: relative;
   /* border: 1px solid rgb(234 30 121 / 40%); */
