@@ -1,5 +1,5 @@
 # Theme Name: SpitOut
-## Tagline: Natural Intimacy Uniquely Yours
+### Tagline: Natural Intimacy Uniquely Yours
 
 # Description:
 SpitOut is a premium WordPress theme designed specifically for platforms focused on the buying and selling of custom fetish content, with an emphasis on intimacy and connection. Tailored for the unique niche of spit fetish enthusiasts, this theme combines sleek design with robust functionality to create a secure and engaging user experience.
