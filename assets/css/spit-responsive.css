@@ -1175,11 +1175,11 @@ Responsive queries here
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 10) {
     display: none;
   }
-  
+
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 6) {
     display: block;
   }
-  
+
   .seller-search-categories .seller-cat-checkbox,
   .seller-search-categories .seller-more {
     width: calc((14.28% - 20px) + (20px / 7));
@@ -1324,6 +1324,5 @@ Responsive queries here
     right: 25px;
 
   }
-
 
 }
