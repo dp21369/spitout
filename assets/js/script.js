@@ -69,9 +69,7 @@ window.dispatchEvent(new Event("resize"));
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("seller-filter-dropdown") != null) {
     // Get references to the "a" tag and the form
-    const dropdownLink = document.getElementById(
-      "seller-filter-dropdown"
-    );
+    const dropdownLink = document.getElementById("seller-filter-dropdown");
     const form = document.querySelector(".seller-filter-dropdown-form.filter");
 
     // Attach a click event listener to the "a" tag
@@ -91,9 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("seller-filter-dropdown") != null) {
     // Get references to the link, h5, and icon
-    const dropdownLink = document.getElementById(
-      "seller-filter-dropdown"
-    );
+    const dropdownLink = document.getElementById("seller-filter-dropdown");
     const h5Element = dropdownLink.querySelector("h5");
     const iconElement = dropdownLink.querySelector(".bi-grid-fill");
 
@@ -205,11 +201,11 @@ jQuery(document).ready(function () {
 
         rows.sort(function (a, b) {
           var aValue = jQuery(a)
-            .find("td")
-            .eq(index)
-            .text()
-            .trim()
-            .replace("$", ""),
+              .find("td")
+              .eq(index)
+              .text()
+              .trim()
+              .replace("$", ""),
             bValue = jQuery(b)
               .find("td")
               .eq(index)
@@ -221,8 +217,8 @@ jQuery(document).ready(function () {
             return parseFloat(aValue) > parseFloat(bValue)
               ? 1
               : parseFloat(aValue) < parseFloat(bValue)
-                ? -1
-                : 0;
+              ? -1
+              : 0;
           } else {
             return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
           }
@@ -277,11 +273,11 @@ jQuery(document).ready(function () {
 
         rows.sort(function (a, b) {
           var aValue = jQuery(a)
-            .find("td")
-            .eq(index)
-            .text()
-            .replace("$", "")
-            .replace(" ", ""),
+              .find("td")
+              .eq(index)
+              .text()
+              .replace("$", "")
+              .replace(" ", ""),
             bValue = jQuery(b)
               .find("td")
               .eq(index)
@@ -293,8 +289,8 @@ jQuery(document).ready(function () {
             return parseFloat(aValue) > parseFloat(bValue)
               ? 1
               : parseFloat(aValue) < parseFloat(bValue)
-                ? -1
-                : 0;
+              ? -1
+              : 0;
           } else {
             return aValue > bValue ? 1 : aValue < bValue ? -1 : 0;
           }
@@ -650,8 +646,9 @@ function getNextFourDays() {
 jQuery(document).ready(function () {
   const dateObj = new Date();
   let curr_month = dateObj.getMonth();
-  var currCurrency = getCookieValue('wmc_current_currency') == 'BTC' ? 'BTC' : 'USD';
-  var currCurrencySymbol = currCurrency == 'BTC' ? '฿' : '$';
+  var currCurrency =
+    getCookieValue("wmc_current_currency") == "BTC" ? "BTC" : "USD";
+  var currCurrencySymbol = currCurrency == "BTC" ? "฿" : "$";
 
   if (jQuery("#monthly_sales").length != 0) {
     //get monthly sales report
@@ -725,17 +722,17 @@ jQuery(document).ready(function () {
           tooltip: {
             callbacks: {
               label: function (context) {
-                if (currCurrency == 'BTC') {
-                  let label = '';
+                if (currCurrency == "BTC") {
+                  let label = "";
                   console.log(parseFloat(context.parsed.y.toFixed(6)));
                   if (context.parsed.y !== null) {
                     label += parseFloat(context.parsed.y.toFixed(6));
                   }
                   return "Earnings: " + currCurrencySymbol + label;
                 }
-              }
-            }
-          }
+              },
+            },
+          },
         },
         scales: {
           x: {},
@@ -751,7 +748,6 @@ jQuery(document).ready(function () {
   }
 
   if (jQuery("#weekly_sales").length != 0) {
-
     console.log(Chart.version);
 
     //get weekly sales report
@@ -817,17 +813,17 @@ jQuery(document).ready(function () {
           tooltip: {
             callbacks: {
               label: function (context) {
-                if (currCurrency == 'BTC') {
-                  let label = '';
+                if (currCurrency == "BTC") {
+                  let label = "";
                   console.log(parseFloat(context.parsed.y.toFixed(6)));
                   if (context.parsed.y !== null) {
                     label += parseFloat(context.parsed.y.toFixed(6));
                   }
                   return "Earnings: " + currCurrencySymbol + label;
                 }
-              }
-            }
-          }
+              },
+            },
+          },
         },
         scales: {
           x: {
@@ -905,17 +901,17 @@ jQuery(document).ready(function () {
           tooltip: {
             callbacks: {
               label: function (context) {
-                if (currCurrency == 'BTC') {
-                  let label = '';
+                if (currCurrency == "BTC") {
+                  let label = "";
                   console.log(parseFloat(context.parsed.y.toFixed(6)));
                   if (context.parsed.y !== null) {
                     label += parseFloat(context.parsed.y.toFixed(6));
                   }
                   return "Earnings: " + currCurrencySymbol + label;
                 }
-              }
-            }
-          }
+              },
+            },
+          },
         },
         scales: {
           x: {
@@ -954,10 +950,9 @@ jQuery(document).ready(function () {
 
     let items = "";
 
-    let lables = ['', 'Qty:', 'PPU:'];
+    let lables = ["", "Qty:", "PPU:"];
 
     sales_data.items.forEach((item) => {
-
       items += "<tr>";
       for (let index = 0; index < item.length; index++) {
         items += "<td>" + lables[index] + item[index] + "</td>";
@@ -973,6 +968,16 @@ jQuery(document).ready(function () {
   // Initial reset of form fields
   resetFilterFormFields();
 
+  
+  // Function to get URL parameters using jQuery
+  function getUrlParameter(name) {
+   // Construct a regex pattern to find the parameter in the URL
+   let results = new RegExp("[?&]" + name + "=([^&#]*)").exec(
+     window.location.href
+   );
+   return results ? decodeURIComponent(results[1]) || null : null;
+ }
+
   // Event handler for reset button
   jQuery(document).on("click", "#reset-button", function () {
     resetFilterFormFields();
@@ -986,8 +991,25 @@ jQuery(document).ready(function () {
     } else {
       jQuery(h5Element).text("Filter");
     }
-    jQuery('.category-class').prop('checked', false);
-    seller_filter();
+    jQuery(".category-class").prop("checked", false);
+    var sellerSearch = getUrlParameter("seller_search");
+    if (sellerSearch) {
+      jQuery("#seller_search").val(sellerSearch);
+    } else {
+      sellerSearch = undefined;
+    }
+    seller_filter(
+      undefined,
+      undefined,
+      undefined,
+      [],
+      sellerSearch,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined
+    );
   });
   //==========seller fitler page ends
 });
@@ -1006,14 +1028,13 @@ function resetFilterFormFields() {
   jQuery("#location").val("");
 }
 
-
 function getCookieValue(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
+  let ca = decodedCookie.split(";");
   for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) == " ") {
       c = c.substring(1);
     }
     if (c.indexOf(name) == 0) {
@@ -1023,25 +1044,22 @@ function getCookieValue(cname) {
   return "";
 }
 
-
-
 jQuery(document).ready(function () {
   jQuery(document).on("click", "#spitout_order", function () {
-
     function createCookie(name, value, minutes) {
       var expires;
       if (minutes) {
         var date = new Date();
-        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        date.setTime(date.getTime() + minutes * 60 * 1000);
         expires = "; expires=" + date.toGMTString();
       } else {
         expires = "";
       }
       document.cookie = name + "=" + value + expires + "; path=/";
     }
-    
+
     // console.log("🚀 ~ createCookie ~ name:", 'uoooooooo');
 
-    createCookie("curr-exchange-rate", jQuery('.curr-exchange-rate').val(), 10);
+    createCookie("curr-exchange-rate", jQuery(".curr-exchange-rate").val(), 10);
   });
 });
