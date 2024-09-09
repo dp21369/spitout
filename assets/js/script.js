@@ -976,6 +976,18 @@ jQuery(document).ready(function () {
   // Event handler for reset button
   jQuery(document).on("click", "#reset-button", function () {
     resetFilterFormFields();
+    // after select the filter button chages starts
+    let h5Element = jQuery("#seller-filter-dropdown").find("h5");
+    jQuery(".so-filters-dropdowns").toggleClass("close-state");
+    jQuery(".seller-filter-dropdown-form").hide();
+    jQuery(document.body).toggleClass("seller-filter-opened");
+    if (jQuery(".so-filters-dropdowns").hasClass("close-state")) {
+      jQuery(h5Element).text("Close");
+    } else {
+      jQuery(h5Element).text("Filter");
+    }
+    jQuery('.category-class').prop('checked', false);
+    seller_filter();
   });
   //==========seller fitler page ends
 });
