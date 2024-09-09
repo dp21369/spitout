@@ -6,7 +6,7 @@ SpitOut is a premium WordPress theme designed specifically for platforms focused
 
 # Key Features:
 
-- erified User Accounts: SpitOut prioritizes safety by ensuring that all users verify their identities, creating a trusted environment for the exchange of intimate products. Users can create free accounts, follow their favorite influencers, artists, and content creators, and explore a wide range of personalized content.
+- Verified User Accounts: SpitOut prioritizes safety by ensuring that all users verify their identities, creating a trusted environment for the exchange of intimate products. Users can create free accounts, follow their favorite influencers, artists, and content creators, and explore a wide range of personalized content.
 
 - Custom Fetish Marketplace: Designed for ease of use, SpitOut allows users to browse and purchase custom fetish content with minimal friction. Buyers can connect with sellers, place orders, and receive their items securely, while sellers have confidence in the secure transaction process.
 
