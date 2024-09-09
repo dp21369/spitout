@@ -1,70 +1,21 @@
-[![Build Status](https://travis-ci.org/Automattic/_s.svg?branch=master)](https://travis-ci.org/Automattic/_s)
+# Theme Name: SpitOut
+## Tagline: Natural Intimacy Uniquely Yours
 
-_s
-===
+# Description:
+SpitOut is a premium WordPress theme designed specifically for platforms focused on the buying and selling of custom fetish content, with an emphasis on intimacy and connection. Tailored for the unique niche of spit fetish enthusiasts, this theme combines sleek design with robust functionality to create a secure and engaging user experience.
 
-Hi. I'm a starter theme called `_s`, or `underscores`, if you like. I'm a theme meant for hacking so don't use me as a Parent Theme. Instead try turning me into the next, most awesome, WordPress theme out there. That's what I'm here for.
+# Key Features:
 
-My ultra-minimal CSS might make me look like theme tartare but that means less stuff to get in your way when you're designing your awesome theme. Here are some of the other more interesting things you'll find here:
+- erified User Accounts: SpitOut prioritizes safety by ensuring that all users verify their identities, creating a trusted environment for the exchange of intimate products. Users can create free accounts, follow their favorite influencers, artists, and content creators, and explore a wide range of personalized content.
 
-* A modern workflow with a pre-made command-line interface to turn your project into a more pleasant experience.
-* A just right amount of lean, well-commented, modern, HTML5 templates.
-* A custom header implementation in `inc/custom-header.php`. Just add the code snippet found in the comments of `inc/custom-header.php` to your `header.php` template.
-* Custom template tags in `inc/template-tags.php` that keep your templates clean and neat and prevent code duplication.
-* Some small tweaks in `inc/template-functions.php` that can improve your theming experience.
-* A script at `js/navigation.js` that makes your menu a toggled dropdown on small screens (like your phone), ready for CSS artistry. It's enqueued in `functions.php`.
-* 2 sample layouts in `sass/layouts/` made using CSS Grid for a sidebar on either side of your content. Just uncomment the layout of your choice in `sass/style.scss`.
-Note: `.no-sidebar` styles are automatically loaded.
-* Smartly organized starter CSS in `style.css` that will help you to quickly get your design off the ground.
-* Full support for `WooCommerce plugin` integration with hooks in `inc/woocommerce.php`, styling override woocommerce.css with product gallery features (zoom, swipe, lightbox) enabled.
-* Licensed under GPLv2 or later. :) Use it to make something cool.
+- Custom Fetish Marketplace: Designed for ease of use, SpitOut allows users to browse and purchase custom fetish content with minimal friction. Buyers can connect with sellers, place orders, and receive their items securely, while sellers have confidence in the secure transaction process.
 
-Installation
----------------
+- Secure Transactions & Delivery Assurance: With SpitOut’s transaction system, funds are only transferred to the seller once the buyer confirms receipt of the order. This ensures a smooth and trustworthy exchange for both parties, providing peace of mind and ensuring satisfaction.
 
-### Requirements
+- Engagement & Community: With over 100,000 users contributing daily, SpitOut fosters a vibrant community of fetish enthusiasts. Whether following influencers or discovering new content creators, users can easily engage and find intimate connections within the platform.
 
-`_s` requires the following dependencies:
+- Responsive Design: Built with a fully responsive design, SpitOut ensures an optimal experience across all devices, whether on mobile, tablet, or desktop, providing seamless access to content and account features at any time.
 
-- [Node.js](https://nodejs.org/)
-- [Composer](https://getcomposer.org/)
+- Customizable Interface: The theme offers a highly customizable interface that can be tailored to reflect your brand, offering intuitive customization options without needing technical expertise. From color schemes to layouts, the SpitOut theme gives you the flexibility to create a site that matches your brand identity.
 
-### Quick Start
-
-Clone or download this repository, change its name to something else (like, say, `megatherium-is-awesome`), and then you'll need to do a six-step find and replace on the name in all the templates.
-
-1. Search for `'_s'` (inside single quotations) to capture the text domain and replace with: `'megatherium-is-awesome'`.
-2. Search for `_s_` to capture all the functions names and replace with: `megatherium_is_awesome_`.
-3. Search for `Text Domain: _s` in `style.css` and replace with: `Text Domain: megatherium-is-awesome`.
-4. Search for <code>&nbsp;_s</code> (with a space before it) to capture DocBlocks and replace with: <code>&nbsp;Megatherium_is_Awesome</code>.
-5. Search for `_s-` to capture prefixed handles and replace with: `megatherium-is-awesome-`.
-6. Search for `_S_` (in uppercase) to capture constants and replace with: `MEGATHERIUM_IS_AWESOME_`.
-
-Then, update the stylesheet header in `style.css`, the links in `footer.php` with your own information and rename `_s.pot` from `languages` folder to use the theme's slug. Next, update or delete this readme.
-
-### Setup
-
-To start using all the tools that come with `_s`  you need to install the necessary Node.js and Composer dependencies :
-
-```sh
-$ composer install
-$ npm install
-```
-
-### Available CLI commands
-
-`_s` comes packed with CLI commands tailored for WordPress theme development :
-
-- `composer lint:wpcs` : checks all PHP files against [PHP Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/php/).
-- `composer lint:php` : checks all PHP files for syntax errors.
-- `composer make-pot` : generates a .pot file in the `languages/` directory.
-- `npm run compile:css` : compiles SASS files to css.
-- `npm run compile:rtl` : generates an RTL stylesheet.
-- `npm run watch` : watches all SASS files and recompiles them to css when they change.
-- `npm run lint:scss` : checks all SASS files against [CSS Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/css/).
-- `npm run lint:js` : checks all JavaScript files against [JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/).
-- `npm run bundle` : generates a .zip archive for distribution, excluding development and system files.
-
-Now you're ready to go! The next step is easy to say, but harder to do: make an awesome WordPress theme. :)
-
-Good luck!
+- SpitOut is more than just a theme; it’s an immersive platform designed for connection, intimacy, and security. Whether you’re building a marketplace for custom fetish content or curating a space for unique, personal interactions, SpitOut provides the perfect balance of functionality and user engagement, bringing the tagline “Natural Intimacy Uniquely Yours” to life.
