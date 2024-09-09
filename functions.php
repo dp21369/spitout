@@ -564,10 +564,10 @@ function spitout_get_seller_information($seller_id)
         // $profile_avatar = get_stylesheet_directory_uri() . '/assets/img/user.png';F
         $seller_url = get_author_posts_url($seller_id);
         // $seller_img_url = resize_and_compress_image($seller_img, 150, 150, 70);
-        $seller_img_url = wp_get_attachment_image_src($seller_img,'thumbnail');
+        $seller_img_url = wp_get_attachment_image_src($seller_img, 'thumbnail');
         if (!$seller_img_url) {
             $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
-        }else{
+        } else {
             $seller_img_url = $seller_img_url[0];
         }
         $seller_location = get_user_meta($seller_id, "so_location", true);
@@ -2152,10 +2152,10 @@ function load_filtered_sellers()
                 foreach ($users_ids as $seller) {
                     $attachment_id = (int) get_user_meta($seller, 'so_profile_img', true);
                     // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
-                    $seller_img_url = wp_get_attachment_image_src($attachment_id,'thumbnail');
+                    $seller_img_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
                     if (!$seller_img_url) {
                         $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
-                    }else{
+                    } else {
                         $seller_img_url = $seller_img_url[0];
                     }
                     $seller_data = get_userdata((int) $seller);
@@ -2454,10 +2454,10 @@ function so_banner_content()
                         $title = get_the_title();
                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
                         // $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
-                        $featured_image_url = wp_get_attachment_image_src($featured_image_id,'thumbnail');
+                        $featured_image_url = wp_get_attachment_image_src($featured_image_id, 'thumbnail');
                         if (!$featured_image_url) {
                             $featured_image_url = get_template_directory_uri() . '/assets/img/user.png';
-                        }else{
+                        } else {
                             $featured_image_url = $featured_image_url[0];
                         } ?>
                         <div class="cat-item">
@@ -2485,12 +2485,12 @@ function so_banner_content()
                 foreach ($user_ids_with_5_star as $user_id) {
                     $attachment_id = (int) get_user_meta($user_id, 'so_profile_img', true);
                     // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70); 
-                    $seller_img_url = wp_get_attachment_image_src($attachment_id,'thumbnail');
+                    $seller_img_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
                     if (!$seller_img_url) {
                         $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
-                    }else{
+                    } else {
                         $seller_img_url = $seller_img_url[0];
-                    }?>
+                    } ?>
                 <figure>
                     <img src="<?php echo esc_url($seller_img_url); ?>" alt="reviewer-image">
                 </figure>
@@ -2638,10 +2638,10 @@ function so_seller_list($atts)
                 foreach ($seller_ids as $seller) {
                     $attachment_id = (int) get_user_meta($seller, 'so_profile_img', true);
                     // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70);
-                    $seller_img_url = wp_get_attachment_image_src($attachment_id,'thumbnail');
+                    $seller_img_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
                     if (!$seller_img_url) {
                         $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
-                    }else{
+                    } else {
                         $seller_img_url = $seller_img_url[0];
                     }
                     $seller_data = get_userdata((int) $seller);
@@ -2765,59 +2765,110 @@ function so_seller_list($atts)
 // END of ShortCode For HomepageSeller 
 
 
-
-function get_popular_seller($total = 20)
+//popular by followers
+function get_popular_seller($total = 10)
 {
-    $count = -1;
     // Query to get all users with the role 'seller'
     $user_args = array(
-        'role' => 'seller' // Get users with the role 'seller'
+        'role' => 'seller',
+        'number' => -1, // Get all users, we'll sort manually based on followers
     );
 
     $user_query = new WP_User_Query($user_args);
-    $sellers = [];
-    $seller_ids = array();
-    // Check if users are found
-    if (!empty($user_query->results)) {
-        foreach ($user_query->results as $key => $user) {
-            $user_id = $user->ID;
+    $sellers = $user_query->get_results();
+    
+    $sellers_with_followers = [];
 
-            // Get WooCommerce products for this user
-            $product_args = array(
-                'post_type' => 'product',
-                'posts_per_page' => $count,
-                'author' => $user_id,
-                'post_status' => 'publish'
-            );
+    // Loop through users and get follower count from the serialized meta
+    foreach ($sellers as $seller) {
+        $followers_data = get_user_meta($seller->ID, 'so_total_followers', true);
 
-            $products = get_posts($product_args);
-            $total_sales = 0;
+        // Unserialize the followers data
+        $followers_array = maybe_unserialize($followers_data);
 
-            // Calculate total sales for all products of this user
-            foreach ($products as $product) {
-                $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
-                $total_sales += $product_sales;
-            }
-            // Add the seller and their total sales to the array
-            $sellers[] = array(
-                'user' => $user,
-                'total_sales' => $total_sales
+        // Count the number of followers (elements in the array)
+        $follower_count = is_array($followers_array) ? count($followers_array) : 0;
 
-            );
-        }
-        // Sort sellers by total sales in descending order
-        usort($sellers, function ($a, $b) {
-            return $b['total_sales'] - $a['total_sales'];
-        });
-        // Display the top sellers based on the total sales
-        $sellers = array_slice($sellers, 0, $total);
-
-        foreach ($sellers as $seller) {
-            $seller_ids[] = $seller['user']->ID;
-        }
+        // Add the seller and follower count to an array
+        $sellers_with_followers[] = [
+            'seller_id' => $seller->ID,
+            'follower_count' => $follower_count,
+        ];
     }
-    return $seller_ids;
+
+    // Sort the sellers based on follower count, descending
+    usort($sellers_with_followers, function ($a, $b) {
+        return $b['follower_count'] - $a['follower_count'];
+    });
+
+    // Get the top 20 sellers based on follower count
+    $top_sellers = array_slice($sellers_with_followers, 0, 20);
+
+    // Shuffle the top sellers to pick random ones
+    // shuffle($top_sellers);
+
+    // Extract random sellers from the top sellers
+    $random_sellers = array_slice($top_sellers, 0, min($total, count($top_sellers)));
+
+    // Return an array of seller IDs from the random selection
+    return array_map(function ($item) {
+        return $item['seller_id'];
+    }, $random_sellers);
 }
+
+//by total sales
+// function get_popular_seller($total = 20)
+// {
+//     $count = -1;
+//     // Query to get all users with the role 'seller'
+//     $user_args = array(
+//         'role' => 'seller' // Get users with the role 'seller'
+//     );
+
+//     $user_query = new WP_User_Query($user_args);
+//     $sellers = [];
+//     $seller_ids = array();
+//     // Check if users are found
+//     if (!empty($user_query->results)) {
+//         foreach ($user_query->results as $key => $user) {
+//             $user_id = $user->ID;
+
+//             // Get WooCommerce products for this user
+//             $product_args = array(
+//                 'post_type' => 'product',
+//                 'posts_per_page' => $count,
+//                 'author' => $user_id,
+//                 'post_status' => 'publish'
+//             );
+
+//             $products = get_posts($product_args);
+//             $total_sales = 0;
+
+//             // Calculate total sales for all products of this user
+//             foreach ($products as $product) {
+//                 $product_sales = intval(get_post_meta($product->ID, 'total_sales', true));
+//                 $total_sales += $product_sales;
+//             }
+//             // Add the seller and their total sales to the array
+//             $sellers[] = array(
+//                 'user' => $user,
+//                 'total_sales' => $total_sales
+
+//             );
+//         }
+//         // Sort sellers by total sales in descending order
+//         usort($sellers, function ($a, $b) {
+//             return $b['total_sales'] - $a['total_sales'];
+//         });
+//         // Display the top sellers based on the total sales
+//         $sellers = array_slice($sellers, 0, $total);
+
+//         foreach ($sellers as $seller) {
+//             $seller_ids[] = $seller['user']->ID;
+//         }
+//     }
+//     return $seller_ids;
+// }
 
 
 function get_newer_seller($count = -1)

@@ -245,7 +245,26 @@ jQuery(document).ready(function () {
       ]);
     });
   });
-  seller_filter();
+
+  // Function to get URL parameters using jQuery
+  function getUrlParameter(name) {
+    // Construct a regex pattern to find the parameter in the URL
+    let results = new RegExp("[?&]" + name + "=([^&#]*)").exec(
+      window.location.href
+    );
+    return results ? decodeURIComponent(results[1]) || null : null;
+  }
+
+  // Check if 'seller_search' exists in the URL
+  var sellerSearch = getUrlParameter("seller_search");
+  if(sellerSearch){
+    jQuery("#seller_search").val(sellerSearch);
+  }else{
+    sellerSearch = undefined;
+  }
+  console.log(sellerSearch);
+  seller_filter(undefined, undefined, undefined, [], sellerSearch, undefined, undefined, undefined, undefined, undefined);
+  // seller_filter();
 });
 
 function seller_filter(
