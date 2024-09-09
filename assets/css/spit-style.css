@@ -10567,6 +10567,7 @@ p.custom-pill-box {
 /* HOW IT WORKS SECTION  */
 .section-header {
   margin-bottom: 25px;
+  font-size: 44px;
 }
 
 .card-box {
@@ -10588,6 +10589,8 @@ p.custom-pill-box {
 
 .card-box .wp-block-heading {
   margin-top: 0;
+  line-height: 1.2;
+  font-size: 48px;
 }
 
 .floating-button.wp-block-heading,
@@ -10597,6 +10600,7 @@ p.custom-pill-box {
   padding: 5px;
   display: flex;
   align-items: center;
+  font-size: 18px;
 }
 
 .face-id {

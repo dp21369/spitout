@@ -1281,6 +1281,19 @@ Responsive queries here
   .seller-new-rating p {
     text-align: center;
   }
+
+  .banner-text .wp-block-heading {
+    line-height: 1.2;
+    font-size: 24px !important;
+}
+
+.card-box .wp-block-heading {
+  font-size: 30px !important;
+}
+.floating-button.wp-block-heading, .so-hiw-age-limit {
+  font-size: 18px !important;
+}
+
 }
 
 
