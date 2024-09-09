@@ -10419,6 +10419,8 @@ p.custom-pill-box {
   height: 300px;
   z-index: 1;
   overflow-y: scroll;
+  scrollbar-color:  var(--pink) #FFF;
+  scrollbar-width: thin;
 }
 
 .cat-option-dropdown::-webkit-scrollbar {
@@ -10427,10 +10429,12 @@ p.custom-pill-box {
 
 .cat-option-dropdown::-webkit-scrollbar-track {
   background: var(--white);
+  box-shadow: unset;
 }
 
 .cat-option-dropdown::-webkit-scrollbar-thumb {
   background: var(--pink);
+
 }
 
 .selected-cat,
@@ -10442,14 +10446,16 @@ p.custom-pill-box {
   display: flex;
   column-gap: 5px;
   align-items: center;
-  padding: 5px;
-  margin-bottom: 5px;
+  padding: 10px 5px;
+  /* margin-bottom: 5px; */
   cursor: pointer;
   transition: all 0.1s ease;
+  border-bottom: 1px solid #ea1e7933;
 }
 
-.cat-item a:last-child {
-  margin-bottom: 5px;
+.cat-item:last-child a {
+	margin-bottom: 0;
+	border: 0;
 }
 
 .cat-item a:hover {
