@@ -1170,10 +1170,14 @@ Responsive queries here
 
   .seller-cat-wrapper {
     gap: 20px;
-    height: 350px;
-    overflow-y: scroll;
-    scrollbar-color:  var(--pink) transparent;
-    scrollbar-width: thin;
+}
+
+
+.seller-expanded .seller-cat-wrapper {
+  height: 350px;
+  overflow-y: scroll;
+  scrollbar-color:  var(--pink) transparent;
+  scrollbar-width: thin;
 }
 
   .seller-cat-wrapper::-webkit-scrollbar {
