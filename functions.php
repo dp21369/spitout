@@ -1745,7 +1745,7 @@ function load_filtered_sellers()
                 add_action('pre_user_query', 'modify_user_query_for_partial_search');
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'AND', // Use AND relation for matching any of the selected categories
+                    'relation' => 'OR', // Use AND relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
@@ -1857,7 +1857,7 @@ function load_filtered_sellers()
 
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'AND', // Use OR relation for matching any of the selected categories
+                    'relation' => 'OR', // Use OR relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
@@ -1956,7 +1956,7 @@ function load_filtered_sellers()
 
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'AND', // Use OR relation for matching any of the selected categories
+                    'relation' => 'OR', // Use OR relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
@@ -2054,7 +2054,7 @@ function load_filtered_sellers()
 
                 // Prepare the meta query
                 $meta_query = array(
-                    'relation' => 'AND', // Use OR relation for matching any of the selected categories
+                    'relation' => 'OR', // Use OR relation for matching any of the selected categories
                 );
 
                 foreach ($selected_cat_ids as $cat_id) {
