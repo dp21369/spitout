@@ -1306,11 +1306,17 @@ Responsive queries here
     right: 15px;
     top: 0;
   }
+
   .seller-tab-col .so-seller-filter-dropdown2 {
     padding: 8px;
     width: auto;
     min-width: auto;
-  }
+    height: 36px;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
   .seller-tab-col .so-seller-filter-dropdown2 h5 {
     display: none;
   }

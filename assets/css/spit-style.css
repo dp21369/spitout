@@ -9828,6 +9828,23 @@ body.seller-not-logged-in {
   left: 0;
 }
 
+.seller-tab-col .so-seller-filter-dropdown2 i{
+  margin: 0;
+}
+
+.seller-tab-col .so-seller-filter-dropdown2 i::before{
+  color: #FFF;
+}
+
+.seller-tab-col .so-filters-dropdowns i::before {
+  position: unset;
+  font-weight: 700 !important;
+}
+
+.seller-tab-col .so-filters-dropdowns.close-state i::before {
+  content: '\F659';
+}
+
 /* SELLER TAB CONTENT  */
 
 .seller-tab-col {
@@ -9984,6 +10001,7 @@ body.seller-not-logged-in {
   gap: 10px;
   background: var(--pink);
   padding: 8px 30px;
+  align-items: center;
 }
 
 .so-filters-dropdowns.close-state .so-seller-filter-dropdown2 {
