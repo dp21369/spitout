@@ -2548,9 +2548,10 @@ function so_category_list()
                 )
             );
 
-            foreach ($get_spit_category as $key => $get_spit_cat) { ?>
+            foreach ($get_spit_category as $key => $get_spit_cat) { 
+                $post_slug = get_post_field('post_name', $get_spit_cat->ID);?>
                 <li>
-                    <a href="<?php echo esc_url(get_permalink($get_spit_cat->ID)); ?>">
+                    <a href="<?php echo '/seller/?cat=' . esc_html($post_slug); ?>">
                         <h5><?php echo esc_html($get_spit_cat->post_title); ?></h5>
                     </a>
                 </li>
@@ -3005,3 +3006,27 @@ function send_completed_order_email_to_admin($recipient, $order)
     return $recipient;
 }
 //===========change woocomerce email template recipient ends======================
+
+
+function redirect_spit_category_to_seller() {
+    // Get the current URL path
+    $current_url = home_url( add_query_arg( null, null ) );
+
+    // Check if the URL contains '/spit-category/'
+    if ( strpos( $current_url, '/spit-category/' ) !== false ) {
+        // Extract the category slug from the URL
+        $parts = explode( '/spit-category/', $current_url );
+
+        if ( isset( $parts[1] ) && !empty( $parts[1] ) ) {
+            $category_slug = trim( $parts[1], '/' );
+
+            // Build the new URL
+            $new_url = home_url( '/seller/?cat=' . $category_slug );
+
+            // Perform the redirect
+            wp_redirect( $new_url );
+            exit();
+        }
+    }
+}
+add_action( 'template_redirect', 'redirect_spit_category_to_seller' );

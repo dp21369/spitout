@@ -265,7 +265,6 @@ jQuery(document).ready(function () {
   // Check if 'seller_search' exists in the URL
   var sellerSearch = getUrlParameter("seller_search");
   var catSearch = getUrlParameter("cat");
-  catValue = [];
   if (sellerSearch) {
     jQuery("#seller_search").val(sellerSearch);
   } else {
@@ -281,15 +280,15 @@ jQuery(document).ready(function () {
     let cat_id = jQuery(
       `input.category-class[data-cat-slug="${catSearch}"]`
     ).data("id");
-    catValue.push(cat_id);
+    selectedIds.push(cat_id);
   } else {
-    catValue = undefined;
+    selectedIds = undefined;
   }
   seller_filter(
     undefined,
     undefined,
     undefined,
-    catValue,
+    selectedIds,
     sellerSearch,
     undefined,
     undefined,
