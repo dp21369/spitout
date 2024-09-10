@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
   // var selectedMaxPrice = jQuery("#price-end").val();
 
   var typingTimer; // Timer identifier
-  var doneTypingInterval = 1000; // Time in milliseconds (1 seconds)
+  var doneTypingInterval = 500; // Time in milliseconds (1 seconds)
 
   // runs on tab changes
   jQuery("#pills-tab .nav-link").on("click", function () {
@@ -47,12 +47,21 @@ jQuery(document).ready(function () {
     );
   });
 
+
+  // jQuery('input.category-class').on('change', function() {
+  //   if (jQuery(this).is(':checked')) {
+  //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now checked.');
+  //   } else {
+  //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now unchecked.');
+  //   }
+  // });
+
   //runs on category selected
   jQuery(".category-class").on("change", function () {
     searchValue = jQuery("#seller_search").val();
     location = jQuery("#location").val();
     let id = jQuery(this).data("id");
-    if (!selectedIds.includes(id)) {
+    if (!selectedIds.includes(id) && jQuery(this).is(':checked')) {
       selectedIds.push(id); // Push only if not already in the array
     } else {
       let index = selectedIds.indexOf(id);
@@ -256,12 +265,37 @@ jQuery(document).ready(function () {
 
   // Check if 'seller_search' exists in the URL
   var sellerSearch = getUrlParameter("seller_search");
-  if(sellerSearch){
+  var catSearch = getUrlParameter("cat");
+  catValue = [];
+  if (sellerSearch) {
     jQuery("#seller_search").val(sellerSearch);
-  }else{
+  } else {
     sellerSearch = undefined;
   }
-  seller_filter(undefined, undefined, undefined, [], sellerSearch, undefined, undefined, undefined, undefined, undefined);
+
+  if (catSearch) {
+    // Check the checkbox that matches the catSearch value in the data-cat-slug attribute
+    jQuery(`input.category-class[data-cat-slug="${catSearch}"]`).prop(
+      "checked",
+      true
+    );
+    let cat_id = jQuery(`input.category-class[data-cat-slug="${catSearch}"]`).data('id');
+    catValue.push(cat_id);
+  } else {
+    catValue = undefined;
+  }
+  seller_filter(
+    undefined,
+    undefined,
+    undefined,
+    catValue,
+    sellerSearch,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined
+  );
   // seller_filter();
 });
 

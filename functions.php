@@ -2450,7 +2450,7 @@ function so_banner_content()
                     while ($seller_type_query->have_posts()) :
                         $seller_type_query->the_post();
                         $post_id = get_the_ID();
-                        $cat_url = get_permalink($post_id);
+                        $post_slug = get_post_field('post_name', $post_id);
                         $title = get_the_title();
                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
                         // $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
@@ -2461,7 +2461,7 @@ function so_banner_content()
                             $featured_image_url = $featured_image_url[0];
                         } ?>
                         <div class="cat-item">
-                            <a href="<?php echo esc_url($cat_url); ?>">
+                            <a href="<?php echo '/seller/?cat='.esc_html($post_slug); ?>">
                                 <figure>
                                     <img src="<?php echo esc_url($featured_image_url); ?>" alt="cat-image">
                                 </figure>

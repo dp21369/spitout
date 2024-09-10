@@ -43,6 +43,7 @@ if ($all_sellers) { ?>
                                         $seller_type_query->the_post();
                                         $post_id = get_the_ID();
                                         $title = get_the_title();
+                                        $post_slug = get_post_field('post_name', $post_id);
                                         $featured_image_id = get_post_meta($post_id, '_thumbnail_id', true);
                                         // $featured_image_url = resize_and_compress_image($featured_image_id, 150, 150, 70);
 
@@ -53,7 +54,7 @@ if ($all_sellers) { ?>
                                             $featured_image_url = $featured_image_url[0];
                                         } ?>
                                         <div class="seller-cat-checkbox">
-                                            <input type="checkbox" name="category-name[]" value="true" class="category-class" data-id="<?php echo $post_id; ?>">
+                                            <input type="checkbox" name="category-name[]" value="true" class="category-class" data-id="<?php echo $post_id; ?>" data-cat-slug="<?php echo esc_html($post_slug); ?>">
                                             <figure>
                                                 <img src="<?php echo esc_url($featured_image_url); ?>" alt="seller-image">
                                             </figure>
