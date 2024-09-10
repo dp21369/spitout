@@ -10002,6 +10002,7 @@ body.seller-not-logged-in {
   background: var(--pink);
   padding: 8px 30px;
   align-items: center;
+  line-height: 1.2;
 }
 
 .so-filters-dropdowns.close-state .so-seller-filter-dropdown2 {
