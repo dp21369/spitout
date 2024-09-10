@@ -9992,9 +9992,9 @@ body.seller-not-logged-in {
   line-height: 1;
 }
 
-.seller-tab-col #seller-filter-dropdown svg path{
-  fill: #FFFFFF ;
-} 
+.seller-tab-col #seller-filter-dropdown svg path {
+  fill: #FFFFFF;
+}
 
 .seller-tab-col .seller-filter-dropdown-form {
   position: relative;
@@ -10416,7 +10416,7 @@ p.custom-pill-box {
   border-radius: 5px;
   overflow: hidden;
   overflow-y: scroll;
-  scrollbar-color:  var(--pink) transparent;
+  scrollbar-color: var(--pink) transparent;
   scrollbar-width: thin;
 }
 
@@ -10459,8 +10459,8 @@ p.custom-pill-box {
 }
 
 .cat-item:last-child a {
-	margin-bottom: 0;
-	border: 0;
+  margin-bottom: 0;
+  border: 0;
 }
 
 .cat-item a:hover {

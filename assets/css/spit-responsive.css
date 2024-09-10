@@ -1170,29 +1170,29 @@ Responsive queries here
 
   .seller-cat-wrapper {
     gap: 20px;
-}
+  }
 
 
-.seller-expanded .seller-cat-wrapper {
-  height: 350px;
-  overflow-y: scroll;
-  scrollbar-color:  var(--pink) transparent;
-  scrollbar-width: thin;
-}
+  .seller-expanded .seller-cat-wrapper {
+    height: 350px;
+    overflow-y: scroll;
+    scrollbar-color: var(--pink) transparent;
+    scrollbar-width: thin;
+  }
 
   .seller-cat-wrapper::-webkit-scrollbar {
-  width: 5px;
-}
+    width: 5px;
+  }
 
   .seller-cat-wrapper::-webkit-scrollbar-track {
-  background: var(--white);
-  box-shadow: unset;
-}
+    background: var(--white);
+    box-shadow: unset;
+  }
 
   .seller-cat-wrapper::-webkit-scrollbar-thumb {
-  background: var(--pink);
+    background: var(--pink);
 
-}
+  }
 
 
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 10) {
@@ -1280,7 +1280,7 @@ Responsive queries here
   }
 
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 4),
-  .seller-expanded .seller-cat-wrapper .seller-cat-checkbox:nth-child(-n + 10)  {
+  .seller-expanded .seller-cat-wrapper .seller-cat-checkbox:nth-child(-n + 10) {
     display: block;
   }
 
@@ -1310,40 +1310,43 @@ Responsive queries here
   .banner-text .wp-block-heading {
     line-height: 1.2;
     font-size: 24px !important;
-}
+  }
 
-.card-box .wp-block-heading {
-  font-size: 30px !important;
-}
-.floating-button.wp-block-heading, .so-hiw-age-limit {
-  font-size: 18px !important;
-}
+  .card-box .wp-block-heading {
+    font-size: 30px !important;
+  }
 
-.seller-card-block .so-new-sellers-name {
-  text-align: center;
-}
-.seller-card-block  .custom-pill-box {
-  margin-top: 10px;
-}
+  .floating-button.wp-block-heading,
+  .so-hiw-age-limit {
+    font-size: 18px !important;
+  }
 
-.seller-no-tag {
-  display: none;
-}
+  .seller-card-block .so-new-sellers-name {
+    text-align: center;
+  }
 
-.seller-card-block .so-new-sellers-name h5 {
-  justify-content: center;
-  text-align: center !important;
-}
+  .seller-card-block .custom-pill-box {
+    margin-top: 10px;
+  }
 
-.seller-card-block .seller-page-location p {
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  .seller-no-tag {
+    display: none;
+  }
 
-.seller-card-block .seller-page-location span {
-  text-align: center;
-}
+  .seller-card-block .so-new-sellers-name h5 {
+    justify-content: center;
+    text-align: center !important;
+  }
+
+  .seller-card-block .seller-page-location p {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .seller-card-block .seller-page-location span {
+    text-align: center;
+  }
 
 }
 
