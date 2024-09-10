@@ -1170,7 +1170,26 @@ Responsive queries here
 
   .seller-cat-wrapper {
     gap: 20px;
-  }
+    height: 350px;
+    overflow-y: scroll;
+    scrollbar-color:  var(--pink) transparent;
+    scrollbar-width: thin;
+}
+
+  .seller-cat-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+  .seller-cat-wrapper::-webkit-scrollbar-track {
+  background: var(--white);
+  box-shadow: unset;
+}
+
+  .seller-cat-wrapper::-webkit-scrollbar-thumb {
+  background: var(--pink);
+
+}
+
 
   .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 10) {
     display: none;
@@ -1309,6 +1328,17 @@ Responsive queries here
 
 .seller-card-block .so-new-sellers-name h5 {
   justify-content: center;
+  text-align: center !important;
+}
+
+.seller-card-block .seller-page-location p {
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.seller-card-block .seller-page-location span {
+  text-align: center;
 }
 
 }
