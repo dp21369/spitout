@@ -2144,7 +2144,9 @@ function load_filtered_sellers()
                 }
             }
     }
-    if (!empty($users_ids)) { ?>
+    if (!empty($users_ids)) {
+        ob_start(); // Start output buffering
+    ?>
 
         <div class="tab-pane fade show active" id="<?php echo esc_html($button_target); ?>" role="tabpanel" aria-labelledby="<?php echo esc_html($button_id); ?>">
             <div class="row">
@@ -2285,8 +2287,17 @@ function load_filtered_sellers()
             </div>
         </div>
 
-    <?php } else {
-        echo '<span class="no-seller-found">No user found!</span>';
+    <?php $html = ob_get_clean();
+        $num_users = count($users_ids);
+        wp_send_json_success(array(
+            'html' => $html,
+            'num_users' => $num_users,
+        ));
+    } else {
+        wp_send_json_success(array(
+            'html' => '<span class="no-seller-found">No user found!</span>',
+            'num_users' => 0,
+        ));
     }
     wp_die();
 }
@@ -2461,7 +2472,7 @@ function so_banner_content()
                             $featured_image_url = $featured_image_url[0];
                         } ?>
                         <div class="cat-item">
-                            <a href="<?php echo '/seller/?cat='.esc_html($post_slug); ?>">
+                            <a href="<?php echo '/seller/?cat=' . esc_html($post_slug); ?>">
                                 <figure>
                                     <img src="<?php echo esc_url($featured_image_url); ?>" alt="cat-image">
                                 </figure>
@@ -2776,7 +2787,7 @@ function get_popular_seller($total = 10)
 
     $user_query = new WP_User_Query($user_args);
     $sellers = $user_query->get_results();
-    
+
     $sellers_with_followers = [];
 
     // Loop through users and get follower count from the serialized meta

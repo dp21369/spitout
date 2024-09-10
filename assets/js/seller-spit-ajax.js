@@ -47,7 +47,6 @@ jQuery(document).ready(function () {
     );
   });
 
-
   // jQuery('input.category-class').on('change', function() {
   //   if (jQuery(this).is(':checked')) {
   //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now checked.');
@@ -61,7 +60,7 @@ jQuery(document).ready(function () {
     searchValue = jQuery("#seller_search").val();
     location = jQuery("#location").val();
     let id = jQuery(this).data("id");
-    if (!selectedIds.includes(id) && jQuery(this).is(':checked')) {
+    if (!selectedIds.includes(id) && jQuery(this).is(":checked")) {
       selectedIds.push(id); // Push only if not already in the array
     } else {
       let index = selectedIds.indexOf(id);
@@ -279,7 +278,9 @@ jQuery(document).ready(function () {
       "checked",
       true
     );
-    let cat_id = jQuery(`input.category-class[data-cat-slug="${catSearch}"]`).data('id');
+    let cat_id = jQuery(
+      `input.category-class[data-cat-slug="${catSearch}"]`
+    ).data("id");
     catValue.push(cat_id);
   } else {
     catValue = undefined;
@@ -332,7 +333,13 @@ function seller_filter(
       jQuery("#seller-pills-tabContent").empty();
     },
     success: function (response) {
-      jQuery("#seller-pills-tabContent").html(response);
+      if (response.success) {
+        var htmlContent = response.data.html;
+        var numUsers = response.data.num_users;
+        console.log('numUsers',numUsers);
+        jQuery("#seller-pills-tabContent").html(htmlContent);
+        jQuery("#seller-count").text(numUsers + ' Sellers');
+      }
     },
     complete: function () {
       jQuery("#new-seller-tab-loader").hide();
