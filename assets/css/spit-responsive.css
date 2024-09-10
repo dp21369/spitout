@@ -1221,6 +1221,11 @@ Responsive queries here
     width: 100%;
   }
 
+  .seller-card-block figure i::before {
+    left: 5%;
+    top: 10%;
+}
+
 }
 
 @media screen and (max-width: 768px) {
@@ -1267,10 +1272,6 @@ Responsive queries here
     margin-bottom: 25px;
   }
 
-  .seller-tab-section .nav-pills {
-    gap: 15px;
-  }
-
   .seller-cat-wrapper {
     gap: 10px;
   }
@@ -1289,6 +1290,45 @@ Responsive queries here
     width: calc((20% - 10px) + (10px / 4));
   }
 
+  .seller-tab-section .nav-pills {
+    gap: 15px;
+    width: calc(100% - 60px);
+  }
+
+  .seller-tab-col .filter-pannel {
+    right: 5px;
+    top: 50px;
+    width: calc(100% - 10px);
+}
+
+  .so-filters-dropdowns {
+    position: absolute;
+    right: 15px;
+    top: 0;
+  }
+  .seller-tab-col .so-seller-filter-dropdown2 {
+    padding: 8px;
+    width: auto;
+    min-width: auto;
+  }
+  .seller-tab-col .so-seller-filter-dropdown2 h5 {
+    display: none;
+  }
+
+  .seller-filter-dropdown-form .bi-caret-up-fill {
+    display: none;
+  }
+
+  .seller-tab-col .filter-pannel .ui-slider-handle{
+    border: 0;
+  }
+
+  .seller-tab-col .filter-pannel .ui-widget-content {
+    border: 0;
+    background: #c5c5c5;
+  }
+
+
   .seller-card-block .so-new-seller-desc {
     padding: 15px;
   }
@@ -1305,6 +1345,12 @@ Responsive queries here
   .seller-card-block  .so-new-seller-desc figure{
     width: 60%;
   }
+
+  .seller-card-block figure i::before {
+    left: 10%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+}
 
   .seller-card-block .so-new-sellers-name {
     text-align: center;

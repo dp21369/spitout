@@ -7176,7 +7176,7 @@ fieldset#so-verify-failed {
   line-height: 45px;
   display: block;
   font-size: 18px;
-  color: #ffffff;
+  color: var(--white);
   background: lightgray;
   border-radius: 50%;
   margin: 0 auto 10px auto;
@@ -9671,7 +9671,7 @@ body.seller-not-logged-in {
   /* display: flex;
   justify-content: space-between; */
   width: 100%;
-  background: #fff;
+  background: var(--white);
   padding: 30px;
   border-radius: 35px;
 }
@@ -9753,6 +9753,10 @@ body.seller-not-logged-in {
   margin-bottom: 10px;
 }
 
+.seller-cat-checkbox h5 {
+  font-size: 16px;
+}
+
 .seller-search-categories .seller-more {
   width: calc((9.09% - 40px) + (40px / 10));
   position: absolute;
@@ -9769,7 +9773,7 @@ body.seller-not-logged-in {
   color: var(--pink);
   font-size: 25px;
   border: 1px solid #dadada;
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 100%;
   margin-bottom: 10px;
 }
@@ -9847,7 +9851,7 @@ body.seller-not-logged-in {
 }
 
 .seller-tab-section .nav-pills .nav-link {
-  background: #FFF;
+  background: var(--white);
   color: #000;
   font-weight: 600;
   border-radius: 50px;
@@ -9858,7 +9862,7 @@ body.seller-not-logged-in {
 
 .seller-tab-section .nav-pills .nav-link.active {
   background: var(--pink);
-  color: #fff;
+  color: var(--white);
 }
 
 .seller-card-block {
@@ -9891,7 +9895,7 @@ body.seller-not-logged-in {
   font-size: 30px;
   color: var(--pink);
   font-weight: 600;
-  background: #FFF;
+  background: var(--white);
   border-radius: 30px;
 }
 
@@ -9987,13 +9991,15 @@ body.seller-not-logged-in {
 }
 
 .seller-tab-col .so-seller-filter-dropdown2 h5 {
-  color: #fff;
+  color: var(--white);
   /* line-height: 24px; */
   line-height: 1;
 }
 
+.close-state #seller-filter-dropdown h5, 
 .seller-tab-col #seller-filter-dropdown svg path {
-  fill: #FFFFFF;
+  fill: var(--white);
+  color: var(--white);
 }
 
 .seller-tab-col .seller-filter-dropdown-form {
@@ -10021,11 +10027,11 @@ body.seller-not-logged-in {
   /* padding: 10px 36px; */
   background: var(--pink);
   border-radius: 50px;
-  color: #fff;
+  color: var(--white);
 }
 
 .so-new-seller .seller-tab-col .apply-button:hover {
-  color: #fff !important;
+  color: var(--white) !important;
 }
 
 .seller-tab-col .filter-dropdown-delete-icon i::before {
@@ -10211,7 +10217,7 @@ section.wp-block-group {
       rgb(201, 35, 118) 100%);
   padding: 6px 30px;
   border-radius: 50px;
-  color: #fff !important;
+  color: var(--white) !important;
   position: relative;
   display: inline-block;
   line-height: 1.2;
@@ -10259,7 +10265,7 @@ section.wp-block-group {
 
 .new-button {
   background-color: var(--pink);
-  color: #ffffff;
+  color: var(--white);
   border: transparent;
   border-radius: 40px;
   /* padding: 20px 70px 20px 50px; */
@@ -10287,7 +10293,7 @@ section.wp-block-group {
 }
 
 .new-button.sell-btn:hover .wp-element-button {
-  color: #fff !important;
+  color: var(--white) !important;
 }
 
 /* .new-button .wp-element-button, */
@@ -10403,7 +10409,7 @@ p.custom-pill-box {
 
 .cat-option-dropdown {
   position: absolute;
-  background: #FFF;
+  background: var(--white);
   width: 100%;
   top: calc(100% + 10px);
   left: 0;
@@ -10464,7 +10470,7 @@ p.custom-pill-box {
 }
 
 .cat-item a:hover {
-  color: #FFF !important;
+  color: var(--white) !important;
   background: var(--pink);
   border-radius: 2px;
 
@@ -10516,7 +10522,7 @@ p.custom-pill-box {
   height: 40px;
   border-radius: 100%;
   overflow: hidden;
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
 }
 
 .reviewers-img img {
@@ -10727,7 +10733,7 @@ p.custom-pill-box {
 }
 
 .shop-btn:hover .wp-element-button {
-  color: #fff !important;
+  color: var(--white) !important;
 }
 
 .shop-btn .wp-element-button:before {
@@ -10759,7 +10765,7 @@ p.custom-pill-box {
 /* .so-subscribe-email .wpcf7-form-control-wrap:before, */
 .subscribe-section .so-subscribe-email .wpcf7-submit {
   background: url("../img/email-icon.svg");
-  background-color: #fff;
+  background-color: var(--white);
   background-position: center;
   background-size: 20px;
   background-repeat: no-repeat;
