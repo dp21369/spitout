@@ -1874,7 +1874,7 @@ function load_filtered_sellers()
                 $args = array(
                     'role'       => 'seller', // Role to match
                     // 'include'    => array_keys(spitout_get_popular_sellers()), // Filter to only these user IDs
-                    'include'    => get_popular_seller(), // Filter to only these user IDs
+                    'include'    => get_popular_seller(-1), // Filter to only these user IDs
                     'meta_query' => $meta_query, // Meta query to filter by so_category
                     'search'     => esc_attr($searchValue), // Search by username
                 );
@@ -2814,18 +2814,20 @@ function get_popular_seller($total = 10)
     });
 
     // Get the top 20 sellers based on follower count
-    $top_sellers = array_slice($sellers_with_followers, 0, 20);
+    $top_sellers = array_slice($sellers_with_followers, 0, $total);
 
     // Shuffle the top sellers to pick random ones
     // shuffle($top_sellers);
 
+    // $total = ($total === -1) ? count($top_sellers) : $total;
+    // var_dump($total);
     // Extract random sellers from the top sellers
-    $random_sellers = array_slice($top_sellers, 0, min($total, count($top_sellers)));
+    // $random_sellers = array_slice($top_sellers, 0, min($total, count($top_sellers)));
 
     // Return an array of seller IDs from the random selection
     return array_map(function ($item) {
         return $item['seller_id'];
-    }, $random_sellers);
+    }, $top_sellers);
 }
 
 //by total sales
