@@ -1297,10 +1297,10 @@ Responsive queries here
   }
 
   .seller-search-categories .seller-cat-checkbox {
-    width: calc((20% - 10px) + (10px / 5));
+    width: calc((25% - 10px) + (10px / 4));
   }
 
-  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 5) {
+  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 4) {
     display: block;
   }
 
