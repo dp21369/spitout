@@ -1224,7 +1224,7 @@ Responsive queries here
   .seller-card-block figure i::before {
     left: 5%;
     top: 10%;
-}
+  }
 
 }
 
@@ -1293,13 +1293,40 @@ Responsive queries here
   .seller-tab-section .nav-pills {
     gap: 15px;
     width: calc(100% - 60px);
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    margin-bottom: 0 !important;
+    padding-bottom: 10px;
+    /* scrollbar-color: var(--pink) var(--white);
+    scrollbar-width: thin; */
+  }
+
+
+  .seller-tab-section .nav-pills::-webkit-scrollbar {
+    /* width: 5px; */
+    height: 5px;
+  }
+
+  .seller-tab-section .nav-pills::-webkit-scrollbar-track {
+    background: var(--white);
+    box-shadow: unset;
+  }
+
+  .seller-tab-section .nav-pills::-webkit-scrollbar-thumb {
+    background: var(--pink);
+    border-radius: 5px;
+
+  }
+
+  .seller-tab-section .nav-pills .nav-item {
+    flex: none;
   }
 
   .seller-tab-col .filter-pannel {
     right: 5px;
     top: 50px;
     width: calc(100% - 10px);
-}
+  }
 
   .so-filters-dropdowns {
     position: absolute;
@@ -1315,7 +1342,7 @@ Responsive queries here
     width: 50px;
     justify-content: center;
     align-items: center;
-}
+  }
 
   .seller-tab-col .so-seller-filter-dropdown2 h5 {
     display: none;
@@ -1325,7 +1352,7 @@ Responsive queries here
     display: none;
   }
 
-  .seller-tab-col .filter-pannel .ui-slider-handle{
+  .seller-tab-col .filter-pannel .ui-slider-handle {
     border: 0;
   }
 
@@ -1348,7 +1375,7 @@ Responsive queries here
     justify-content: center;
   }
 
-  .seller-card-block  .so-new-seller-desc figure{
+  .seller-card-block .so-new-seller-desc figure {
     width: 60%;
   }
 
@@ -1356,12 +1383,12 @@ Responsive queries here
     left: 10%;
     top: 20%;
     transform: translate(-50%, -50%);
-}
+  }
 
   .seller-card-block .so-new-sellers-name {
     text-align: center;
     flex: 100%;
-}
+  }
 
   .seller-card-block .seller-tag-popular {
     margin-top: 10px;
@@ -1379,7 +1406,7 @@ Responsive queries here
   .so-seller-footer {
     margin-top: 10px !important;
     padding-top: 10px !important;
-}
+  }
 
   .seller-card-block .seller-page-location p {
     justify-content: center;

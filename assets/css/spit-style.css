@@ -9828,11 +9828,11 @@ body.seller-not-logged-in {
   left: 0;
 }
 
-.seller-tab-col .so-seller-filter-dropdown2 i{
+.seller-tab-col .so-seller-filter-dropdown2 i {
   margin: 0;
 }
 
-.seller-tab-col .so-seller-filter-dropdown2 i::before{
+.seller-tab-col .so-seller-filter-dropdown2 i::before {
   color: #FFF;
 }
 
@@ -9858,11 +9858,6 @@ body.seller-not-logged-in {
   top: calc(100% + 85px);
 }
 
-#seller-pills-tabContent {
-  flex-basis: 100%;
-  height: 100%;
-}
-
 .seller-tab-section .nav-pills {
   column-gap: 15px;
 }
@@ -9881,6 +9876,13 @@ body.seller-not-logged-in {
   background: var(--pink);
   color: var(--white);
 }
+
+
+#seller-pills-tabContent {
+  flex-basis: 100%;
+  height: 100%;
+}
+
 
 .seller-card-block {
   height: 100%;
@@ -9997,7 +9999,8 @@ body.seller-not-logged-in {
   z-index: 9;
 }
 
-.seller-tab-col .so-seller-filter-dropdown2 {
+.seller-tab-col .so-seller-filter-dropdown2,
+body.seller-not-logged-in .so-seller-filter-dropdown2 {
   gap: 10px;
   background: var(--pink);
   padding: 8px 30px;
@@ -10016,7 +10019,7 @@ body.seller-not-logged-in {
   line-height: 1;
 }
 
-.close-state #seller-filter-dropdown h5, 
+.close-state #seller-filter-dropdown h5,
 .seller-tab-col #seller-filter-dropdown svg path {
   fill: var(--white);
   color: var(--white);
@@ -10809,4 +10812,12 @@ p.custom-pill-box {
   border: 1px solid #a1a1a1a1 !important;
   width: 100%;
   font-size: 16px;
+}
+
+
+/* FOOTER CSS  */
+.so-footer-logo img {
+  max-width: max-content;
+  width: auto;
+  height: 36px;
 }
