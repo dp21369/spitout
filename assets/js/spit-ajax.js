@@ -1795,6 +1795,7 @@ jQuery(document).on("click", ".multistep-next", function () {
 // console.log(isValid);
   // If all validation passes, proceed to the next step
   if (isValid) {
+    jQuery(this).prop('disabled', true);
     jQuery.ajax({
       type: "POST",
       url: spit_ajax.ajax_url,
