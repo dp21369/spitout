@@ -2504,13 +2504,13 @@ function so_banner_content()
                     // } 
                     ?>
                 <figure>
-                    <img src="<?php echo esc_url($seller_img_url); ?>" alt="reviewer-image">
+                    <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile1-100x100.jpg" alt="reviewer-image">
                 </figure>
                 <figure>
-                    <img src="<?php echo esc_url($seller_img_url); ?>" alt="reviewer-image">
+                    <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile2-150x150.jpg" alt="reviewer-image">
                 </figure>
                 <figure>
-                    <img src="<?php echo esc_url($seller_img_url); ?>" alt="reviewer-image">
+                    <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile3-150x150.jpg" alt="reviewer-image">
                 </figure>
             <?php //} ?>
         </div>
