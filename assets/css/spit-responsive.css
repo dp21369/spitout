@@ -1447,6 +1447,18 @@ Responsive queries here
     font-size: 14px;
   }
 
+  .shortcode-seller-wrapper .row,
+  #seller-pills-tabContent .row {
+    row-gap: 15px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+  }
+
+  #seller-pills-tabContent .row [class^='col-'],
+  .shortcode-seller-wrapper .row [class^='col-'] {
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+}
 }
 
 
