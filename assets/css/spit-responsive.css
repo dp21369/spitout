@@ -1290,6 +1290,46 @@ Responsive queries here
     width: calc((20% - 10px) + (10px / 4));
   }
 
+
+  /*  NEW CHANGES FOR MORE BTN  */
+  .seller-cat-wrapper {
+    padding: 0 20px;
+  }
+
+  .seller-search-categories .seller-cat-checkbox {
+    width: calc((20% - 10px) + (10px / 5));
+  }
+
+  .seller-cat-wrapper>.seller-cat-checkbox:nth-child(-n + 5) {
+    display: block;
+  }
+
+  .seller-search-categories .seller-more {
+    width: 40px;
+    top: -25px;
+    right: -20px;
+    z-index: 9;
+  }
+
+  .seller-search-categories .bi-three-dots {
+    margin-bottom: 0;
+    background: var(--pink);
+    border: 0;
+    color: var(--white);
+  }
+
+  .seller-expanded .bi-three-dots::before {
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 600 !important;
+  }
+
+  .seller-search-categories .seller-more h5 {
+    display: none;
+  }
+
+  /*  END OF CHANGES FOR MORE BTN  */
+
   .seller-tab-section .nav-pills {
     gap: 15px;
     width: calc(100% - 60px);
@@ -1458,7 +1498,7 @@ Responsive queries here
   .shortcode-seller-wrapper .row [class^='col-'] {
     padding-left: 7.5px;
     padding-right: 7.5px;
-}
+  }
 }
 
 
