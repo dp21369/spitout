@@ -10112,10 +10112,15 @@ NEW HOME PAGE CSS
 /* Header Section  */
 .navbar-brand,
 .nav-rightside-icons {
-  flex-basis: 15%;
+  flex-basis: 20%;
   width: auto !important;
   justify-content: flex-end;
   margin: 0;
+}
+
+.so-nav-search input[type="text"] {
+  outline: none;
+  box-shadow: unset;
 }
 
 .so-navigation-menu li {
