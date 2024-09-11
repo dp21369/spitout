@@ -82,7 +82,7 @@ if (!isset($_COOKIE['curr-exchange-rate'])) {
 			</a>
 
 			<div class="so-iconlogo so-logo-mobile">
-				<a href="<?php echo esc_url(home_url('/')); ?>" class="navbar-brand" rel="home"><img src="<?php echo is_user_logged_in() ? get_option('mobile_logo_field') : get_option('desktop_logo_field'); ?> " alt="spitout header logo" /></a>
+				<a href="<?php echo esc_url(home_url('/')); ?>" class="navbar-brand" rel="home"><img src="<?php echo /*is_user_logged_in() ? get_option('mobile_logo_field') :*/ get_option('desktop_logo_field'); ?> " alt="spitout header logo" /></a>
 			</div>
 			<button class="navbar-toggler so-nav-toggle" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon d-flex"><i class="bi bi-list"></i>
