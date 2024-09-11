@@ -1443,8 +1443,9 @@ Responsive queries here
     font-size: 18px !important;
   }
 
-
-
+  .seller-cat-checkbox h5 {
+    font-size: 14px;
+  }
 
 }
 
