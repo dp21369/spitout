@@ -1234,6 +1234,11 @@ Responsive queries here
     padding: 0;
   }
 
+  .logged-in .so-iconlogo.so-logo-mobile {
+    width: 100%;
+    max-width: 120px;
+}
+
   .seller-dropdown.d-flex {
     gap: 20px;
     justify-content: center;
@@ -1500,6 +1505,11 @@ Responsive queries here
     padding-left: 7.5px;
     padding-right: 7.5px;
   }
+
+  .logged-in .so-iconlogo.so-logo-mobile {
+    /* width: 50px; */
+    display: none;
+}
 }
 
 
