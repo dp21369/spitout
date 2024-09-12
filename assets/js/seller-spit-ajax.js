@@ -47,19 +47,12 @@ jQuery(document).ready(function () {
     );
   });
 
-  // jQuery('input.category-class').on('change', function() {
-  //   if (jQuery(this).is(':checked')) {
-  //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now checked.');
-  //   } else {
-  //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now unchecked.');
-  //   }
-  // });
-
   //runs on category selected
   jQuery(".category-class").on("change", function () {
     searchValue = jQuery("#seller_search").val();
     location = jQuery("#location").val();
     let id = jQuery(this).data("id");
+    
     if (!selectedIds.includes(id) && jQuery(this).is(":checked")) {
       selectedIds.push(id); // Push only if not already in the array
     } else {
@@ -282,7 +275,7 @@ jQuery(document).ready(function () {
     ).data("id");
     selectedIds.push(cat_id);
   } else {
-    selectedIds = undefined;
+    selectedIds = [];
   }
   seller_filter(
     undefined,
@@ -335,7 +328,6 @@ function seller_filter(
       if (response.success) {
         var htmlContent = response.data.html;
         var numUsers = response.data.num_users;
-        console.log('numUsers',numUsers);
         jQuery("#seller-pills-tabContent").html(htmlContent);
         jQuery("#seller-count").text(numUsers + ' Sellers');
       }
