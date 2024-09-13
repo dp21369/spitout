@@ -1237,7 +1237,7 @@ Responsive queries here
   .logged-in .so-iconlogo.so-logo-mobile {
     width: 100%;
     max-width: 120px;
-}
+  }
 
   .seller-dropdown.d-flex {
     gap: 20px;
@@ -1379,8 +1379,8 @@ Responsive queries here
     top: 0;
   }
 
-  .seller-tab-col .so-seller-filter-dropdown2, 
-  body.seller-not-logged-in .so-seller-filter-dropdown2{
+  .seller-tab-col .so-seller-filter-dropdown2,
+  body.seller-not-logged-in .so-seller-filter-dropdown2 {
     padding: 8px;
     width: auto;
     min-width: auto;
@@ -1509,7 +1509,7 @@ Responsive queries here
   .logged-in .so-iconlogo.so-logo-mobile {
     /* width: 50px; */
     display: none;
-}
+  }
 }
 
 
