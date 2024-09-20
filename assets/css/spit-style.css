@@ -10112,7 +10112,7 @@ NEW HOME PAGE CSS
 /* Header Section  */
 .navbar-brand,
 .nav-rightside-icons {
-  flex-basis: 20%;
+  flex-basis: 25%;
   width: auto !important;
   justify-content: flex-end;
   margin: 0;

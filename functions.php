@@ -2239,7 +2239,7 @@ function load_filtered_sellers()
                                         </div>
                                         <div class="seller-sold">
                                             <h6><strong><?php echo esc_html($total_sold); ?></strong></h6>
-                                            <span>Spits Sold</span>
+                                            <span>Content Sold</span>
                                         </div>
                                         <div class="seller-category">
                                             <p class="custom-pill-box pink-pill-box"><span><?php echo esc_html($seller_category); ?></span></p>
@@ -2731,7 +2731,7 @@ function so_seller_list($atts)
                                         </div>
                                         <div class="seller-sold">
                                             <h6><strong><?php echo esc_html($total_sold); ?></strong></h6>
-                                            <span>Spits Sold</span>
+                                            <span>Content Sold</span>
                                         </div>
                                         <div class="seller-category">
                                             <p class="custom-pill-box pink-pill-box"><span><?php echo esc_html($seller_category); ?></span></p>
