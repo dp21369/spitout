@@ -47,12 +47,19 @@ jQuery(document).ready(function () {
     );
   });
 
+  // jQuery('input.category-class').on('change', function() {
+  //   if (jQuery(this).is(':checked')) {
+  //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now checked.');
+  //   } else {
+  //     console.log('Checkbox with cat-slug: ' + jQuery(this).data('cat-slug') + ' is now unchecked.');
+  //   }
+  // });
+
   //runs on category selected
   jQuery(".category-class").on("change", function () {
     searchValue = jQuery("#seller_search").val();
     location = jQuery("#location").val();
     let id = jQuery(this).data("id");
-    
     if (!selectedIds.includes(id) && jQuery(this).is(":checked")) {
       selectedIds.push(id); // Push only if not already in the array
     } else {
