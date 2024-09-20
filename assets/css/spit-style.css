@@ -10341,14 +10341,17 @@ section.wp-block-group {
 }
 
 .sell-btn .wp-element-button:before {
-  background: url("../img/drop-dark-icon.svg");
+  background: url("../img/camera-reels-dark.svg");
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
+  width: 18px;
+    height: 18px;
+    /* transition: all 0.6s ease; */
 }
 
 .sell-btn:hover .wp-element-button:before {
-  background: url("../img/drop-light-icon.svg");
+  background: url("../img/camera-reels-light.svg");
   background-position: center;
   background-size: 100%;
   background-repeat: no-repeat;
