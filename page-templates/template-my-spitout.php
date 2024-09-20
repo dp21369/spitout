@@ -907,20 +907,32 @@ if (is_user_logged_in()) {
                                                                 <textarea name="additional_info"></textarea>
                                                             </div>
                                                             <div class="form-group so-my-spitout-form-full">
-                                                                <label for="additional_info">Product Icon</label>
+                                                                <label for="additional_info">Category</label>
 
                                                                 <input type="hidden" name="product_icon" value="">
 
                                                                 <select class="so-producticonpicker">
                                                                     <option value=""
                                                                         data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/product-icon-noimage.png">
-                                                                        Select product icon</option>
-                                                                    <option value="saliva"
-                                                                        data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/saliva.png">
+                                                                        Select Category</option>
+                                                                    <!-- <option value="saliva"
+                                                                        data-thumbnail="<?php // get_stylesheet_directory_uri(); ?>/assets/img/saliva.png">
                                                                         Saliva</option>
                                                                     <option value="jar"
-                                                                        data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/jar.png">
-                                                                        Jar</option>
+                                                                        data-thumbnail="<?php //echo get_stylesheet_directory_uri(); ?>/assets/img/jar.png">
+                                                                        Jar</option> -->
+                                                                        <option value="text" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/text.svg">Text</option>
+                                                                        <option value="photo" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/photo.svg">Photo</option>
+                                                                        <option value="video" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/video.svg">Video</option>
+                                                                        <option value="vr_video" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/vr_video.svg">VR Video</option>
+                                                                        <option value="pov_video" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/pov_video.svg">POV Video</option>
+                                                                        <option value="livestream" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/livestream.svg">Livestream</option>
+                                                                        <option value="couples" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/couples.svg">Couples</option>
+                                                                        <option value="cosplay_and_fantasy" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/cosplay_and_fantasy.png">Cosplay & Fantasy</option>
+                                                                        <option value="role_play_services" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/role_play_services.png">Role-play Services</option>
+                                                                        <option value="virtual_girlfriend" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/virtual_girlfriend.png">Virtual Girlfriend</option>
+                                                                        <option value="custom_fetish_requests" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/custom_fetish_requests.png">Custom Fetish Requests</option>
+                                                                        <option value="other" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/other.png">Other</option>
                                                                 </select>
 
                                                                 <div class="product-icon-select lang-select">
@@ -1078,19 +1090,31 @@ if (is_user_logged_in()) {
                                                                 <textarea name="additional_info"></textarea>
                                                             </div>
                                                             <div class="form-group so-my-spitout-form-full">
-                                                                <label for="product_icon">Product Icon</label>
+                                                                <label for="product_icon">Category</label>
                                                                 <input type="hidden" name="product_icon" value="">
                                                                 <select class="so-producticonpicker-edit"
                                                                     name="product_icon_choose">
                                                                     <option value=""
                                                                         data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/product-icon-noimage.png">
-                                                                        Select product icon</option>
-                                                                    <option value="saliva"
-                                                                        data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/saliva.png">
+                                                                        Select Category</option>
+                                                                    <!-- <option value="saliva"
+                                                                        data-thumbnail="<?php //echo get_stylesheet_directory_uri(); ?>/assets/img/saliva.png">
                                                                         Saliva</option>
                                                                     <option value="jar"
-                                                                        data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/jar.png">
-                                                                        Jar</option>
+                                                                        data-thumbnail="<?php //echo get_stylesheet_directory_uri(); ?>/assets/img/jar.png">
+                                                                        Jar</option> -->
+                                                                        <option value="text" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/text.svg">Text</option>
+                                                                        <option value="photo" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/photo.svg">Photo</option>
+                                                                        <option value="video" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/video.svg">Video</option>
+                                                                        <option value="vr_video" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/vr_video.svg">VR Video</option>
+                                                                        <option value="pov_video" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/pov_video.svg">POV Video</option>
+                                                                        <option value="livestream" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/livestream.svg">Livestream</option>
+                                                                        <option value="couples" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/couples.svg">Couples</option>
+                                                                        <option value="cosplay_and_fantasy" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/cosplay_and_fantasy.png">Cosplay & Fantasy</option>
+                                                                        <option value="role_play_services" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/role_play_services.png">Role-play Services</option>
+                                                                        <option value="virtual_girlfriend" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/virtual_girlfriend.png">Virtual Girlfriend</option>
+                                                                        <option value="custom_fetish_requests" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/custom_fetish_requests.svg">Custom Fetish Requests</option>
+                                                                        <option value="other" data-thumbnail="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/other.png">Other</option>
                                                                 </select>
 
                                                                 <div class="product-icon-selecte">
