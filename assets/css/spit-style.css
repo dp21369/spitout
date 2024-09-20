@@ -10828,3 +10828,14 @@ p.custom-pill-box {
   width: auto;
   height: 36px;
 }
+
+/* SELLER MY SPITOUT  */
+#add_new_product_form .product-icon-select li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#add_new_product_form .product-icon-select li img {
+  margin-bottom: 0;
+}
