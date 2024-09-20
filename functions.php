@@ -2486,7 +2486,7 @@ function so_banner_content()
         </div>
     </div>
     <div class="wp-block-buttons">
-        <div class="new-button sell-btn"><a class="wp-block-button__link wp-element-button" href="/register">Sell</a></div>
+        <div class="new-button sell-btn"><a class="wp-block-button__link wp-element-button" href="/register">Create</a></div>
         <div class="new-button join-btn"><a class="wp-block-button__link wp-element-button" href="/my-spitout">Join Free</a></div>
     </div>
 
