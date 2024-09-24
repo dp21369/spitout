@@ -9190,13 +9190,17 @@ fieldset.hide-current {
 .so-cart-page-totals table {
   display: flex;
   text-align-last: left;
+  order: 2;
 }
 
 .so-cart-page-totals h2 {
   font-size: 28px;
   text-align: left;
+  order: 1;
 }
-
+.cart_totals .woocommerce-terms-and-conditions-wrapper {
+  order: 3;
+}
 .so-cart-page-totals table tbody {
   display: flex;
   flex-direction: column;
@@ -9231,6 +9235,7 @@ fieldset.hide-current {
   background-color: var(--pink);
   padding: 8px 12px;
   border-radius: 50px;
+  order: 4;
 }
 
 .so-cart-page-totals .wc-proceed-to-checkout a:hover {
