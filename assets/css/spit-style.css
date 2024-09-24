@@ -9298,6 +9298,7 @@ fieldset.hide-current {
 }
 .cart_totals .woocommerce-terms-and-conditions-wrapper {
   order: 3;
+  display: flex;
 }
 .so-cart-page-totals table tbody {
   display: flex;
