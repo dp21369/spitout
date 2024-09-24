@@ -10948,3 +10948,32 @@ p.custom-pill-box {
 #add_new_product_form .product-icon-select li img {
   margin-bottom: 0;
 }
+
+
+/* CART PAGE  */
+
+.woocommerce-notices-wrapper .woocommerce-error {
+  background-color: #FFF;
+  border: 1px solid var(--pink);
+  border-radius: 50px;
+}
+
+.woocommerce-notices-wrapper .woocommerce-error li {
+  color: var(--pink);
+  font-weight: 600;
+}
+
+.woocommerce-cart .so-cart-page-totals .wc-proceed-to-checkout a:hover {
+  background-color: unset;
+  color: #FFF !important;
+}
+
+.cart_totals .woocommerce-terms-and-conditions-wrapper span {
+  text-decoration: underline;
+}
+
+.cart_totals .woocommerce-form__label-for-checkbox {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
