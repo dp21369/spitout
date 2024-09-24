@@ -2386,14 +2386,14 @@ function so_banner_content()
         'fields'  => 'ID',
     ));
 
+    // Query for users with 'seller' role
+    $user_query = new WP_User_Query($seller_ids);
+
+    // Get the total number of users found
+    $seller_count = $user_query->get_total();
+
     // Check if there are any seller IDs
     global $wpdb;
-
-    // Get all user IDs with the 'seller' role
-    $seller_ids = get_users(array(
-        'role'    => 'seller',
-        'fields'  => 'ID',
-    ));
 
     // If there are sellers
     if (!empty($seller_ids)) {
@@ -2450,7 +2450,7 @@ function so_banner_content()
 
     ?>
     <div class="seller-dropdown d-flex">
-        <div class="custom-pill-box pink-pill-box"><?php echo esc_html($seller_cat_count); ?> Sellers</div>
+        <div class="custom-pill-box pink-pill-box"><?php echo esc_html($seller_count); ?> Sellers</div>
         <div class="banner-cat-select">
             <div class="selected-cat">
                 <span>Selected Category</span>
@@ -2493,26 +2493,27 @@ function so_banner_content()
     <div class="banner-rewiews">
         <div class="reviewers-img">
             <?php //if (!empty($user_ids_with_5_star))
-                //foreach ($user_ids_with_5_star as $user_id) {
-                    //$attachment_id = (int) get_user_meta($user_id, 'so_profile_img', true);
-                    // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70); 
-                    // $seller_img_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
-                    // if (!$seller_img_url) {
-                        $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
-                    // } else {
-                    //     $seller_img_url = $seller_img_url[0];
-                    // } 
-                    ?>
-                <figure>
-                    <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile1-100x100.jpg" alt="reviewer-image">
-                </figure>
-                <figure>
-                    <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile2-150x150.jpg" alt="reviewer-image">
-                </figure>
-                <figure>
-                    <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile3-150x150.jpg" alt="reviewer-image">
-                </figure>
-            <?php //} ?>
+            //foreach ($user_ids_with_5_star as $user_id) {
+            //$attachment_id = (int) get_user_meta($user_id, 'so_profile_img', true);
+            // $seller_img_url = resize_and_compress_image($attachment_id, 150, 150, 70); 
+            // $seller_img_url = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+            // if (!$seller_img_url) {
+            $seller_img_url = get_template_directory_uri() . '/assets/img/user.png';
+            // } else {
+            //     $seller_img_url = $seller_img_url[0];
+            // } 
+            ?>
+            <figure>
+                <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile1-100x100.jpg" alt="reviewer-image">
+            </figure>
+            <figure>
+                <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile2-150x150.jpg" alt="reviewer-image">
+            </figure>
+            <figure>
+                <img src="https://spitout.com/wp-content/uploads/2024/09/review-profile3-150x150.jpg" alt="reviewer-image">
+            </figure>
+            <?php //} 
+            ?>
         </div>
         <div class="review-details">
             <div class="review-icons">
@@ -2525,7 +2526,8 @@ function so_banner_content()
                 <span>5.0</span>
             </div>
             <div class="review-text">
-                <p>From <?php //echo $unique_user_count; ?> 150+ Reviews</p>
+                <p>From <?php //echo $unique_user_count; 
+                        ?> 150+ Reviews</p>
             </div>
         </div>
     </div>
@@ -3040,3 +3042,37 @@ function redirect_spit_category_to_seller()
     }
 }
 add_action('template_redirect', 'redirect_spit_category_to_seller');
+
+// Display the terms and conditions checkbox on the cart page
+function custom_woocommerce_terms_conditions_checkbox_cart() {
+    echo '<div class="woocommerce-terms-and-conditions-wrapper">';
+    echo '<p><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">';
+    echo '<input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="terms" id="terms" value="1"> ';
+    echo '<span>I agree to the <a href="/terms-of-use/" target="_blank">Terms and Conditions</a></span>';
+    echo '</label></p>';
+    echo '</div>';
+}
+add_action( 'woocommerce_cart_totals_after_order_total', 'custom_woocommerce_terms_conditions_checkbox_cart' );
+
+// Add JavaScript to validate terms and conditions checkbox on cart page
+function custom_validate_terms_conditions_checkout() {
+    ?>
+    <script type="text/javascript">
+        jQuery(function($) {
+            // Attach click event to the proceed to checkout button
+            $('a.checkout-button').on('click', function(e) {
+                // Check if the terms checkbox is checked
+                if ($('#terms').length && !$('#terms').is(':checked')) {
+                    e.preventDefault(); // Prevent redirection to checkout
+                    // Add WooCommerce error notice to cart page
+                    $('.woocommerce-notices-wrapper').remove(); // Clear any existing notices
+                    $('form.woocommerce-cart-form').prepend('<div class="woocommerce-notices-wrapper"><ul class="woocommerce-error"><li><?php _e( "You must accept the terms and conditions to proceed.", "woocommerce" ); ?></li></ul></div>');
+                    // Scroll to the top so the user can see the message
+                    $('html, body').animate({ scrollTop: $('form.woocommerce-cart-form').offset().top }, 1000);
+                }
+            });
+        });
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'custom_validate_terms_conditions_checkout' );
