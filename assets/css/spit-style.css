@@ -10965,6 +10965,7 @@ p.custom-pill-box {
 
 .woocommerce-cart .so-cart-page-totals .wc-proceed-to-checkout a:hover {
   background-color: unset;
+  border: 0;
   color: #FFF !important;
 }
 
