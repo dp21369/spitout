@@ -2380,20 +2380,15 @@ function so_banner_content()
 
     global $wpdb;
 
-    // Get all user IDs with the 'seller' role
-    $seller_ids = get_users(array(
-        'role'    => 'seller',
-        'fields'  => 'ID',
-    ));
-
     // Query for users with 'seller' role
-    $user_query = new WP_User_Query($seller_ids);
+    $user_query = new WP_User_Query(array(
+        'role'    => 'seller',
+        'fields'  => 'ID'
+    ));
 
     // Get the total number of users found
     $seller_count = $user_query->get_total();
-
-    // Check if there are any seller IDs
-    global $wpdb;
+    var_dump($seller_count);
 
     // If there are sellers
     if (!empty($seller_ids)) {
@@ -3044,7 +3039,8 @@ function redirect_spit_category_to_seller()
 add_action('template_redirect', 'redirect_spit_category_to_seller');
 
 // Display the terms and conditions checkbox on the cart page
-function custom_woocommerce_terms_conditions_checkbox_cart() {
+function custom_woocommerce_terms_conditions_checkbox_cart()
+{
     echo '<div class="woocommerce-terms-and-conditions-wrapper">';
     echo '<p><label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">';
     echo '<input type="checkbox" class="woocommerce-form__input woocommerce-form__input-checkbox input-checkbox" name="terms" id="terms" value="1"> ';
@@ -3052,11 +3048,12 @@ function custom_woocommerce_terms_conditions_checkbox_cart() {
     echo '</label></p>';
     echo '</div>';
 }
-add_action( 'woocommerce_cart_totals_after_order_total', 'custom_woocommerce_terms_conditions_checkbox_cart' );
+add_action('woocommerce_cart_totals_after_order_total', 'custom_woocommerce_terms_conditions_checkbox_cart');
 
 // Add JavaScript to validate terms and conditions checkbox on cart page
-function custom_validate_terms_conditions_checkout() {
-    ?>
+function custom_validate_terms_conditions_checkout()
+{
+?>
     <script type="text/javascript">
         jQuery(function($) {
             // Attach click event to the proceed to checkout button
@@ -3066,13 +3063,15 @@ function custom_validate_terms_conditions_checkout() {
                     e.preventDefault(); // Prevent redirection to checkout
                     // Add WooCommerce error notice to cart page
                     $('.woocommerce-notices-wrapper').remove(); // Clear any existing notices
-                    $('form.woocommerce-cart-form').prepend('<div class="woocommerce-notices-wrapper"><ul class="woocommerce-error"><li><?php _e( "You must accept the terms and conditions to proceed.", "woocommerce" ); ?></li></ul></div>');
+                    $('form.woocommerce-cart-form').prepend('<div class="woocommerce-notices-wrapper"><ul class="woocommerce-error"><li><?php _e("You must accept the terms and conditions to proceed.", "woocommerce"); ?></li></ul></div>');
                     // Scroll to the top so the user can see the message
-                    $('html, body').animate({ scrollTop: $('form.woocommerce-cart-form').offset().top }, 1000);
+                    $('html, body').animate({
+                        scrollTop: $('form.woocommerce-cart-form').offset().top
+                    }, 1000);
                 }
             });
         });
     </script>
-    <?php
+<?php
 }
-add_action( 'wp_footer', 'custom_validate_terms_conditions_checkout' );
+add_action('wp_footer', 'custom_validate_terms_conditions_checkout');
